@@ -5,7 +5,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 const Main = () => {
   return (
     <>
-      <Router>
+      <Router basename='/service-connect'>
         <AppRouter />
       </Router>
     </>
