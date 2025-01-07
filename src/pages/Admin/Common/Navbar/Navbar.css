@@ -1,0 +1,40 @@
+.header-navbar {
+  background-color: #ffffff;
+}
+
+.custom-navbar {
+  padding: 0px;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 10px 0px;
+}
+
+.customlogo {
+  width: 100px;
+  height: auto;
+}
+
+.notification path {
+  fill: #555b6d;
+}
+
+.moon-icon path {
+  color: #555b6d;
+}
+
+.profile-icon path {
+  color: #555b6d;
+}
+
+.navbar-brand {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 65px;
+}
+
+.navbar-icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+
+}

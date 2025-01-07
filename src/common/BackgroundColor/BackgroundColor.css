@@ -1,0 +1,75 @@
+.circle-bg {
+  background: linear-gradient(90deg, rgba(0, 125, 133, 1) 0%,
+      rgba(0, 123, 131, 0.83) 25%,
+      rgba(0, 123, 131, 0.88) 50%,
+      rgba(0, 113, 120, 0.8) 75%,
+      rgba(1, 141, 149, 1) 100%);
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;
+  width: 70%;
+  border-top-right-radius: 50%;
+  border-bottom-right-radius: 50%;
+  transform: scaleY(1.5);
+  animation: pulse 3s linear infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 #d8eff0;
+  }
+
+  50% {
+    box-shadow: 35px 0 0 0 #d8eff0;
+  }
+
+  100% {
+    box-shadow: 70px 0 0 10px #d8eff0;
+  }
+}
+
+
+.bg-wave::before {
+  content: "";
+  background-image: url('../../assets/images/login/bg-wave.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0%;
+  right: 40%;
+  z-index: -2;
+
+}
+
+@media only screen and (max-width:525px) {
+  .circle-bg {
+    width: 100%;
+    border-bottom-left-radius: 50%;
+    border-bottom-right-radius: 50%;
+    transform: scaleX(1.5);
+    border-top-right-radius: 0px;
+    height: 60%;
+  }
+
+  @keyframes pulse {
+    0% {
+      box-shadow: 0 0 0 0 #d8eff0;
+    }
+
+    50% {
+      box-shadow: 0 50px 0 0 #d8eff0;
+    }
+
+    100% {
+      box-shadow: 0  100px 0 10px #d8eff0;
+    }
+  }
+
+
+}

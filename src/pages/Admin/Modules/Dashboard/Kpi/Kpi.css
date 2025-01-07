@@ -1,0 +1,73 @@
+.dashboard-kpi {
+  background-color: #02868d0d;
+  padding: 40px;
+  flex: 1;
+}
+
+.dashboard-heading {
+  font-family: 'Be Vietnam Pro';
+  color: #525252;
+  padding-bottom: 25px;
+}
+
+.kpi-item {
+  box-shadow: rgba(17, 17, 26, 0.05) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
+  border-radius: 5px;
+  padding: 30px 30px 25px 30px;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 20px;
+  width: 23%;
+  border: 1px solid #8080803b;
+  justify-content: start;
+}
+
+.kpi-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 8px;
+  background: linear-gradient(90deg, rgba(1, 127, 135, 1) 0%,
+      rgba(0, 134, 143, 1) 25%,
+      rgba(1, 134, 143, 1) 50%,
+      rgba(2, 146, 154, 1) 75%,
+      rgba(3, 131, 139, 1) 100%);
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.kpi-alignment {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.kpi-value {
+  font-family: 'Be Vietnam Pro';
+}
+
+.kpi-icon {
+  background-color: #02848D;
+  color: #ffffff;
+  border-radius: 50%;
+  padding: 18px;
+}
+
+.kpi-icon svg {
+  width: 40px;
+  height: 40px;
+}
+
+.kpi-value h6 {
+  font-size: 18px;
+  color: #595959;
+}
+
+.kpi-value h2 {
+  color: #02848D;
+  font-weight: bold;
+  margin-bottom: 0px;
+}

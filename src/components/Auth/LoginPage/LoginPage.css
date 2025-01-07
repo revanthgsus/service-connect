@@ -1,0 +1,251 @@
+.login-bg {
+  width: 100%;
+  overflow: hidden;
+  height: 100vh;
+  position: relative;
+}
+
+.form-alignment {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 100%;
+}
+
+.login-image {
+  width: 600px;
+  height: auto;
+}
+
+.input-wrapper {
+  position: relative;
+}
+
+.input-icon {
+  position: absolute;
+  right: 15px;
+  top: 45%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.login-form {
+  background-color: #ffffff;
+  border-radius: 15px;
+  padding: 70px 50px;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  width: 550px;
+  height: 660px;
+  margin: auto;
+}
+
+.login-form h1 {
+  color: #111111;
+  font-size: 30px;
+  font-weight: 700;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  text-align: center;
+}
+
+.underline-animation {
+  background: #00adb9;
+  border-radius: 5px;
+  height: 5px;
+  overflow: hidden;
+  position: relative;
+  width: 100px;
+  margin: 15px auto 25px
+}
+
+.underline-animation::before {
+  animation: underline 3s linear infinite;
+  content: "";
+  height: 100%;
+  left: 0;
+  right: 0;
+  top: 0;
+  position: absolute;
+  width: 100px;
+  border-radius: 5px;
+  background-color: #009ba7;
+}
+
+@keyframes underline {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.login-form p {
+  color: #666666;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-size: 16px;
+  padding-bottom: 10px;
+  text-align: center;
+  line-height: 30px;
+}
+
+.input-icon svg {
+  color: #606060;
+  font-size: 20px;
+}
+
+.form-input {
+  width: 100%;
+  border: 1px solid #858585;
+  border-radius: 8px;
+  padding: 10px 15px;
+  font-family: 'Be Vietnam Pro', sans-serif;
+}
+
+.form-label {
+  color: #333333;
+  font-weight: 500;
+  padding: 5px 0px;
+  display: block;
+  font-family: 'Be Vietnam Pro', sans-serif;
+}
+
+.input-container {
+  margin-bottom: 25px;
+}
+
+.login-btn {
+  width: 100%;
+  padding: 10px 15px;
+  border-radius: 30px;
+  border: 1px solid transparent;
+  font-family: 'Be Vietnam Pro';
+  font-size: 18px;
+  font-weight: 600;
+  background: linear-gradient(90deg, rgba(0, 125, 133, 1) 0%,
+      rgba(0, 123, 131, 0.83) 25%,
+      rgba(0, 123, 131, 0.88) 50%,
+      rgba(0, 113, 120, 0.8) 75%,
+      rgba(1, 141, 149, 1) 100%);
+  color: white;
+  margin-top: 50px;
+  box-shadow: rgb(0 0 0 / 20%) 0px 15px 20px 0px;
+}
+
+.forgot-link {
+  color: #0089DC;
+  text-decoration: none;
+  font-family: 'Be Vietnam Pro';
+  font-size: 14px;
+  font-weight: 400;
+  float: inline-end;
+}
+
+.main-logo {
+  width: 120px;
+  height: auto;
+  position: absolute;
+  right: 5%;
+  top: 5%;
+  z-index: 1;
+}
+
+.bg-wave {
+  text-align: center;
+}
+
+@media only screen and (max-width:575px) {
+  .main-logo {
+    width: 80px;
+    top: 1%;
+  }
+
+  .form-alignment {
+    display: block;
+  }
+
+  .login-bg {
+    height: 100%;
+    padding: 20px 0px;
+  }
+
+  .login-image {
+    width: 280px;
+  }
+
+  .login-form {
+    width: 90%;
+    padding: 50px 30px;
+    height: 540px;
+  }
+
+  .login-form h1 {
+    font-size: 22px;
+  }
+
+  .underline-animation {
+    margin: 10px auto 15px;
+  }
+
+  .login-form p {
+    line-height: 20px;
+    font-size: 14px;
+    padding-bottom: 0px;
+  }
+
+  .input-container {
+    margin-bottom: 15px;
+  }
+
+  .login-btn {
+    margin-top: 40px;
+  }
+
+  .bg-wave::before {
+    display: none;
+  }
+
+}
+
+@media screen and (min-width:576px) and (max-width:768px) {
+  .login-form {
+    width: 90%;
+    padding: 50px 40px;
+  }
+
+  .main-logo {
+    width: 100px;
+    top: 1%;
+  }
+
+  .login-bg {
+    height: 100%;
+    padding: 80px 0px;
+  }
+
+  .login-form h1 {
+    font-size: 24px;
+  }
+
+  .underline-animation {
+    margin: 10px auto 15px;
+  }
+
+  .login-form p {
+    line-height: 25px;
+    font-size: 16px;
+    padding-bottom: 0px;
+  }
+
+  .input-container {
+    margin-bottom: 20px;
+  }
+
+  .login-btn {
+    margin-top: 40px;
+  }
+
+  .bg-wave::before {
+    display: none;
+  }
+}

@@ -1,0 +1,12 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+label {
+  color: #333333;
+  font-weight: 400;
+  padding: 5px 0px;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  margin-bottom: 5px;
+}

@@ -1,0 +1,155 @@
+.manager-list {
+  background-color: #02868d0d;
+  padding: 40px;
+  flex: 1;
+}
+
+.manager-heading {
+  font-family: 'Be Vietnam Pro';
+  color: #525252;
+  margin-bottom: 0px;
+}
+
+.manager-list .add-button {
+  padding: 10px 15px;
+  border-radius: 30px;
+  border: 1px solid transparent;
+  font-family: 'Be Vietnam Pro';
+  background: linear-gradient(90deg, rgba(1, 127, 135, 1) 0%,
+      rgba(0, 134, 143, 1) 25%,
+      rgba(1, 134, 143, 1) 50%,
+      rgba(2, 146, 154, 1) 75%,
+      rgba(3, 131, 139, 1) 100%);
+  color: white;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.manager-list .top-alignment {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.manager-list .list-alignment {
+  border: 1px solid #8080803b;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 10px;
+  border-radius: 5px;
+  background-color: #ffffff;
+  height: 90%;
+}
+
+.manager-list .manager-table {
+  width: 100%;
+}
+
+.manager-list .table-align {
+  background: linear-gradient(90deg,
+      rgba(5, 128, 136, 1) 0%,
+      rgba(0, 129, 137, 1) 25%,
+      rgba(0, 139, 148, 1) 50%,
+      rgba(5, 148, 156, 1) 75%,
+      rgba(2, 128, 136, 1) 100%);
+  color: #ffffff;
+}
+
+.manager-list .table-heading {
+  padding: 12px 25px;
+  font-weight: 500;
+  font-family: 'Be Vietnam Pro';
+  text-align: start;
+}
+
+.manager-list .list-item td {
+  padding: 15px 25px;
+  font-family: 'Be Vietnam Pro';
+  color: #696969;
+  text-align: start;
+  font-size: 14px;
+}
+
+.manager-list .add-button svg {
+  color: #ffffff;
+  font-size: 18px;
+  margin-right: 5px;
+  vertical-align: text-bottom;
+}
+
+.manager-list .search-input {
+  border: 1px solid #0505053b;
+  padding: 8px 20px;
+  border-radius: 20px;
+  outline: none;
+  font-family: 'Be Vietnam Pro';
+  color: #585858;
+  width: 100%;
+  font-size: 14px;
+}
+
+.manager-list .search-input::placeholder {
+  color: #969696;
+  font-weight: 400;
+}
+
+.manager-list .search-wrapper {
+  position: relative;
+  max-width: 100%;
+  width: 450px;
+  margin: 30px 30px;
+}
+
+.manager-list .search-icon {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #707070;
+}
+
+.manager-list .list-item {
+  border-bottom: 1px solid #0505051a
+}
+
+.manager-list .no-data td {
+  padding: 15px 25px;
+  font-family: 'Be Vietnam Pro';
+  color: #696969;
+  text-align: center;
+}
+
+.manager-list .status-wrapper {
+  position: relative;
+  max-width: 100%;
+  width: 150px;
+  margin: 30px 30px;
+}
+
+.manager-list .status-select {
+  border: 1px solid #0505053b;
+  padding: 8px 20px;
+  border-radius: 20px;
+  outline: none;
+  font-family: 'Be Vietnam Pro';
+  color: #585858;
+  width: 100%;
+  font-size: 14px;
+  appearance: none;
+}
+
+.manager-list .arrow-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #707070;
+}
+
+.manager-list .list-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

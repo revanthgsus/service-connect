@@ -1,0 +1,53 @@
+.dropdownfile {
+  position: absolute;
+  top: 100%;
+  right: 15px;
+  background-color: white;
+  border-radius: 5px;
+  text-align: start;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  z-index: 1;
+}
+
+.dropdownfile ul {
+  list-style-type: none;
+  padding: 10px 15px;
+  margin-bottom: 0px;
+}
+
+.dropdownfile ul li {
+  padding: 10px 15px;
+}
+
+.dropdownfile ul li:hover {
+  background-color: #f5f5f5;
+  border-radius: 5px;
+  transition: .2S all linear;
+}
+
+.dropdownfile::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  right: 23px;
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  transform: rotate(45deg);
+  border-left: 1px solid #e5e5e5;
+  border-top: 1px solid #e5e5e5;
+}
+
+.dropdownfile ul li a {
+  text-decoration: none;
+  color: #525252;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Be Vietnam Pro';
+}
+
+.logout-link a {
+  color: #F54F36 !important;
+}

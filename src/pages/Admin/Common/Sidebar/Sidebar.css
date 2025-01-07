@@ -1,0 +1,76 @@
+.sidebar-link {
+  list-style-type: none;
+  padding: 0px 25px;
+  position: relative;
+}
+
+.sidebar-section {
+  width: 280px;
+  min-height: calc(100vh - 68px);
+  background: linear-gradient(90deg, rgba(1, 127, 135, 1) 0%,
+      rgba(0, 134, 143, 1) 25%,
+      rgba(1, 134, 143, 1) 50%,
+      rgba(2, 146, 154, 1) 75%,
+      rgba(3, 131, 139, 1) 100%);
+  padding: 40px 0px;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-link a {
+  color: #ffffff;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  padding: 10px 20px ;
+  text-decoration: none;
+}
+
+.sidebar-link a svg path {
+  fill: #ffffff;
+}
+
+.sidebar-link .active-link {
+  color: #007D85;
+  background: #ffffff;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  padding: 10px 20px;
+}
+
+.sidebar-link .active-link svg path {
+  fill: #007D85
+}
+
+.sidebar-link a:not(.active-link):hover {
+  background-color: #ffffff;
+  color: #007D85;
+  transition: 0.2s linear all;
+}
+
+.sidebar-link a:not(.active-link):hover svg path {
+  fill: #007D85;
+}
+
+.sidebar-content {
+  font-weight: 600;
+  font-family: 'Be Vietnam Pro';
+}
+
+.sidebar-link .active-link::before {
+  background-color: #ffffff;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 10px;
+  height: 100%;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
