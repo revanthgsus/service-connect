@@ -3,9 +3,9 @@ import '../GetOtp/GetOtp.css';
 import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../../../common/MainLogo/Logo';
 import loginImage from "../../../assets/images/login/login-image.png";
-import BackgroundColor from '../../../common/BackgroundColor/BackgroundColor';
 import otpimage from "../../../assets/images/login/otp-image.png";
 import { IoArrowBack } from "react-icons/io5";
+import { Row, Col } from 'react-bootstrap';
 
 const GetOtp = () => {
   const navigate = useNavigate();
@@ -39,22 +39,22 @@ const GetOtp = () => {
 
   return (
     <>
+      <Logo />
       <section className="login-bg">
-        <Logo />
-        <BackgroundColor />
-        <div className="form-alignment">
-          <div className="bg-wave">
-            <img src={loginImage} alt="login" className="img-fluid login-image" />
-          </div>
-          <div>
-            <form className="login-form" >
+        <Row className='loginpage-flex'>
+          <Col xxl={4} xl={4} lg={5} md={5}>
+            <div className='bg-wave'>
+              <img src={loginImage} alt="login-image" className='img-fluid login-image' />
+            </div>
+          </Col>
+          <Col xxl={4} xl={5} lg={6} md={5}>
+            <form className="login-form" onSubmit={handleSubmit} >
               <span className="back-span">
                 <Link to="/forgot-password" className="back-btn">
                   <IoArrowBack /> Back
                 </Link>
               </span>
               <img src={otpimage} alt="otp-image" className='img-fluid forgot-image' />
-
               <h1>Enter Your OTP</h1>
               <div className="underline-animation"></div>
               <p>We've sent a verification OTP to your email. Please check your inbox and enter the OTP to verify your email address.</p>
@@ -72,11 +72,10 @@ const GetOtp = () => {
                   />
                 ))}
               </div>
-
-              <button type="submit" className="otp-btn" onClick={handleSubmit}>Verify OTP</button>
+              <button type="submit" className="otp-btn">Verify OTP</button>
             </form>
-          </div>
-        </div>
+          </Col>
+        </Row>
       </section>
     </>
   );

@@ -1,15 +1,24 @@
 import React, { useState } from 'react';
 import "../CreateCustomer/CreateCustomer.css";
 import { Col, Row } from 'react-bootstrap';
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import { IoIosArrowDown } from "react-icons/io";
+import { MdVisibility } from "react-icons/md";
+import { MdVisibilityOff } from "react-icons/md";
+import { useNavigate } from 'react-router-dom';
 
 const CreateCustomer = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const navigate = useNavigate();
 
   const AddCustomers = [
-    { label: "User Name", name: "username", placeholder: "Enter username",type: "text", autocomplete: "username",},
+    {
+      label: "User Name",
+      name: "username",
+      placeholder: "Enter username",
+      type: "text",
+      autocomplete: "username",
+    },
     {
       label: "Email Address",
       name: "emailaddress",
@@ -46,6 +55,11 @@ const CreateCustomer = () => {
       autocomplete: "joiningdate",
     },
   ]
+
+  const handlesubmit = (e) => {
+    e.preventDefault();
+    navigate("/admin/service-manager")
+  }
   return (
     <>
       <section className='create-customer'>
@@ -53,7 +67,7 @@ const CreateCustomer = () => {
         <form className='create-form'>
           <Row>
             {AddCustomers.map((field, index) => (
-              <Col key={index} xxl={4} xl={4} lg={4}>
+              <Col key={index} xxl={4} xl={4} lg={4} md={6} sm={6}>
                 <div className='input-wrapper'>
                   <div className="form-group">
                     <label htmlFor={field.name}>{field.label}</label>
@@ -68,7 +82,7 @@ const CreateCustomer = () => {
                           className="form-control"
                         />
                         <span className='input-icon' onClick={() => setShowPassword(prev => !prev)}>
-                          {showPassword ? <Visibility /> : <VisibilityOff />}
+                          {showPassword ? <MdVisibility /> : <MdVisibilityOff />}
                         </span>
                       </div>
                     ) : field.name === "confirmpassword" ? (
@@ -82,8 +96,22 @@ const CreateCustomer = () => {
                           className="form-control"
                         />
                         <span className='input-icon' onClick={() => setShowConfirmPassword(prev => !prev)}>
-                          {showConfirmPassword ? <Visibility /> : <VisibilityOff />}
+                          {showConfirmPassword ? <MdVisibility /> : <MdVisibilityOff />}
                         </span>
+                      </div>
+                    ) : field.options ? (
+                      <div className="custom-select">
+                        <select
+                          id={field.name}
+                          name={field.name}
+                          className="form-control"
+                        >
+                          <option value="">{field.placeholder}</option>
+                          {field.options.map((option, idx) => (
+                            <option key={idx} value={option}>{option}</option>
+                          ))}
+                        </select>
+                        <IoIosArrowDown className="custom-arrow-icon" />
                       </div>
                     ) : (
                       <input
@@ -103,8 +131,8 @@ const CreateCustomer = () => {
         </form>
 
         <div className='form-submit-button'>
-          <button type='submit' className='cancel-button'>Cancel</button>
-          <button type='submit' className='save-button'>Save</button>
+          <button type='submit' className='cancel-button' onClick={handlesubmit}>Cancel</button>
+          <button type='submit' className='save-button' onClick={handlesubmit}>Save</button>
         </div>
       </section>
     </>

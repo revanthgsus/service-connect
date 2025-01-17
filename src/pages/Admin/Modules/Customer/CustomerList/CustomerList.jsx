@@ -4,21 +4,27 @@ import { HiPlus } from "react-icons/hi";
 import { IoSearch } from "react-icons/io5";
 import { useNavigate } from 'react-router-dom';
 import { IoIosArrowDown } from "react-icons/io";
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
+import { MdModeEditOutline } from "react-icons/md";
+import { HiOutlineTrash } from "react-icons/hi";
 
 const CustomerList = () => {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
 
   const tableHeadings = [
-    { segment: "SNo", title: "S.No" },
-    { segment: "CustomerID", title: "Customer ID" },
-    { segment: "CustomerName", title: "Customer Name" },
-    { segment: "MailID", title: "Mail ID" },
-    { segment: "MobileNumber", title: "Mobile Number" },
-    { segment: "Location", title: "Location" },
-    { segment: "Status", title: "Status" },
-    { segment: "Status", title: "Status" },
+    { title: "S.No" },
+    { title: "Customer ID" },
+    { title: "Customer Name" },
+    { title: "Mail ID" },
+    { title: "Mobile Number" },
+    { title: "Location" },
+    { title: "Status" },
+    { title: "Status" },
   ];
 
   const customers = [
@@ -45,7 +51,7 @@ const CustomerList = () => {
 
   const handleCreate = (e) => {
     e.preventDefault();
-    navigate("/admin/customer/createcustomer");
+    navigate("createcustomer");
   };
 
   const filteredCustomers = customers.filter((customer) => {
@@ -64,6 +70,20 @@ const CustomerList = () => {
   const handleStatusChange = (e) => {
     setStatusFilter(e.target.value);
   }
+
+  const handlePageChange = (event, page) => {
+    setCurrentPage(page);
+  };
+
+  const displayedCustomers = filteredCustomers.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
+  const handleEdit = (customer) => {
+    navigate("editcustomer", { state: { managerData: customer } });
+  };
+
   return (
     <section className="customer-list">
       <div className='top-alignment'>
@@ -72,21 +92,27 @@ const CustomerList = () => {
           Add Customer</button>
       </div>
 
-      <div className="list-alignment">
-        <div className='list-top'>
-          <div className='search-wrapper'>
-            <input type="search"
-              className='search-input'
-              placeholder='Search by Manager Name or ID'
-              name='search'
+      <div className="table-list">
+        <div className="list-top">
+          <div className="search-wrapper">
+            <input
+              type="search"
+              className="search-input"
+              placeholder="Search by Manager Name or ID"
               value={searchTerm}
-              onChange={handleSearchChange} />
-            <IoSearch className='search-icon' />
+              onChange={handleSearchChange}
+            />
+            <IoSearch className="search-icon" />
           </div>
           <div className="status-wrapper">
-            <select name="status" id="status-select" className="status-select" value={statusFilter}
-              onChange={handleStatusChange}>
-              <option value="" selected >Status</option>
+            <select
+              name="status"
+              id="status-select"
+              className="status-select"
+              value={statusFilter}
+              onChange={handleStatusChange}
+            >
+              <option value="">Status</option>
               <option value="active">Active</option>
               <option value="inactive">Inactive</option>
             </select>
@@ -94,38 +120,58 @@ const CustomerList = () => {
           </div>
         </div>
 
-        <table className="customer-table">
-          <thead className='table-align'>
-            <tr>
-              {tableHeadings.map((heading, index) => (
-                <th key={index} className="table-heading">
-                  {heading.title}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {filteredCustomers.length === 0 ? (
-              <tr className='no-data'>
-                <td colSpan={7}>
-                  No Managers Found
-                </td>
+        <div className="list-alignment">
+          <table className="manager-table">
+            <thead className="table-align">
+              <tr>
+                {tableHeadings.map((heading, index) => (
+                  <th key={index} className="table-heading">
+                    {heading.title}
+                  </th>
+                ))}
               </tr>
-            ) : (
-              filteredCustomers.map((customer, index) => (
-                <tr key={customer.id} className="list-item">
-                  <td>{index + 1}</td>
-                  <td>{customer.customerID}</td>
-                  <td>{customer.customerName}</td>
-                  <td>{customer.mailID}</td>
-                  <td>{customer.mobileNumber}</td>
-                  <td>{customer.location}</td>
-                  <td>{customer.status}</td>
+            </thead>
+            <tbody>
+              {displayedCustomers.length === 0 ? (
+                <tr className="no-data">
+                  <td colSpan={tableHeadings.length}>No Managers Found</td>
                 </tr>
-              ))
-            )}
-          </tbody>
-        </table>
+              ) : (
+                displayedCustomers.map((manager, index) => (
+                  <tr key={manager.id} className="list-item">
+                    <td>{(currentPage - 1) * itemsPerPage + index + 1}</td>
+                    <td>{manager.customerID}</td>
+                    <td>{manager.customerName}</td>
+                    <td>{manager.mailID}</td>
+                    <td>{manager.mobileNumber}</td>
+                    <td>{manager.location}</td>
+                    <td>{manager.status}</td>
+                    <td>
+                      <span className='edit-icon' onClick={() => handleEdit(manager)}>
+                        <MdModeEditOutline />
+                      </span>
+
+                      <span className='delete-icon'>
+                        <HiOutlineTrash />
+                      </span>
+                    </td>
+                  </tr>
+                ))
+              )}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div className="pagination-align">
+        <Stack spacing={2}>
+          <Pagination
+            count={Math.ceil(filteredCustomers.length / itemsPerPage)}
+            page={currentPage}
+            onChange={handlePageChange}
+            color="primary"
+          />
+        </Stack>
       </div>
     </section>
   )

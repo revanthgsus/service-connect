@@ -9,4 +9,4 @@ const CustomLogo = () => {
   )
 }
 
-export default CustomLogo
+export default CustomLogo;

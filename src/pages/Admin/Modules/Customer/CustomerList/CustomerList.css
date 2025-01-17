@@ -1,9 +1,3 @@
-.customer-list {
-  background-color: #02868d0d;
-  padding: 40px;
-  flex: 1;
-}
-
 .customer-heading {
   font-family: 'Be Vietnam Pro';
   color: #525252;
@@ -24,21 +18,29 @@
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   font-size: 14px;
   font-weight: 500;
+  cursor: pointer;
+}
+
+.customer-list .add-button:hover {
+  transform: translate(0px, -1px);
+  box-shadow: rgb(0, 0, 0, 40%) 0px 0px 5px;
+  transition: .3s linear all;
 }
 
 .customer-list .top-alignment {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 25px;
+  margin-bottom: 15px;
+  flex-wrap: wrap;
 }
 
 .customer-list .list-alignment {
-  border: 1px solid #8080803b;
-  box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 10px;
-  border-radius: 5px;
-  background-color: #ffffff;
-  height: 90%;
+  overflow-x: scroll;
+}
+
+.customer-list .list-alignment::-webkit-scrollbar {
+  display: none;
 }
 
 .customer-list .customer-table {
@@ -55,19 +57,27 @@
   color: #ffffff;
 }
 
+.table-list {
+  border: 1px solid #8080803b;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 10px;
+  border-radius: 5px;
+  background-color: #ffffff;
+}
+
 .customer-list .table-heading {
-  padding: 12px 25px;
+  padding: 20px 15px;
   font-weight: 500;
-  font-family: 'Be Vietnam Pro';
+  font-family: 'Be Vietnam Pro', sans-serif;
   text-align: start;
+  white-space: nowrap;
 }
 
 .customer-list .list-item td {
-  padding: 15px 25px;
-  font-family: 'Be Vietnam Pro';
+  padding: 15px 15px;
+  font-family: 'Be Vietnam Pro', sans-serif;
   color: #696969;
   text-align: start;
-  font-size: 14px;
+  white-space: nowrap;
 }
 
 .customer-list .add-button svg {
@@ -80,9 +90,9 @@
 .customer-list .search-input {
   border: 1px solid #0505053b;
   padding: 8px 20px;
-  border-radius: 30px;
-  outline: none;
-  font-family: 'Be Vietnam Pro';
+  border-radius: 20px;
+  outline: 1px solid transparent;
+  font-family: 'Be Vietnam Pro', sans-serif;
   color: #585858;
   width: 100%;
   font-size: 14px;
@@ -96,8 +106,8 @@
 .customer-list .search-wrapper {
   position: relative;
   max-width: 400px;
-  width: 450px;
-  margin: 30px 30px;
+  width: 40%;
+  margin: 20px 20px;
 }
 
 .customer-list .search-icon {
@@ -115,7 +125,7 @@
 
 .customer-list .no-data td {
   padding: 15px 25px;
-  font-family: 'Be Vietnam Pro';
+  font-family: 'Be Vietnam Pro', sans-serif;
   color: #696969;
   text-align: center;
 }
@@ -124,7 +134,7 @@
   position: relative;
   max-width: 100%;
   width: 150px;
-  margin: 30px 30px;
+  margin: 20px 20px;
 }
 
 .customer-list .status-select {
@@ -152,4 +162,132 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.pagination-align {
+  padding: 15px 0px;
+  float: inline-end;
+}
+
+.css-1bug3cd-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected {
+  background-color: #02858D !important;
+  font-family: 'Be Vietnam Pro', sans-serif;
+}
+
+.customer-list .list-item td:first-child {
+  text-align: center;
+}
+
+.edit-icon {
+  background-color: #EEEEEE;
+  padding: 7px 10px;
+  border-radius: 3px;
+  transition: .3s ease-out all;
+  display: inline-block;
+}
+
+.edit-icon:hover {
+  background-color: #048088;
+  color: white;
+  transition: 0.3s linear all;
+}
+
+.edit-icon:hover svg {
+  transform: scale(1.1)
+}
+
+.delete-icon {
+  background-color: #EEEEEE;
+  padding: 7px 10px;
+  border-radius: 3px;
+  transition: .3s ease-out all;
+  display: inline-block;
+  margin: 0px 15px;
+}
+
+.delete-icon:hover {
+  background-color: #fb5454;
+  color: white;
+  transition: 0.3s linear all;
+}
+
+.delete-icon:hover svg {
+  transform: scale(1.1);
+}
+
+@media only screen and (max-width:575px) {
+  .customer-list .list-top {
+    display: block;
+  }
+
+  .customer-list .search-wrapper,
+  .customer-list .search-wrapper {
+    margin: 15px auto;
+    width: 90%;
+  }
+
+  .customer-list .status-wrapper {
+    display: none;
+  }
+
+  .customer-list .add-button {
+    margin-top: 10px;
+  }
+
+}
+
+@media only screen and (min-width: 576px) and (max-width: 768px) {
+  .customer-list .add-button {
+    font-size: 12px;
+    padding: 8px 12px;
+  }
+
+  .customer-list .search-wrapper {
+    margin: 20px 15px;
+    width: 90%;
+  }
+
+  .customer-list .status-wrapper {
+    margin: 20px 15px;
+  }
+
+  .customer-list .list-top {
+    display: flex;
+  }
+}
+
+@media only screen and (min-width:1200px) and (max-width:1369px) {
+  .customer-list .table-heading {
+    font-size: 14px;
+  }
+
+  .customer-list .list-item td {
+    font-size: 14px;
+  }
+
+  .customer-list .add-button {
+    padding: 8px 15px;
+  }
+}
+
+@media only screen and (min-width:1400px) {
+  .customer-list .search-input {
+    font-size: 14px;
+  }
+
+  .customer-list .status-select {
+    font-size: 12px;
+  }
+
+  .customer-list .top-alignment {
+    margin-bottom: 20px;
+  }
+
+  .customer-list .status-wrapper {
+    margin: 30px 30px;
+  }
+
+  .customer-list .search-wrapper {
+    margin: 30px 30px;
+  }
 }

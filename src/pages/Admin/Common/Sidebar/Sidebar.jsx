@@ -31,7 +31,7 @@ const Sidebar = ({ isOpen }) => {
   ];
 
   return (
-    <aside className={`sidebar-section ${isOpen ? "open" : ""}`}>
+    <aside className={`sidebar-section ${isOpen ? "open" : "closed"}`}>
       {sidebarItems.map((item, index) => (
         <ul key={index} className='sidebar-link'>
           <li>

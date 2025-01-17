@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import "../CreateManager/CreateManager.css";
 import { Col, Row } from 'react-bootstrap';
 import { IoIosArrowDown } from "react-icons/io";
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import { MdVisibility } from "react-icons/md";
+import { MdVisibilityOff } from "react-icons/md";
+import { useNavigate } from 'react-router-dom';
 
 const CreateManager = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const navigate = useNavigate();
 
   const AddManager = [
     {
@@ -81,6 +83,10 @@ const CreateManager = () => {
     },
   ];
 
+  const handlesubmit = (e) =>{
+    e.preventDefault();
+    navigate("/admin/service-manager")
+  }
   return (
     <>
       <section className='create-manager'>
@@ -88,7 +94,7 @@ const CreateManager = () => {
         <form className='create-form'>
           <Row>
             {AddManager.map((field, index) => (
-              <Col key={index} xxl={4} xl={4} lg={4}>
+              <Col key={index} xxl={4} xl={4} lg={4} md={6} sm={6}>
                 <div className='input-wrapper'>
                   <div className="form-group">
                     <label htmlFor={field.name}>{field.label}</label>
@@ -103,7 +109,7 @@ const CreateManager = () => {
                           className="form-control"
                         />
                         <span className='input-icon' onClick={() => setShowPassword(prev => !prev)}>
-                          {showPassword ? <Visibility /> : <VisibilityOff />}
+                          {showPassword ? <MdVisibility /> : <MdVisibilityOff />}
                         </span>
                       </div>
                     ) : field.name === "confirmpassword" ? (
@@ -117,7 +123,7 @@ const CreateManager = () => {
                           className="form-control"
                         />
                         <span className='input-icon' onClick={() => setShowConfirmPassword(prev => !prev)}>
-                          {showConfirmPassword ? <Visibility /> : <VisibilityOff />}
+                            {showConfirmPassword ? <MdVisibility /> : <MdVisibilityOff />}
                         </span>
                       </div>
                     ) : field.options ? (
@@ -127,7 +133,7 @@ const CreateManager = () => {
                           name={field.name}
                           className="form-control"
                         >
-                          <option value="" disabled>{field.placeholder}</option>
+                          <option value="">{field.placeholder}</option>
                           {field.options.map((option, idx) => (
                             <option key={idx} value={option}>{option}</option>
                           ))}
@@ -152,8 +158,8 @@ const CreateManager = () => {
         </form>
 
         <div className='form-submit-button'>
-          <button type='submit' className='cancel-button'>Cancel</button>
-          <button type='submit' className='save-button'>Save</button>
+          <button type='submit' className='cancel-button' onClick={handlesubmit}>Cancel</button>
+          <button type='submit' className='save-button' onClick={handlesubmit}>Save</button>
         </div>
       </section>
     </>

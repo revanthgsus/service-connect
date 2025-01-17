@@ -8,10 +8,12 @@
   font-weight: 600;
   background: linear-gradient(90deg, rgba(0, 125, 133, 1) 0%, rgba(0, 123, 131, 0.83) 25%, rgba(0, 123, 131, 0.88) 50%, rgba(0, 113, 120, 0.8) 75%, rgba(1, 141, 149, 1) 100%);
   color: white;
-  margin-top: 50px;
+  margin-top: 35px;
   box-shadow: rgb(0 0 0 / 20%) 0px 15px 20px 0px;
 }
-
+.otp-btn:hover{
+  background: #0c828a;
+}
 .otp-input {
   width: 50px;
   height: 50px;
@@ -21,9 +23,41 @@
   box-shadow: rgb(0 0 0 / 10%) 0px 5px 10px 0px;
   text-align: center;
 }
-
+.otp-input:hover{
+  border: 2px solid #01848d;
+}
+.otp-input:focus-visible{
+  border: 2px solid #01848d;
+}
 .otp-input-container {
   display: flex;
   justify-content: space-evenly;
-  margin: 50px 0px 10px 0px;
+  margin: 40px 0px 10px 0px;
+}
+
+@media only screen and (max-width:575px) {
+  .otp-btn {
+    margin-top: 30px;
+  }
+
+  .otp-input {
+    height: 40px;
+    width: 40px;
+  }
+}
+
+@media only screen and (min-width : 768px) and (max-width:992px) {
+  .otp-btn {
+    margin-top: 20px;
+    padding: 7px 10px;
+    font-size: 14px;
+  }
+  .otp-input{
+    width: 40px;
+    height: 40px;
+  }
+}
+
+@media screen and (min-width:992px) and (max-width:1399px) {
+  
 }

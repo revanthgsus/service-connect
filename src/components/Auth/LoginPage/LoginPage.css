@@ -1,8 +1,54 @@
 .login-bg {
   width: 100%;
-  overflow: hidden;
-  height: 100vh;
+  min-height: 100vh;
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.loginpage-flex {
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  gap: 30px;
+}
+
+.login-bg::before {
+  content: "";
+  background: linear-gradient(90deg,
+      rgba(0, 125, 133, 1) 0%,
+      rgba(0, 123, 131, 0.83) 25%,
+      rgba(0, 123, 131, 0.88) 50%,
+      rgba(0, 113, 120, 0.8) 75%,
+      rgba(1, 141, 149, 1) 100%);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: -1;
+  width: 70%;
+  height: 100%;
+  border-top-right-radius: 50%;
+  border-bottom-right-radius: 50%;
+  animation: pulse 2s linear infinite;
+  transform: scaleY(1.5);
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0px 0 0 0 #d8eff0;
+  }
+
+  50% {
+    box-shadow: 30px 0 0 0 #d8eff0;
+  }
+
+  100% {
+    box-shadow: 60px 0 0 0 #d8eff0;
+  }
 }
 
 .form-alignment {
@@ -10,11 +56,6 @@
   justify-content: space-evenly;
   align-items: center;
   height: 100%;
-}
-
-.login-image {
-  width: 600px;
-  height: auto;
 }
 
 .input-wrapper {
@@ -32,16 +73,15 @@
 .login-form {
   background-color: #ffffff;
   border-radius: 15px;
-  padding: 70px 50px;
-  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
-  width: 550px;
-  height: 660px;
+  padding: 60px 60px;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
   margin: auto;
 }
 
 .login-form h1 {
   color: #111111;
-  font-size: 30px;
+  font-size: 28px;
   font-weight: 700;
   font-family: 'Be Vietnam Pro', sans-serif;
   text-align: center;
@@ -65,7 +105,7 @@
   right: 0;
   top: 0;
   position: absolute;
-  width: 100px;
+  width: 100%;
   border-radius: 5px;
   background-color: #009ba7;
 }
@@ -96,7 +136,7 @@
 
 .form-input {
   width: 100%;
-  border: 1px solid #858585;
+  border: 1.5px solid #858585;
   border-radius: 8px;
   padding: 10px 15px;
   font-family: 'Be Vietnam Pro', sans-serif;
@@ -111,7 +151,7 @@
 }
 
 .input-container {
-  margin-bottom: 25px;
+  margin-bottom: 15px;
 }
 
 .login-btn {
@@ -119,8 +159,8 @@
   padding: 10px 15px;
   border-radius: 30px;
   border: 1px solid transparent;
-  font-family: 'Be Vietnam Pro';
-  font-size: 18px;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-size: 16px;
   font-weight: 600;
   background: linear-gradient(90deg, rgba(0, 125, 133, 1) 0%,
       rgba(0, 123, 131, 0.83) 25%,
@@ -135,24 +175,44 @@
 .forgot-link {
   color: #0089DC;
   text-decoration: none;
-  font-family: 'Be Vietnam Pro';
+  font-family: 'Be Vietnam Pro', sans-serif;
   font-size: 14px;
   font-weight: 400;
   float: inline-end;
 }
 
 .main-logo {
-  width: 120px;
+  width: 100px;
   height: auto;
   position: absolute;
-  right: 5%;
+  right: 2%;
   top: 5%;
   z-index: 1;
+}
+
+.bg-wave::before {
+  content: "";
+  background-image: url('../../../assets/images/login/bg-wave.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: -2;
+  width: 55%;
 }
 
 .bg-wave {
   text-align: center;
 }
+
+.login-btn:hover {
+  background: #0c828a;
+}
+
 
 @media only screen and (max-width:575px) {
   .main-logo {
@@ -160,27 +220,22 @@
     top: 1%;
   }
 
-  .form-alignment {
-    display: block;
+  .loginpage-flex {
+    gap: 0px;
   }
 
   .login-bg {
     height: 100%;
-    padding: 20px 0px;
-  }
-
-  .login-image {
-    width: 280px;
+    padding: 50px 0px;
   }
 
   .login-form {
-    width: 90%;
-    padding: 50px 30px;
-    height: 540px;
+    padding: 40px 30px;
+    width: 95%;
   }
 
   .login-form h1 {
-    font-size: 22px;
+    font-size: 20px;
   }
 
   .underline-animation {
@@ -198,24 +253,51 @@
   }
 
   .login-btn {
-    margin-top: 40px;
+    margin-top: 30px;
   }
 
   .bg-wave::before {
     display: none;
   }
 
+  .login-bg::before {
+    border-top-left-radius: 50%;
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 0px;
+    transform: scaleX(1.5);
+    height: 45%;
+    width: 100%;
+    top: unset;
+  }
+
+  @keyframes pulse {
+    0% {
+      box-shadow: 0 0 0 0 #d8eff0;
+    }
+
+    50% {
+      box-shadow: 0 -30px 0 0 #d8eff0;
+    }
+
+    100% {
+      box-shadow: 0 -60px 0 0 #d8eff0;
+    }
+  }
 }
 
-@media screen and (min-width:576px) and (max-width:768px) {
+@media screen and (min-width:576px) and (max-width:767px) {
+  .login-image {
+    width: 80%;
+  }
+
   .login-form {
-    width: 90%;
     padding: 50px 40px;
+    width: 80%;
   }
 
   .main-logo {
     width: 100px;
-    top: 1%;
+    top: 3%;
   }
 
   .login-bg {
@@ -242,10 +324,137 @@
   }
 
   .login-btn {
-    margin-top: 40px;
+    margin-top: 30px;
   }
 
   .bg-wave::before {
     display: none;
+  }
+
+  .login-bg::before {
+    border-top-left-radius: 50%;
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 0px;
+    transform: scaleX(1.5);
+    height: 40%;
+    width: 100%;
+    top: unset;
+  }
+
+  @keyframes pulse {
+    0% {
+      box-shadow: 0 0 0 0 #d8eff0;
+    }
+
+    50% {
+      box-shadow: 0 -30px 0 0 #d8eff0;
+    }
+
+    100% {
+      box-shadow: 0 -60px 0 0 #d8eff0;
+    }
+  }
+}
+
+@media screen and (min-width:768px) and (max-width:991px) {
+  .bg-wave::before {
+    display: none;
+  }
+
+  .login-form h1 {
+    font-size: 18px;
+  }
+
+  .login-form p {
+    font-size: 10px;
+    line-height: 15px;
+    margin-bottom: 10px;
+    padding-bottom: 0px;
+  }
+
+  .login-form {
+    padding: 30px 30px;
+  }
+
+  .underline-animation {
+    margin: 10px auto 10px;
+  }
+
+  .forgot-link {
+    font-size: 10px;
+  }
+
+  .login-btn {
+    margin-top: 20px;
+    padding: 7px 10px;
+    font-size: 14px;
+  }
+
+  .form-input {
+    font-size: 12px;
+    padding: 7px 10px;
+  }
+
+  .input-icon svg {
+    font-size: 16px;
+  }
+
+  .form-label {
+    font-size: 12px;
+    margin-bottom: 0px;
+  }
+
+  .input-container {
+    margin-bottom: 10px;
+  }
+
+  .main-logo {
+    width: 70px;
+    top: 2%;
+    right: 2%;
+  }
+}
+
+@media screen and (min-width:992px) and (max-width:1439px) {
+  .login-form h1 {
+    font-size: 24px;
+  }
+
+  .login-form p {
+    line-height: 24px;
+    font-size: 13px;
+    padding-bottom: 0px;
+  }
+
+  .login-btn {
+    font-size: 16px;
+    margin-top: 30px;
+  }
+
+  .login-form {
+    padding: 45px 45px;
+    width: 90%;
+  }
+
+  .form-label {
+    font-size: 14px;
+    margin-bottom: 5px;
+
+  }
+
+  .forgot-link {
+    font-size: 12px;
+  }
+
+  .form-input {
+    font-size: 14px;
+  }
+
+  .underline-animation {
+    margin: 10px auto 20px;
+  }
+
+  .main-logo {
+    top: 2%;
   }
 }

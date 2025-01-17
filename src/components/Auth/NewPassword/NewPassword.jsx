@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import BackgroundColor from '../../../common/BackgroundColor/BackgroundColor';
 import Logo from '../../../common/MainLogo/Logo';
 import { IoArrowBack } from "react-icons/io5";
 import loginImage from "../../../assets/images/login/login-image.png";
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import "../NewPassword/NewPassword.css";
+import { Row, Col } from 'react-bootstrap';
 
 const NewPassword = () => {
   const navigate = useNavigate();
@@ -26,7 +26,7 @@ const NewPassword = () => {
     {
       label: "Confirm New Password",
       name: "confirmPassword",
-      placeholder: "Confirm your new password",
+      placeholder: "Confirm new password",
       type: "password",
       autocomplete: "password",
       showPassword: showConfirmPassword,
@@ -45,21 +45,22 @@ const NewPassword = () => {
 
   return (
     <>
+      <Logo />
       <section className='login-bg'>
-        <Logo />
-        <BackgroundColor />
-        <div className='form-alignment'>
-          <div className='bg-wave'>
-            <img src={loginImage} alt="login-image" className='img-fluid login-image' />
-          </div>
-          <div>
-            <form className='login-form'>
+        <Row className='loginpage-flex'>
+          <Col xxl={4} xl={4} lg={5} md={5}>
+            <div className='bg-wave'>
+              <img src={loginImage} alt="login-image" className='img-fluid login-image' />
+            </div>
+          </Col>
+          <Col xxl={4} xl={5} lg={6} md={5}>
+            <form className='login-form'onSubmit={handleSubmit}>
               <span className="back-span">
                 <Link to="/forgot-password" className="back-btn">
                   <IoArrowBack /> Back
                 </Link>
               </span>
-              <h1 className='mt-4'>Set New Password</h1>
+              <h1 className='new-password-heading'>Set New Password</h1>
               <div className='underline-animation'></div>
               <p>Choose a strong, unique password to secure your personal information and keep your account safe.</p>
               {newpassword.map((field, index) => (
@@ -80,10 +81,10 @@ const NewPassword = () => {
                   </div>
                 </div>
               ))}
-              <button type='submit' className='update-pass-btn' onClick={handleSubmit}>Update Password</button>
+              <button type='submit' className='update-pass-btn'>Update Password</button>
             </form>
-          </div>
-        </div>
+          </Col>
+        </Row>
       </section>
     </>
   );

@@ -1,12 +1,15 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
-label {
-  color: #333333;
-  font-weight: 400;
-  padding: 5px 0px;
-  font-family: 'Be Vietnam Pro', sans-serif;
-  margin-bottom: 5px;
+.theme--light {
+  --bg-color: #ffffff;
+  --text-color: #525252;
+}
+
+.theme--dark {
+  --bg-color: #242c35;
+  --text-color: #ffffff;
 }

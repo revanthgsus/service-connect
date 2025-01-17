@@ -1,0 +1,16 @@
+.dashboard-layout {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.layout-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.layout-main {
+    flex: 1;
+    overflow-y: auto;
+}

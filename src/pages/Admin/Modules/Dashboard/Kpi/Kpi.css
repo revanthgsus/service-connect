@@ -1,26 +1,21 @@
-.dashboard-kpi {
-  background-color: #02868d0d;
-  padding: 40px;
-  flex: 1;
-}
-
 .dashboard-heading {
-  font-family: 'Be Vietnam Pro';
+  font-family: 'Be Vietnam Pro', sans-serif;
   color: #525252;
-  padding-bottom: 25px;
+  padding-bottom: 20px;
+  margin-bottom: 0px;
 }
 
 .kpi-item {
   box-shadow: rgba(17, 17, 26, 0.05) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
   border-radius: 5px;
-  padding: 30px 30px 25px 30px;
+  padding: 25px 15px 20px 15px;
   position: relative;
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  gap: 20px;
-  width: 23%;
+  justify-content: flex-start;
+  gap: 10px;
   border: 1px solid #8080803b;
-  justify-content: start;
+  background-color: #ffffff;
 }
 
 .kpi-item::before {
@@ -39,35 +34,50 @@
   border-top-right-radius: 5px;
 }
 
-.kpi-alignment {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
 .kpi-value {
-  font-family: 'Be Vietnam Pro';
+  font-family: 'Be Vietnam Pro', sans-serif;
 }
 
 .kpi-icon {
   background-color: #02848D;
   color: #ffffff;
   border-radius: 50%;
-  padding: 18px;
+  padding: 14px;
 }
 
 .kpi-icon svg {
-  width: 40px;
-  height: 40px;
+  width: 25px;
+  height: 25px;
 }
 
 .kpi-value h6 {
-  font-size: 18px;
   color: #595959;
 }
 
-.kpi-value h2 {
+.kpi-value h3 {
   color: #02848D;
   font-weight: bold;
   margin-bottom: 0px;
+}
+
+@media only screen and (max-width:575px) {
+  .dashboard-heading {
+    padding-bottom: 10px;
+  }
+}
+
+@media only screen and (min-width:1200px) and (max-width:1399px) {
+  .kpi-value h6 {
+    font-size: 14px;
+  }
+
+  .dashboard-heading {
+    padding-bottom: 15px;
+  }
+}
+
+@media only screen and (min-width:1400px) {
+  .kpi-item {
+    gap: 30px;
+  }
 }

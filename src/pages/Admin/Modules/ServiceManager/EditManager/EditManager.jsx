@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
-import "../CreateAdvisor/CreateAdvisor.css";
+import "./EditManager.css"
 import { Col, Row } from 'react-bootstrap';
 import { IoIosArrowDown } from "react-icons/io";
 import { MdVisibility } from "react-icons/md";
 import { MdVisibilityOff } from "react-icons/md";
 import { useNavigate } from 'react-router-dom';
 
-const CreateAdvisor = () => {
+const EditManager = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const navigate = useNavigate();
 
-  const AddAdvisor = [
+  const AddManager = [
     {
       label: "User Name",
       name: "username",
@@ -85,17 +85,17 @@ const CreateAdvisor = () => {
 
   const handlesubmit = (e) => {
     e.preventDefault();
-    navigate("/admin/service-advisor")
+    navigate("/admin/service-manager")
   }
 
   return (
     <>
-      <section className='create-advisor'>
-        <h5 className='addadvisor-heading'>Add Service Advisor</h5>
+      <section className='create-manager'>
+        <h5 className='addmanager-heading'>Add Service Manager</h5>
         <form className='create-form'>
           <Row>
-            {AddAdvisor.map((field, index) => (
-              <Col key={index} xxl={4} xl={4} lg={4}>
+            {AddManager.map((field, index) => (
+              <Col key={index} xxl={4} xl={4} lg={4} md={6} sm={6}>
                 <div className='input-wrapper'>
                   <div className="form-group">
                     <label htmlFor={field.name}>{field.label}</label>
@@ -124,7 +124,7 @@ const CreateAdvisor = () => {
                           className="form-control"
                         />
                         <span className='input-icon' onClick={() => setShowConfirmPassword(prev => !prev)}>
-                            {showConfirmPassword ? <MdVisibility /> : <MdVisibilityOff />}
+                          {showConfirmPassword ? <MdVisibility /> : <MdVisibilityOff />}
                         </span>
                       </div>
                     ) : field.options ? (
@@ -134,7 +134,7 @@ const CreateAdvisor = () => {
                           name={field.name}
                           className="form-control"
                         >
-                          <option value="" >{field.placeholder}</option>
+                          <option value="">{field.placeholder}</option>
                           {field.options.map((option, idx) => (
                             <option key={idx} value={option}>{option}</option>
                           ))}
@@ -167,4 +167,4 @@ const CreateAdvisor = () => {
   )
 }
 
-export default CreateAdvisor;
+export default EditManager;

@@ -5,15 +5,26 @@
 .custom-navbar {
   padding: 0px;
   box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 10px 0px;
+  z-index: 9;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: white;
 }
 
-.customlogo {
+.custom-logo {
   width: 100px;
   height: auto;
+  display: block;
+}
+
+.mobile-logo {
+  display: none;
 }
 
 .notification path {
-  fill: #555b6d;
+  color: #555b6d;
 }
 
 .moon-icon path {
@@ -35,6 +46,41 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 15px;
+  gap: 10px;
 
+}
+
+.navbar-icons button {
+  /* background-color: #f6f6f6; */
+  transition: 0.2s ease-in-out all;
+}
+
+.navbar-icons button:hover {
+  background-color: #dedede;
+  transition: 0.2s linear all;
+}
+
+
+@media only screen and (max-width:768px) {
+
+  .navbar-brand {
+    gap: 0px;
+    padding: 15px 0px;
+    margin-right: 0px;
+  }
+
+  .custom-logo {
+    display: none;
+  }
+
+  .mobile-logo {
+    display: block;
+    width: 32px;
+  }
+}
+
+@media only screen and ( min-width:769px ) and (max-width: 992px) {
+  .navbar-brand{
+    gap: unset;
+  }
 }
