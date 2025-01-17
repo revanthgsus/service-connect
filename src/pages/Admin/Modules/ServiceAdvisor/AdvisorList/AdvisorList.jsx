@@ -121,7 +121,7 @@ const AdvisorList = () => {
         </div>
 
         <div className="list-alignment">
-          <table className="manager-table">
+          <table className="advisor-table">
             <thead className="table-align">
               <tr>
                 {tableHeadings.map((heading, index) => (

@@ -10,7 +10,6 @@ const AdminLayout = () => {
     const handleDrawerToggle = () => {
         setIsOpen(!isOpen);
     };
-
     return (
         <>
             <section className='admin-layout'>

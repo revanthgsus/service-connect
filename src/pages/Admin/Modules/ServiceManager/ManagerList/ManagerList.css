@@ -36,7 +36,7 @@
 }
 
 .manager-list .list-alignment {
-  overflow-x: scroll;
+  overflow-x: auto;
 }
 
 .manager-list .list-alignment::-webkit-scrollbar {
@@ -55,6 +55,9 @@
       rgba(5, 148, 156, 1) 75%,
       rgba(2, 128, 136, 1) 100%);
   color: #ffffff;
+  position: sticky;
+  top: 0;
+  z-index: 1;
 }
 
 .table-list {
