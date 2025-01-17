@@ -5,7 +5,7 @@ import { HashRouter as Router } from 'react-router-dom';
 const Main = () => {
   return (
     <>
-      <Router basename='/'>
+      <Router>
         <AppRouter />
       </Router>
     </>
