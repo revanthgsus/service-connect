@@ -121,7 +121,7 @@ const CustomerList = () => {
         </div>
 
         <div className="list-alignment">
-          <table className="manager-table">
+          <table className="customer-table">
             <thead className="table-align">
               <tr>
                 {tableHeadings.map((heading, index) => (
