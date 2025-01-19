@@ -11,14 +11,14 @@ import { IoNotificationsOutline } from "react-icons/io5";
 import { IoMoonOutline } from "react-icons/io5";
 import { IoSunny } from "react-icons/io5";
 import Dropdown from '../Dropdown/Dropdown';
-import { ThemeContext } from '../../../../common/Theme/ThemeProvider';
+import ThemeContext from '../../../../contexts/ThemeContext';
 
 const CustomNavbar = ({ handleDrawerToggle, isOpen }) => {
   const { theme, toggleTheme } = useContext(ThemeContext);
 
   return (
     <>
-      <Navbar collapseOnSelect expand={false} className="custom-navbar">
+      <Navbar expand={false} className="custom-navbar">
         <Container fluid className="px-4">
           <div className="navbar-brand">
             <Navbar.Brand className="p-0">

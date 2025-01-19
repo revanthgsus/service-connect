@@ -10,32 +10,17 @@ import { Row, Col } from 'react-bootstrap';
 
 const NewPassword = () => {
   const navigate = useNavigate();
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  const newpassword = [
-    {
-      label: "New password",
-      name: "password",
-      placeholder: "Enter new password",
-      type: "password",
-      autocomplete: "password",
-      showPassword: showPassword,
-      setShowPassword: setShowPassword,
-    },
-    {
-      label: "Confirm New Password",
-      name: "confirmPassword",
-      placeholder: "Confirm new password",
-      type: "password",
-      autocomplete: "password",
-      showPassword: showConfirmPassword,
-      setShowPassword: setShowConfirmPassword,
+  const handlePasswordToggle = (type) => {
+    if (type === "password") {
+      setShowPassword((prev) => !prev);
+    } else {
+      setShowConfirmPassword((prev) => !prev);
     }
-  ];
-
-  const handlePasswordToggle = (field) => {
-    field.setShowPassword(prevState => !prevState);
   };
 
   const handleSubmit = (e) => {
@@ -53,34 +38,51 @@ const NewPassword = () => {
               <img src={loginImage} alt="login-image" className='img-fluid login-image' />
             </div>
           </Col>
-          <Col xxl={4} xl={5} lg={6} md={5}>
-            <form className='login-form'onSubmit={handleSubmit}>
+          <Col xxl={5} xl={5} lg={6} md={5}>
+            <form className='login-form' onSubmit={handleSubmit}>
               <span className="back-span">
-                <Link to="/forgot-password" className="back-btn">
+                <Link to="/" className="back-btn">
                   <IoArrowBack /> Back
                 </Link>
               </span>
               <h1 className='new-password-heading'>Set New Password</h1>
               <div className='underline-animation'></div>
               <p>Choose a strong, unique password to secure your personal information and keep your account safe.</p>
-              {newpassword.map((field, index) => (
-                <div key={index} className='input-container'>
-                  <label htmlFor={field.name} className='form-label'>{field.label}</label>
-                  <div className='input-wrapper'>
-                    {field.name === "password" || field.name === "confirmPassword" ? (
-                      <span className='input-icon' onClick={() => handlePasswordToggle(field)}>
-                        {field.showPassword ? <Visibility /> : <VisibilityOff />}
-                      </span>
-                    ) : null}
-                    <input
-                      type={field.showPassword ? "text" : field.type}
-                      name={field.name}
-                      placeholder={field.placeholder}
-                      className='form-input'
-                    />
-                  </div>
+
+              <div className='input-container'>
+                <label htmlFor="password" className='form-label'>New Password</label>
+                <div className='input-wrapper'>
+                  <span className='input-icon' onClick={() => handlePasswordToggle("password")}>
+                    {showPassword ? <Visibility /> : <VisibilityOff />}
+                  </span>
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    name="password"
+                    value={password}
+                    placeholder="Enter new password"
+                    className='form-input'
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
                 </div>
-              ))}
+              </div>
+
+              <div className='input-container'>
+                <label htmlFor="confirmPassword" className='form-label'>Confirm New Password</label>
+                <div className='input-wrapper'>
+                  <span className='input-icon' onClick={() => handlePasswordToggle("confirmPassword")}>
+                    {showConfirmPassword ? <Visibility /> : <VisibilityOff />}
+                  </span>
+                  <input
+                    type={showConfirmPassword ? "text" : "password"}
+                    name="confirmPassword"
+                    value={confirmPassword}
+                    placeholder="Confirm new password"
+                    className='form-input'
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                  />
+                </div>
+              </div>
+
               <button type='submit' className='update-pass-btn'>Update Password</button>
             </form>
           </Col>

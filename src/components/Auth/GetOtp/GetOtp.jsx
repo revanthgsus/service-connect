@@ -47,17 +47,18 @@ const GetOtp = () => {
               <img src={loginImage} alt="login-image" className='img-fluid login-image' />
             </div>
           </Col>
-          <Col xxl={4} xl={5} lg={6} md={5}>
+          <Col xxl={5} xl={5} lg={6} md={5}>
             <form className="login-form" onSubmit={handleSubmit} >
               <span className="back-span">
                 <Link to="/forgot-password" className="back-btn">
                   <IoArrowBack /> Back
                 </Link>
               </span>
-              <img src={otpimage} alt="otp-image" className='img-fluid forgot-image' />
+              <img src={otpimage} alt="getotp-image" className='getotp-image' />
               <h1>Enter Your OTP</h1>
               <div className="underline-animation"></div>
               <p>We've sent a verification OTP to your email. Please check your inbox and enter the OTP to verify your email address.</p>
+
               <div className="otp-input-container">
                 {otp.map((digit, index) => (
                   <input
@@ -72,7 +73,8 @@ const GetOtp = () => {
                   />
                 ))}
               </div>
-              <button type="submit" className="otp-btn">Verify OTP</button>
+
+              <button type="submit" className="verify-otp-btn">Verify OTP</button>
             </form>
           </Col>
         </Row>

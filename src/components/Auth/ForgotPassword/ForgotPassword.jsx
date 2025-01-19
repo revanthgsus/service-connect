@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import "../ForgotPassword/ForgotPassword.css";
 import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../../../common/MainLogo/Logo';
@@ -10,17 +10,11 @@ import { Row, Col } from 'react-bootstrap';
 
 const ForgotPassword = () => {
   const navigate = useNavigate();
+  const [email, setEmail] = useState('');
 
-  const forgotpassword = [
-    {
-      label: "Email",
-      name: "email",
-      placeholder: "Enter email address",
-      type: "email",
-      autocomplete: "email",
-      icon: <MdEmail />
-    }
-  ]
+  const handleChange = (e) => {
+    setEmail(e.target.value);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -33,37 +27,41 @@ const ForgotPassword = () => {
       <Logo />
       <section className='login-bg'>
         <Row className='loginpage-flex'>
-          <Col xxl={4} xl={4} lg={5} md={5}>
+          <Col xxl={4} xl={4} lg={5} md={4}>
             <div className='bg-wave'>
               <img src={loginImage} alt="login-image" className='img-fluid login-image' />
             </div>
           </Col>
-          <Col xxl={4} xl={5} lg={6} md={5}>
+          <Col xxl={5} xl={5} lg={6} md={5}>
             <form className='login-form' onSubmit={handleSubmit} >
               <span className='back-span'>
-                <Link to='/' className='back-btn'><IoArrowBack />
-                  Back</Link>
+                <Link to='/' className='back-btn'>
+                  <IoArrowBack />Back
+                </Link>
               </span>
-              <img src={forgotImage} alt="forgot-image" className='img-fluid forgot-image' />
+              <img src={forgotImage} alt="forgot-image" className='forgot-image' />
               <h1>Forgot Your Password</h1>
               <div className='underline-animation'></div>
               <p>Please provide your email address, and we'll send you a link to reset your password</p>
-              {forgotpassword.map((field, index) => (
-                <div key={index} className='input-container'>
-                  <label htmlFor={field.name} className='form-label'>{field.label}</label>
-                  <div className='input-wrapper'>
-                    {field.icon && <span className='input-icon'>{field.icon}</span>}
-                    <input
-                      type={field.name}
-                      name={field.name}
-                      placeholder={field.placeholder}
-                      autoComplete={field.autocomplete}
-                      className='form-input'
-                    />
-                  </div>
+
+              <div className='input-container'>
+                <label htmlFor="email" className='form-label'>Email</label>
+                <div className='input-wrapper'>
+                  <span className='input-icon'><MdEmail /></span>
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="Enter email address"
+                    autoComplete="email"
+                    className='form-input'
+                    value={email}
+                    onChange={handleChange}
+                  />
                 </div>
-              ))}
-              <button type='submit' className='forgot-btn'>Send OTP</button>
+                {/* {error && <span className='error-message'>{error}</span>} */}
+              </div>
+
+              <button type='submit' className='send-otp-btn'>Send OTP</button>
             </form>
           </Col>
         </Row>
