@@ -1,7 +1,7 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import AddAdmin from '../pages/Admin/Common/AddAdmin/AddAdmin';
-import Profile from '../pages/Admin/Common/Profile/Profile';
+// import AddAdmin from '../pages/Admin/Common/AddAdmin/AddAdmin';
+// import Profile from '../pages/Admin/Common/Profile/Profile';
 import CreateManager from '../pages/Admin/Modules/ServiceManager/CreateManager/CreateManager';
 import ManagerList from './../pages/Admin/Modules/ServiceManager/ManagerList/ManagerList';
 import CreateAdvisor from '../pages/Admin/Modules/ServiceAdvisor/CreateAdvisor/CreateAdvisor';

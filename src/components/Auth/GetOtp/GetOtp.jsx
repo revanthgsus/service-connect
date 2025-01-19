@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import '../GetOtp/GetOtp.css';
 import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../../../common/MainLogo/Logo';
-import loginImage from "../../../assets/images/login/login-image.png";
-import otpimage from "../../../assets/images/login/otp-image.png";
+import loginImage from "../../../assets/images/login/login-image.svg";
+import otpimage from "../../../assets/images/login/otp-image.svg";
 import { IoArrowBack } from "react-icons/io5";
 import { Row, Col } from 'react-bootstrap';
 

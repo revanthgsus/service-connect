@@ -1,5 +1,5 @@
 import React from 'react';
-import customlogo from "../../assets/images/logo/main-logo.png";
+import customlogo from "../../assets/images/logo/main-logo.svg";
 
 const CustomLogo = () => {
   return (

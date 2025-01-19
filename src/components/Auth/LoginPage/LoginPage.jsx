@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import "../LoginPage/LoginPage.css";
 import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../../../common/MainLogo/Logo';
-import loginImage from "../../../assets/images/login/login-image.png";
+import loginImage from "../../../assets/images/login/login-image.svg";
 import PersonIcon from '@mui/icons-material/Person';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
