@@ -12,7 +12,7 @@ const Dropdown = () => {
 
   const dropdownList = [
     {
-      title: 'Add Admin',
+      title: 'Admin List',
       icon: <LuUserPlus />,
       link: "/admin/addadmin"
     },

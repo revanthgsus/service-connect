@@ -5,10 +5,8 @@ const ThemeProvider = ({ children }) => {
   const [theme, setTheme] = useState('light');
 
   useEffect(() => {
-    const savedtheme = sessionStorage.getItem('theme');
-    if (savedtheme) {
-      setTheme(savedtheme)
-    }
+    const savedTheme = sessionStorage.getItem('theme') || 'light';
+    setTheme(savedTheme);
   }, []);
 
   useEffect(() => {

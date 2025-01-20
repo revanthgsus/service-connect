@@ -18,7 +18,7 @@ const CustomNavbar = ({ handleDrawerToggle, isOpen }) => {
 
   return (
     <>
-      <Navbar expand={false} className="custom-navbar">
+      <Navbar expand={false} className="custom-navbar fixed-top" >
         <Container fluid className="px-4">
           <div className="navbar-brand">
             <Navbar.Brand className="p-0">

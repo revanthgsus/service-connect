@@ -242,7 +242,7 @@ const ManagerList = () => {
                       <td>{manager.mailID}</td>
                       <td>{manager.mobileNumber}</td>
                       <td>{manager.location}</td>
-                      <td>{manager.status}</td>
+                      <td><span>{manager.status}</span></td>
                       <td>
                         <span className='edit-icon' onClick={() => handleEdit(manager)}>
                           <MdModeEditOutline />
@@ -266,7 +266,6 @@ const ManagerList = () => {
               count={Math.ceil(filteredManagers.length / itemsPerPage)}
               page={currentPage}
               onChange={handlePageChange}
-              color="primary"
             />
           </Stack>
         </div>

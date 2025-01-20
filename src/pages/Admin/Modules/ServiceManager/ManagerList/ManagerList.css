@@ -171,38 +171,46 @@
   float: inline-end;
 }
 
-.css-1bug3cd-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected {
+.css-1l5xwdx-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected {
   background-color: #02858D !important;
   font-family: 'Be Vietnam Pro', sans-serif;
+  color: #ffffff;
 }
 
 .manager-list .list-item td:first-child {
   text-align: center;
 }
 
+.manager-list .list-item td:nth-last-child(2) span {
+  background-color: red;
+  padding: 10px 15px;
+  border-radius: 100px;
+  color: #ffffff;
+}
+
 .edit-icon {
   background-color: #EEEEEE;
   padding: 7px 10px;
   border-radius: 3px;
-  transition: .3s ease-out all;
+  transition: 0.5s ease-out all;
   display: inline-block;
 }
 
 .edit-icon:hover {
   background-color: #048088;
   color: white;
-  transition: 0.3s linear all;
+  transition: 0.5s linear all;
 }
 
 .edit-icon:hover svg {
-  transform: scale(1.1)
+  transform: scale(1.2)
 }
 
 .delete-icon {
   background-color: #EEEEEE;
   padding: 7px 10px;
   border-radius: 3px;
-  transition: .3s ease-out all;
+  transition: 0.5s ease-out all;
   display: inline-block;
   margin: 0px 15px;
 }
@@ -210,11 +218,11 @@
 .delete-icon:hover {
   background-color: #fb5454;
   color: white;
-  transition: 0.3s linear all;
+  transition: 0.5s linear all;
 }
 
 .delete-icon:hover svg {
-  transform: scale(1.1);
+  transform: scale(1.2);
 }
 
 @media only screen and (max-width:575px) {
@@ -258,13 +266,14 @@
   }
 }
 
-@media only screen and (min-width:1200px) and (max-width:1369px) {
+@media only screen and (min-width:1200px) and (max-width:1399px) {
   .manager-list .table-heading {
     font-size: 14px;
   }
 
   .manager-list .list-item td {
     font-size: 14px;
+    padding: 10px 15px;
   }
 
   .manager-list .add-button {

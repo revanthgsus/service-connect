@@ -8,7 +8,7 @@ const AppRouter = () => {
       <Routes>
         <Route path="/*" element={<AuthRouter />} />
         <Route path="/admin/*" element={<AdminRouter />} />
-      </Routes>
+      </Routes> 
   );
 }
 
