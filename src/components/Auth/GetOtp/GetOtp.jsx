@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import '../GetOtp/GetOtp.css';
 import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../../../common/MainLogo/Logo';
-import loginImage from "../../../assets/images/login/login-image.svg";
-import otpimage from "../../../assets/images/login/otp-image.svg";
+import loginImage from "../../../assets/images/login/login-image.webp";
+import otpimage from "../../../assets/images/login/otp-image.webp";
 import { IoArrowBack } from "react-icons/io5";
 import { Row, Col } from 'react-bootstrap';
 
@@ -44,7 +44,8 @@ const GetOtp = () => {
         <Row className='loginpage-flex'>
           <Col xxl={4} xl={4} lg={5} md={5}>
             <div className='bg-wave'>
-              <img src={loginImage} alt="login-image" className='img-fluid login-image' />
+              <img src={loginImage} alt="login-image" className='img-fluid login-image' loading='lazy'
+                height="auto" width="100%" />
             </div>
           </Col>
           <Col xxl={5} xl={5} lg={6} md={5}>
@@ -54,7 +55,7 @@ const GetOtp = () => {
                   <IoArrowBack /> Back
                 </Link>
               </span>
-              <img src={otpimage} alt="getotp-image" className='getotp-image' />
+              <img src={otpimage} alt="getotp-image" className='getotp-image' loading='lazy'/>
               <h1>Enter Your OTP</h1>
               <div className="underline-animation"></div>
               <p>We've sent a verification OTP to your email. Please check your inbox and enter the OTP to verify your email address.</p>

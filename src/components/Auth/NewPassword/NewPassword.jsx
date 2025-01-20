@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../../../common/MainLogo/Logo';
 import { IoArrowBack } from "react-icons/io5";
-import loginImage from "../../../assets/images/login/login-image.svg";
+import loginImage from "../../../assets/images/login/login-image.webp";
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import "../NewPassword/NewPassword.css";
@@ -35,7 +35,8 @@ const NewPassword = () => {
         <Row className='loginpage-flex'>
           <Col xxl={4} xl={4} lg={5} md={5}>
             <div className='bg-wave'>
-              <img src={loginImage} alt="login-image" className='img-fluid login-image' />
+              <img src={loginImage} alt="login-image" className='img-fluid login-image' loading='lazy'
+                height="auto" width="100%" />
             </div>
           </Col>
           <Col xxl={5} xl={5} lg={6} md={5}>

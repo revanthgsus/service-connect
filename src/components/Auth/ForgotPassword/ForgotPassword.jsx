@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import "../ForgotPassword/ForgotPassword.css";
 import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../../../common/MainLogo/Logo';
-import loginImage from "../../../assets/images/login/login-image.svg";
-import forgotImage from "../../../assets/images/login/forgot-image.svg";
+import loginImage from "../../../assets/images/login/login-image.webp";
+import forgotImage from "../../../assets/images/login/forgot-image.webp";
 import { MdEmail } from "react-icons/md";
 import { IoArrowBack } from "react-icons/io5";
 import { Row, Col } from 'react-bootstrap';
@@ -29,7 +29,8 @@ const ForgotPassword = () => {
         <Row className='loginpage-flex'>
           <Col xxl={4} xl={4} lg={5} md={4}>
             <div className='bg-wave'>
-              <img src={loginImage} alt="login-image" className='img-fluid login-image' />
+              <img src={loginImage} alt="login-image" className='img-fluid login-image' loading='lazy'
+                height="auto" width="100%" />
             </div>
           </Col>
           <Col xxl={5} xl={5} lg={6} md={5}>
@@ -39,7 +40,7 @@ const ForgotPassword = () => {
                   <IoArrowBack />Back
                 </Link>
               </span>
-              <img src={forgotImage} alt="forgot-image" className='forgot-image' />
+              <img src={forgotImage} alt="forgot-image" className='forgot-image' loading='lazy' />
               <h1>Forgot Your Password</h1>
               <div className='underline-animation'></div>
               <p>Please provide your email address, and we'll send you a link to reset your password</p>

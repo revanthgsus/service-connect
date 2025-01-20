@@ -186,7 +186,7 @@
 
 .bg-wave::before {
   content: "";
-  background-image: url('../../../assets/images/login/bg-wave.svg');
+  background-image: url('../../../assets/images/login/bg-wave.png');
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
