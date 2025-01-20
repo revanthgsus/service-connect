@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/service-connect/static/css/main.b3143282.css",
-    "main.js": "/service-connect/static/js/main.ceba1762.js",
+    "main.css": "/service-connect/static/css/main.385cbbf4.css",
+    "main.js": "/service-connect/static/js/main.3cb83ff5.js",
     "static/js/488.98341302.chunk.js": "/service-connect/static/js/488.98341302.chunk.js",
     "static/media/login-image.svg": "/service-connect/static/media/login-image.80df31a1a4d631200e8886cbec5134f0.svg",
     "static/media/forgot-image.svg": "/service-connect/static/media/forgot-image.3101fd76eb22da9a1607603d80f4b291.svg",
@@ -15,12 +15,12 @@
     "index.html": "/service-connect/index.html",
     "static/media/admin.svg": "/service-connect/static/media/admin.9e1db49b117c092d91c4e2b6c8ceebf5.svg",
     "static/media/customer.svg": "/service-connect/static/media/customer.2fed24a57ed5b87c0425c7bf03e87a93.svg",
-    "main.b3143282.css.map": "/service-connect/static/css/main.b3143282.css.map",
-    "main.ceba1762.js.map": "/service-connect/static/js/main.ceba1762.js.map",
+    "main.385cbbf4.css.map": "/service-connect/static/css/main.385cbbf4.css.map",
+    "main.3cb83ff5.js.map": "/service-connect/static/js/main.3cb83ff5.js.map",
     "488.98341302.chunk.js.map": "/service-connect/static/js/488.98341302.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.b3143282.css",
-    "static/js/main.ceba1762.js"
+    "static/css/main.385cbbf4.css",
+    "static/js/main.3cb83ff5.js"
   ]
 }
