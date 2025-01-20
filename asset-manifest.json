@@ -1,26 +1,26 @@
 {
   "files": {
-    "main.css": "/service-connect/static/css/main.385cbbf4.css",
-    "main.js": "/service-connect/static/js/main.3cb83ff5.js",
+    "main.css": "/service-connect/static/css/main.3b508ebe.css",
+    "main.js": "/service-connect/static/js/main.87823a38.js",
     "static/js/488.98341302.chunk.js": "/service-connect/static/js/488.98341302.chunk.js",
-    "static/media/login-image.svg": "/service-connect/static/media/login-image.80df31a1a4d631200e8886cbec5134f0.svg",
-    "static/media/forgot-image.svg": "/service-connect/static/media/forgot-image.3101fd76eb22da9a1607603d80f4b291.svg",
-    "static/media/bg-wave.svg": "/service-connect/static/media/bg-wave.3f27f2e3b20108e43c55.svg",
-    "static/media/otp-image.svg": "/service-connect/static/media/otp-image.3604adf89e112a8c368655293e8e12cc.svg",
+    "static/media/bg-wave.png": "/service-connect/static/media/bg-wave.e9de6dfd45f52f523636.png",
+    "static/media/login-image.webp": "/service-connect/static/media/login-image.73673414c50c606d9a9f.webp",
     "static/media/main-logo.svg": "/service-connect/static/media/main-logo.26df51049695ccdcf2c95b72718d8a1d.svg",
     "static/media/mobile-logo.png": "/service-connect/static/media/mobile-logo.bf88e7663ad3fc4647f7.png",
+    "static/media/forgot-image.webp": "/service-connect/static/media/forgot-image.2b5b0511a16ec9a38585.webp",
+    "static/media/otp-image.webp": "/service-connect/static/media/otp-image.d11739b78d319d406d3e.webp",
     "static/media/dashboard.svg": "/service-connect/static/media/dashboard.e108870510a87ab9f9ca10238c2c1353.svg",
     "static/media/service-manager.svg": "/service-connect/static/media/service-manager.2edb3a644082ace753823ea80882eabf.svg",
     "static/media/service-advisor.svg": "/service-connect/static/media/service-advisor.266ef81e50d86584db1c210514557e8a.svg",
     "index.html": "/service-connect/index.html",
     "static/media/admin.svg": "/service-connect/static/media/admin.9e1db49b117c092d91c4e2b6c8ceebf5.svg",
     "static/media/customer.svg": "/service-connect/static/media/customer.2fed24a57ed5b87c0425c7bf03e87a93.svg",
-    "main.385cbbf4.css.map": "/service-connect/static/css/main.385cbbf4.css.map",
-    "main.3cb83ff5.js.map": "/service-connect/static/js/main.3cb83ff5.js.map",
+    "main.3b508ebe.css.map": "/service-connect/static/css/main.3b508ebe.css.map",
+    "main.87823a38.js.map": "/service-connect/static/js/main.87823a38.js.map",
     "488.98341302.chunk.js.map": "/service-connect/static/js/488.98341302.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.385cbbf4.css",
-    "static/js/main.3cb83ff5.js"
+    "static/css/main.3b508ebe.css",
+    "static/js/main.87823a38.js"
   ]
 }
