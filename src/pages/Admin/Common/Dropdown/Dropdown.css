@@ -2,16 +2,16 @@
   position: absolute;
   top: 100%;
   right: 15px;
-  background-color: white;
+  background-color: var(--navbar-color);
   border-radius: 5px;
   text-align: start;
-  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  box-shadow: var(--shadow-color);
   z-index: 99;
 }
 
 .dropdownfile ul {
   list-style-type: none;
-  padding: 10px 15px;
+  padding: 14px 15px;
   margin-bottom: 0px;
 }
 
@@ -22,7 +22,7 @@
 .dropdownfile ul li:hover {
   background-color: #f5f5f5;
   border-radius: 5px;
-  transition: .2S all linear;
+  transition: 0.3s linear all;
 }
 
 .dropdownfile::before {
@@ -32,15 +32,15 @@
   right: 23px;
   width: 20px;
   height: 20px;
-  background-color: white;
+  background-color: var(--navbar-color);
   transform: rotate(45deg);
-  border-left: 1px solid #e5e5e5;
-  border-top: 1px solid #e5e5e5;
+  border-left: 1px solid var(--border-color);
+  border-top: 1px solid var(--border-color);
 }
 
 .dropdownfile ul li a {
   text-decoration: none;
-  color: #525252;
+  color: var(--text-color);
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -48,9 +48,18 @@
   font-family: 'Be Vietnam Pro';
 }
 
+.dropdownfile ul li:hover a {
+  color: var(--dropdown-color);
+}
+
 .logout-link a {
   color: #F54F36 !important;
 }
-.dropdownfile ul li a svg{
+
+.logout-link:hover {
+  background-color: var(--logout-color) !important;
+}
+
+.dropdownfile ul li a svg {
   font-size: 20px;
 }

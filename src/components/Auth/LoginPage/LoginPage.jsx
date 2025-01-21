@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import "../LoginPage/LoginPage.css";
 import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../../../common/MainLogo/Logo';
-import loginImage from "../../../assets/images/login/login-image.webp";
+import loginImage from "../../../assets/images/login/login-image.png";
 import PersonIcon from '@mui/icons-material/Person';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
@@ -33,8 +33,8 @@ const LoginPage = () => {
         <Row className='loginpage-flex'>
           <Col xxl={4} xl={4} lg={5} md={4}>
             <div className='bg-wave'>
-              <img src={loginImage} alt="login-image" className='img-fluid login-image' loading='lazy' 
-              height="auto" width="100%" />
+              <img src={loginImage} alt="login-image" className='img-fluid login-image'
+                height="auto" width="100%" />
             </div>
           </Col>
           <Col xxl={5} xl={5} lg={6} md={5}>

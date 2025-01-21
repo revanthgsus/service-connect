@@ -1,6 +1,6 @@
 .manager-heading {
   font-family: 'Be Vietnam Pro', sans-serif;
-  color: #525252;
+  color: var(--text-color);
   margin-bottom: 0px;
 }
 
@@ -9,21 +9,16 @@
   border-radius: 30px;
   border: 1px solid transparent;
   font-family: 'Be Vietnam Pro', sans-serif;
-  background: linear-gradient(90deg, rgba(1, 127, 135, 1) 0%,
-      rgba(0, 134, 143, 1) 25%,
-      rgba(1, 134, 143, 1) 50%,
-      rgba(2, 146, 154, 1) 75%,
-      rgba(3, 131, 139, 1) 100%);
-  color: white;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  background: var(--main-btn-color);
+  color: #ffffff;
+  box-shadow: var(--shadow-color);
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
 }
 
 .manager-list .add-button:hover {
-  transform: translate(0px, -1px);
-  box-shadow: rgb(0, 0, 0, 40%) 0px 0px 5px;
+  box-shadow: var(--shadow-color);
   transition: .3s linear all;
 }
 
@@ -48,22 +43,17 @@
 }
 
 .manager-list .table-align {
-  background: linear-gradient(90deg,
-      rgba(5, 128, 136, 1) 0%,
-      rgba(0, 129, 137, 1) 25%,
-      rgba(0, 139, 148, 1) 50%,
-      rgba(5, 148, 156, 1) 75%,
-      rgba(2, 128, 136, 1) 100%);
+  background: var(--main-btn-color);
   color: #ffffff;
-  position: sticky;
-  top: 0;
 }
 
 .table-list {
-  border: 1px solid #8080803b;
-  box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 10px;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-color);
   border-radius: 5px;
-  background-color: #ffffff;
+  background-color: var(--navbar-color);
+  /* height: 80vh;
+  overflow-y: scroll; */
 }
 
 .manager-list .table-heading {
@@ -77,7 +67,7 @@
 .manager-list .list-item td {
   padding: 15px 15px;
   font-family: 'Be Vietnam Pro', sans-serif;
-  color: #696969;
+  color: var(--text-color);
   text-align: start;
   white-space: nowrap;
 }
@@ -90,18 +80,19 @@
 }
 
 .manager-list .search-input {
-  border: 1px solid #0505053b;
+  border: 1px solid var(--input-border-color);
   padding: 8px 20px;
   border-radius: 20px;
   outline: 1px solid transparent;
   font-family: 'Be Vietnam Pro', sans-serif;
-  color: #585858;
+  color: var(--text-color);
   width: 100%;
   font-size: 14px;
+  background-color: var(--input-color);
 }
 
 .manager-list .search-input::placeholder {
-  color: #969696;
+  color: var(--placeholder-color);
   font-weight: 400;
 }
 
@@ -118,18 +109,22 @@
   top: 50%;
   transform: translateY(-50%);
   cursor: pointer;
-  color: #707070;
+  color: var(--input-icon-color);
 }
 
 .manager-list .list-item {
-  border-bottom: 1px solid #0505051a
+  border-bottom: 1px solid var(--border-color)
 }
 
 .manager-list .no-data td {
-  padding: 15px 25px;
+  padding: 30px 25px;
   font-family: 'Be Vietnam Pro', sans-serif;
-  color: #696969;
+  color: var(--text-color);
   text-align: center;
+}
+
+.no-data h5 {
+  padding: 25px 0px 5px 0px;
 }
 
 .manager-list .status-wrapper {
@@ -140,15 +135,17 @@
 }
 
 .manager-list .status-select {
-  border: 1px solid #0505053b;
+  border: 1px solid var(--input-border-color);
   padding: 8px 20px;
   border-radius: 20px;
   outline: 1px solid transparent;
   font-family: 'Be Vietnam Pro', sans-serif;
-  color: #969696;
+  color: var(--text-color);
   width: 100%;
   font-size: 14px;
   appearance: none;
+  background-color: var(--input-color);
+  cursor: pointer;
 }
 
 .manager-list .arrow-icon {
@@ -157,7 +154,8 @@
   top: 50%;
   transform: translateY(-50%);
   cursor: pointer;
-  color: #707070;
+  pointer-events: none;
+  color: var(--input-icon-color);
 }
 
 .manager-list .list-top {
@@ -177,29 +175,45 @@
   color: #ffffff;
 }
 
+.css-8uzxat-MuiSvgIcon-root-MuiPaginationItem-icon {
+  color: var(--text-color);
+}
+
 .manager-list .list-item td:first-child {
   text-align: center;
 }
 
-.manager-list .list-item td:nth-last-child(2) span {
-  background-color: red;
-  padding: 10px 15px;
+.status {
+  padding: 3px 10px;
   border-radius: 100px;
-  color: #ffffff;
+  width: 85px;
+  text-align: center;
+  display: inline-block;
+}
+
+.status.active {
+  background-color: #d7f6e4;
+  color: #00A956;
+}
+
+.status.inactive {
+  background-color: #FFE3E0;
+  color: #FF4426;
 }
 
 .edit-icon {
-  background-color: #EEEEEE;
+  background-color: var(--actions-color);
   padding: 7px 10px;
   border-radius: 3px;
-  transition: 0.5s ease-out all;
+  transition: 0.3s ease-out all;
   display: inline-block;
+  color: var(--actions-icon-color);
 }
 
 .edit-icon:hover {
   background-color: #048088;
   color: white;
-  transition: 0.5s linear all;
+  transition: 0.3s linear all;
 }
 
 .edit-icon:hover svg {
@@ -207,18 +221,19 @@
 }
 
 .delete-icon {
-  background-color: #EEEEEE;
+  background-color: var(--actions-color);
   padding: 7px 10px;
   border-radius: 3px;
-  transition: 0.5s ease-out all;
+  transition: 0.3s ease-out all;
   display: inline-block;
   margin: 0px 15px;
+  color: var(--actions-icon-color);
 }
 
 .delete-icon:hover {
   background-color: #fb5454;
   color: white;
-  transition: 0.5s linear all;
+  transition: 0.3s linear all;
 }
 
 .delete-icon:hover svg {

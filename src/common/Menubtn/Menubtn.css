@@ -8,7 +8,7 @@
 }
 
 .line-menu {
-  background-color: #038c94;
+  background-color: var(--hamburger-color);
   border-radius: 3px;
   height: 4px;
   transition: all .3s linear;

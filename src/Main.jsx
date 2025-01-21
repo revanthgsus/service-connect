@@ -1,10 +1,13 @@
 import React from 'react';
 import AppRouter from './routes/AppRouter';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 const Main = () => {
   return (
     <>
-      <AppRouter />
+      <Router basename='/service-connect'>
+        <AppRouter />
+      </Router>
     </>
   )
 }

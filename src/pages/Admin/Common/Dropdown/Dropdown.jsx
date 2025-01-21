@@ -62,7 +62,7 @@ const Dropdown = () => {
                 </Link>
               </li>
             ))}
-            <hr className="mt-2 mb-0" />
+            <hr className="mt-2 mb-1" />
             <li className="logout-link">
               <Link to={logoutItem.link}>
                 {logoutItem.icon}

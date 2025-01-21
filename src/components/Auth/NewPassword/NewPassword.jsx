@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../../../common/MainLogo/Logo';
 import { IoArrowBack } from "react-icons/io5";
-import loginImage from "../../../assets/images/login/login-image.webp";
+import loginImage from "../../../assets/images/login/login-image.png";
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import "../NewPassword/NewPassword.css";
 import { Row, Col } from 'react-bootstrap';
+import Modal from 'react-bootstrap/Modal';
+import Successimage from "../../../assets/images/login/success-gif.gif";
 
 const NewPassword = () => {
   const navigate = useNavigate();
@@ -14,6 +16,7 @@ const NewPassword = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   const handlePasswordToggle = (type) => {
     if (type === "password") {
@@ -25,8 +28,15 @@ const NewPassword = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setShowModal(true);
+  };
+
+  const handleCloseModal = (e) => {
+    e.preventDefault();
+    setShowModal(false);
     navigate('/');
   };
+
 
   return (
     <>
@@ -35,7 +45,7 @@ const NewPassword = () => {
         <Row className='loginpage-flex'>
           <Col xxl={4} xl={4} lg={5} md={5}>
             <div className='bg-wave'>
-              <img src={loginImage} alt="login-image" className='img-fluid login-image' loading='lazy'
+              <img src={loginImage} alt="login-image" className='img-fluid login-image'
                 height="auto" width="100%" />
             </div>
           </Col>
@@ -59,6 +69,7 @@ const NewPassword = () => {
                   <input
                     type={showPassword ? "text" : "password"}
                     name="password"
+                    id="password"
                     value={password}
                     placeholder="Enter new password"
                     className='form-input'
@@ -76,6 +87,7 @@ const NewPassword = () => {
                   <input
                     type={showConfirmPassword ? "text" : "password"}
                     name="confirmPassword"
+                    id="confirmPassword"
                     value={confirmPassword}
                     placeholder="Confirm new password"
                     className='form-input'
@@ -89,6 +101,18 @@ const NewPassword = () => {
           </Col>
         </Row>
       </section>
+
+      <Modal show={showModal} animation={false} backdrop="static" className="modal-transition">
+        <Modal.Header className='border-0'>
+          <img src={Successimage} alt='successimage' className='success-img' />
+        </Modal.Header>
+        <Modal.Body className='modal-body'>Your password has been successfully updated!</Modal.Body>
+        <Modal.Footer className='border-0'>
+          <button className='welcome-btn mx-auto' onClick={handleCloseModal}>
+            Ok
+          </button>
+        </Modal.Footer>
+      </Modal>
     </>
   );
 };

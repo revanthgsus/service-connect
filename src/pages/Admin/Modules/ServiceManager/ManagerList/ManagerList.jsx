@@ -8,12 +8,14 @@ import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import { MdModeEditOutline } from "react-icons/md";
 import { HiOutlineTrash } from "react-icons/hi";
+import { ReactComponent as Norecords } from "../../../../../assets/images/admin/manager/no-records.svg"
 
 const ManagerList = () => {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
+  // const [managers, setManagers] = useState([]);
   const itemsPerPage = 10;
 
   const tableHeadings = [
@@ -44,7 +46,7 @@ const ManagerList = () => {
       mailID: "mari@gmail.com",
       mobileNumber: "9876543210",
       location: "Rajapalayam",
-      status: "Inactive",
+      status: "In Active",
     },
     {
       id: 3,
@@ -62,7 +64,7 @@ const ManagerList = () => {
       mailID: "kumar@gmail.com",
       mobileNumber: "9876543212",
       location: "Chennai",
-      status: "Inactive",
+      status: "In Active",
     },
     {
       id: 5,
@@ -80,7 +82,7 @@ const ManagerList = () => {
       mailID: "balaji@gmail.com",
       mobileNumber: "9876543214",
       location: "Trichy",
-      status: "Inactive",
+      status: "In Active",
     },
     {
       id: 7,
@@ -89,7 +91,7 @@ const ManagerList = () => {
       mailID: "balaji@gmail.com",
       mobileNumber: "9876543214",
       location: "Trichy",
-      status: "Inactive",
+      status: "In Active",
     },
     {
       id: 8,
@@ -98,44 +100,9 @@ const ManagerList = () => {
       mailID: "balaji@gmail.com",
       mobileNumber: "9876543214",
       location: "Trichy",
-      status: "Inactive",
+      status: "In Active",
     },
-    {
-      id: 9,
-      managerID: "SM_00006",
-      managerName: "Balaji",
-      mailID: "balaji@gmail.com",
-      mobileNumber: "9876543214",
-      location: "Trichy",
-      status: "Inactive",
-    },
-    {
-      id: 10,
-      managerID: "SM_00006",
-      managerName: "Balaji",
-      mailID: "balaji@gmail.com",
-      mobileNumber: "9876543214",
-      location: "Trichy",
-      status: "Inactive",
-    },
-    {
-      id: 11,
-      managerID: "SM_00006",
-      managerName: "Balaji",
-      mailID: "balaji@gmail.com",
-      mobileNumber: "9876543214",
-      location: "Trichy",
-      status: "Inactive",
-    },
-    {
-      id: 12,
-      managerID: "SM_00006",
-      managerName: "Balaji",
-      mailID: "balaji@gmail.com",
-      mobileNumber: "9876543214",
-      location: "Trichy",
-      status: "Inactive",
-    },
+
   ];
 
   const handleCreate = (e) => {
@@ -148,7 +115,7 @@ const ManagerList = () => {
       manager.managerName.toLowerCase().includes(searchTerm.toLowerCase()) ||
       manager.managerID.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesStatus =
-      statusFilter === '' || manager.status.toLowerCase() === statusFilter;
+      statusFilter === '' || manager.status.toLowerCase() === statusFilter.toLowerCase();
     return matchesSearch && matchesStatus;
   });
 
@@ -211,9 +178,9 @@ const ManagerList = () => {
               >
                 <option value="">Status</option>
                 <option value="active">Active</option>
-                <option value="inactive">Inactive</option>
+                <option value="In Active">In Active</option>
               </select>
-              <IoIosArrowDown className="arrow-icon" />
+              <IoIosArrowDown className="arrow-icon" onClick={() => document.getElementById('status-select').click()} />
             </div>
           </div>
 
@@ -231,7 +198,11 @@ const ManagerList = () => {
               <tbody>
                 {displayedManagers.length === 0 ? (
                   <tr className="no-data">
-                    <td colSpan={tableHeadings.length}>No Managers Found</td>
+                    <td colSpan={tableHeadings.length}>
+                      <Norecords />
+                      <h5>No Managers Found!</h5>
+                      <p>Once records are added, they’ll appear on this page.</p>
+                    </td>
                   </tr>
                 ) : (
                   displayedManagers.map((manager, index) => (
@@ -242,7 +213,11 @@ const ManagerList = () => {
                       <td>{manager.mailID}</td>
                       <td>{manager.mobileNumber}</td>
                       <td>{manager.location}</td>
-                      <td><span>{manager.status}</span></td>
+                      <td>
+                        <span className={`status ${manager.status.toLowerCase().replace(" ", "")}`}>
+                          {manager.status}
+                        </span>
+                      </td>
                       <td>
                         <span className='edit-icon' onClick={() => handleEdit(manager)}>
                           <MdModeEditOutline />

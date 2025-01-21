@@ -1,12 +1,8 @@
-.header-navbar {
-  background-color: #ffffff;
-}
-
 .custom-navbar {
   padding: 0px;
-  box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 10px 0px;
+  box-shadow:var(--shadow-color);
   z-index: 9;
-  background-color: white;
+  background-color: var(--navbar-color);
 }
 
 .custom-logo {
@@ -20,15 +16,15 @@
 }
 
 .notification path {
-  color: #555b6d;
+  color: var(--icon-color);
 }
 
 .moon-icon path {
-  color: #555b6d;
+  color: var(--icon-color);
 }
 
 .profile-icon path {
-  color: #555b6d;
+  color: var(--icon-color);
 }
 
 .navbar-brand {
@@ -46,40 +42,19 @@
 
 }
 
-.navbar-icons button {
-  transition: 0.2s ease-in-out all;
-}
-
 .navbar-icons button:hover {
-  background-color: #dedede;
-  transition: 0.2s linear all;
+  background-color: var(--hover-color);
+  transition: .3s linear all;
 }
 
-.theme-icon {
-  transition: 0.3s linear all;
+.navbar-icons button:hover svg path {
+  color: var(--dark-hover-color);
 }
 
-.sun-icon,
-.moon-icon {
-  animation: toggleicon .4s linear;
+.sun-icon {
+  color: var(--icon-color);
 }
 
-@keyframes toggleicon {
-  0% {
-    opacity: 0;
-    transform: scale(0.8);
-  }
-
-  50% {
-    opacity: 1;
-    transform: scale(1.2);
-  }
-
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
 
 @media only screen and (max-width:768px) {
 
