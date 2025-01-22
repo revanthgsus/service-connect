@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/service-connect/static/css/main.4a3f3736.css",
-    "main.js": "/service-connect/static/js/main.1ace6b01.js",
+    "main.css": "/service-connect/static/css/main.981f9118.css",
+    "main.js": "/service-connect/static/js/main.c0db1d3e.js",
     "static/js/488.98341302.chunk.js": "/service-connect/static/js/488.98341302.chunk.js",
     "static/media/success-gif.gif": "/service-connect/static/media/success-gif.094df3f1fae790fee7ee.gif",
     "static/media/login-image.png": "/service-connect/static/media/login-image.d6b438571eda2ae2bde8.png",
@@ -18,12 +18,12 @@
     "index.html": "/service-connect/index.html",
     "static/media/admin.svg": "/service-connect/static/media/admin.9e1db49b117c092d91c4e2b6c8ceebf5.svg",
     "static/media/customer.svg": "/service-connect/static/media/customer.2fed24a57ed5b87c0425c7bf03e87a93.svg",
-    "main.4a3f3736.css.map": "/service-connect/static/css/main.4a3f3736.css.map",
-    "main.1ace6b01.js.map": "/service-connect/static/js/main.1ace6b01.js.map",
+    "main.981f9118.css.map": "/service-connect/static/css/main.981f9118.css.map",
+    "main.c0db1d3e.js.map": "/service-connect/static/js/main.c0db1d3e.js.map",
     "488.98341302.chunk.js.map": "/service-connect/static/js/488.98341302.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.4a3f3736.css",
-    "static/js/main.1ace6b01.js"
+    "static/css/main.981f9118.css",
+    "static/js/main.c0db1d3e.js"
   ]
 }
