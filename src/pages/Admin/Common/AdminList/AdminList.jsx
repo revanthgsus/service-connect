@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import "./CustomerList.css";
+import "./AdminList.css";
 import { HiPlus } from "react-icons/hi";
 import { IoSearch } from "react-icons/io5";
 import { useNavigate } from 'react-router-dom';
@@ -8,16 +8,16 @@ import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import { MdModeEditOutline } from "react-icons/md";
 import { HiOutlineTrash } from "react-icons/hi";
-import { ReactComponent as Norecords } from "../../../../../assets/images/admin/customer/no-records.svg"
-import DeleteModal from '../../../Common/DeleteModal/DeleteModal';
-import PreLoader from '../../../../../common/PreLoader/PreLoader';
+import { ReactComponent as Norecords } from "../../../../assets/images/admin/no-records.svg";
+import DeleteModal from '../DeleteModal/DeleteModal';
+import PreLoader from '../../../../common/PreLoader/PreLoader';
 
-const CustomerList = () => {
+const AdminList = () => {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-
+  // const [managers, setManagers] = useState([]);
   const itemsPerPage = 10;
 
   const [show, setShow] = useState(false);
@@ -32,8 +32,8 @@ const CustomerList = () => {
 
   const tableHeadings = [
     { title: "S.No" },
-    { title: "Customer ID" },
-    { title: "Customer Name" },
+    { title: "Admin ID" },
+    { title: "Admin Name" },
     { title: "Mail ID" },
     { title: "Mobile Number" },
     { title: "JoiningDate" },
@@ -41,22 +41,41 @@ const CustomerList = () => {
     { title: "" },
   ];
 
-  const Customers = [
+  const Admins = [
     {
       id: 1,
-      customerID: "CUST_00001",
-      customerName: "Revanth",
-      mailID: "revanth@gmail.com",
+      managerID: "ADM_001",
+      managerName: "Priya",
+      mailID: "priya@gmail.com",
       mobileNumber: "9876543210",
       JoiningDate: "01/12/2025",
       status: "Active",
     },
     {
       id: 2,
-      customerID: "CUST_00001",
-      customerName: "Mari vignesh Rao",
+      managerID: "ADM_002",
+      managerName: "Mari vignesh",
       mailID: "mari@gmail.com",
       mobileNumber: "9876543210",
+      JoiningDate: "01/12/2025",
+      status: "In Active",
+    },
+
+    {
+      id: 3,
+      adminID: "SM_00003",
+      managerName: "Vignesh",
+      mailID: "vignesh@gmail.com",
+      mobileNumber: "9876543211",
+      JoiningDate: "01/12/2025",
+      status: "Active",
+    },
+    {
+      id: 4,
+      managerID: "SM_00004",
+      managerName: "Kumar",
+      mailID: "kumar@gmail.com",
+      mobileNumber: "9876543212",
       JoiningDate: "01/12/2025",
       status: "In Active",
     },
@@ -68,16 +87,16 @@ const CustomerList = () => {
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false)
-      navigate("createcustomer");
+      navigate("createadmin");
     }, 1000)
   };
 
-  const filteredCustomers = Customers.filter((customer) => {
+  const filteredAdmins = Admins.filter((admin) => {
     const matchesSearch =
-      customer.customerName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      customer.customerID.toLowerCase().includes(searchTerm.toLowerCase());
+      admin.adminName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      admin.adminID.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesStatus =
-      statusFilter === '' || customer.status.toLowerCase() === statusFilter.toLowerCase();
+      statusFilter === '' || admin.status.toLowerCase() === statusFilter.toLowerCase();
     return matchesSearch && matchesStatus;
   });
 
@@ -93,16 +112,16 @@ const CustomerList = () => {
     setCurrentPage(page);
   };
 
-  const displayedCustomers = filteredCustomers.slice(
+  const displayedAdmins = filteredAdmins.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
   );
 
-  const handleEdit = (customer) => {
+  const handleEdit = (admin) => {
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false)
-      navigate("editcustomer", { state: { customerData: customer } });
+      navigate("editadmin", { state: { adminData: admin } });
     }, 1000)
   };
 
@@ -110,12 +129,12 @@ const CustomerList = () => {
     <>
       {isLoading && <PreLoader />}
       {!isLoading && (
-        <section className="customer-list">
+        <section className="admin-list">
           <div className="top-alignment">
-            <h5 className="customer-heading">Customers List</h5>
+            <h5 className="admin-heading">Admin List</h5>
             <button type="button" className="add-button" onClick={handleCreate}>
               <HiPlus />
-              Add Customer
+              Add Admin
             </button>
           </div>
 
@@ -125,7 +144,7 @@ const CustomerList = () => {
                 <input
                   type="search"
                   className="search-input"
-                  placeholder="Search by Customer Name or ID"
+                  placeholder="Search by Manager Name or ID"
                   value={searchTerm}
                   onChange={handleSearchChange}
                 />
@@ -151,7 +170,7 @@ const CustomerList = () => {
             </div>
 
             <div className="list-alignment">
-              <table className="customer-table">
+              <table className="admin-table">
                 <thead className="table-align">
                   <tr>
                     {tableHeadings.map((heading, index) => (
@@ -162,30 +181,30 @@ const CustomerList = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {displayedCustomers.length === 0 ? (
+                  {displayedAdmins.length === 0 ? (
                     <tr className="no-data">
                       <td colSpan={tableHeadings.length}>
                         <Norecords />
-                        <h5>No Customers Found!</h5>
+                        <h5>No Admins Found!</h5>
                         <p>Once records are added, they’ll appear on this page.</p>
                       </td>
                     </tr>
                   ) : (
-                    displayedCustomers.map((customer, index) => (
-                      <tr key={customer.id} className="list-item">
+                    displayedAdmins.map((admin, index) => (
+                      <tr key={admin.id} className="list-item">
                         <td>{(currentPage - 1) * itemsPerPage + index + 1}</td>
-                        <td>{customer.customerID}</td>
-                        <td>{customer.customerName}</td>
-                        <td>{customer.mailID}</td>
-                        <td>{customer.mobileNumber}</td>
-                        <td>{customer.JoiningDate}</td>
+                        <td>{admin.adminID}</td>
+                        <td>{admin.adminName}</td>
+                        <td>{admin.mailID}</td>
+                        <td>{admin.mobileNumber}</td>
+                        <td>{admin.JoiningDate}</td>
                         <td>
-                          <span className={`status ${customer.status.toLowerCase().replace(" ", "")}`}>
-                            {customer.status}
+                          <span className={`status ${admin.status.toLowerCase().replace(" ", "")}`}>
+                            {admin.status}
                           </span>
                         </td>
                         <td>
-                          <span className='edit-icon' onClick={() => handleEdit(customer)}>
+                          <span className='edit-icon' onClick={() => handleEdit(admin)}>
                             <MdModeEditOutline />
                           </span>
 
@@ -204,7 +223,7 @@ const CustomerList = () => {
           <div className="pagination-align">
             <Stack spacing={2}>
               <Pagination
-                count={Math.ceil(filteredCustomers.length / itemsPerPage)}
+                count={Math.ceil(filteredAdmins.length / itemsPerPage)}
                 page={currentPage}
                 onChange={handlePageChange}
               />
@@ -219,4 +238,4 @@ const CustomerList = () => {
   );
 };
 
-export default CustomerList;
+export default AdminList;

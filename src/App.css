@@ -21,7 +21,7 @@
   --main-bg-color: #ffffff;
   --span-color: #ffffff;
   --logout-color: #ff000014;
-  --dropdown-color: #595959;
+  --dropdown-color: #2c2c2c;
   --border-color: #e5e5e5;
   --main-btn-color: linear-gradient(90deg,
       rgba(1, 127, 135, 1) 0%,
@@ -49,7 +49,7 @@
   --main-bg-color: #27282b;
   --span-color: #2f3742;
   --logout-color: #ffffffd4;
-  --dropdown-color: #595959;
+  --dropdown-color: #2c2c2c;
   --border-color: #43474c;
   --main-btn-color: linear-gradient(90deg,
       rgba(1, 127, 135, 1) 0%,

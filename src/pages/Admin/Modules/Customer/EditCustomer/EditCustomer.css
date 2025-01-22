@@ -1,0 +1,201 @@
+.edit-customer .editcustomer-heading {
+  font-family: 'Be Vietnam Pro', sans-serif;
+  color: #ffffff;
+  background: var(--main-btn-color);
+  margin-bottom: 0px;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  padding: 20px 35px;
+}
+
+.edit-customer .edit-header {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 15px;
+}
+
+.edit-customer .edit-header svg {
+  font-size: 20px;
+  color: var(--text-color);
+  cursor: pointer;
+}
+
+.edit-customer .edit-header svg:hover {
+  transform: scale(1.2);
+  transition: .3s linear all;
+}
+
+.edit-customer .edit-header h5 {
+  margin-bottom: 0px;
+  color: var(--text-color);
+}
+
+.edit-customer .add-fields {
+  padding: 25px 25px;
+}
+
+.edit-customer .edit-form {
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-color);
+  border-radius: 5px;
+  background-color: var(--navbar-color);
+}
+
+.edit-customer .form-control {
+  width: 100%;
+  border: 1px solid #b1b1b1bd;
+  border-radius: 5px;
+  padding: 8px 15px;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  background-color: var(--navbar-color);
+  color: var(--text-color);
+}
+
+.edit-customer .form-control::placeholder {
+  color: var(--text-color);
+}
+
+.edit-customer .form-control:hover {
+  border: 1px solid #01848d;
+  transition: .2s linear all;
+}
+
+.edit-customer .form-control:focus-visible {
+  outline: 1px solid #01848d;
+  box-shadow: none;
+}
+
+.edit-customer .form-group {
+  margin-bottom: 30px;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
+
+.edit-customer .custom-select {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.edit-customer .custom-arrow-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--input-icon-color);
+}
+
+.edit-customer select {
+  cursor: pointer;
+  color: var(--text-color);
+}
+
+.edit-customer .password-field {
+  position: relative;
+}
+
+.edit-customer .form-submit-button {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  gap: 20px;
+  margin: 40px 0px;
+}
+
+.edit-customer .create-form .input-icon svg {
+  font-size: unset;
+  color: var(--input-icon-color);
+}
+
+.edit-customer .save-button {
+  padding: 8px 0px;
+  border-radius: 30px;
+  border: 1px solid transparent;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  background: var(--main-btn-color);
+  color: #ffffff;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  font-weight: 500;
+  width: 150px;
+}
+
+.edit-customer .cancel-button {
+  padding: 8px 0px;
+  border-radius: 30px;
+  border: 1px solid #ff9c9c;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  border: 1px solid transparent;
+  background-color: #EEEEEE;
+  color: #131313;
+  font-weight: 500;
+  width: 150px;
+}
+
+.edit-customer .cancel-button:hover {
+  background-color: #d5d5d5;
+  transition: .3s linear all;
+}
+
+.edit-customer .save-button:hover {
+  background: #007281;
+}
+
+.edit-customer input[type="date"] {
+  color: var(--text-color);
+}
+
+.edit-customer .input-wrapper {
+  margin-bottom: 15px;
+}
+
+
+@media only screen and (max-width:575px) {
+  .edit-customer .create-form {
+    padding: 15px 20px;
+  }
+
+  .edit-customer .form-submit-button {
+    justify-content: center;
+    margin: 30px 0px 30px 0px;
+  }
+}
+
+@media only screen and (min-width:1200px) and (max-width: 1399px) {
+  .edit-customer .editcustomer-heading {
+    padding: 15px 25px;
+  }
+
+  .edit-customer .form-group label {
+    font-size: 14px;
+  }
+
+  .edit-customer .form-control {
+    font-size: 14px;
+    padding: 7px 10px;
+  }
+
+  .edit-customer .form-group {
+    margin-bottom: 15px;
+  }
+
+  .edit-customer .editcustomer-heading {
+    font-size: 16px;
+  }
+
+  .edit-customer .cancel-button {
+    font-size: 14px;
+  }
+
+  .edit-customer .save-button {
+    font-size: 14px;
+  }
+
+  .edit-customer .input-wrapper label {
+    font-size: 14px;
+  }
+}

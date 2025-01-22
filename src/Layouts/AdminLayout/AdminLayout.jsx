@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import "../AdminLayout/AdminLayout.css";
-import CustomNavbar from '../../pages/Admin/Common/Navbar/Navbar';
 import Sidebar from '../../pages/Admin/Common/Sidebar/Sidebar';
 import { Outlet } from 'react-router-dom';
+import AdminNavbar from '../../pages/Admin/Common/Navbar/Navbar';
 
 const AdminLayout = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -13,7 +13,7 @@ const AdminLayout = () => {
     return (
         <>
             <section className='admin-layout'>
-                <CustomNavbar handleDrawerToggle={handleDrawerToggle} isOpen={isOpen} />
+                <AdminNavbar handleDrawerToggle={handleDrawerToggle} isOpen={isOpen} />
                 <div className="layout-container">
                     <Sidebar isOpen={isOpen} />
                     <main className='layout-main'>

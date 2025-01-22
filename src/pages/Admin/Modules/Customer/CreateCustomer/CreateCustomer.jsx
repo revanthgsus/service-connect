@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
-import "../CreateCustomer/CreateCustomer.css";
+import "./CreateCustomer.css";
 import { Col, Row } from 'react-bootstrap';
 import { IoIosArrowDown } from "react-icons/io";
 import { MdVisibility } from "react-icons/md";
 import { MdVisibilityOff } from "react-icons/md";
 import { useNavigate } from 'react-router-dom';
+import { IoMdArrowRoundBack } from "react-icons/io";
 
 const CreateCustomer = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const navigate = useNavigate();
 
-  const AddCustomers = [
+  const CustomerInfo = [
     {
       label: "User Name",
       name: "username",
@@ -54,80 +55,181 @@ const CreateCustomer = () => {
       type: "date",
       autocomplete: "joiningdate",
     },
+  ];
+
+  const BranchInfo = [
+    {
+      label: "Address Line 1",
+      name: "addressline1",
+      placeholder: "Enter Address",
+      autocomplete: "addressline1",
+      type: "text",
+    },
+    {
+      label: "Address Line 2",
+      name: "addressline2",
+      placeholder: "Address Line 2:",
+      type: "text",
+      autocomplete: "addressline2",
+    },
+    {
+      label: "City",
+      name: "City",
+      placeholder: "Enter City",
+      type: "text",
+      autocomplete: "City",
+    },
+    {
+      label: "Pincode",
+      name: "pincode",
+      placeholder: "Enter pincode",
+      type: "number",
+      autocomplete: "pincode",
+    },
+    {
+      label: "State",
+      name: "state",
+      placeholder: "Enter State",
+      type: "text",
+      autocomplete: "state",
+    },
+    {
+      label: "Status",
+      name: "status",
+      placeholder: "Select status",
+      autocomplete: "status",
+      options: [
+        "Active",
+        "In Active"
+      ],
+    },
   ]
 
   const handlesubmit = (e) => {
     e.preventDefault();
-    navigate("/admin/service-manager")
+    navigate("/admin/customer")
   }
+
+  const handleBack = (e) => {
+    e.preventDefault();
+    navigate("/admin/customer")
+  }
+
   return (
     <>
       <section className='create-customer'>
-        <h5 className='addcustomer-heading'>Add Customer</h5>
-        <form className='create-form'>
-          <Row>
-            {AddCustomers.map((field, index) => (
-              <Col key={index} xxl={4} xl={4} lg={4} md={6} sm={6}>
-                <div className='input-wrapper'>
-                  <div className="form-group">
-                    <label htmlFor={field.name}>{field.label}</label>
-                    {field.name === "password" ? (
-                      <div className="password-field">
+        <div className='create-header'>
+          <IoMdArrowRoundBack onClick={handleBack} />
+          <h5>Create Customer</h5>
+        </div>
+        <form>
+          <div className='create-form'>
+            <h5 className='createcustomer-heading'>Customer Information</h5>
+            <Row className='add-fields'>
+              {CustomerInfo.map((field, index) => (
+                <Col key={index} xxl={4} xl={4} lg={4} md={6} sm={6}>
+                  <div className='input-wrapper'>
+                    <div className="form-group">
+                      <label htmlFor={field.name}>{field.label}</label>
+                      {field.name === "password" ? (
+                        <div className="password-field">
+                          <input
+                            type={showPassword ? "text" : "password"}
+                            id={field.name}
+                            name={field.name}
+                            placeholder={field.placeholder}
+                            autoComplete={field.autocomplete}
+                            className="form-control"
+                          />
+                          <span className='input-icon' onClick={() => setShowPassword(prev => !prev)}>
+                            {showPassword ? <MdVisibility /> : <MdVisibilityOff />}
+                          </span>
+                        </div>
+                      ) : field.name === "confirmpassword" ? (
+                        <div className="password-field">
+                          <input
+                            type={showConfirmPassword ? "text" : "password"}
+                            id={field.name}
+                            name={field.name}
+                            placeholder={field.placeholder}
+                            autoComplete={field.autocomplete}
+                            className="form-control"
+                          />
+                          <span className='input-icon' onClick={() => setShowConfirmPassword(prev => !prev)}>
+                            {showConfirmPassword ? <MdVisibility /> : <MdVisibilityOff />}
+                          </span>
+                        </div>
+                      ) : field.options ? (
+                        <div className="custom-select">
+                          <select
+                            id={field.name}
+                            name={field.name}
+                            className="form-control"
+                          >
+                            <option value="">{field.placeholder}</option>
+                            {field.options.map((option, idx) => (
+                              <option key={idx} value={option}>{option}</option>
+                            ))}
+                          </select>
+                          <IoIosArrowDown className="custom-arrow-icon" />
+                        </div>
+                      ) : (
                         <input
-                          type={showPassword ? "text" : "password"}
                           id={field.name}
+                          type={field.type}
                           name={field.name}
                           placeholder={field.placeholder}
                           autoComplete={field.autocomplete}
                           className="form-control"
                         />
-                        <span className='input-icon' onClick={() => setShowPassword(prev => !prev)}>
-                          {showPassword ? <MdVisibility /> : <MdVisibilityOff />}
-                        </span>
-                      </div>
-                    ) : field.name === "confirmpassword" ? (
-                      <div className="password-field">
-                        <input
-                          type={showConfirmPassword ? "text" : "password"}
-                          id={field.name}
-                          name={field.name}
-                          placeholder={field.placeholder}
-                          autoComplete={field.autocomplete}
-                          className="form-control"
-                        />
-                        <span className='input-icon' onClick={() => setShowConfirmPassword(prev => !prev)}>
-                          {showConfirmPassword ? <MdVisibility /> : <MdVisibilityOff />}
-                        </span>
-                      </div>
-                    ) : field.options ? (
-                      <div className="custom-select">
-                        <select
-                          id={field.name}
-                          name={field.name}
-                          className="form-control"
-                        >
-                          <option value="">{field.placeholder}</option>
-                          {field.options.map((option, idx) => (
-                            <option key={idx} value={option}>{option}</option>
-                          ))}
-                        </select>
-                        <IoIosArrowDown className="custom-arrow-icon" />
-                      </div>
-                    ) : (
-                      <input
-                        id={field.name}
-                        type={field.type}
-                        name={field.name}
-                        placeholder={field.placeholder}
-                        autoComplete={field.autocomplete}
-                        className="form-control"
-                      />
-                    )}
+                      )}
+                    </div>
                   </div>
-                </div>
-              </Col>
-            ))}
-          </Row>
+                </Col>
+              ))}
+            </Row>
+          </div>
+
+          <div className='create-form mt-4'>
+            <h5 className='createcustomer-heading'>Add Personal Details</h5>
+            <Row className='add-fields'>
+              {BranchInfo.map((field, index) => (
+                <Col key={index} xxl={4} xl={4} lg={4} md={6} sm={6}>
+                  <div className='input-wrapper'>
+                    <div className="form-group">
+                      <label htmlFor={field.name}>{field.label}</label>
+                      {field.options ? (
+                        <div className="custom-select">
+                          <select
+                            id={field.name}
+                            name={field.name}
+                            className="form-control"
+                          >
+                            <option value="">{field.placeholder}</option>
+                            {field.options.map((option, idx) => (
+                              <option key={idx} value={option}>{option}</option>
+                            ))}
+                          </select>
+                          <IoIosArrowDown className="custom-arrow-icon" />
+                        </div>
+                      ) : (
+                        <input
+                          id={field.name}
+                          type={field.type}
+                          name={field.name}
+                          placeholder={field.placeholder}
+                          autoComplete={field.autocomplete}
+                          // value={field.value || ""}
+                          className="form-control"
+                        />
+                      )}
+                    </div>
+                  </div>
+                </Col>
+              ))}
+            </Row>
+          </div>
+
         </form>
 
         <div className='form-submit-button'>
@@ -136,7 +238,7 @@ const CreateCustomer = () => {
         </div>
       </section>
     </>
-  )
-}
+  );
+};
 
 export default CreateCustomer;

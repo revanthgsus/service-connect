@@ -132,7 +132,7 @@ const CreateAdvsior = () => {
         </div>
         <form>
           <div className='create-form'>
-            <h5 className='addadvisor-heading'>Advisor Information</h5>
+            <h5 className='createadvisor-heading'>Advisor Information</h5>
             <Row className='add-fields'>
               {AdvisorInfo.map((field, index) => (
                 <Col key={index} xxl={4} xl={4} lg={4} md={6} sm={6}>
@@ -199,7 +199,7 @@ const CreateAdvsior = () => {
           </div>
 
           <div className='create-form mt-4'>
-            <h5 className='addadvisor-heading'>Branch Information</h5>
+            <h5 className='createadvisor-heading'>Branch Information</h5>
             <Row className='add-fields'>
               {BranchInfo.map((field, index) => (
                 <Col key={index} xxl={4} xl={4} lg={4} md={6} sm={6}>

@@ -12,6 +12,8 @@ const LoginPage = () => {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({ username: '', password: '' })
+  const [role, setRole] = useState('');
+  const [success, setSuccess] = useState(false);
 
   const handlePasswordToggle = () => {
     setShowPassword(prevState => !prevState);
@@ -24,7 +26,43 @@ const LoginPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate('/admin/dashboard');
+
+    if (formData.username === "admin" && formData.password === "admin@123") {
+      setSuccess(true);
+      setRole('admin');
+    } else if (formData.username === "customer" && formData.password === "customer@123") {
+      setSuccess(true);
+      setRole('customer');
+    } else if (formData.username === "manager" && formData.password === "manager@123") {
+      setSuccess(true);
+      setRole("manager")
+    } else if (formData.username === "advisor" && formData.password === "advisor@123") {
+      setSuccess(true);
+      setRole("advisor")
+    } else {
+      setSuccess(false);
+      alert('Invalid credentials');
+    }
+
+    if (success) {
+      if (role === "admin") {
+        navigate('/admin/dashboard');
+      }
+      else if (role === "customer") {
+        navigate('/customer/dashboard');
+      }
+      else if (role === "advisor") {
+        navigate('/advisor/dashboard');
+      }
+      else if (role === "manager") {
+        navigate('/manager/dashboard');
+      }
+      else {
+        alert('Role not recognized');
+      }
+    }
+
+
   }
   return (
     <>

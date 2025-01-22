@@ -3,7 +3,7 @@ import "./Dropdown.css";
 import { BsPersonCircle } from "react-icons/bs";
 import IconButton from '@mui/material/IconButton';
 import { Link } from 'react-router-dom';
-import { LuUserPlus } from "react-icons/lu";
+import { HiOutlineUsers } from "react-icons/hi";
 import { AiOutlineUser } from "react-icons/ai";
 import { TbLogout } from "react-icons/tb";
 
@@ -13,8 +13,8 @@ const Dropdown = () => {
   const dropdownList = [
     {
       title: 'Admin List',
-      icon: <LuUserPlus />,
-      link: "/admin/addadmin"
+      icon: <HiOutlineUsers />,
+      link: "/admin/adminlist"
     },
     {
       title: 'View Profile',

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import "../CustomerLayout/CustomerLayout.css"
-import CustomNavbar from '../../pages/Admin/Common/Navbar/Navbar';
 import Sidebar from '../../pages/Admin/Common/Sidebar/Sidebar';
 import { Outlet } from 'react-router-dom';
+import CustomerNavbar from '../../pages/Customer/Common/Navbar/Navbar';
 
 const CustomerLayout = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -13,7 +13,7 @@ const CustomerLayout = () => {
     return (
         <>
             <section className='dashboard-layout'>
-                <CustomNavbar handleDrawerToggle={handleDrawerToggle} isOpen={isOpen} />
+                <CustomerNavbar handleDrawerToggle={handleDrawerToggle} isOpen={isOpen} />
                 <div className="layout-container">
                     <Sidebar isOpen={isOpen} />
                     <main className='layout-main'>

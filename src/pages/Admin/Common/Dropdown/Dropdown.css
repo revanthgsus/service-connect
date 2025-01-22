@@ -45,7 +45,7 @@
   justify-content: flex-start;
   align-items: center;
   gap: 10px;
-  font-family: 'Be Vietnam Pro';
+  font-family: 'Be Vietnam Pro', sans-serif;
 }
 
 .dropdownfile ul li:hover a {
