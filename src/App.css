@@ -12,7 +12,7 @@
       rgba(2, 146, 154, 1) 75%,
       rgba(3, 131, 139, 1) 100%);
   --navbar-color: #ffffff;
-  --text-color: #595959;
+  --text-color: #2b2b2b;
   --shadow-color: rgba(0, 0, 0, 0.15) 0px 5px 10px 0px;
   --icon-color: #555b6d;
   --hover-color: #dedede;
@@ -40,7 +40,7 @@
 .theme--dark {
   --brand-color: #2F3742;
   --navbar-color: #2F3742;
-  --text-color: #dbdbdb;
+  --text-color: #ececec;
   --shadow-color: rgba(97, 97, 97, 0.15) 0px 2px 10px 0px;
   --icon-color: #fcfcfc;
   --hover-color: #d2d2d2;

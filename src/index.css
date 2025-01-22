@@ -19,7 +19,7 @@ input[type="search"]::-webkit-search-cancel-button {
 }
 
 label {
-  color: #333333;
+  color: var(--text-color);
   font-weight: 400;
   padding: 5px 0px;
   font-family: 'Be Vietnam Pro', sans-serif;

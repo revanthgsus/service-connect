@@ -23,7 +23,7 @@
 }
 
 .sidebar-link a {
-  color: #ececec;
+  color: #ffffff;
   border-radius: 5px;
   display: flex;
   align-items: center;
@@ -34,12 +34,12 @@
 }
 
 .sidebar-link a svg path {
-  fill: #ececec;
+  fill: #ffffff;
 }
 
 .sidebar-link .active-link {
   color: #007D85;
-  background: #fcfcfc;
+  background: #ffffff;
   border-radius: 5px;
   display: flex;
   align-items: center;
@@ -53,7 +53,7 @@
 }
 
 .sidebar-link a:not(.active-link):hover {
-  background-color: #ececec;
+  background-color: #ffffff;
   color: #007D85;
   transition: 0.2s linear all;
 }
@@ -68,7 +68,7 @@
 }
 
 .sidebar-link .active-link::before {
-  background-color: #ececec;
+  background-color: #ffffff;
   content: "";
   position: absolute;
   top: 0;

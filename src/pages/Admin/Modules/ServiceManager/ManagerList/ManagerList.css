@@ -15,11 +15,32 @@
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.manager-list .add-button::after {
+  background: #fff;
+  content: "";
+  height: 100px;
+  opacity: 0;
+  position: absolute;
+  top: -35px;
+  transform: rotate(35deg);
+  transition: all 2s cubic-bezier(0.22, 1, 0.22, 1);
+  width: 30px;
+  left: 0%;
+}
+
+.manager-list .add-button:hover::after {
+  left: 120%;
+  opacity: 0.5;
 }
 
 .manager-list .add-button:hover {
-  box-shadow: var(--shadow-color);
-  transition: .3s linear all;
+  background-color: #028d96;
+  transform: scale(1.02);
+  transition: .2s linear all;
 }
 
 .manager-list .top-alignment {
@@ -47,11 +68,12 @@
   color: #ffffff;
 }
 
-.table-list {
+.manager-list .table-list {
   border: 1px solid var(--border-color);
   box-shadow: var(--shadow-color);
   border-radius: 5px;
   background-color: var(--navbar-color);
+  overflow-x: auto;
   /* height: 80vh;
   overflow-y: scroll; */
 }
@@ -123,8 +145,8 @@
   text-align: center;
 }
 
-.no-data h5 {
-  padding: 25px 0px 5px 0px;
+.manager-list .no-data h5 {
+  padding: 15px 0px 5px 0px;
 }
 
 .manager-list .status-wrapper {
@@ -132,6 +154,11 @@
   max-width: 100%;
   width: 150px;
   margin: 20px 20px;
+  display: inline-block;
+}
+
+.manager-list .select-container {
+  position: relative;
 }
 
 .manager-list .status-select {
@@ -164,9 +191,70 @@
   align-items: center;
 }
 
-.pagination-align {
+.manager-list .pagination-align {
   padding: 15px 0px;
   float: inline-end;
+}
+
+.manager-list .list-item td:first-child {
+  text-align: center;
+}
+
+.manager-list .status {
+  padding: 3px 10px;
+  border-radius: 100px;
+  width: 85px;
+  text-align: center;
+  display: inline-block;
+}
+
+.manager-list .status.active {
+  background-color: #d7f6e4;
+  color: #00A956;
+}
+
+.manager-list .status.inactive {
+  background-color: #FFE3E0;
+  color: #FF4426;
+}
+
+.manager-list .edit-icon {
+  background-color: var(--actions-color);
+  padding: 7px 10px;
+  border-radius: 3px;
+  transition: 0.3s ease-out all;
+  display: inline-block;
+  color: var(--actions-icon-color);
+}
+
+.manager-list .edit-icon:hover {
+  background-color: #048088;
+  color: white;
+  transition: 0.3s linear all;
+}
+
+.manager-list .edit-icon:hover svg {
+  transform: scale(1.2)
+}
+
+.manager-list .delete-icon {
+  background-color: var(--actions-color);
+  padding: 7px 10px;
+  border-radius: 3px;
+  transition: 0.3s ease-out all;
+  display: inline-block;
+  margin: 0px 15px;
+  color: var(--actions-icon-color);
+}
+
+.manager-list .delete-icon:hover {
+  background-color: #fb5454;
+  color: white;
+  transition: 0.3s linear all;
+}
+
+.manager-list .delete-icon:hover svg {
+  transform: scale(1.2);
 }
 
 .css-1l5xwdx-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected {
@@ -177,67 +265,6 @@
 
 .css-8uzxat-MuiSvgIcon-root-MuiPaginationItem-icon {
   color: var(--text-color);
-}
-
-.manager-list .list-item td:first-child {
-  text-align: center;
-}
-
-.status {
-  padding: 3px 10px;
-  border-radius: 100px;
-  width: 85px;
-  text-align: center;
-  display: inline-block;
-}
-
-.status.active {
-  background-color: #d7f6e4;
-  color: #00A956;
-}
-
-.status.inactive {
-  background-color: #FFE3E0;
-  color: #FF4426;
-}
-
-.edit-icon {
-  background-color: var(--actions-color);
-  padding: 7px 10px;
-  border-radius: 3px;
-  transition: 0.3s ease-out all;
-  display: inline-block;
-  color: var(--actions-icon-color);
-}
-
-.edit-icon:hover {
-  background-color: #048088;
-  color: white;
-  transition: 0.3s linear all;
-}
-
-.edit-icon:hover svg {
-  transform: scale(1.2)
-}
-
-.delete-icon {
-  background-color: var(--actions-color);
-  padding: 7px 10px;
-  border-radius: 3px;
-  transition: 0.3s ease-out all;
-  display: inline-block;
-  margin: 0px 15px;
-  color: var(--actions-icon-color);
-}
-
-.delete-icon:hover {
-  background-color: #fb5454;
-  color: white;
-  transition: 0.3s linear all;
-}
-
-.delete-icon:hover svg {
-  transform: scale(1.2);
 }
 
 @media only screen and (max-width:575px) {

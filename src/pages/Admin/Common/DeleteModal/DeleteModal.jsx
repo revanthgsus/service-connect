@@ -1,26 +1,24 @@
 import React from 'react';
 import "../DeleteModal/DeleteModal.css";
+import Deleteicon from "../../../../assets/images/admin/delete-icon.svg";
+import { Modal } from 'react-bootstrap';
 
-const DeleteModal = () => {
+const DeleteModal = ({ show, handleClose }) => {
 
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow  = () => setShow(true);
   return (
     <>
-      <Modal show={showModal} onHide={handleClose} >
+      <Modal show={show} animation={false} onHide={handleClose} className='Delete-popup' >
         <Modal.Header className='border-0'>
-          <img src={Successimage} alt='successimage' className='success-img' />
+          <img src={Deleteicon} alt='deleteicon' className='delete-popup-icon' />
         </Modal.Header>
         <Modal.Body >
           <h5>Confirm Delete</h5>
-          <p>Are you sure want to delete this account.</p>
+          <p>Are you sure you want to delete this? Please confirm if you want to proceed.</p>
         </Modal.Body>
         <Modal.Footer className='border-0'>
-          <div>
-            <button>Cancel</button>
-            <button>Delete</button>
+          <div className='delete-actions-btn'>
+            <button onClick={handleClose} className='cancel-btn'>Cancel</button>
+            <button className='dlt-confirm-btn'>Delete</button>
           </div>
         </Modal.Footer>
       </Modal>

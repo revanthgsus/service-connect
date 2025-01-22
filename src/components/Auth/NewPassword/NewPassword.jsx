@@ -102,12 +102,12 @@ const NewPassword = () => {
         </Row>
       </section>
 
-      <Modal show={showModal} animation={false} backdrop="static" className="modal-transition">
-        <Modal.Header className='border-0'>
+      <Modal show={showModal} backdrop="static" className='update-password-modal'>
+        <Modal.Header className='modal-header'>
           <img src={Successimage} alt='successimage' className='success-img' />
         </Modal.Header>
         <Modal.Body className='modal-body'>Your password has been successfully updated!</Modal.Body>
-        <Modal.Footer className='border-0'>
+        <Modal.Footer className='modal-footer'>
           <button className='welcome-btn mx-auto' onClick={handleCloseModal}>
             Ok
           </button>
