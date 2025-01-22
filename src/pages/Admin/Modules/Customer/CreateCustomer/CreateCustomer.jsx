@@ -6,11 +6,14 @@ import { MdVisibility } from "react-icons/md";
 import { MdVisibilityOff } from "react-icons/md";
 import { useNavigate } from 'react-router-dom';
 import { IoMdArrowRoundBack } from "react-icons/io";
+import CancelModal from '../../../Common/CancelModal/CancelModal';
 
 const CreateCustomer = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const navigate = useNavigate();
+
+  const [cancelShow, setCancelShow] = useState(false);
 
   const CustomerInfo = [
     {
@@ -110,9 +113,18 @@ const CreateCustomer = () => {
     navigate("/admin/customer")
   }
 
+  const handleCancel = (e) => {
+    e.preventDefault();
+    setCancelShow(true);
+  }
+
+  const handleCancelClose = () => {
+    setCancelShow(false);
+  };
+
   const handleBack = (e) => {
     e.preventDefault();
-    navigate("/admin/customer")
+    setCancelShow(true);
   }
 
   return (
@@ -233,10 +245,12 @@ const CreateCustomer = () => {
         </form>
 
         <div className='form-submit-button'>
-          <button type='submit' className='cancel-button' onClick={handlesubmit}>Cancel</button>
+          <button type='submit' className='cancel-button' onClick={handleCancel}>Cancel</button>
           <button type='submit' className='save-button' onClick={handlesubmit}>Save</button>
         </div>
       </section>
+
+      <CancelModal cancelShow={cancelShow} handleCancelClose={handleCancelClose} />
     </>
   );
 };

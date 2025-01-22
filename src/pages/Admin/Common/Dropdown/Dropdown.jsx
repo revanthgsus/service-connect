@@ -14,7 +14,7 @@ const Dropdown = () => {
     {
       title: 'Admin List',
       icon: <HiOutlineUsers />,
-      link: "/admin/adminlist"
+      link: "/admin"
     },
     {
       title: 'View Profile',

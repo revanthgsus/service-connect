@@ -101,7 +101,7 @@ const AdvisorList = () => {
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false)
-      navigate("editadvisor", { state: { asvisorData: advisor } });
+      navigate("editadvisor", { state: { advisorData: advisor } });
     }, 1000)
   };
 

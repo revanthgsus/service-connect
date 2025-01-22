@@ -22,13 +22,14 @@
 }
 
 .edit-customer .edit-header svg:hover {
-  transform: scale(1.2);
+  transform: scale(1.1);
   transition: .3s linear all;
 }
 
 .edit-customer .edit-header h5 {
   margin-bottom: 0px;
   color: var(--text-color);
+  font-family: 'Be Vietnam Pro', sans-serif;
 }
 
 .edit-customer .add-fields {
@@ -107,7 +108,7 @@ input[type="number"]::-webkit-outer-spin-button {
   margin: 40px 0px;
 }
 
-.edit-customer .create-form .input-icon svg {
+.edit-customer .edit-form .input-icon svg {
   font-size: unset;
   color: var(--input-icon-color);
 }
@@ -155,7 +156,7 @@ input[type="number"]::-webkit-outer-spin-button {
 
 
 @media only screen and (max-width:575px) {
-  .edit-customer .create-form {
+  .edit-customer .edit-form {
     padding: 15px 20px;
   }
 
@@ -168,6 +169,11 @@ input[type="number"]::-webkit-outer-spin-button {
 @media only screen and (min-width:1200px) and (max-width: 1399px) {
   .edit-customer .editcustomer-heading {
     padding: 15px 25px;
+    font-size: 16px;
+  }
+
+  .edit-customer .edit-header h5 {
+    font-size: 16px;
   }
 
   .edit-customer .form-group label {
@@ -181,10 +187,6 @@ input[type="number"]::-webkit-outer-spin-button {
 
   .edit-customer .form-group {
     margin-bottom: 15px;
-  }
-
-  .edit-customer .editcustomer-heading {
-    font-size: 16px;
   }
 
   .edit-customer .cancel-button {

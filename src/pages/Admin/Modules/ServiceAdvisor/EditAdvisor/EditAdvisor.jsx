@@ -6,6 +6,7 @@ import { MdVisibility } from "react-icons/md";
 import { MdVisibilityOff } from "react-icons/md";
 import { useLocation, useNavigate } from 'react-router-dom';
 import { IoMdArrowRoundBack } from "react-icons/io";
+import CancelModal from '../../../Common/CancelModal/CancelModal';
 
 const EditAdvisor = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -14,11 +15,12 @@ const EditAdvisor = () => {
   const location = useLocation();
   const { advisorData } = location.state || {};
 
-  // const [cancelModal, setCancelModal] = useState(false);
+  const [cancelShow, setCancelShow] = useState(false);
 
   const [formData, setFormData] = useState({
-    username: advisorData?.advisorname || '',
+    username: advisorData?.advisorName || '',
     emailaddress: advisorData?.mailID || '',
+    mobilenumber: advisorData?.mobileNumber || '',
     password: '',
     confirmpassword: '',
     joiningdate: '',
@@ -26,7 +28,7 @@ const EditAdvisor = () => {
     branchname: advisorData?.location || '',
     branchlocation: advisorData?.location || '',
     Department: '',
-    status: advisorData?.status || 'Active',
+    status: advisorData?.status || '',
   })
 
 
@@ -146,13 +148,16 @@ const EditAdvisor = () => {
 
   const handleCancel = (e) => {
     e.preventDefault();
-    // setCancelModal(true)
-    navigate("/admin/service-advisor")
+    setCancelShow(true);
   }
+
+  const handleCancelClose = () => {
+    setCancelShow(false);
+  };
 
   const handleBack = (e) => {
     e.preventDefault();
-    navigate("/admin/service-advisor")
+    setCancelShow(true);
   }
 
   return (
@@ -291,6 +296,8 @@ const EditAdvisor = () => {
           <button type='submit' className='save-button' onClick={handleSubmit}>Save</button>
         </div>
       </section>
+
+      <CancelModal cancelShow={cancelShow} handleCancelClose={handleCancelClose} />
     </>
   )
 }

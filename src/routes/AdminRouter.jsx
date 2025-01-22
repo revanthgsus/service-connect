@@ -27,25 +27,25 @@ const AdminRouter = () => {
         <Route path='service-manager' >
           <Route index element={<ManagerList />} />
           <Route path='createmanager' element={<CreateManager />} />
-          <Route path='editmanager/:id' element={<EditManager />} />
+          <Route path='editmanager' element={<EditManager />} />
         </Route>
 
         <Route path='service-advisor' >
           <Route index element={<AdvisorList />} />
           <Route path='createadvisor' element={<CreateAdvisor />} />
-          <Route path='editadvisor/:id' element={<EditAdvisor />} />
+          <Route path='editadvisor' element={<EditAdvisor />} />
         </Route>
 
         <Route path='customer' >
           <Route index element={<CustomerList />} />
           <Route path='createcustomer' element={<CreateCustomer />} />
-          <Route path='editcustomer/:id' element={<EditCustomer />} />
+          <Route path='editcustomer' element={<EditCustomer />} />
         </Route>
 
         <Route path="admin" >
           <Route index element={<AdminList />} />
           <Route path='createadmin' element={<CreateAdmin />} />
-          <Route path='editadmin/:id' element={<EditAdmin />} />
+          <Route path='editadmin' element={<EditAdmin />} />
 
         </Route>
         <Route path="profile" element={<Profile />} />

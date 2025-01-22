@@ -9,7 +9,7 @@ const PreLoader = () => {
         <PulseLoader
           loading={true}
           margin={10}
-          size={15}
+          size={10}
           speedMultiplier={1}
           color="#007D85"
         />

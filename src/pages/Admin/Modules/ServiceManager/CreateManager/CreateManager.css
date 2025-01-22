@@ -12,7 +12,7 @@
   display: flex;
   align-items: center;
   gap: 5px;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 .create-manager .create-header svg {
@@ -22,13 +22,14 @@
 }
 
 .create-manager .create-header svg:hover {
-  transform: scale(1.2);
+  transform: scale(1.1);
   transition: .3s linear all;
 }
 
 .create-manager .create-header h5 {
   margin-bottom: 0px;
   color: var(--text-color);
+  font-family: 'Be Vietnam Pro', sans-serif;
 }
 
 .create-manager .add-fields {
@@ -168,6 +169,11 @@ input[type="number"]::-webkit-outer-spin-button {
 @media only screen and (min-width:1200px) and (max-width: 1399px) {
   .create-manager .addmanager-heading {
     padding: 15px 25px;
+    font-size: 16px;
+  }
+
+  .create-manager .create-header h5 {
+    font-size: 16px;
   }
 
   .create-manager .form-group label {
@@ -181,10 +187,6 @@ input[type="number"]::-webkit-outer-spin-button {
 
   .create-manager .form-group {
     margin-bottom: 15px;
-  }
-
-  .create-manager .addmanager-heading {
-    font-size: 16px;
   }
 
   .create-manager .cancel-button {

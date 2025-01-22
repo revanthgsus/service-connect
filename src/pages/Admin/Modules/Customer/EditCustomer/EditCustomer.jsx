@@ -6,6 +6,7 @@ import { MdVisibility } from "react-icons/md";
 import { MdVisibilityOff } from "react-icons/md";
 import { useLocation, useNavigate } from 'react-router-dom';
 import { IoMdArrowRoundBack } from "react-icons/io";
+import CancelModal from '../../../Common/CancelModal/CancelModal';
 
 const EditCustomer = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -14,15 +15,20 @@ const EditCustomer = () => {
   const location = useLocation();
   const { customerData } = location.state || {};
 
-  // const [cancelModal, setCancelModal] = useState(false);
+  const [cancelShow, setCancelShow] = useState(false);
 
   const [formData, setFormData] = useState({
-    username: customerData?.customername || '',
+    username: customerData?.customerName || '',
     emailaddress: customerData?.mailID || '',
-    mobilenumber: '',
+    mobilenumber: customerData?.mobileNumber || '',
     password: '',
     confirmpassword: '',
     joiningdate: '',
+    addressline1: '',
+    addressline2: '',
+    city: '',
+    pincode: '',
+    state: '',
     status: customerData?.status || 'Active',
   })
 
@@ -135,13 +141,16 @@ const EditCustomer = () => {
 
   const handleCancel = (e) => {
     e.preventDefault();
-    // setCancelModal(true)
-    navigate("/admin/customer")
+    setCancelShow(true);
   }
+
+  const handleCancelClose = () => {
+    setCancelShow(false);
+  };
 
   const handleBack = (e) => {
     e.preventDefault();
-    navigate("/admin/customer")
+    setCancelShow(true);
   }
 
   return (
@@ -280,6 +289,8 @@ const EditCustomer = () => {
           <button type='submit' className='save-button' onClick={handleSubmit}>Save</button>
         </div>
       </section>
+
+      <CancelModal cancelShow={cancelShow} handleCancelClose={handleCancelClose} />
     </>
   )
 }

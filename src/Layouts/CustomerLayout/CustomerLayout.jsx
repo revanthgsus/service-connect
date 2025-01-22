@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import "../CustomerLayout/CustomerLayout.css"
 import Sidebar from '../../pages/Admin/Common/Sidebar/Sidebar';
 import { Outlet } from 'react-router-dom';
-import CustomerNavbar from '../../pages/Customer/Common/Navbar/Navbar';
+import CustomerNavbar from './../../pages/Customer/Common/Navbar/Navbar';
 
 const CustomerLayout = () => {
     const [isOpen, setIsOpen] = useState(false);
