@@ -17,7 +17,6 @@ const ManagerList = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  // const [managers, setManagers] = useState([]);
   const itemsPerPage = 10;
 
   const [show, setShow] = useState(false);
@@ -266,7 +265,6 @@ const ManagerList = () => {
           </div>
         </section>
       )}
-
 
       <DeleteModal show={show} handleClose={handleCloseModal} />
     </>

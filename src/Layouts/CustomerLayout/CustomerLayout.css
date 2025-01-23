@@ -1,16 +1,29 @@
-.dashboard-layout {
+.customer-layout {
     height: 100vh;
-    display: flex;
-    flex-direction: column;
 }
 
-.layout-container {
+.customer-layout .layout-container {
     display: flex;
     width: 100%;
     height: 100%;
+    padding-top: 68px;
 }
 
-.layout-main {
+.customer-layout .layout-main {
     flex: 1;
     overflow-y: auto;
+    width: 100%;
+    height: 100%;
+    padding: 30px;
+    background-color: var(--main-bg-color);
+}
+
+.customer-layout .layout-main::-webkit-scrollbar {
+    display: none;
+}
+
+@media only screen and (max-width:768px) {
+    .customer-layout .layout-main {
+        padding: 25px 15px;
+    }
 }

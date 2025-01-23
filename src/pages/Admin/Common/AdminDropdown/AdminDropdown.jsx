@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import "./Dropdown.css";
+import "./AdminDropdown.css";
 import { BsPersonCircle } from "react-icons/bs";
 import IconButton from '@mui/material/IconButton';
 import { Link } from 'react-router-dom';
@@ -7,14 +7,14 @@ import { HiOutlineUsers } from "react-icons/hi";
 import { AiOutlineUser } from "react-icons/ai";
 import { TbLogout } from "react-icons/tb";
 
-const Dropdown = () => {
+const AdminDropdown = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const dropdownList = [
     {
       title: 'Admin List',
       icon: <HiOutlineUsers />,
-      link: "/admin"
+      link: "/admin/adminlist"
     },
     {
       title: 'View Profile',
@@ -47,7 +47,7 @@ const Dropdown = () => {
   }, []);
 
   return (
-    <div>
+    <div className='admin-dropdown'>
       <IconButton onClick={toggleDropdown} className="profile-icon">
         <BsPersonCircle />
       </IconButton>
@@ -76,4 +76,4 @@ const Dropdown = () => {
   );
 };
 
-export default Dropdown;
+export default AdminDropdown;

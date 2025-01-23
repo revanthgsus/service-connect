@@ -86,6 +86,10 @@
   white-space: nowrap;
 }
 
+.advisor-list .table-heading:nth-last-child(2) {
+  text-align: center;
+}
+
 .advisor-list .list-item td {
   padding: 15px 15px;
   font-family: 'Be Vietnam Pro', sans-serif;

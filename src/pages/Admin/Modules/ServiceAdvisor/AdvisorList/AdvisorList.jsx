@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import "../AdvisorList/AdvisorList.css";
+import "./AdvisorList.css";
 import { HiPlus } from "react-icons/hi";
 import { IoSearch } from "react-icons/io5";
 import { useNavigate } from 'react-router-dom';

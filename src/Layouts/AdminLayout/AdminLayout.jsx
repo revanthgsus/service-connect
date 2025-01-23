@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import "../AdminLayout/AdminLayout.css";
-import Sidebar from '../../pages/Admin/Common/Sidebar/Sidebar';
+import "./AdminLayout.css";
 import { Outlet } from 'react-router-dom';
-import AdminNavbar from '../../pages/Admin/Common/Navbar/Navbar';
+import AdminNavbar from '../../pages/Admin/Common/AdminNavbar/AdminNavbar';
+import AdminSidebar from '../../pages/Admin/Common/AdminSidebar/AdminSidebar';
 
 const AdminLayout = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -15,7 +15,7 @@ const AdminLayout = () => {
             <section className='admin-layout'>
                 <AdminNavbar handleDrawerToggle={handleDrawerToggle} isOpen={isOpen} />
                 <div className="layout-container">
-                    <Sidebar isOpen={isOpen} />
+                    <AdminSidebar isOpen={isOpen} />
                     <main className='layout-main'>
                         <Outlet />
                     </main>

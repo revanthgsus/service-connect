@@ -9,7 +9,7 @@ import Stack from '@mui/material/Stack';
 import { MdModeEditOutline } from "react-icons/md";
 import { HiOutlineTrash } from "react-icons/hi";
 import { ReactComponent as Norecords } from "../../../../assets/images/admin/no-records.svg";
-import DeleteModal from '../DeleteModal/DeleteModal';
+import DeleteModal from '../../Common/DeleteModal/DeleteModal';
 import PreLoader from '../../../../common/PreLoader/PreLoader';
 
 const AdminList = () => {
@@ -17,7 +17,6 @@ const AdminList = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  // const [managers, setManagers] = useState([]);
   const itemsPerPage = 10;
 
   const [show, setShow] = useState(false);
@@ -36,50 +35,30 @@ const AdminList = () => {
     { title: "Admin Name" },
     { title: "Mail ID" },
     { title: "Mobile Number" },
-    { title: "JoiningDate" },
+    { title: "Joining Date" },
     { title: "Status" },
     { title: "" },
   ];
 
-  const Admins = [
+  const admins = [
     {
       id: 1,
-      managerID: "ADM_001",
-      managerName: "Priya",
-      mailID: "priya@gmail.com",
+      adminID: "ADM_0001",
+      adminName: "Ganeshram",
+      mailID: "ganeshram@gmail.com",
       mobileNumber: "9876543210",
-      JoiningDate: "01/12/2025",
+      location: "Rajapalayam",
       status: "Active",
     },
     {
       id: 2,
-      managerID: "ADM_002",
-      managerName: "Mari vignesh",
-      mailID: "mari@gmail.com",
+      adminID: "ADM_0002",
+      adminName: "Dhanasekar",
+      mailID: "dhanasekar@gmail.com",
       mobileNumber: "9876543210",
-      JoiningDate: "01/12/2025",
+      location: "Rajapalayam",
       status: "In Active",
     },
-
-    {
-      id: 3,
-      adminID: "SM_00003",
-      managerName: "Vignesh",
-      mailID: "vignesh@gmail.com",
-      mobileNumber: "9876543211",
-      JoiningDate: "01/12/2025",
-      status: "Active",
-    },
-    {
-      id: 4,
-      managerID: "SM_00004",
-      managerName: "Kumar",
-      mailID: "kumar@gmail.com",
-      mobileNumber: "9876543212",
-      JoiningDate: "01/12/2025",
-      status: "In Active",
-    },
-
   ];
 
   const handleCreate = (e) => {
@@ -91,12 +70,13 @@ const AdminList = () => {
     }, 1000)
   };
 
-  const filteredAdmins = Admins.filter((admin) => {
+
+  const filteredAdmins = admins.filter((admin) => {
     const matchesSearch =
       admin.adminName.toLowerCase().includes(searchTerm.toLowerCase()) ||
       admin.adminID.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesStatus =
-      statusFilter === '' || admin.status.toLowerCase() === statusFilter.toLowerCase();
+      statusFilter === '' || admin.status.toLowerCase() === statusFilter;
     return matchesSearch && matchesStatus;
   });
 
@@ -144,7 +124,7 @@ const AdminList = () => {
                 <input
                   type="search"
                   className="search-input"
-                  placeholder="Search by Manager Name or ID"
+                  placeholder="Search by Admin Name or ID"
                   value={searchTerm}
                   onChange={handleSearchChange}
                 />
@@ -197,14 +177,14 @@ const AdminList = () => {
                         <td>{admin.adminName}</td>
                         <td>{admin.mailID}</td>
                         <td>{admin.mobileNumber}</td>
-                        <td>{admin.JoiningDate}</td>
+                        <td>{admin.location}</td>
                         <td>
                           <span className={`status ${admin.status.toLowerCase().replace(" ", "")}`}>
                             {admin.status}
                           </span>
                         </td>
                         <td>
-                          <span className='edit-icon' onClick={() => handleEdit(admin)}>
+                          <span className='edit-icon' onClick={() => handleEdit(filteredAdmins)}>
                             <MdModeEditOutline />
                           </span>
 
@@ -231,7 +211,6 @@ const AdminList = () => {
           </div>
         </section>
       )}
-
 
       <DeleteModal show={show} handleClose={handleCloseModal} />
     </>

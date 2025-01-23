@@ -1,40 +1,40 @@
-.customer-navbar {
+.admin-navbar {
   padding: 0px;
   box-shadow: var(--shadow-color);
   z-index: 9;
   background-color: var(--navbar-color);
 }
 
-.custom-logo {
+.admin-navbar .custom-logo {
   width: 100px;
   height: auto;
   display: block;
 }
 
-.mobile-logo {
+.admin-navbar .mobile-logo {
   display: none;
 }
 
-.notification path {
+.admin-navbar .notification path {
   color: var(--icon-color);
 }
 
-.moon-icon path {
+.admin-navbar .moon-icon path {
   color: var(--icon-color);
 }
 
-.profile-icon path {
+.admin-navbar .profile-icon path {
   color: var(--icon-color);
 }
 
-.navbar-brand {
+.admin-navbar .navbar-brand {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 65px;
 }
 
-.navbar-icons {
+.admin-navbar .navbar-icons {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -42,40 +42,40 @@
 
 }
 
-.navbar-icons button:hover {
+.admin-navbar .navbar-icons button:hover {
   background-color: var(--hover-color);
   transition: .3s linear all;
 }
 
-.navbar-icons button:hover svg path {
+.admin-navbar .navbar-icons button:hover svg path {
   color: var(--dark-hover-color);
 }
 
-.sun-icon {
+.admin-navbar .sun-icon {
   color: var(--icon-color);
 }
 
 
 @media only screen and (max-width:768px) {
 
-  .navbar-brand {
+  .admin-navbar .navbar-brand {
     gap: 0px;
     padding: 15px 0px;
     margin-right: 0px;
   }
 
-  .custom-logo {
+  .admin-navbar .custom-logo {
     display: none;
   }
 
-  .mobile-logo {
+  .admin-navbar .mobile-logo {
     display: block;
     width: 32px;
   }
 }
 
 @media only screen and (min-width:769px) and (max-width: 992px) {
-  .navbar-brand {
+  .admin-navbar .navbar-brand {
     gap: unset;
   }
 }

@@ -1,10 +1,10 @@
-.sidebar-link {
+.admin-sidebar .sidebar-link {
   list-style-type: none;
   padding: 0px 20px;
   position: relative;
 }
 
-.sidebar-section {
+.admin-sidebar .sidebar-section {
   width: 260px;
   background: var(--brand-color);
   padding: 40px 0px;
@@ -14,15 +14,15 @@
   z-index: 1;
 }
 
-.sidebar-section.open {
+.admin-sidebar .sidebar-section.open {
   width: 95px;
 }
 
-.sidebar-section.open .sidebar-content {
+.admin-sidebar .sidebar-section.open .sidebar-content {
   display: none;
 }
 
-.sidebar-link a {
+.admin-sidebar .sidebar-link a {
   color: #ffffff;
   border-radius: 5px;
   display: flex;
@@ -33,11 +33,11 @@
   text-decoration: none;
 }
 
-.sidebar-link a svg path {
+.admin-sidebar .sidebar-link a svg path {
   fill: #ffffff;
 }
 
-.sidebar-link .active-link {
+.admin-sidebar .sidebar-link .active-link {
   color: #007D85;
   background: #ffffff;
   border-radius: 5px;
@@ -45,29 +45,29 @@
   align-items: center;
   justify-content: flex-start;
   gap: 10px;
-  padding: 10px 17px;
+  padding: 10px 15px;
 }
 
-.sidebar-link .active-link svg path {
+.admin-sidebar .sidebar-link .active-link svg path {
   fill: #007D85
 }
 
-.sidebar-link a:not(.active-link):hover {
+.admin-sidebar .sidebar-link a:not(.active-link):hover {
   background-color: #ffffff;
   color: #007D85;
   transition: 0.2s linear all;
 }
 
-.sidebar-link a:not(.active-link):hover svg path {
+.admin-sidebar .sidebar-link a:not(.active-link):hover svg path {
   fill: #007D85;
 }
 
-.sidebar-content {
+.admin-sidebar .sidebar-content {
   font-weight: 600;
   font-family: 'Be Vietnam Pro', sans-serif;
 }
 
-.sidebar-link .active-link::before {
+.admin-sidebar .sidebar-link .active-link::before {
   background-color: #ffffff;
   content: "";
   position: absolute;
@@ -81,43 +81,43 @@
 }
 
 @media only screen and (Max-width:767px) {
-  .sidebar-section {
+  .admin-sidebar .sidebar-section {
     display: none;
     width: 100%;
     position: fixed;
     left: 0;
   }
 
-  .sidebar-section.open {
+  .admin-sidebar .sidebar-section.open {
     display: block;
     width: 270px;
   }
 
-  .sidebar-section.open .sidebar-content {
+  .admin-sidebar .sidebar-section.open .sidebar-content {
     display: block;
   }
 }
 
 @media only screen and (min-width:768px) and (max-width:1119px) {
-  .sidebar-section {
+  .admin-sidebar .sidebar-section {
     width: 95px;
   }
 
-  .sidebar-section.open {
+  .admin-sidebar .sidebar-section.open {
     width: 260px;
   }
 
-  .sidebar-content {
+  .admin-sidebar .sidebar-content {
     display: none;
   }
 
-  .sidebar-section.open .sidebar-content {
+  .admin-sidebar .sidebar-section.open .sidebar-content {
     display: block;
   }
 }
 
 @media only screen and (min-width:1200px) and (max-width:1399px) {
-  .sidebar-section {
+  .admin-sidebar .sidebar-section {
     width: 260px;
     font-size: 14px;
   }

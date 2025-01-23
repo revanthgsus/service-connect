@@ -74,8 +74,6 @@
   border-radius: 5px;
   background-color: var(--navbar-color);
   overflow-x: auto;
-  /* height: 80vh;
-  overflow-y: scroll; */
 }
 
 .customer-list .table-heading {
@@ -84,6 +82,10 @@
   font-family: 'Be Vietnam Pro', sans-serif;
   text-align: start;
   white-space: nowrap;
+}
+
+.customer-list .table-heading:nth-last-child(2) {
+  text-align: center;
 }
 
 .customer-list .list-item td {

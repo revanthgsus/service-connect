@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import "../Navbar/Navbar.css";
+import "./AdminNavbar.css";
 import Menubtn from '../../../../common/Menubtn/Menubtn';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
@@ -10,8 +10,8 @@ import IconButton from '@mui/material/IconButton';
 import { IoNotificationsOutline } from "react-icons/io5";
 import { IoMoonOutline } from "react-icons/io5";
 import { IoSunny } from "react-icons/io5";
-import Dropdown from '../Dropdown/Dropdown';
 import ThemeContext from '../../../../contexts/ThemeContext';
+import AdminDropdown from './../AdminDropdown/AdminDropdown';
 
 const AdminNavbar = ({ handleDrawerToggle, isOpen }) => {
   const { theme, toggleTheme } = useContext(ThemeContext);
@@ -44,7 +44,7 @@ const AdminNavbar = ({ handleDrawerToggle, isOpen }) => {
                 <IoMoonOutline className="moon-icon" />
               )}
             </IconButton>
-            <Dropdown />
+            <AdminDropdown />
           </div>
         </Container>
       </Navbar>

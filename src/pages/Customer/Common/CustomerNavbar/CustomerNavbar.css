@@ -1,0 +1,81 @@
+.customer-navbar {
+  padding: 0px;
+  box-shadow: var(--shadow-color);
+  z-index: 9;
+  background-color: var(--navbar-color);
+}
+
+.customer-navbar .custom-logo {
+  width: 100px;
+  height: auto;
+  display: block;
+}
+
+.customer-navbar .mobile-logo {
+  display: none;
+}
+
+.customer-navbar .notification path {
+  color: var(--icon-color);
+}
+
+.customer-navbar .moon-icon path {
+  color: var(--icon-color);
+}
+
+.customer-navbar .profile-icon path {
+  color: var(--icon-color);
+}
+
+.customer-navbar .navbar-brand {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 65px;
+}
+
+.customer-navbar .navbar-icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+}
+
+.customer-navbar .navbar-icons button:hover {
+  background-color: var(--hover-color);
+  transition: .3s linear all;
+}
+
+.customer-navbar .navbar-icons button:hover svg path {
+  color: var(--dark-hover-color);
+}
+
+.customer-navbar .sun-icon {
+  color: var(--icon-color);
+}
+
+
+@media only screen and (max-width:768px) {
+
+  .customer-navbar .navbar-brand {
+    gap: 0px;
+    padding: 15px 0px;
+    margin-right: 0px;
+  }
+
+  .customer-navbar .custom-logo {
+    display: none;
+  }
+
+  .customer-navbar .mobile-logo {
+    display: block;
+    width: 32px;
+  }
+}
+
+@media only screen and (min-width:769px) and (max-width: 992px) {
+  .customer-navbar .navbar-brand {
+    gap: unset;
+  }
+}
