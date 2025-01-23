@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/service-connect/static/css/main.02326b7e.css",
-    "main.js": "/service-connect/static/js/main.6427c688.js",
+    "main.css": "/service-connect/static/css/main.15e4ac48.css",
+    "main.js": "/service-connect/static/js/main.7288566f.js",
     "static/js/488.98341302.chunk.js": "/service-connect/static/js/488.98341302.chunk.js",
     "static/media/success-gif.gif": "/service-connect/static/media/success-gif.094df3f1fae790fee7ee.gif",
     "static/media/login-image.png": "/service-connect/static/media/login-image.d6b438571eda2ae2bde8.png",
@@ -11,19 +11,24 @@
     "static/media/forgot-image.png": "/service-connect/static/media/forgot-image.279e7395d45e4eb339dc.png",
     "static/media/otp-image.png": "/service-connect/static/media/otp-image.568b982d0a0dd2d09790.png",
     "static/media/no-records.svg": "/service-connect/static/media/no-records.07e9235ceea38f23c9245c35db37d2f5.svg",
+    "static/media/activity.svg": "/service-connect/static/media/activity.ffec98b9ba32e99db867d1bab3384998.svg",
+    "static/media/invoice.svg": "/service-connect/static/media/invoice.58b9dab903a4bc3cd8529c7d12acca58.svg",
     "static/media/delete-icon.svg": "/service-connect/static/media/delete-icon.a6ac5fac2836405cabee69e654dfe308.svg",
-    "static/media/dashboard.svg": "/service-connect/static/media/dashboard.e108870510a87ab9f9ca10238c2c1353.svg",
-    "static/media/service-manager.svg": "/service-connect/static/media/service-manager.2edb3a644082ace753823ea80882eabf.svg",
-    "static/media/service-advisor.svg": "/service-connect/static/media/service-advisor.266ef81e50d86584db1c210514557e8a.svg",
+    "static/media/service-manager.svg": "/service-connect/static/media/service-manager.89766f4af446bf09b495351663995a6e.svg",
+    "static/media/dashboard.svg": "/service-connect/static/media/dashboard.b3cea33071d1bf924c8b8dbc71ac0445.svg",
+    "static/media/payment.svg": "/service-connect/static/media/payment.c762a0ec1be7b3d1d7bfd871f3693afa.svg",
+    "static/media/service-advisor.svg": "/service-connect/static/media/service-advisor.da72943439986f1ced4321f1dca9007d.svg",
+    "static/media/quotes.svg": "/service-connect/static/media/quotes.115ac07f6a5edd869f5f8f8211d8793f.svg",
     "index.html": "/service-connect/index.html",
     "static/media/admin.svg": "/service-connect/static/media/admin.9e1db49b117c092d91c4e2b6c8ceebf5.svg",
-    "static/media/customer.svg": "/service-connect/static/media/customer.2fed24a57ed5b87c0425c7bf03e87a93.svg",
-    "main.02326b7e.css.map": "/service-connect/static/css/main.02326b7e.css.map",
-    "main.6427c688.js.map": "/service-connect/static/js/main.6427c688.js.map",
+    "static/media/appointment.svg": "/service-connect/static/media/appointment.6fbafc4b21dda9ec053e28d6be10ccb0.svg",
+    "static/media/customer.svg": "/service-connect/static/media/customer.21a86866c99b4ac8670c7348bd0611dd.svg",
+    "main.15e4ac48.css.map": "/service-connect/static/css/main.15e4ac48.css.map",
+    "main.7288566f.js.map": "/service-connect/static/js/main.7288566f.js.map",
     "488.98341302.chunk.js.map": "/service-connect/static/js/488.98341302.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.02326b7e.css",
-    "static/js/main.6427c688.js"
+    "static/css/main.15e4ac48.css",
+    "static/js/main.7288566f.js"
   ]
 }
