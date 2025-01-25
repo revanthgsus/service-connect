@@ -3,7 +3,7 @@ import '../GetOtp/GetOtp.css';
 import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../../../common/MainLogo/Logo';
 import loginImage from "../../../assets/images/login/login-image.png";
-import otpimage from "../../../assets/images/login/otp-image.png";
+import { ReactComponent as OtpImage } from "../../../assets/images/login/otp-image.svg";
 import { IoArrowBack } from "react-icons/io5";
 import { Row, Col } from 'react-bootstrap';
 
@@ -55,7 +55,8 @@ const GetOtp = () => {
                   <IoArrowBack /> Back
                 </Link>
               </span>
-              <img src={otpimage} alt="getotp-image" className='getotp-image' />
+              <OtpImage className="getotp-image" />
+              {/* <img src={otpimage} alt="getotp-image" className='getotp-image' /> */}
               <h1>Enter Your OTP</h1>
               <div className="underline-animation"></div>
               <p>We've sent a verification OTP to your email. Please check your inbox and enter the OTP to verify your email address.</p>

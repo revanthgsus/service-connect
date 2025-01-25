@@ -1,28 +1,28 @@
-.invoice-heading {
+.payment-heading {
   font-family: 'Be Vietnam Pro', sans-serif;
   color: var(--text-color);
   margin-bottom: 15px;
   line-height: 38px;
 }
 
-.invoice-list .list-alignment {
+.payment-list .list-alignment {
   overflow-x: auto;
 }
 
-.invoice-list .list-alignment::-webkit-scrollbar {
+.payment-list .list-alignment::-webkit-scrollbar {
   display: none;
 }
 
-.invoice-list .invoice-table {
+.payment-list .payment-table {
   width: 100%;
 }
 
-.invoice-list .table-align {
+.payment-list .table-align {
   background: var(--main-btn-color);
   color: #ffffff;
 }
 
-.invoice-list .table-list {
+.payment-list .table-list {
   border: 1px solid var(--border-color);
   box-shadow: var(--shadow-color);
   border-radius: 5px;
@@ -30,7 +30,7 @@
   overflow-x: auto;
 }
 
-.invoice-list .table-heading {
+.payment-list .table-heading {
   padding: 20px 15px;
   font-weight: 500;
   font-family: 'Be Vietnam Pro', sans-serif;
@@ -38,11 +38,11 @@
   white-space: nowrap;
 }
 
-.invoice-list .table-heading:nth-last-child(3) {
+.payment-list .table-heading:nth-last-child(3) {
   text-align: center;
 }
 
-.invoice-list .list-item td {
+.payment-list .list-item td {
   padding: 15px 15px;
   font-family: 'Be Vietnam Pro', sans-serif;
   color: var(--text-color);
@@ -50,7 +50,7 @@
   white-space: nowrap;
 }
 
-.invoice-list .search-input {
+.payment-list .search-input {
   border: 1px solid var(--input-border-color);
   padding: 8px 20px;
   border-radius: 20px;
@@ -62,19 +62,19 @@
   background-color: var(--input-color);
 }
 
-.invoice-list .search-input::placeholder {
+.payment-list .search-input::placeholder {
   color: var(--placeholder-color);
   font-weight: 400;
 }
 
-.invoice-list .search-wrapper {
+.payment-list .search-wrapper {
   position: relative;
   max-width: 100%;
   width: 40%;
   margin: 20px 20px;
 }
 
-.invoice-list .search-icon {
+.payment-list .search-icon {
   position: absolute;
   right: 15px;
   top: 50%;
@@ -83,22 +83,22 @@
   color: var(--input-icon-color);
 }
 
-.invoice-list .list-item {
+.payment-list .list-item {
   border-bottom: 1px solid var(--border-color)
 }
 
-.invoice-list .no-data td {
+.payment-list .no-data td {
   padding: 30px 25px;
   font-family: 'Be Vietnam Pro', sans-serif;
   color: var(--text-color);
   text-align: center;
 }
 
-.invoice-list .no-data h5 {
+.payment-list .no-data h5 {
   padding: 15px 0px 5px 0px;
 }
 
-.invoice-list .status-wrapper {
+.payment-list .status-wrapper {
   position: relative;
   max-width: 100%;
   width: 150px;
@@ -106,11 +106,11 @@
   display: inline-block;
 }
 
-.invoice-list .select-container {
+.payment-list .select-container {
   position: relative;
 }
 
-.invoice-list .status-select {
+.payment-list .status-select {
   border: 1px solid var(--input-border-color);
   padding: 8px 20px;
   border-radius: 20px;
@@ -124,7 +124,7 @@
   cursor: pointer;
 }
 
-.invoice-list .arrow-icon {
+.payment-list .arrow-icon {
   position: absolute;
   right: 10px;
   top: 50%;
@@ -134,22 +134,22 @@
   color: var(--input-icon-color);
 }
 
-.invoice-list .list-top {
+.payment-list .list-top {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.invoice-list .pagination-align {
+.payment-list .pagination-align {
   padding: 15px 0px;
   float: inline-end;
 }
 
-.invoice-list .list-item td:first-child {
+.payment-list .list-item td:first-child {
   text-align: center;
 }
 
-.invoice-list .status {
+.payment-list .status {
   padding: 3px 10px;
   border-radius: 100px;
   width: 100%;
@@ -157,17 +157,17 @@
   display: inline-block;
 }
 
-.invoice-list .status.paid {
+.payment-list .status.paid {
   background-color: #d7f6e4;
   color: #00A956;
 }
 
-.invoice-list .status.unpaid {
+.payment-list .status.unpaid {
   background-color: #FFE3E0;
   color: #FF4426;
 }
 
-.invoice-list .view-icon {
+.payment-list .view-icon {
   background-color: var(--actions-color);
   padding: 7px 10px;
   border-radius: 3px;
@@ -176,13 +176,13 @@
   color: var(--actions-icon-color);
 }
 
-.invoice-list .view-icon:hover {
+.payment-list .view-icon:hover {
   background-color: #048088;
   color: white;
   transition: 0.3s linear all;
 }
 
-.invoice-list .view-icon:hover svg {
+.payment-list .view-icon:hover svg {
   transform: scale(1.2)
 }
 
@@ -197,78 +197,78 @@
 }
 
 @media only screen and (max-width:575px) {
-  .invoice-list .list-top {
+  .payment-list .list-top {
     display: block;
   }
 
-  .invoice-list .search-wrapper,
-  .invoice-list .search-wrapper {
+  .payment-list .search-wrapper,
+  .payment-list .search-wrapper {
     margin: 15px auto;
     width: 90%;
   }
 
-  .invoice-list .status-wrapper {
+  .payment-list .status-wrapper {
     display: none;
   }
 
-  .invoice-heading {
+  .payment-heading {
     line-height: 52px;
   }
 
 }
 
 @media only screen and (min-width: 576px) and (max-width: 768px) {
-  .invoice-list .search-wrapper {
+  .payment-list .search-wrapper {
     margin: 20px 15px;
     width: 90%;
   }
 
-  .invoice-list .status-wrapper {
+  .payment-list .status-wrapper {
     margin: 20px 15px;
   }
 
-  .invoice-list .list-top {
+  .payment-list .list-top {
     display: flex;
   }
 
-  .invoice-heading {
+  .payment-heading {
     line-height: 37px;
   }
 }
 
 @media only screen and (min-width:1200px) and (max-width:1399px) {
-  .invoice-list .table-heading {
+  .payment-list .table-heading {
     font-size: 14px;
   }
 
-  .invoice-list .list-item td {
+  .payment-list .list-item td {
     font-size: 13px;
     padding: 10px 15px;
   }
 
-  .invoice-heading {
+  .payment-heading {
     line-height: 40px;
   }
 }
 
 @media only screen and (min-width:1400px) {
-  .invoice-list .search-input {
+  .payment-list .search-input {
     font-size: 14px;
   }
 
-  .invoice-list .status-select {
+  .payment-list .status-select {
     font-size: 12px;
   }
 
-  .invoice-list .status-wrapper {
+  .payment-list .status-wrapper {
     margin: 30px 30px;
   }
 
-  .invoice-list .search-wrapper {
+  .payment-list .search-wrapper {
     margin: 30px 30px;
   }
 
-  .invoice-heading {
+  .payment-heading {
     line-height: 47px;
   }
 }

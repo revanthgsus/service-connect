@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import "./QuoteList.css";
+import "./PaymentList.css";
 import { IoSearch } from "react-icons/io5";
 import { useNavigate } from 'react-router-dom';
 import { IoIosArrowDown } from "react-icons/io";
@@ -9,7 +9,7 @@ import { FaRegEye } from "react-icons/fa6";
 import { ReactComponent as Norecords } from "../../../../../assets/images/customer/no-records.svg"
 import PreLoader from './../../../../../common/PreLoader/PreLoader';
 
-const QuoteList = () => {
+const PaymentList = () => {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('');
@@ -20,62 +20,55 @@ const QuoteList = () => {
 
   const tableHeadings = [
     { title: "S.No" },
-    { title: "Service ID" },
+    { title: "Invoice ID" },
+    { title: "Billing Name" },
     { title: "Service Type" },
-    { title: "Appointment Date" },
-    { title: "Urgency Level" },
+    { title: "Due Date" },
     { title: "Status" },
+    { title: "Total Amount" },
+    { title: "Due Amount" },
     { title: "" },
   ];
 
-  const QuotesData = [
+  const PaymentData = [
     {
       id: 1,
-      serviceID: "SR-12345",
+      invoiceID: "INV-00001",
+      billingName: "Revanth",
       serviceType: "Car Routine Maintenance",
-      appointmentDate: "12/02/2025",
-      urgencyLevel: "Urgent",
-      status: "Accepted",
+      dueDate: "12/02/2025",
+      status: "Paid",
+      totalAmount: "₹5000",
+      dueAmount: "₹500",
     },
     {
       id: 2,
-      serviceID: "SR-12346",
-      serviceType: "Battery Testing",
-      appointmentDate: "13/02/2025",
-      urgencyLevel: "Standard",
-      status: "Accepted",
+      invoiceID: "INV-00002",
+      billingName: "Priya",
+      serviceType: "Car Routine Maintenance",
+      dueDate: "15/02/2025",
+      status: "Un Paid",
+      totalAmount: "₹50000",
+      dueAmount: "₹500",
     },
     {
       id: 3,
-      serviceID: "SR-12347",
-      serviceType: "Oil and filter change",
-      appointmentDate: "14/02/2025",
-      urgencyLevel: "Urgent",
-      status: "In Progress",
-    },
-    {
-      id: 4,
-      serviceID: "SR-12348",
-      serviceType: "Tire replacement",
-      appointmentDate: "14/02/2025",
-      urgencyLevel: "Urgent",
-      status: "In Progress",
-    },
-    {
-      id: 5,
-      serviceID: "SR-12345",
+      invoiceID: "INV-00003",
+      billingName: "Bowyaa",
       serviceType: "Car Routine Maintenance",
-      appointmentDate: "16/02/2025",
-      urgencyLevel: "Urgent",
-      status: "Accepted",
+      dueDate: "12/02/2025",
+      status: "Un Paid",
+      totalAmount: "₹7500",
+      dueAmount: "₹500",
     },
+
   ];
 
-  const filteredServiceID = QuotesData.filter((quote) => {
+  const filteredInvoiceID = PaymentData.filter((invoice) => {
     const matchesSearch =
-      quote.serviceID.toLowerCase().includes(searchTerm.toLowerCase());
+      invoice.invoiceID.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesStatus =
-      statusFilter === '' || quote.status.toLowerCase() === statusFilter.toLowerCase();
+      statusFilter === '' || invoice.status.toLowerCase() === statusFilter.toLowerCase();
     return matchesSearch && matchesStatus;
   });
 
@@ -91,7 +84,7 @@ const QuoteList = () => {
     setCurrentPage(page);
   };
 
-  const displayedQuotes = filteredServiceID.slice(
+  const displayedInvoice = filteredInvoiceID.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
   );
@@ -100,7 +93,7 @@ const QuoteList = () => {
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false)
-      navigate("quotesummary");
+      navigate("viewpayment");
     }, 1000)
   };
 
@@ -108,8 +101,8 @@ const QuoteList = () => {
     <>
       {isLoading && <PreLoader />}
       {!isLoading && (
-        <section className="quote-list">
-          <h5 className="quote-heading">Quotes</h5>
+        <section className="payment-list">
+          <h5 className="payment-heading">Payment Details</h5>
 
           <div className="table-list">
             <div className="list-top">
@@ -117,7 +110,7 @@ const QuoteList = () => {
                 <input
                   type="search"
                   className="search-input"
-                  placeholder="Search by Service ID"
+                  placeholder="Search by Invoice ID"
                   value={searchTerm}
                   onChange={handleSearchChange}
                 />
@@ -134,8 +127,8 @@ const QuoteList = () => {
                     onChange={handleStatusChange}
                   >
                     <option value="">Status</option>
-                    <option value="accepted">Accepted</option>
-                    <option value="inprogress">In Progress</option>
+                    <option value="paid">Paid</option>
+                    <option value="unpaid">Un Paid</option>
                   </select>
                   <IoIosArrowDown className="arrow-icon" />
                 </div>
@@ -143,7 +136,7 @@ const QuoteList = () => {
             </div>
 
             <div className="list-alignment">
-              <table className="quote-table">
+              <table className="payment-table">
                 <thead className="table-align">
                   <tr>
                     {tableHeadings.map((heading, index) => (
@@ -154,27 +147,29 @@ const QuoteList = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {displayedQuotes.length === 0 ? (
+                  {displayedInvoice.length === 0 ? (
                     <tr className="no-data">
                       <td colSpan={tableHeadings.length}>
                         <Norecords />
-                        <h5>No Quotes Found!</h5>
+                        <h5>No Invoice Found!</h5>
                         <p>Once records are added, they’ll appear on this page.</p>
                       </td>
                     </tr>
                   ) : (
-                    displayedQuotes.map((quote, index) => (
-                      <tr key={quote.id} className="list-item">
+                    displayedInvoice.map((invoice, index) => (
+                      <tr key={invoice.id} className="list-item">
                         <td>{(currentPage - 1) * itemsPerPage + index + 1}</td>
-                        <td>{quote.serviceID}</td>
-                        <td>{quote.serviceType}</td>
-                        <td>{quote.appointmentDate}</td>
-                        <td>{quote.urgencyLevel}</td>
+                        <td>{invoice.invoiceID}</td>
+                        <td>{invoice.billingName}</td>
+                        <td>{invoice.serviceType}</td>
+                        <td>{invoice.dueDate}</td>
                         <td>
-                          <span className={`status ${quote.status.toLowerCase().replace(" ", "")}`}>
-                            {quote.status}
+                          <span className={`status ${invoice.status.toLowerCase().replace(" ", "")}`}>
+                            {invoice.status}
                           </span>
                         </td>
+                        <td>{invoice.totalAmount}</td>
+                        <td>{invoice.dueAmount}</td>
                         <td>
                           <span className='view-icon' onClick={handleView}>
                             <FaRegEye />
@@ -191,7 +186,7 @@ const QuoteList = () => {
           <div className="pagination-align">
             <Stack spacing={2}>
               <Pagination
-                count={Math.ceil(filteredServiceID.length / itemsPerPage)}
+                count={Math.ceil(filteredInvoiceID.length / itemsPerPage)}
                 page={currentPage}
                 onChange={handlePageChange}
               />
@@ -203,4 +198,4 @@ const QuoteList = () => {
   );
 };
 
-export default QuoteList;
+export default PaymentList;

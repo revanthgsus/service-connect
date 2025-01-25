@@ -1,0 +1,6 @@
+.revenuegraph {
+  box-shadow: var(--shadow-color);
+  border-radius: 5px;
+  padding: 30px 20px;
+  background-color: var(--span-color);
+}

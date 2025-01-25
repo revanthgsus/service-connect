@@ -1,0 +1,6 @@
+.piechart {
+  box-shadow: var(--shadow-color);
+  border-radius: 5px;
+  padding: 30px 0px;
+  background-color: var(--span-color);
+}

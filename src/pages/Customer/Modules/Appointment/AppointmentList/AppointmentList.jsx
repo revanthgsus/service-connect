@@ -87,7 +87,7 @@ const AppointmentList = () => {
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false)
-      navigate("requestappointment");
+      navigate("request");
     }, 1000)
   };
 
@@ -120,7 +120,7 @@ const AppointmentList = () => {
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false)
-      navigate("/");
+      navigate("request");
     }, 1000)
   };
 
@@ -202,7 +202,7 @@ const AppointmentList = () => {
                           </span>
                         </td>
                         <td>
-                          <span className='view-icon' onClick={() => handleView}>
+                          <span className='view-icon' onClick={handleView}>
                             <FaRegEye />
                           </span>
 

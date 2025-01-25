@@ -7,7 +7,7 @@ const DeleteModal = ({ show, handleClose }) => {
 
   return (
     <>
-      <Modal show={show} animation={false} onHide={handleClose} className='Delete-popup' >
+      <Modal show={show} animation onHide={handleClose} className='Delete-popup' >
         <Modal.Header className='border-0'>
           <img src={Deleteicon} alt='deleteicon' className='delete-popup-icon' />
         </Modal.Header>

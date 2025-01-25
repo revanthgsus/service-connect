@@ -3,7 +3,6 @@ import { Route, Routes } from 'react-router-dom';
 import CustomerLayout from './../Layouts/CustomerLayout/CustomerLayout';
 import Dashboard from './../pages/Customer/Modules/Dashboard/DashboardContainer/Dashboard';
 import AppointmentList from './../pages/Customer/Modules/Appointment/AppointmentList/AppointmentList';
-import PaymentsList from '../pages/Customer/Modules/Payments/PaymentsList';
 import RequestAppointment from './../pages/Customer/Modules/Appointment/RequestAppointment/RequestAppointment';
 import QuoteList from './../pages/Customer/Modules/Quote/QuoteList/QuoteList';
 import QuoteSummary from './../pages/Customer/Modules/Quote/QuoteSummary/QuoteSummary';
@@ -11,6 +10,8 @@ import ActivityList from './../pages/Customer/Modules/Activity/ActivityList/Acti
 import DailyActivity from './../pages/Customer/Modules/Activity/DailyActivity/DailyActivity';
 import ViewInvoice from './../pages/Customer/Modules/Invoice/ViewInvoice/ViewInvoice';
 import InvoiceList from './../pages/Customer/Modules/Invoice/InvoiceList/InvoiceList';
+import PaymentList from '../pages/Customer/Modules/Payments/PaymentList/PaymentList';
+import ViewPayment from './../pages/Customer/Modules/Payments/ViewPayment/ViewPayment';
 
 const CustomerRouter = () => {
   return (
@@ -23,7 +24,7 @@ const CustomerRouter = () => {
 
           <Route path='appointments' >
             <Route index element={<AppointmentList />} />
-            <Route path='requestappointment' element={<RequestAppointment />} />
+            <Route path='request' element={<RequestAppointment />} />
           </Route>
 
           <Route path='quotes' >
@@ -42,11 +43,11 @@ const CustomerRouter = () => {
           </Route>
 
           <Route path='payment' >
-            <Route index element={<PaymentsList />} />
+            <Route index element={<PaymentList />} />
+            <Route path='viewpayment' element={<ViewPayment />} />
           </Route>
 
         </Route>
-
       </Routes>
 
     </>

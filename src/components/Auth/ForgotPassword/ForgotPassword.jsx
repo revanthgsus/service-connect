@@ -3,7 +3,7 @@ import "../ForgotPassword/ForgotPassword.css";
 import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../../../common/MainLogo/Logo';
 import loginImage from "../../../assets/images/login/login-image.png";
-import forgotImage from "../../../assets/images/login/forgot-image.png";
+import { ReactComponent as ForgotImage } from "../../../assets/images/login/forgot-image.svg";
 import { MdEmail } from "react-icons/md";
 import { IoArrowBack } from "react-icons/io5";
 import { Row, Col } from 'react-bootstrap';
@@ -40,7 +40,8 @@ const ForgotPassword = () => {
                   <IoArrowBack />Back
                 </Link>
               </span>
-              <img src={forgotImage} alt="forgot-image" className='forgot-image' />
+              <ForgotImage className='forgot-image' />
+              {/* <img src={forgotImage} alt="forgot-image" className='forgot-image' /> */}
               <h1>Forgot Your Password</h1>
               <div className='underline-animation'></div>
               <p>Please provide your email address, and we'll send you a link to reset your password</p>

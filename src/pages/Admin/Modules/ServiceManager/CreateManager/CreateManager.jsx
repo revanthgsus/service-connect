@@ -7,6 +7,10 @@ import { MdVisibilityOff } from "react-icons/md";
 import { useNavigate } from 'react-router-dom';
 import { IoMdArrowRoundBack } from "react-icons/io";
 import CancelModal from '../../../Common/CancelModal/CancelModal';
+// import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 const CreateManager = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -47,7 +51,7 @@ const CreateManager = () => {
     {
       label: "Confirm Password",
       name: "confirmpassword",
-      placeholder: "Enter Confirm Password",
+      placeholder: "Enter confirm password",
       type: "password",
       autocomplete: "confirmpassword",
     },
@@ -79,14 +83,14 @@ const CreateManager = () => {
     {
       label: "Branch Location",
       name: "branchlocation",
-      placeholder: "Enter Branch location",
+      placeholder: "Enter branch location",
       type: "text",
       autocomplete: "branchlocation",
     },
     {
       label: "Department",
       name: "Department",
-      placeholder: "Enter Department",
+      placeholder: "Enter department",
       type: "text",
       autocomplete: "Department",
     },
@@ -152,6 +156,36 @@ const CreateManager = () => {
                             {showPassword ? <MdVisibility /> : <MdVisibilityOff />}
                           </span>
                         </div>
+                      ) : field.type === "date" ? (
+                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                          <DatePicker
+                            className="form-control date-picker"
+                            format="DD/MM/YYYY"
+                            sx={{
+                              "& .MuiOutlinedInput-root": {
+                                outline: "0",
+                                fontSize: "11px",
+                                paddingRight: "4px",
+                                "& fieldset": {
+                                  border: "0px",
+                                },
+                                "& button": {
+                                  padding: "5px 8px",
+                                  "& svg": {
+                                    width: "16px",
+                                    color: "var(--input-icon-color)",
+                                  },
+                                },
+                              },
+                              "&:hover .MuiOutlinedInput-notchedOutline": {
+                                borderColor: "transparent",
+                              },
+                              "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                                borderColor: "transparent",
+                              },
+                            }}
+                          />
+                        </LocalizationProvider>
                       ) : field.name === "confirmpassword" ? (
                         <div className="password-field">
                           <input
@@ -243,7 +277,7 @@ const CreateManager = () => {
           <button type='submit' className='cancel-button' onClick={handleCancel}>Cancel</button>
           <button type='submit' className='save-button' onClick={handlesubmit}>Save</button>
         </div>
-      </section>
+      </section >
 
       <CancelModal cancelShow={cancelShow} handleCancelClose={handleCancelClose} />
     </>

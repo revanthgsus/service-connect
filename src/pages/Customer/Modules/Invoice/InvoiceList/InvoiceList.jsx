@@ -159,14 +159,14 @@ const InvoiceList = () => {
                         <td>{invoice.billingName}</td>
                         <td>{invoice.serviceType}</td>
                         <td>{invoice.dueDate}</td>
-                        <td>{invoice.totalAmount}</td>
                         <td>
                           <span className={`status ${invoice.status.toLowerCase().replace(" ", "")}`}>
                             {invoice.status}
                           </span>
                         </td>
+                        <td>{invoice.totalAmount}</td>
                         <td>
-                          <span className='view-icon' onClick={() => handleView}>
+                          <span className='view-icon' onClick={handleView}>
                             <FaRegEye />
                           </span>
                         </td>

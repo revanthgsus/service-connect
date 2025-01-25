@@ -176,7 +176,7 @@ const ActivityList = () => {
                           </span>
                         </td>
                         <td>
-                          <span className='view-icon' onClick={() => handleView}>
+                          <span className='view-icon' onClick={handleView}>
                             <FaRegEye />
                           </span>
                         </td>
