@@ -11,7 +11,6 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  z-index: 1;
 }
 
 .customer-sidebar .sidebar-section.open {

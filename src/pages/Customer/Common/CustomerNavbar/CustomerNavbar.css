@@ -1,7 +1,6 @@
 .customer-navbar {
   padding: 0px;
   box-shadow: var(--shadow-color);
-  z-index: 9;
   background-color: var(--navbar-color);
 }
 

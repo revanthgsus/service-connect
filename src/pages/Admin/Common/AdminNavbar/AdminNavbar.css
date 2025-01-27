@@ -1,7 +1,6 @@
 .admin-navbar {
   padding: 0px;
   box-shadow: var(--shadow-color);
-  z-index: 9;
   background-color: var(--navbar-color);
 }
 
@@ -21,6 +20,7 @@
 
 .admin-navbar .moon-icon path {
   color: var(--icon-color);
+  transition: .3s linear all;
 }
 
 .admin-navbar .profile-icon path {
@@ -53,8 +53,12 @@
 
 .admin-navbar .sun-icon {
   color: var(--icon-color);
+  transition: .3s linear all;
 }
 
+.admin-navbar .theme-toggle-btn {
+  transition: .10s linear all;
+}
 
 @media only screen and (max-width:768px) {
 

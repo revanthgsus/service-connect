@@ -8,7 +8,8 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import "../NewPassword/NewPassword.css";
 import { Row, Col } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
-import Successimage from "../../../assets/images/login/success-gif.gif";
+import UpdatedImage from "../Updated.json"
+import Lottie from 'react-lottie-player';
 
 const NewPassword = () => {
   const navigate = useNavigate();
@@ -104,7 +105,7 @@ const NewPassword = () => {
 
       <Modal show={showModal} backdrop="static" className='update-password-modal'>
         <Modal.Header className='modal-header'>
-          <img src={Successimage} alt='successimage' className='success-img' />
+          <Lottie animationData={UpdatedImage} loop={true} play={true} className="success-img" />
         </Modal.Header>
         <Modal.Body className='modal-body'>Your password has been successfully updated!</Modal.Body>
         <Modal.Footer className='modal-footer'>

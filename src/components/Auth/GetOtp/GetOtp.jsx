@@ -56,7 +56,6 @@ const GetOtp = () => {
                 </Link>
               </span>
               <OtpImage className="getotp-image" />
-              {/* <img src={otpimage} alt="getotp-image" className='getotp-image' /> */}
               <h1>Enter Your OTP</h1>
               <div className="underline-animation"></div>
               <p>We've sent a verification OTP to your email. Please check your inbox and enter the OTP to verify your email address.</p>

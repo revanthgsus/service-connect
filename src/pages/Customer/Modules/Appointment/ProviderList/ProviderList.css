@@ -1,14 +1,14 @@
-.advisor-list .checkbox-wrapper input[type="checkbox"] {
+.provider-list .checkbox-wrapper input[type="checkbox"] {
   display: none;
 }
 
-.advisor-list .checkbox-wrapper label {
+.provider-list .checkbox-wrapper label {
   padding: 0;
   margin: 0;
   line-height: 1;
 }
 
-.advisor-list .item .cbx {
+.provider-list .item .cbx {
   position: relative;
   top: 3px;
   display: inline-block;
@@ -19,7 +19,7 @@
   cursor: pointer;
 }
 
-.advisor-list .item .cbx svg {
+.provider-list .item .cbx svg {
   position: relative;
   top: 0px;
   transform: scale(0);
@@ -29,7 +29,7 @@
   transition: .3s linear ease-out;
 }
 
-.advisor-list .checkbox-wrapper .item .cbx::before {
+.provider-list .checkbox-wrapper .item .cbx::before {
   content: '';
   position: absolute;
   top: 50%;
@@ -42,7 +42,7 @@
   transform: scale(0);
 }
 
-.advisor-list .checkbox-wrapper .item .cbx::after {
+.provider-list .checkbox-wrapper .item .cbx::after {
   content: '';
   position: absolute;
   top: 5px;
@@ -54,7 +54,7 @@
   transform: scale(0);
 }
 
-.advisor-list .checkbox-wrapper .item .advisor-detail {
+.provider-list .checkbox-wrapper .item .advisor-detail {
   position: relative;
   cursor: pointer;
   transition: color 0.3s ease;
@@ -63,7 +63,7 @@
   width: 100%;
 }
 
-/* .advisor-list .checkbox-wrapper .item .advisor-detail::after {
+/* .provider-list .checkbox-wrapper .item .advisor-detail::after {
   content: '';
   position: absolute;
   top: 50%;
@@ -73,11 +73,11 @@
   background: #9098a9;
 } */
 
-.advisor-list .checkbox-wrapper .item:checked+.cbx {
+.provider-list .checkbox-wrapper .item:checked+.cbx {
   border-color: transparent;
 }
 
-.advisor-list .checkbox-wrapper .item input:checked+.cbx svg {
+.provider-list .checkbox-wrapper .item input:checked+.cbx svg {
   transform: scale(1);
   stroke-width: 2px;
   stroke: #007D85;
@@ -85,28 +85,28 @@
   transition-delay: 0.1s;
 }
 
-.advisor-list .checkbox-wrapper .item input:checked+.cbx::after {
+.provider-list .checkbox-wrapper .item input:checked+.cbx::after {
   transform: scale(1);
   opacity: 0;
   transition: all 0.6s ease;
 }
 
-.advisor-list .checkbox-wrapper .item input:checked+.cbx::before {
+.provider-list .checkbox-wrapper .item input:checked+.cbx::before {
   transform: scale(1);
   opacity: 0;
   transition: all 0.6s ease;
 }
 
-.advisor-list .checkbox-wrapper .item:checked~.advisor-detail {
+.provider-list .checkbox-wrapper .item:checked~.advisor-detail {
   color: #9098a9;
 }
 
-.advisor-list .checkbox-wrapper .item:checked~.advisor-detail:after {
+.provider-list .checkbox-wrapper .item:checked~.advisor-detail:after {
   width: 100%;
   transition: all 0.4s ease;
 }
 
-.advisor-list {
+.provider-list {
   border: 1px solid var(--border-color);
   box-shadow: var(--shadow-color);
   border-radius: 5px;
@@ -114,7 +114,7 @@
   margin: 30px 0px;
 }
 
-.advisor-list .nearby-advisor {
+.provider-list .nearby-advisor {
   font-family: 'Be Vietnam Pro', sans-serif;
   color: #ffffff;
   background: var(--main-btn-color);
@@ -124,11 +124,11 @@
   padding: 20px 35px;
 }
 
-.advisor-list .checkbox-wrapper {
+.provider-list .checkbox-wrapper {
   padding: 15px 25px;
 }
 
-.advisor-list .suggestion-advisor {
+.provider-list .suggestion-advisor {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -136,7 +136,7 @@
 }
 
 @media only screen and (min-width :1200px) and (max-width: 1399px) {
-  .advisor-list .nearby-advisor {
+  .provider-list .nearby-advisor {
     padding: 15px 25px;
     font-size: 16px;
   }

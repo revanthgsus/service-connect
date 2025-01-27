@@ -41,7 +41,6 @@ const ForgotPassword = () => {
                 </Link>
               </span>
               <ForgotImage className='forgot-image' />
-              {/* <img src={forgotImage} alt="forgot-image" className='forgot-image' /> */}
               <h1>Forgot Your Password</h1>
               <div className='underline-animation'></div>
               <p>Please provide your email address, and we'll send you a link to reset your password</p>

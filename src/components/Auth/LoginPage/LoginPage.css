@@ -186,17 +186,17 @@
 
 .bg-wave::before {
   content: "";
-  background-image: url('../../../assets/images/login/bg-wave.png');
+  background-image: url('../../../assets/images/login/bg-wave.svg');
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
   position: absolute;
   top: 0;
   bottom: 0;
-  left: 0;
+  left: -20%;
   right: 0;
   z-index: -1;
-  width: 55%;
+  width: 100%;
 }
 
 .bg-wave {
@@ -335,6 +335,7 @@
     top: unset;
   }
 
+
   @keyframes pulse {
     0% {
       box-shadow: 0 0 0 0 #d8eff0;
@@ -355,19 +356,43 @@
     display: none;
   }
 
+  .login-bg::before {
+    border-top-left-radius: 50%;
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 0px;
+    transform: scaleX(1.5);
+    height: 40%;
+    width: 100%;
+    top: unset;
+  }
+
+  @keyframes pulse {
+    0% {
+      box-shadow: 0 0 0 0 #d8eff0;
+    }
+
+    50% {
+      box-shadow: 0 -30px 0 0 #d8eff0;
+    }
+
+    100% {
+      box-shadow: 0 -60px 0 0 #d8eff0;
+    }
+  }
+
   .login-form h1 {
-    font-size: 16px;
+    font-size: 18px;
   }
 
   .login-form p {
-    font-size: 10px;
-    line-height: 15px;
-    margin-bottom: 10px;
+    font-size: 12px;
+    line-height: 18px;
+    margin-bottom: 12px;
     padding-bottom: 0px;
   }
 
   .login-form {
-    padding: 30px 30px;
+    padding: 60px 30px;
   }
 
   .underline-animation {
@@ -384,13 +409,12 @@
 
   .login-btn {
     margin-top: 20px;
-    padding: 7px 10px;
-    font-size: 14px;
+    padding: 10px 10px;
   }
 
   .form-input {
     font-size: 12px;
-    padding: 7px 10px;
+    padding: 10px 10px;
     border-radius: 5px;
   }
 
@@ -400,11 +424,11 @@
 
   .form-label {
     font-size: 12px;
-    margin-bottom: 0px;
+    margin-bottom: 5px;
   }
 
   .input-container {
-    margin-bottom: 10px;
+    margin-bottom: 15px;
   }
 
   .main-logo {
@@ -486,7 +510,7 @@
   }
 
   .login-form {
-    padding: 45px 45px;
+    padding: 50px 45px;
     width: 90%;
   }
 
@@ -510,5 +534,11 @@
 
   .main-logo {
     top: 2%;
+  }
+}
+
+@media screen and (min-width: 1400px) {
+  .login-form {
+    padding: 90px 60px;
   }
 }

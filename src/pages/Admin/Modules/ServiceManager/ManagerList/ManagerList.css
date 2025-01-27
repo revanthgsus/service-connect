@@ -74,8 +74,6 @@
   border-radius: 5px;
   background-color: var(--navbar-color);
   overflow-x: auto;
-  /* height: 80vh;
-  overflow-y: scroll; */
 }
 
 .manager-list .table-heading {
@@ -261,15 +259,6 @@
   transform: scale(1.2);
 }
 
-.css-1l5xwdx-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected {
-  background-color: #02858D !important;
-  font-family: 'Be Vietnam Pro', sans-serif;
-  color: #ffffff;
-}
-
-.css-8uzxat-MuiSvgIcon-root-MuiPaginationItem-icon {
-  color: var(--text-color);
-}
 
 @media only screen and (max-width:575px) {
   .manager-list .list-top {

@@ -12,7 +12,7 @@
 
 .Cancel-popup .modal-body {
   text-align: center;
-  padding: 15px 30px 20px 30px;
+  padding: 5px 30px 20px 30px;
 }
 
 .Cancel-popup .modal-footer {
@@ -23,8 +23,9 @@
 
 .Cancel-popup .modal-header .btn-close {
   font-size: 12px;
-  background-color: #d8d8d8;
+  background-color: #ffffff;
   border-radius: 50%;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 .cancel-actions-btn {
@@ -84,8 +85,11 @@
   animation: zoominpopup 0.3s ease-out;
 }
 
-.Cancel-popup .modal-body h5 {
-  margin-bottom: 20px;
+.Cancel-popup .Cancel-popup-icon {
+  margin: auto;
+  width: 60px;
+  height: fit-content;
+  margin-bottom: 15px;
 }
 
 @media only screen and (Max-width:575px) {
@@ -112,7 +116,7 @@
 
 @media only screen and (min-width: 1200px) and (max-width: 1399px) {
   .Cancel-popup .modal-dialog {
-    width: 400px;
+    width: 420px;
     max-width: 100%;
   }
 

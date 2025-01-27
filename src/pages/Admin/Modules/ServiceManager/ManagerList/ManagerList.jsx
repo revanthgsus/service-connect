@@ -260,9 +260,22 @@ const ManagerList = () => {
                 count={Math.ceil(filteredManagers.length / itemsPerPage)}
                 page={currentPage}
                 onChange={handlePageChange}
+                sx={{
+                  "& .Mui-selected": {
+                    backgroundColor: "#01848D",
+                    color: "#ffffff"
+                  },
+                  "& .Mui-selected:hover": {
+                    backgroundColor: "#028d96"
+                  },
+                  "& .Mui-disabled": {
+                    color: "var(--text-color)"
+                  }
+                }}
               />
             </Stack>
           </div>
+
         </section>
       )}
 

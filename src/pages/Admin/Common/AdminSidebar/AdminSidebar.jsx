@@ -16,12 +16,12 @@ const AdminSidebar = ({ isOpen }) => {
     {
       title: 'Service Manager',
       icon: <ManagerIcon />,
-      link: "admin/service-manager"
+      link: "admin/manager"
     },
     {
       title: 'Service Advisor',
       icon: <AdvisorIcon />,
-      link: "admin/service-advisor"
+      link: "admin/advisor"
     },
     {
       title: 'Customers',

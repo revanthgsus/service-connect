@@ -31,7 +31,7 @@
       rgba(3, 131, 139, 1) 100%);
   --input-color: #ffffff;
   --input-border-color: #8080803b;
-  --placeholder-color: #6d6d6da5;
+  --placeholder-color: #8e8e8ea5;
   --input-icon-color: #707070;
   --actions-color: #EEEEEE;
   --actions-icon-color: #5a5a5a;
@@ -59,7 +59,7 @@
       rgba(3, 131, 139, 1) 100%);
   --input-color: #27282b;
   --input-border-color: #00000000;
-  --placeholder-color: #d0d0d0;
+  --placeholder-color: #a4a4a4;
   --input-icon-color: #dcdcdc;
   --actions-color: #485463;
   --actions-icon-color: #ececec;

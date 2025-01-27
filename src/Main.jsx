@@ -4,11 +4,9 @@ import { BrowserRouter as Router } from 'react-router-dom';
 
 const Main = () => {
   return (
-    <>
-      <Router basename='/service-connect'>
-        <AppRouter />
-      </Router>
-    </>
+    <Router basename='/service-connect'>
+      <AppRouter />
+    </Router>
   )
 }
 

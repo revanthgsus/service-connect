@@ -7,7 +7,6 @@ import { MdVisibilityOff } from "react-icons/md";
 import { useNavigate } from 'react-router-dom';
 import { IoMdArrowRoundBack } from "react-icons/io";
 import CancelModal from '../../../Common/CancelModal/CancelModal';
-// import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
@@ -260,7 +259,7 @@ const CreateManager = () => {
                           name={field.name}
                           placeholder={field.placeholder}
                           autoComplete={field.autocomplete}
-                          // value={field.value || ""}
+                          defaultValue={field.value}
                           className="form-control"
                         />
                       )}

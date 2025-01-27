@@ -5,7 +5,7 @@ import { FaRegUserCircle } from "react-icons/fa";
 const ProviderList = () => {
   return (
     <>
-      <section className='advisor-list'>
+      <section className='provider-list'>
         <h5 className="nearby-advisor">Nearby Service Advisors</h5>
         <div className="checkbox-wrapper">
           <div className="item d-flex">
