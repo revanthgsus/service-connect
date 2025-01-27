@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkservice_connect=self.webpackChunkservice_connect||[]).push([[915],{4915:(e,c,n)=>{n.r(c),n.d(c,{default:()=>r});n(5043);var s=n(579);const r=()=>(0,s.jsx)("div",{children:"ManagerRouter"})}}]);
+//# sourceMappingURL=915.24d682e2.chunk.js.map
