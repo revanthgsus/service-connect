@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/service-connect/static/css/main.9015c82c.css",
-    "main.js": "/service-connect/static/js/main.36e4cc26.js",
+    "main.css": "/service-connect/static/css/main.89dbe062.css",
+    "main.js": "/service-connect/static/js/main.0b431b99.js",
     "static/css/596.72de4fa6.chunk.css": "/service-connect/static/css/596.72de4fa6.chunk.css",
     "static/js/596.bd0164f6.chunk.js": "/service-connect/static/js/596.bd0164f6.chunk.js",
     "static/css/564.d697437b.chunk.css": "/service-connect/static/css/564.d697437b.chunk.css",
@@ -10,7 +10,7 @@
     "static/js/915.24d682e2.chunk.js": "/service-connect/static/js/915.24d682e2.chunk.js",
     "static/js/488.e0d54c9d.chunk.js": "/service-connect/static/js/488.e0d54c9d.chunk.js",
     "static/css/646.a9155041.chunk.css": "/service-connect/static/css/646.a9155041.chunk.css",
-    "static/js/646.ccb4f90c.chunk.js": "/service-connect/static/js/646.ccb4f90c.chunk.js",
+    "static/js/646.d26a1e76.chunk.js": "/service-connect/static/js/646.d26a1e76.chunk.js",
     "static/css/871.80237a8c.chunk.css": "/service-connect/static/css/871.80237a8c.chunk.css",
     "static/js/871.380120f9.chunk.js": "/service-connect/static/js/871.380120f9.chunk.js",
     "static/css/726.26d36557.chunk.css": "/service-connect/static/css/726.26d36557.chunk.css",
@@ -61,8 +61,8 @@
     "static/media/admin.svg": "/service-connect/static/media/admin.9e1db49b117c092d91c4e2b6c8ceebf5.svg",
     "static/media/appointment.svg": "/service-connect/static/media/appointment.6fbafc4b21dda9ec053e28d6be10ccb0.svg",
     "static/media/customer.svg": "/service-connect/static/media/customer.21a86866c99b4ac8670c7348bd0611dd.svg",
-    "main.9015c82c.css.map": "/service-connect/static/css/main.9015c82c.css.map",
-    "main.36e4cc26.js.map": "/service-connect/static/js/main.36e4cc26.js.map",
+    "main.89dbe062.css.map": "/service-connect/static/css/main.89dbe062.css.map",
+    "main.0b431b99.js.map": "/service-connect/static/js/main.0b431b99.js.map",
     "596.72de4fa6.chunk.css.map": "/service-connect/static/css/596.72de4fa6.chunk.css.map",
     "596.bd0164f6.chunk.js.map": "/service-connect/static/js/596.bd0164f6.chunk.js.map",
     "564.d697437b.chunk.css.map": "/service-connect/static/css/564.d697437b.chunk.css.map",
@@ -71,7 +71,7 @@
     "915.24d682e2.chunk.js.map": "/service-connect/static/js/915.24d682e2.chunk.js.map",
     "488.e0d54c9d.chunk.js.map": "/service-connect/static/js/488.e0d54c9d.chunk.js.map",
     "646.a9155041.chunk.css.map": "/service-connect/static/css/646.a9155041.chunk.css.map",
-    "646.ccb4f90c.chunk.js.map": "/service-connect/static/js/646.ccb4f90c.chunk.js.map",
+    "646.d26a1e76.chunk.js.map": "/service-connect/static/js/646.d26a1e76.chunk.js.map",
     "871.80237a8c.chunk.css.map": "/service-connect/static/css/871.80237a8c.chunk.css.map",
     "871.380120f9.chunk.js.map": "/service-connect/static/js/871.380120f9.chunk.js.map",
     "726.26d36557.chunk.css.map": "/service-connect/static/css/726.26d36557.chunk.css.map",
@@ -103,7 +103,7 @@
     "678.93e4aa4d.chunk.js.map": "/service-connect/static/js/678.93e4aa4d.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.9015c82c.css",
-    "static/js/main.36e4cc26.js"
+    "static/css/main.89dbe062.css",
+    "static/js/main.0b431b99.js"
   ]
 }
