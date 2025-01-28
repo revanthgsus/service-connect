@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Logo from '../../../common/MainLogo/Logo';
 import { IoArrowBack } from "react-icons/io5";
 import loginImage from "../../../assets/images/login/login-image.png";
@@ -8,8 +8,10 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import "../NewPassword/NewPassword.css";
 import { Row, Col } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
-import UpdatedImage from "../Updated.json"
+import UpdatedImage from "../Updated.json";
 import Lottie from 'react-lottie-player';
+import axios from 'axios';
+import API_BASE_URL from '../../../services/AuthService';
 
 const NewPassword = () => {
   const navigate = useNavigate();
@@ -19,6 +21,12 @@ const NewPassword = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
+  const location = useLocation();
+  const otp = location.state?.otp;
+
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+
   const handlePasswordToggle = (type) => {
     if (type === "password") {
       setShowPassword((prev) => !prev);
@@ -27,17 +35,56 @@ const NewPassword = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setShowModal(true);
+    setLoading(true);
+    setError('');
+
+    // Validate password strength and matching
+    if (password !== confirmPassword) {
+      setError('Passwords do not match.');
+      setLoading(false);
+      return;
+    }
+
+    if (password.length < 8 || password.length > 12) {
+      setError('Password must be between 8 and 12 characters.');
+      setLoading(false);
+      return;
+    }
+
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,12}$/;
+    if (!passwordRegex.test(password)) {
+      setError('Password must include uppercase, lowercase, numbers, and special characters.');
+      setLoading(false);
+      return;
+    }
+
+    const payload = {
+      newPassword: password,
+      confirmPassword: confirmPassword,
+      token: otp.join(""),
+    };
+
+    try {
+      const response = await axios.post(`${API_BASE_URL}/email/changePassword`, payload);
+
+      if (response.status === 200) {
+        setShowModal(true); // Show modal on successful password change
+      } else {
+        setError('Something went wrong. Please try again.');
+      }
+    } catch (err) {
+      setError(err.response?.data?.message || 'Something went wrong. Please try again.');
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const handleCloseModal = (e) => {
-    e.preventDefault();
+  const handleCloseModal = () => {
     setShowModal(false);
     navigate('/');
   };
-
 
   return (
     <>
@@ -46,8 +93,7 @@ const NewPassword = () => {
         <Row className='loginpage-flex'>
           <Col xxl={4} xl={4} lg={5} md={5}>
             <div className='bg-wave'>
-              <img src={loginImage} alt="login-image" className='img-fluid login-image'
-                height="auto" width="100%" />
+              <img src={loginImage} alt="login-image" className='img-fluid login-image' height="auto" width="100%" />
             </div>
           </Col>
           <Col xxl={5} xl={5} lg={6} md={5}>
@@ -60,6 +106,8 @@ const NewPassword = () => {
               <h1 className='new-password-heading'>Set New Password</h1>
               <div className='underline-animation'></div>
               <p>Choose a strong, unique password to secure your personal information and keep your account safe.</p>
+
+              {error && <div className="error-message">{error}</div>}
 
               <div className='input-container'>
                 <label htmlFor="password" className='form-label'>New Password</label>
@@ -97,7 +145,9 @@ const NewPassword = () => {
                 </div>
               </div>
 
-              <button type='submit' className='update-pass-btn'>Update Password</button>
+              <button type='submit' className='update-pass-btn' disabled={loading}>
+                {loading ? 'Updating...' : 'Update Password'}
+              </button>
             </form>
           </Col>
         </Row>

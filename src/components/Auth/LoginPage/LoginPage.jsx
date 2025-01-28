@@ -6,15 +6,21 @@ import loginImage from "../../../assets/images/login/login-image.png";
 import PersonIcon from '@mui/icons-material/Person';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col, ToastContainer } from 'react-bootstrap';
+import { useAuth } from '../../../contexts/AuthContext';
+import API_BASE_URL from '../../../services/AuthService';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 
 const LoginPage = () => {
   const navigate = useNavigate();
+  const { login } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({ username: '', password: '' });
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState({ username: '', password: '', general: '' });
 
   const handlePasswordToggle = () => {
     setShowPassword((prevState) => !prevState);
@@ -25,32 +31,70 @@ const LoginPage = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    setError({ username: '', password: '', general: '' });
 
-    const credentials = {
-      admin: "admin@123",
-      customer: "customer@123",
-      manager: "manager@123",
-      advisor: "advisor@123",
+    if (!formData.username) {
+      setError((prev) => ({ ...prev, username: 'User Name is required' }));
+      return;
+    }
+    if (!formData.password) {
+      setError((prev) => ({ ...prev, password: 'Password is required' }));
+      return;
+    }
+
+    const requestData = {
+      userName: formData.username,
+      password: formData.password
     };
 
-    const { username, password } = formData;
+    try {
+      const response = await axios.post(`${API_BASE_URL}/userMaster/loginAuthenticate`, requestData, {
+        headers: { 'Content-Type': 'application/json' },
+      });
 
-    if (credentials[username] === password) {
-      const roleRoutes = {
-        admin: '/admin/dashboard',
-        customer: '/customer/dashboard',
-        manager: '/manager/dashboard',
-        advisor: '/advisor/dashboard',
-      };
-      setTimeout(() => {
-        navigate(roleRoutes[username]);
-        setLoading(false);
-      }, 1000);
-    }
-    else {
-      alert('Invalid credentials');
+      if (response.data && response.data.token && response.data.role) {
+        login(response.data.token, response.data.role);
+
+        toast.success("Login Successfully!", {
+          position: "top-center",
+          autoClose: 1000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+
+        const roleRoutes = {
+          Admin: '/admin/dashboard',
+          Customer: '/customer/dashboard',
+          Manager: '/manager/dashboard',
+          Advisor: '/advisor/dashboard',
+        };
+        const redirectTo = roleRoutes[response.data.role] || '/';
+
+        setTimeout(() => {
+          navigate(redirectTo);
+        }, 0);
+      } else {
+        setError((prev) => ({ ...prev, general: 'Invalid username or password' }));
+        toast.error("Invalid username or password", {
+          position: "top-center",
+          autoClose: 2000,
+          theme: "light",
+        });
+      }
+    } catch (err) {
+      setError((prev) => ({
+        ...prev,
+        general: "An error occurred. Please try again later.",
+      }));
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -64,7 +108,7 @@ const LoginPage = () => {
               <img src={loginImage} alt="login" className='img-fluid login-image' height="auto" width="100%" loading='lazy' />
             </div>
           </Col>
-          <Col xxl={5} xl={5} lg={6} md={8} >
+          <Col xxl={5} xl={5} lg={6} md={8}>
             <form className='login-form' onSubmit={handleSubmit}>
               <h1>Login to Service Connect</h1>
               <div className='underline-animation'></div>
@@ -80,11 +124,12 @@ const LoginPage = () => {
                     type="text"
                     name="username"
                     placeholder="Enter your username"
-                    className="form-input"
+                    className={`form-input ${error.username && "input-error"}`}
                     value={formData.username}
                     onChange={handleChange}
                   />
                 </div>
+                {error.username && <span className='error-msg'>{error.username}</span>}
               </div>
 
               <div className="input-container">
@@ -97,24 +142,35 @@ const LoginPage = () => {
                     type={showPassword ? 'text' : 'password'}
                     name="password"
                     placeholder="Enter your password"
-                    className="form-input"
+                    className={`form-input ${error.password && "input-error"}`}
                     value={formData.password}
                     onChange={handleChange}
                   />
                 </div>
+                {error.password && <span className='error-msg'>{error.password}</span>}
               </div>
 
               <Link to='/forgot-password' className='forgot-link'>Forgot Password?</Link>
-              <button type='submit' className='login-btn' disabled={loading}>
+              <button type='submit' className='login-btn'>
                 {loading ? (
-                  <Box sx={{ display: 'flex' }}>
-                    <CircularProgress size={24} />
+                  <Box sx={{ display: 'flex', justifyContent: "center" }}>
+                    <CircularProgress size={20} />
                   </Box>
-                ) : 'Login'}
+                ) : ("Login")}
+
               </button>
             </form>
           </Col>
         </Row>
+
+        <ToastContainer
+          position="top-center"
+          autoClose={1000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick rtl={false}
+          pauseOnFocusLoss draggable
+          pauseOnHover theme="light" />
       </section>
     </>
   );

@@ -262,7 +262,7 @@ const ManagerList = () => {
                 onChange={handlePageChange}
                 sx={{
                   "& .Mui-selected": {
-                    backgroundColor: "#01848D",
+                    backgroundColor: "#01848D !important",
                     color: "#ffffff"
                   },
                   "& .Mui-selected:hover": {

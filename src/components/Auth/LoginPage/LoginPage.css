@@ -164,6 +164,32 @@
   color: white;
   margin-top: 50px;
   box-shadow: rgb(0 0 0 / 20%) 0px 15px 20px 0px;
+  position: relative;
+  overflow: hidden;
+}
+
+.login-btn::after {
+  background: #ffffff7c;
+  content: "";
+  height: 100px;
+  opacity: 0;
+  position: absolute;
+  top: -35px;
+  transform: rotate(45deg);
+  transition: all 2s cubic-bezier(0.22, 1, 0.22, 1);
+  width: 25px;
+  left: 0%;
+}
+
+.login-btn:hover {
+  background-color: #028d96;
+  transform: scale(1.01);
+  transition: .3s linear all;
+}
+
+.login-btn:hover::after {
+  left: 120%;
+  opacity: 0.2;
 }
 
 .forgot-link {
@@ -202,11 +228,6 @@
 .bg-wave {
   text-align: center;
 }
-
-.login-btn:hover {
-  background: #0c828a;
-}
-
 
 @media only screen and (max-width:575px) {
   .main-logo {
