@@ -6,9 +6,18 @@ import { Link } from 'react-router-dom';
 import { HiOutlineUsers } from "react-icons/hi";
 import { AiOutlineUser } from "react-icons/ai";
 import { TbLogout } from "react-icons/tb";
+import Logout from '../../../../common/Logout/Logout';
 
 const AdminDropdown = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [show, setShow] = useState(false);
+
+  const setShowModal = () => {
+    setShow(true)
+  }
+  const handleCloseModal = () => {
+    setShow(false);
+  };
 
   const dropdownList = [
     {
@@ -26,7 +35,6 @@ const AdminDropdown = () => {
   const logoutItem = {
     title: 'Logout',
     icon: <TbLogout />,
-    link: "/"
   };
 
   const toggleDropdown = () => {
@@ -47,32 +55,36 @@ const AdminDropdown = () => {
   }, []);
 
   return (
-    <div className='admin-dropdown'>
-      <IconButton onClick={toggleDropdown} className="profile-icon">
-        <BsPersonCircle />
-      </IconButton>
-      {isDropdownOpen && (
-        <div className="dropdownfile">
-          <ul>
-            {dropdownList.map((item, index) => (
-              <li key={index}>
-                <Link to={item.link}>
-                  {item.icon}
-                  <span>{item.title}</span>
+    <>
+      <div className='admin-dropdown'>
+        <IconButton onClick={toggleDropdown} className="profile-icon">
+          <BsPersonCircle />
+        </IconButton>
+        {isDropdownOpen && (
+          <div className="dropdownfile">
+            <ul>
+              {dropdownList.map((item, index) => (
+                <li key={index}>
+                  <Link to={item.link}>
+                    {item.icon}
+                    <span>{item.title}</span>
+                  </Link>
+                </li>
+              ))}
+              <hr className="mt-2 mb-1" />
+              <li className="logout-link" onClick={setShowModal}>
+                <Link>
+                  {logoutItem.icon}
+                  <span>{logoutItem.title}</span>
                 </Link>
               </li>
-            ))}
-            <hr className="mt-2 mb-1" />
-            <li className="logout-link">
-              <Link to={logoutItem.link}>
-                {logoutItem.icon}
-                <span>{logoutItem.title}</span>
-              </Link>
-            </li>
-          </ul>
-        </div>
-      )}
-    </div>
+            </ul>
+          </div>
+        )}
+      </div>
+
+      <Logout show={show} handleClose={handleCloseModal} />
+    </>
   );
 };
 

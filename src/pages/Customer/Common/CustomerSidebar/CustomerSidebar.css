@@ -10,7 +10,6 @@
   padding: 40px 0px;
   display: flex;
   flex-direction: column;
-  height: 100%;
 }
 
 .customer-sidebar .sidebar-section.open {

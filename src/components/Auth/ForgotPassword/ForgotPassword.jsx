@@ -9,6 +9,9 @@ import { IoArrowBack } from "react-icons/io5";
 import { Row, Col } from 'react-bootstrap';
 import axios from 'axios';
 import API_BASE_URL from '../../../services/AuthService';
+import { ToastContainer, toast } from 'react-toastify';
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
 
 const ForgotPassword = () => {
   const navigate = useNavigate();
@@ -31,6 +34,13 @@ const ForgotPassword = () => {
       return;
     }
 
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|org|net|edu)$/;
+    if (!emailPattern.test(email)) {
+      setError('Please enter a valid email address');
+      setLoading(false);
+      return;
+    }
+
     const payload = {
       emailAddress: email,
     };
@@ -41,8 +51,16 @@ const ForgotPassword = () => {
       });
 
       if (response.status === 200) {
-        alert('OTP sent successfully! Check your email.');
-        navigate('/get-otp', { state: { email: email } });
+        toast.info("OTP sent successfully!", {
+          position: "top-center",
+          autoClose: 1000,
+          hideProgressBar: true,
+          theme: "light",
+        });
+
+        setTimeout(() => {
+          navigate('/get-otp', { state: { email: email } });
+        }, 1000);
       } else {
         setError('Failed to send OTP, try again.');
       }
@@ -87,18 +105,27 @@ const ForgotPassword = () => {
                     className='form-input'
                     value={email}
                     onChange={handleChange}
-                    disabled={loading}
                   />
                 </div>
-                {error && <span className='error-msg'>{error}</span>}
+                {error && <span className='error-message'>{error}</span>}
               </div>
 
-              <button type='submit' className='send-otp-btn' disabled={loading}>
-                {loading ? 'Sending...' : 'Send OTP'}
+              <button type='submit' className='send-otp-btn'>
+                {loading ? (
+                  <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                    <CircularProgress size={24} sx={{ marginRight: 2 }} color="white" />Sending...</Box>
+                ) : ("Send OTP")}
               </button>
             </form>
           </Col>
         </Row>
+
+        <ToastContainer
+          position="top-center"
+          autoClose={1000}
+          hideProgressBar={true}
+          theme="light"
+        />
       </section>
     </>
   );

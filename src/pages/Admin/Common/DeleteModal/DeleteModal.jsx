@@ -1,5 +1,5 @@
 import React from 'react';
-import "../DeleteModal/DeleteModal.css";
+import "./DeleteModal.css";
 import { ReactComponent as Deleteicon } from "../../../../assets/images/admin/delete-icon.svg";
 import { Modal } from 'react-bootstrap';
 

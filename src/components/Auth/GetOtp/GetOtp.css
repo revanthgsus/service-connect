@@ -17,12 +17,12 @@
   font-weight: 600;
   background: linear-gradient(90deg, rgba(0, 125, 133, 1) 0%, rgba(0, 123, 131, 0.83) 25%, rgba(0, 123, 131, 0.88) 50%, rgba(0, 113, 120, 0.8) 75%, rgba(1, 141, 149, 1) 100%);
   color: white;
-  margin-top: 38px;
+  margin-top: 48px;
   box-shadow: rgb(0 0 0 / 20%) 0px 15px 20px 0px;
 }
 
 .verify-otp-btn:hover {
-  background: #0c828a;
+  background: #007c85;
 }
 
 .otp-input {
@@ -89,6 +89,6 @@
 
 @media screen and (min-width:1400px) {
   .otp-input-container {
-    margin-top: 65px;
+    margin-top: 75px;
   }
 }

@@ -10,13 +10,29 @@ import CancelModal from '../../../Common/CancelModal/CancelModal';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import axios from 'axios';
+import API_BASE_URL from '../../../../../services/AuthService';
 
 const CreateManager = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const navigate = useNavigate();
-
   const [cancelShow, setCancelShow] = useState(false);
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false)
+
+  const [formData, setFormData] = useState({
+    userName: 'Naveen',
+    emailAddress: 'revanth@gmail.com',
+    mobileNumber: '8056812595',
+    password: 'Revanth@675',
+    confirmPassword: 'Revanth@675',
+    joiningDate: '23/12/2022',
+    designation: 'Service Manager',
+    branchName: 'chennai',
+    branchLocation: 'chennai',
+    status: 'true'
+  })
 
   const ManagerInfo = [
     {
@@ -24,42 +40,36 @@ const CreateManager = () => {
       name: "username",
       placeholder: "Enter username",
       type: "text",
-      autocomplete: "username",
     },
     {
       label: "Email Address",
       name: "emailaddress",
       placeholder: "Enter email address",
       type: "email",
-      autocomplete: "emailaddress",
     },
     {
       label: "Mobile Number",
       name: "mobilenumber",
       placeholder: "Enter mobile number",
       type: "number",
-      autocomplete: "mobilenumber",
     },
     {
       label: "Password",
       name: "password",
       placeholder: "Enter password",
       type: "password",
-      autocomplete: "password",
     },
     {
       label: "Confirm Password",
-      name: "confirmpassword",
+      name: "confirmPassword",
       placeholder: "Enter confirm password",
       type: "password",
-      autocomplete: "confirmpassword",
     },
     {
       label: "Joining Date",
       name: "joiningdate",
       placeholder: "Enter joining date",
       type: "date",
-      autocomplete: "joiningdate",
     },
   ];
 
@@ -68,36 +78,30 @@ const CreateManager = () => {
       label: "Designation",
       name: "designation",
       placeholder: "Select designation",
-      autocomplete: "designation",
       type: "text",
-      value: "Service Manager",
     },
     {
       label: "Branch Name",
       name: "branchname",
       placeholder: "Enter branch name",
       type: "text",
-      autocomplete: "branchname",
     },
     {
       label: "Branch Location",
       name: "branchlocation",
       placeholder: "Enter branch location",
       type: "text",
-      autocomplete: "branchlocation",
     },
     {
       label: "Department",
       name: "Department",
       placeholder: "Enter department",
       type: "text",
-      autocomplete: "Department",
     },
     {
       label: "Status",
       name: "status",
       placeholder: "Select status",
-      autocomplete: "status",
       options: [
         "Active",
         "In Active"
@@ -105,11 +109,50 @@ const CreateManager = () => {
     },
   ]
 
-  const handlesubmit = (e) => {
-    e.preventDefault();
-    navigate("/admin/service-manager")
-  }
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prevData => ({ ...prevData, [name]: value }));
+  };
 
+  const handlesubmit = async (e) => {
+    e.preventDefault();
+    setError('');
+    setLoading(true);
+
+    console.log("sda", formData)
+
+    const token = sessionStorage.getItem('token');
+
+    if (!token) {
+      setError("Authentication token is missing.");
+      setLoading(false);
+      return;
+    }
+
+    try {
+      const response = await axios.post(`${API_BASE_URL}/managerMaster/addOrUpdateManagerMaster`, formData,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log("API Response:", response);
+
+      if (response.status === 200) {
+        console.log(response)
+        navigate("/admin/service-manager");
+      } else {
+        alert("Error adding manager");
+      }
+    } catch (err) {
+      setError("An error occurred while saving the data.");
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleCancel = (e) => {
     e.preventDefault();
@@ -148,11 +191,27 @@ const CreateManager = () => {
                             id={field.name}
                             name={field.name}
                             placeholder={field.placeholder}
-                            autoComplete={field.autocomplete}
                             className="form-control"
+                            value={formData.password}
+                            onChange={handleInputChange}
                           />
-                          <span className='input-icon' onClick={() => setShowPassword(prev => !prev)}>
+                          <span className='input-icon' onClick={() => setShowPassword(prevData => !prevData)}>
                             {showPassword ? <MdVisibility /> : <MdVisibilityOff />}
+                          </span>
+                        </div>
+                      ) : field.name === "confirmPassword" ? (
+                        <div className="password-field">
+                          <input
+                            type={showConfirmPassword ? "text" : "password"}
+                            id={field.name}
+                            name={field.name}
+                            placeholder={field.placeholder}
+                            className="form-control"
+                            value={formData.confirmPassword}
+                            onChange={handleInputChange}
+                          />
+                          <span className='input-icon' onClick={() => setShowConfirmPassword(prevData => !prevData)}>
+                            {showConfirmPassword ? <MdVisibility /> : <MdVisibilityOff />}
                           </span>
                         </div>
                       ) : field.type === "date" ? (
@@ -160,6 +219,9 @@ const CreateManager = () => {
                           <DatePicker
                             className="form-control date-picker"
                             format="DD/MM/YYYY"
+                            id="joiningdate"
+                            // value={formData.joiningDate}
+                            onChange={handleInputChange}
                             sx={{
                               "& .MuiOutlinedInput-root": {
                                 outline: "0",
@@ -185,27 +247,14 @@ const CreateManager = () => {
                             }}
                           />
                         </LocalizationProvider>
-                      ) : field.name === "confirmpassword" ? (
-                        <div className="password-field">
-                          <input
-                            type={showConfirmPassword ? "text" : "password"}
-                            id={field.name}
-                            name={field.name}
-                            placeholder={field.placeholder}
-                            autoComplete={field.autocomplete}
-                            className="form-control"
-                          />
-                          <span className='input-icon' onClick={() => setShowConfirmPassword(prev => !prev)}>
-                            {showConfirmPassword ? <MdVisibility /> : <MdVisibilityOff />}
-                          </span>
-                        </div>
                       ) : field.options ? (
                         <div className="custom-select">
                           <select
                             id={field.name}
                             name={field.name}
                             className="form-control"
-                          >
+                            onChange={handleInputChange}
+                            value={formData[field.name]}>
                             <option value="">{field.placeholder}</option>
                             {field.options.map((option, idx) => (
                               <option key={idx} value={option}>{option}</option>
@@ -219,8 +268,9 @@ const CreateManager = () => {
                           type={field.type}
                           name={field.name}
                           placeholder={field.placeholder}
-                          autoComplete={field.autocomplete}
                           className="form-control"
+                          value={formData[field.name]}
+                          onChange={handleInputChange}
                         />
                       )}
                     </div>
@@ -244,7 +294,8 @@ const CreateManager = () => {
                             id={field.name}
                             name={field.name}
                             className="form-control"
-                          >
+                            value={formData[field.name]}
+                            onChange={handleInputChange}>
                             <option value="">{field.placeholder}</option>
                             {field.options.map((option, idx) => (
                               <option key={idx} value={option}>{option}</option>
@@ -258,8 +309,8 @@ const CreateManager = () => {
                           type={field.type}
                           name={field.name}
                           placeholder={field.placeholder}
-                          autoComplete={field.autocomplete}
-                          defaultValue={field.value}
+                          value={formData[field.name]}
+                          onChange={handleInputChange}
                           className="form-control"
                         />
                       )}

@@ -36,16 +36,11 @@ input:focus-visible {
   border: 1.5px solid #01848d;
 }
 
-.error-msg {
+.error-message {
   font-size: 12px;
   color: rgb(255, 0, 0);
   font-family: 'Be Vietnam Pro', sans-serif;
   margin: 5px;
-  position: relative;
+  position: absolute;
   font-weight: 400;
-  display: inline-block;
-}
-
-.input-error {
-  border: 1px solid rgb(255, 0, 0);
 }

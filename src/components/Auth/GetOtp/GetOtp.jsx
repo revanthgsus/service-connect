@@ -8,6 +8,9 @@ import { ReactComponent as OtpImage } from "../../../assets/images/login/otp-ima
 import { IoArrowBack } from "react-icons/io5";
 import { Row, Col } from 'react-bootstrap';
 import API_BASE_URL from '../../../services/AuthService';
+import { ToastContainer, toast } from 'react-toastify';
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
 
 const GetOtp = () => {
   const navigate = useNavigate();
@@ -59,14 +62,28 @@ const GetOtp = () => {
         headers: { 'Content-Type': 'application/json' },
       });
 
-      if (response.status === 200) {
-        alert('OTP Verified');
-        navigate('/new-password', { state: { otp: otp } });
+      if (response.status === 200 && response.data?.success) {
+        toast.info("OTP Verified!", {
+          position: "top-center",
+          autoClose: 1000,
+          hideProgressBar: true,
+          theme: "light",
+        });
+
+        setTimeout(() => {
+          navigate('/new-password', { state: { otp: otp } });
+        }, 1000);
       } else {
-        setError('Failed to verify OTP, Try Again');
+        setError('Invalid OTP. Please try again.');
+        setLoading(false);
       }
     } catch (err) {
-      setError(err.response?.data?.message || 'Something went wrong. Please try again.');
+      if (err.response?.status === 400 || err.response?.status === 401) {
+        setError(err.response?.data?.message || 'Invalid OTP. Please try again.');
+      } else {
+        setError('Something went wrong. Please try again.');
+      }
+      setLoading(false);
     } finally {
       setLoading(false);
     }
@@ -114,19 +131,24 @@ const GetOtp = () => {
                   />
                 ))}
               </div>
+              {error && <span className="error-message">{error}</span>}
 
-              <button
-                type="submit"
-                className="verify-otp-btn"
-                disabled={loading}
-              >
-                {loading ? "Verifying..." : "Verify OTP"}
+              <button type='submit' className='verify-otp-btn'>
+                {loading ? (
+                  <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                    <CircularProgress size={24} sx={{ marginRight: 2 }} color="white" />Verifying...</Box>
+                ) : ("Verify OTP")}
               </button>
-
-              {error && <p className="error-message">{error}</p>}
             </form>
           </Col>
         </Row>
+
+        <ToastContainer
+          position="top-center"
+          autoClose={1000}
+          hideProgressBar={true}
+          theme="light"
+        />
       </section>
     </>
   );

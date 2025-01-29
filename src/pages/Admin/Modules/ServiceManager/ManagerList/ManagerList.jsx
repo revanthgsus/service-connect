@@ -119,10 +119,10 @@ const ManagerList = () => {
   const handleCreate = (e) => {
     e.preventDefault();
     setIsLoading(true);
+
     setTimeout(() => {
-      setIsLoading(false)
       navigate("createmanager");
-    }, 1000)
+    }, 500)
   };
 
   const filteredManagers = managers.filter((manager) => {
@@ -154,9 +154,8 @@ const ManagerList = () => {
   const handleEdit = (manager) => {
     setIsLoading(true);
     setTimeout(() => {
-      setIsLoading(false)
       navigate("editmanager", { state: { managerData: manager } });
-    }, 1000)
+    }, 500)
   };
 
   return (
@@ -275,7 +274,6 @@ const ManagerList = () => {
               />
             </Stack>
           </div>
-
         </section>
       )}
 

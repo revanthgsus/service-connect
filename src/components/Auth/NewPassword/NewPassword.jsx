@@ -12,6 +12,8 @@ import UpdatedImage from "../Updated.json";
 import Lottie from 'react-lottie-player';
 import axios from 'axios';
 import API_BASE_URL from '../../../services/AuthService';
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
 
 const NewPassword = () => {
   const navigate = useNavigate();
@@ -40,6 +42,12 @@ const NewPassword = () => {
     setLoading(true);
     setError('');
 
+    if (!password || !confirmPassword) {
+      setError('Both fields are required.');
+      setLoading(false);
+      return;
+    }
+
     // Validate password strength and matching
     if (password !== confirmPassword) {
       setError('Passwords do not match.');
@@ -48,14 +56,7 @@ const NewPassword = () => {
     }
 
     if (password.length < 8 || password.length > 12) {
-      setError('Password must be between 8 and 12 characters.');
-      setLoading(false);
-      return;
-    }
-
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,12}$/;
-    if (!passwordRegex.test(password)) {
-      setError('Password must include uppercase, lowercase, numbers, and special characters.');
+      setError('Password must be between 8 and 12 characters');
       setLoading(false);
       return;
     }
@@ -70,7 +71,7 @@ const NewPassword = () => {
       const response = await axios.post(`${API_BASE_URL}/email/changePassword`, payload);
 
       if (response.status === 200) {
-        setShowModal(true); // Show modal on successful password change
+        setShowModal(true);
       } else {
         setError('Something went wrong. Please try again.');
       }
@@ -107,8 +108,6 @@ const NewPassword = () => {
               <div className='underline-animation'></div>
               <p>Choose a strong, unique password to secure your personal information and keep your account safe.</p>
 
-              {error && <div className="error-message">{error}</div>}
-
               <div className='input-container'>
                 <label htmlFor="password" className='form-label'>New Password</label>
                 <div className='input-wrapper'>
@@ -143,10 +142,14 @@ const NewPassword = () => {
                     onChange={(e) => setConfirmPassword(e.target.value)}
                   />
                 </div>
+                {error && <div className="error-message">{error}</div>}
               </div>
 
-              <button type='submit' className='update-pass-btn' disabled={loading}>
-                {loading ? 'Updating...' : 'Update Password'}
+              <button type='submit' className='update-pass-btn'>
+                {loading ? (
+                  <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                    <CircularProgress size={24} sx={{ marginRight: 2 }} color="white" />Updating...</Box>
+                ) : ("Update Password")}
               </button>
             </form>
           </Col>

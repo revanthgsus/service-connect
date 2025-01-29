@@ -8,7 +8,7 @@ const ThemeProvider = ({ children }) => {
   });
 
   useEffect(() => {
-    document.body.className = theme;
+    document.body.className = `theme--${theme}`;
     sessionStorage.setItem('theme', theme);
   }, [theme]);
 

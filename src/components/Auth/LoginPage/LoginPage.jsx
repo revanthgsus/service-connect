@@ -6,11 +6,11 @@ import loginImage from "../../../assets/images/login/login-image.png";
 import PersonIcon from '@mui/icons-material/Person';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import { Row, Col, ToastContainer } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import { useAuth } from '../../../contexts/AuthContext';
 import API_BASE_URL from '../../../services/AuthService';
 import axios from 'axios';
-import { toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 
@@ -23,7 +23,7 @@ const LoginPage = () => {
   const [error, setError] = useState({ username: '', password: '', general: '' });
 
   const handlePasswordToggle = () => {
-    setShowPassword((prevState) => !prevState);
+    setShowPassword((prev) => !prev);
   };
 
   const handleChange = (e) => {
@@ -38,10 +38,12 @@ const LoginPage = () => {
 
     if (!formData.username) {
       setError((prev) => ({ ...prev, username: 'User Name is required' }));
+      setLoading(false);
       return;
     }
     if (!formData.password) {
       setError((prev) => ({ ...prev, password: 'Password is required' }));
+      setLoading(false);
       return;
     }
 
@@ -58,18 +60,11 @@ const LoginPage = () => {
       if (response.data && response.data.token && response.data.role) {
         login(response.data.token, response.data.role);
 
-        toast.success("Login Successfully!", {
-          position: "top-center",
-          autoClose: 1000,
-          hideProgressBar: false,
-          closeOnClick: false,
-          pauseOnHover: false,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-        });
-
+        if (!sessionStorage.getItem('theme')) {
+          sessionStorage.setItem('theme', 'light');
+        }
         const roleRoutes = {
+          MasterAdmin: '/masteradmin/dashboard',
           Admin: '/admin/dashboard',
           Customer: '/customer/dashboard',
           Manager: '/manager/dashboard',
@@ -77,22 +72,22 @@ const LoginPage = () => {
         };
         const redirectTo = roleRoutes[response.data.role] || '/';
 
-        setTimeout(() => {
-          navigate(redirectTo);
-        }, 0);
-      } else {
-        setError((prev) => ({ ...prev, general: 'Invalid username or password' }));
-        toast.error("Invalid username or password", {
+        toast.success("Login Successfully!", {
           position: "top-center",
-          autoClose: 2000,
+          autoClose: 500,
           theme: "light",
         });
+
+        setTimeout(() => {
+          navigate(redirectTo);
+        }, 500);
+      } else {
+        setError((prev) => ({ ...prev, general: 'Invalid username and password' }));
+        setLoading(false);
       }
     } catch (err) {
-      setError((prev) => ({
-        ...prev,
-        general: "An error occurred. Please try again later.",
-      }));
+      setError((prev) => ({ ...prev, general: "Login failed. Please try again later.", }));
+      alert("Login failed. Please try again later.");
     } finally {
       setLoading(false);
     }
@@ -129,7 +124,7 @@ const LoginPage = () => {
                     onChange={handleChange}
                   />
                 </div>
-                {error.username && <span className='error-msg'>{error.username}</span>}
+                {error.username && <span className='error-message'>{error.username}</span>}
               </div>
 
               <div className="input-container">
@@ -147,17 +142,17 @@ const LoginPage = () => {
                     onChange={handleChange}
                   />
                 </div>
-                {error.password && <span className='error-msg'>{error.password}</span>}
+                {error.password && <span className='error-message'>{error.password}</span>}
+                {error.general && <span className="error-message">{error.general}</span>}
+
               </div>
 
               <Link to='/forgot-password' className='forgot-link'>Forgot Password?</Link>
               <button type='submit' className='login-btn'>
                 {loading ? (
-                  <Box sx={{ display: 'flex', justifyContent: "center" }}>
-                    <CircularProgress size={20} />
-                  </Box>
+                  <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                    <CircularProgress size={24} sx={{ marginRight: 2 }} color="white" />Loggin in...</Box>
                 ) : ("Login")}
-
               </button>
             </form>
           </Col>
@@ -165,13 +160,10 @@ const LoginPage = () => {
 
         <ToastContainer
           position="top-center"
-          autoClose={1000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick rtl={false}
-          pauseOnFocusLoss draggable
-          pauseOnHover theme="light" />
-      </section>
+          autoClose={500}
+          pauseOnHover
+          theme="light" />
+      </section >
     </>
   );
 };
