@@ -122,3 +122,9 @@
     font-size: 14px;
   }
 }
+
+@media only screen and (Min-width:1400px) {
+  .admin-sidebar .sidebar-section {
+    width: 300px;
+  }
+}

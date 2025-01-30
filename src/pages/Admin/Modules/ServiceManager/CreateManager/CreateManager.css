@@ -45,7 +45,7 @@
 
 .create-manager .form-control {
   width: 100%;
-  border: 1px solid #b1b1b1bd;
+  border: 1px solid #858585;
   border-radius: 5px;
   padding: 8px 15px;
   font-family: 'Be Vietnam Pro', sans-serif;
@@ -146,7 +146,7 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .create-manager .input-wrapper {
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 .create-manager .date-picker input {
@@ -162,10 +162,6 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 @media only screen and (max-width:575px) {
-  .create-manager .create-form {
-    padding: 15px 20px;
-  }
-
   .create-manager .form-submit-button {
     justify-content: center;
     margin: 30px 0px 30px 0px;
@@ -192,7 +188,7 @@ input[type="number"]::-webkit-outer-spin-button {
   }
 
   .create-manager .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 20px;
   }
 
   .create-manager .cancel-button {

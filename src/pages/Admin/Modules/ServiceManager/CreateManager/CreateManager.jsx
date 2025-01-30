@@ -10,48 +10,38 @@ import CancelModal from '../../../Common/CancelModal/CancelModal';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import dayjs from "dayjs";
 import axios from 'axios';
 import API_BASE_URL from '../../../../../services/AuthService';
+import { Formik, Form, ErrorMessage } from 'formik';
+import ManagerValidationSchema from '../../../../../utils/FormValidation';
+import PreLoader from '../../../../../common/PreLoader/PreLoader';
 
 const CreateManager = () => {
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const navigate = useNavigate();
   const [cancelShow, setCancelShow] = useState(false);
-  const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false)
-
-  const [formData, setFormData] = useState({
-    userName: 'Naveen',
-    emailAddress: 'revanth@gmail.com',
-    mobileNumber: '8056812595',
-    password: 'Revanth@675',
-    confirmPassword: 'Revanth@675',
-    joiningDate: '23/12/2022',
-    designation: 'Service Manager',
-    branchName: 'chennai',
-    branchLocation: 'chennai',
-    status: 'true'
-  })
+  const [loading, setLoading] = useState(false);
 
   const ManagerInfo = [
     {
       label: "User Name",
-      name: "username",
+      name: "userName",
       placeholder: "Enter username",
       type: "text",
     },
     {
       label: "Email Address",
-      name: "emailaddress",
+      name: "emailAddress",
       placeholder: "Enter email address",
       type: "email",
     },
     {
       label: "Mobile Number",
-      name: "mobilenumber",
+      name: "mobileNumber",
       placeholder: "Enter mobile number",
-      type: "number",
+      type: "text",
     },
     {
       label: "Password",
@@ -67,7 +57,7 @@ const CreateManager = () => {
     },
     {
       label: "Joining Date",
-      name: "joiningdate",
+      name: "joiningDate",
       placeholder: "Enter joining date",
       type: "date",
     },
@@ -79,22 +69,23 @@ const CreateManager = () => {
       name: "designation",
       placeholder: "Select designation",
       type: "text",
+      readOnly: true,
     },
     {
       label: "Branch Name",
-      name: "branchname",
+      name: "branchName",
       placeholder: "Enter branch name",
       type: "text",
     },
     {
       label: "Branch Location",
-      name: "branchlocation",
+      name: "branchLocation",
       placeholder: "Enter branch location",
       type: "text",
     },
     {
       label: "Department",
-      name: "Department",
+      name: "department",
       placeholder: "Enter department",
       type: "text",
     },
@@ -102,52 +93,41 @@ const CreateManager = () => {
       label: "Status",
       name: "status",
       placeholder: "Select status",
-      options: [
-        "Active",
-        "In Active"
-      ],
+      options: ["Active", "In Active"],
     },
-  ]
+  ];
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prevData => ({ ...prevData, [name]: value }));
+  const handleDateChange = (date, setFieldValue) => {
+    setFieldValue("joiningDate", date ? date.format("YYYY-MM-DD") : "");
   };
 
-  const handlesubmit = async (e) => {
-    e.preventDefault();
-    setError('');
+  const handleSubmit = async (values) => {
+    const updatedValues = {
+      ...values,
+      status: values.status === "Active" ? true : false,
+    };
     setLoading(true);
+    console.log(values)
 
-    console.log("sda", formData)
-
-    const token = sessionStorage.getItem('token');
-
+    const token = sessionStorage.getItem('authToken');
     if (!token) {
-      setError("Authentication token is missing.");
+      alert("Auth token is missing");
       setLoading(false);
       return;
     }
 
     try {
-      const response = await axios.post(`${API_BASE_URL}/managerMaster/addOrUpdateManagerMaster`, formData,
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      console.log("API Response:", response);
-
+      const response = await axios.post(`${API_BASE_URL}/managerMaster/addOrUpdateManagerMaster`, updatedValues, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+      });
       if (response.status === 200) {
-        console.log(response)
-        navigate("/admin/service-manager");
-      } else {
-        alert("Error adding manager");
+        navigate("/admin/manager");
       }
     } catch (err) {
-      setError("An error occurred while saving the data.");
+      alert("An error occurred while saving the data.");
       console.error(err);
     } finally {
       setLoading(false);
@@ -157,7 +137,7 @@ const CreateManager = () => {
   const handleCancel = (e) => {
     e.preventDefault();
     setCancelShow(true);
-  }
+  };
 
   const handleCancelClose = () => {
     setCancelShow(false);
@@ -166,168 +146,217 @@ const CreateManager = () => {
   const handleBack = (e) => {
     e.preventDefault();
     setCancelShow(true);
-  }
+  };
 
   return (
     <>
-      <section className='create-manager'>
-        <div className='create-header'>
+      {loading ? (<PreLoader />) : ("")}
+      <section className="create-manager">
+        <div className="create-header">
           <IoMdArrowRoundBack onClick={handleBack} />
           <h5>Create Service Manager</h5>
         </div>
-        <form>
-          <div className='create-form'>
-            <h5 className='addmanager-heading'>Manager Information</h5>
-            <Row className='add-fields'>
-              {ManagerInfo.map((field, index) => (
-                <Col key={index} xxl={4} xl={4} lg={4} md={6} sm={6}>
-                  <div className='input-wrapper'>
-                    <div className="form-group">
-                      <label htmlFor={field.name}>{field.label}</label>
-                      {field.name === "password" ? (
-                        <div className="password-field">
-                          <input
-                            type={showPassword ? "text" : "password"}
-                            id={field.name}
-                            name={field.name}
-                            placeholder={field.placeholder}
-                            className="form-control"
-                            value={formData.password}
-                            onChange={handleInputChange}
-                          />
-                          <span className='input-icon' onClick={() => setShowPassword(prevData => !prevData)}>
-                            {showPassword ? <MdVisibility /> : <MdVisibilityOff />}
-                          </span>
-                        </div>
-                      ) : field.name === "confirmPassword" ? (
-                        <div className="password-field">
-                          <input
-                            type={showConfirmPassword ? "text" : "password"}
-                            id={field.name}
-                            name={field.name}
-                            placeholder={field.placeholder}
-                            className="form-control"
-                            value={formData.confirmPassword}
-                            onChange={handleInputChange}
-                          />
-                          <span className='input-icon' onClick={() => setShowConfirmPassword(prevData => !prevData)}>
-                            {showConfirmPassword ? <MdVisibility /> : <MdVisibilityOff />}
-                          </span>
-                        </div>
-                      ) : field.type === "date" ? (
-                        <LocalizationProvider dateAdapter={AdapterDayjs}>
-                          <DatePicker
-                            className="form-control date-picker"
-                            format="DD/MM/YYYY"
-                            id="joiningdate"
-                            // value={formData.joiningDate}
-                            onChange={handleInputChange}
-                            sx={{
-                              "& .MuiOutlinedInput-root": {
-                                outline: "0",
-                                fontSize: "11px",
-                                paddingRight: "4px",
-                                "& fieldset": {
-                                  border: "0px",
-                                },
-                                "& button": {
-                                  padding: "5px 8px",
-                                  "& svg": {
-                                    width: "16px",
-                                    color: "var(--input-icon-color)",
+        <Formik
+          initialValues={{
+            userName: '',
+            emailAddress: '',
+            mobileNumber: '',
+            password: '',
+            confirmPassword: '',
+            joiningDate: '',
+            designation: 'Service Manager',
+            branchName: '',
+            branchLocation: '',
+            department: '',
+            status: '',
+          }}
+          validationSchema={ManagerValidationSchema}
+          onSubmit={handleSubmit}
+        >
+          {({ values, handleChange, handleBlur, setFieldValue }) => (
+            <Form>
+              <div className="create-form">
+                <h5 className="addmanager-heading">Manager Information</h5>
+                <Row className="add-fields">
+                  {ManagerInfo.map((field, index) => (
+                    <Col key={index} xxl={4} xl={4} lg={4} md={6} sm={6}>
+                      <div className="input-wrapper">
+                        <div className="form-group">
+                          <label htmlFor={field.name}>{field.label}</label>
+                          {field.name === "password" ? (
+                            <div className="password-field">
+                              <input
+                                type={showPassword ? "text" : "password"}
+                                id={field.name}
+                                name={field.name}
+                                placeholder={field.placeholder}
+                                className="form-control"
+                                value={values.password}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                              />
+                              <span
+                                className="input-icon"
+                                onClick={() => setShowPassword(prevData => !prevData)}
+                              >
+                                {showPassword ? <MdVisibility /> : <MdVisibilityOff />}
+                              </span>
+                            </div>
+                          ) : field.name === "confirmPassword" ? (
+                            <div className="password-field">
+                              <input
+                                type={showConfirmPassword ? "text" : "password"}
+                                id={field.name}
+                                name={field.name}
+                                placeholder={field.placeholder}
+                                className="form-control"
+                                value={values.confirmPassword}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                              />
+                              <span
+                                className="input-icon"
+                                onClick={() => setShowConfirmPassword(prevData => !prevData)}
+                              >
+                                {showConfirmPassword ? <MdVisibility /> : <MdVisibilityOff />}
+                              </span>
+                            </div>
+                          ) : field.type === "date" ? (
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                              <DatePicker
+                                className="form-control date-picker"
+                                format="DD/MM/YYYY"
+                                id="joiningdate"
+                                value={values.joiningDate ? dayjs(values.joiningDate) : null}
+                                onChange={(date) => handleDateChange(date, setFieldValue)}
+                                onBlur={handleBlur}
+                                sx={{
+                                  "& .MuiOutlinedInput-root": {
+                                    outline: "0",
+                                    fontSize: "11px",
+                                    paddingRight: "4px",
+                                    "& fieldset": {
+                                      border: "0px",
+                                    },
+                                    "& button": {
+                                      padding: "5px 8px",
+                                      "& svg": {
+                                        width: "16px",
+                                        color: "var(--input-icon-color)",
+                                      },
+                                    },
                                   },
-                                },
-                              },
-                              "&:hover .MuiOutlinedInput-notchedOutline": {
-                                borderColor: "transparent",
-                              },
-                              "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                                borderColor: "transparent",
-                              },
-                            }}
-                          />
-                        </LocalizationProvider>
-                      ) : field.options ? (
-                        <div className="custom-select">
-                          <select
-                            id={field.name}
-                            name={field.name}
-                            className="form-control"
-                            onChange={handleInputChange}
-                            value={formData[field.name]}>
-                            <option value="">{field.placeholder}</option>
-                            {field.options.map((option, idx) => (
-                              <option key={idx} value={option}>{option}</option>
-                            ))}
-                          </select>
-                          <IoIosArrowDown className="custom-arrow-icon" />
+                                  "&:hover .MuiOutlinedInput-notchedOutline": {
+                                    borderColor: "transparent",
+                                  },
+                                  "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                                    borderColor: "transparent",
+                                  },
+                                }}
+                              />
+                            </LocalizationProvider>
+                          ) : field.options ? (
+                            <div className="custom-select">
+                              <select
+                                id={field.name}
+                                name={field.name}
+                                className="form-control"
+                                onChange={handleChange}
+                                value={values[field.name]}
+                                onBlur={handleBlur}
+                              >
+                                <option value="">{field.placeholder}</option>
+                                {field.options.map((option, idx) => (
+                                  <option key={idx} value={option}>
+                                    {option}
+                                  </option>
+                                ))}
+                              </select>
+                              <IoIosArrowDown className="custom-arrow-icon" />
+                            </div>
+                          ) : (
+                            <input
+                              id={field.name}
+                              type={field.type}
+                              name={field.name}
+                              placeholder={field.placeholder}
+                              className="form-control"
+                              value={values[field.name]}
+                              onBlur={handleBlur}
+                              onChange={(e) => {
+                                if (field.name === 'mobileNumber') {
+                                  const newValue = e.target.value.replace(/[^0-9]/g, '').slice(0, 10);
+                                  handleChange({ target: { name: field.name, value: newValue } });
+                                } else {
+                                  handleChange(e);
+                                }
+                              }}
+                            />
+                          )}
+                          <ErrorMessage name={field.name} component="div" className="error-message" />
                         </div>
-                      ) : (
-                        <input
-                          id={field.name}
-                          type={field.type}
-                          name={field.name}
-                          placeholder={field.placeholder}
-                          className="form-control"
-                          value={formData[field.name]}
-                          onChange={handleInputChange}
-                        />
-                      )}
-                    </div>
-                  </div>
-                </Col>
-              ))}
-            </Row>
-          </div>
+                      </div>
+                    </Col>
+                  ))}
+                </Row>
+              </div>
 
-          <div className='create-form mt-4'>
-            <h5 className='addmanager-heading'>Branch Information</h5>
-            <Row className='add-fields'>
-              {BranchInfo.map((field, index) => (
-                <Col key={index} xxl={4} xl={4} lg={4} md={6} sm={6}>
-                  <div className='input-wrapper'>
-                    <div className="form-group">
-                      <label htmlFor={field.name}>{field.label}</label>
-                      {field.options ? (
-                        <div className="custom-select">
-                          <select
-                            id={field.name}
-                            name={field.name}
-                            className="form-control"
-                            value={formData[field.name]}
-                            onChange={handleInputChange}>
-                            <option value="">{field.placeholder}</option>
-                            {field.options.map((option, idx) => (
-                              <option key={idx} value={option}>{option}</option>
-                            ))}
-                          </select>
-                          <IoIosArrowDown className="custom-arrow-icon" />
+              <div className="create-form mt-4">
+                <h5 className="addmanager-heading">Branch Information</h5>
+                <Row className="add-fields">
+                  {BranchInfo.map((field, index) => (
+                    <Col key={index} xxl={4} xl={4} lg={4} md={6} sm={6}>
+                      <div className="input-wrapper">
+                        <div className="form-group">
+                          <label htmlFor={field.name}>{field.label}</label>
+                          {field.options ? (
+                            <div className="custom-select">
+                              <select
+                                id={field.name}
+                                name={field.name}
+                                className="form-control"
+                                value={values[field.name]}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                              >
+                                <option value="">{field.placeholder}</option>
+                                {field.options.map((option, idx) => (
+                                  <option key={idx} value={option}>
+                                    {option}
+                                  </option>
+                                ))}
+                              </select>
+                              <IoIosArrowDown className="custom-arrow-icon" />
+                            </div>
+                          ) : (
+                            <input
+                              id={field.name}
+                              type={field.type}
+                              name={field.name}
+                              placeholder={field.placeholder}
+                              value={values[field.name]}
+                              onChange={handleChange}
+                              onBlur={handleBlur}
+                              className="form-control"
+                              readOnly={field.readOnly}
+                            />
+                          )}
+                          <ErrorMessage name={field.name} component="div" className="error-message" />
                         </div>
-                      ) : (
-                        <input
-                          id={field.name}
-                          type={field.type}
-                          name={field.name}
-                          placeholder={field.placeholder}
-                          value={formData[field.name]}
-                          onChange={handleInputChange}
-                          className="form-control"
-                        />
-                      )}
-                    </div>
-                  </div>
-                </Col>
-              ))}
-            </Row>
-          </div>
+                      </div>
+                    </Col>
+                  ))}
+                </Row>
+              </div>
 
-        </form>
-
-        <div className='form-submit-button'>
-          <button type='submit' className='cancel-button' onClick={handleCancel}>Cancel</button>
-          <button type='submit' className='save-button' onClick={handlesubmit}>Save</button>
-        </div>
-      </section >
+              <div className="form-submit-button">
+                <button type="button" className="cancel-button" onClick={handleCancel}>Cancel</button>
+                <button type="submit" className="save-button">Save</button>
+              </div>
+            </Form>
+          )}
+        </Formik>
+      </section>
 
       <CancelModal cancelShow={cancelShow} handleCancelClose={handleCancelClose} />
     </>

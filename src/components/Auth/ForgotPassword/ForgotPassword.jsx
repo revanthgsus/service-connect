@@ -29,7 +29,7 @@ const ForgotPassword = () => {
     setError('');
 
     if (!email) {
-      setError('Enter Email Address');
+      setError('Enter email address');
       setLoading(false);
       return;
     }

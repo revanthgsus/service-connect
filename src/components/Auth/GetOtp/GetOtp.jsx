@@ -62,7 +62,7 @@ const GetOtp = () => {
         headers: { 'Content-Type': 'application/json' },
       });
 
-      if (response.status === 200 && response.data?.success) {
+      if (response.status === 200) {
         toast.info("OTP Verified!", {
           position: "top-center",
           autoClose: 1000,

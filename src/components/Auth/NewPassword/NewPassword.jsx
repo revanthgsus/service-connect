@@ -50,13 +50,14 @@ const NewPassword = () => {
 
     // Validate password strength and matching
     if (password !== confirmPassword) {
-      setError('Passwords do not match.');
+      setError('Passwords do not match');
       setLoading(false);
       return;
     }
 
-    if (password.length < 8 || password.length > 12) {
-      setError('Password must be between 8 and 12 characters');
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,12}$/;
+    if (!passwordRegex.test(password)) {
+      setError('Password: 8-12 chars, uppercase, numbers, special chars');
       setLoading(false);
       return;
     }
