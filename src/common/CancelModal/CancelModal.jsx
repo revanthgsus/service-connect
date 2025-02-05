@@ -2,7 +2,7 @@ import React from 'react';
 import "./CancelModal.css";
 import { Modal } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import { ReactComponent as CancelIcon } from "../../../../assets/images/admin/cancel-icon.svg"
+import { ReactComponent as CancelIcon } from "../../assets/images/comman/cancel-icon.svg"
 
 const CancelModal = ({ cancelShow, handleCancelClose }) => {
   const navigate = useNavigate();

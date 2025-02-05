@@ -1,0 +1,52 @@
+.banner-image {
+  box-shadow: var(--shadow-color);
+  border-radius: 5px;
+  background-color: #ffffff;
+}
+
+.banner-content h5 {
+  color: #ffffff;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-weight: 600;
+}
+
+.banner-content p {
+  color: #fcfcfc;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-size: 12px;
+  line-height: 20px;
+  margin-bottom: 0px;
+}
+
+.bannerimage-container {
+  position: relative;
+}
+
+.banner-content {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0px 40px;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0px 40px;
+  top: 0;
+  height: 75%;
+}
+
+.banner-alignment {
+  height: fit-content;
+}
+
+@media only screen and (max-width: 575px) {}
+
+@media only screen and (min-width: 1200px) and (max-width: 1399px) {
+  .banner-image {
+    width: 75%;
+  }
+
+  .banner-alignment {
+    height: 75%;
+  }
+}

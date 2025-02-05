@@ -36,13 +36,12 @@ const LoginPage = () => {
     setLoading(true);
     setError({ username: '', password: '', general: '' });
 
-    if (!formData.username) {
-      setError((prev) => ({ ...prev, username: 'User Name is required' }));
-      setLoading(false);
-      return;
-    }
-    if (!formData.password) {
-      setError((prev) => ({ ...prev, password: 'Password is required' }));
+    if (!formData.username || !formData.password) {
+      setError((prev) => ({
+        ...prev,
+        username: !formData.username ? 'User Name is required' : '',
+        password: !formData.password ? 'Password is required' : '',
+      }));
       setLoading(false);
       return;
     }
@@ -57,18 +56,15 @@ const LoginPage = () => {
         headers: { 'Content-Type': 'application/json' },
       });
 
-      if (response.data && response.data.token && response.data.role) {
+      if (response.data?.token && response.data?.role) {
         login(response.data.token, response.data.role);
 
-        if (!sessionStorage.getItem('theme')) {
-          sessionStorage.setItem('theme', 'light');
-        }
         const roleRoutes = {
-          MasterAdmin: '/masteradmin/dashboard',
-          Admin: '/admin/dashboard',
-          Customer: '/customer/dashboard',
-          Manager: '/manager/dashboard',
-          Advisor: '/advisor/dashboard',
+          "Super Admin": '/admin/dashboard',
+          "Admin": '/admin/dashboard',
+          "Customer": '/customer/dashboard',
+          "Manager": '/manager/dashboard',
+          "Advisor": '/advisor/dashboard',
         };
         const redirectTo = roleRoutes[response.data.role] || '/';
 
@@ -87,7 +83,6 @@ const LoginPage = () => {
       }
     } catch (err) {
       setError((prev) => ({ ...prev, general: "Login failed. Please try again later.", }));
-      alert("Login failed. Please try again later.");
     } finally {
       setLoading(false);
     }

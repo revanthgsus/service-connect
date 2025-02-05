@@ -1,55 +1,58 @@
-import React from 'react'
+import React, { lazy, Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import CustomerLayout from './../Layouts/CustomerLayout/CustomerLayout';
-import Dashboard from './../pages/Customer/Modules/Dashboard/DashboardContainer/Dashboard';
-import AppointmentList from './../pages/Customer/Modules/Appointment/AppointmentList/AppointmentList';
-import RequestAppointment from './../pages/Customer/Modules/Appointment/RequestAppointment/RequestAppointment';
-import QuoteList from './../pages/Customer/Modules/Quote/QuoteList/QuoteList';
-import QuoteSummary from './../pages/Customer/Modules/Quote/QuoteSummary/QuoteSummary';
-import ActivityList from './../pages/Customer/Modules/Activity/ActivityList/ActivityList';
-import DailyActivity from './../pages/Customer/Modules/Activity/DailyActivity/DailyActivity';
-import ViewInvoice from './../pages/Customer/Modules/Invoice/ViewInvoice/ViewInvoice';
-import InvoiceList from './../pages/Customer/Modules/Invoice/InvoiceList/InvoiceList';
-import PaymentList from '../pages/Customer/Modules/Payments/PaymentList/PaymentList';
-import ViewPayment from './../pages/Customer/Modules/Payments/ViewPayment/ViewPayment';
+import PreLoader from '../common/PreLoader/PreLoader';
+import MainLayout from '../Layouts/MainLayout/MainLayout';
+
+const CustomerDashboard = lazy(() => import('../pages/Customer/Modules/Dashboard/CustomerDashboard/CustomerDashboard'));
+const AppointmentList = lazy(() => import("../pages/Customer/Modules/Appointment/AppointmentList/AppointmentList"));
+const RequestAppointment = lazy(() => import("../pages/Customer/Modules/Appointment/RequestAppointment/RequestAppointment"));
+const QuoteList = lazy(() => import("../pages/Customer/Modules/Quote/QuoteList/QuoteList"));
+const QuoteSummary = lazy(() => import("../pages/Customer/Modules/Quote/QuoteSummary/QuoteSummary"));
+const ActivityList = lazy(() => import("../pages/Customer/Modules/Activity/ActivityList/ActivityList"));
+const DailyActivity = lazy(() => import("../pages/Customer/Modules/Activity/DailyActivity/DailyActivity"));
+const InvoiceList = lazy(() => import("../pages/Customer/Modules/Invoice/InvoiceList/InvoiceList"));
+const ViewInvoice = lazy(() => import("../pages/Customer/Modules/Invoice/ViewInvoice/ViewInvoice"));
+const PaymentList = lazy(() => import("../pages/Customer/Modules/Payments/PaymentList/PaymentList"));
+const ViewPayment = lazy(() => import("../pages/Customer/Modules/Payments/ViewPayment/ViewPayment"));
 
 const CustomerRouter = () => {
   return (
     <>
-      <Routes>
-        <Route path='/' element={<CustomerLayout />}>
-          <Route path="dashboard">
-            <Route index element={<Dashboard />} />
+      <Suspense fallback={<PreLoader />}>
+        <Routes>
+          <Route path='/' element={<MainLayout />}>
+            <Route path="dashboard">
+              <Route index element={<CustomerDashboard />} />
+            </Route>
+
+            <Route path='appointments' >
+              <Route index element={<AppointmentList />} />
+              <Route path='request' element={<RequestAppointment />} />
+            </Route>
+
+            <Route path='quotes' >
+              <Route index element={<QuoteList />} />
+              <Route path='quotesummary' element={<QuoteSummary />} />
+            </Route>
+
+            <Route path='activity' >
+              <Route index element={<ActivityList />} />
+              <Route path='dailyactivity' element={<DailyActivity />} />
+            </Route>
+
+            <Route path='invoice' >
+              <Route index element={<InvoiceList />} />
+              <Route path='viewinvoice' element={<ViewInvoice />} />
+            </Route>
+
+            <Route path='payment' >
+              <Route index element={<PaymentList />} />
+              <Route path='viewpayment' element={<ViewPayment />} />
+            </Route>
+
           </Route>
-
-          <Route path='appointments' >
-            <Route index element={<AppointmentList />} />
-            <Route path='request' element={<RequestAppointment />} />
-          </Route>
-
-          <Route path='quotes' >
-            <Route index element={<QuoteList />} />
-            <Route path='quotesummary' element={<QuoteSummary />} />
-          </Route>
-
-          <Route path='activity' >
-            <Route index element={<ActivityList />} />
-            <Route path='dailyactivity' element={<DailyActivity />} />
-          </Route>
-
-          <Route path='invoice' >
-            <Route index element={<InvoiceList />} />
-            <Route path='viewinvoice' element={<ViewInvoice />} />
-          </Route>
-
-          <Route path='payment' >
-            <Route index element={<PaymentList />} />
-            <Route path='viewpayment' element={<ViewPayment />} />
-          </Route>
-
-        </Route>
-      </Routes>
-
+        </Routes>
+      </Suspense>
     </>
   )
 }

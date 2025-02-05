@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import "./AdminList.css";
 import { HiPlus } from "react-icons/hi";
 import { IoSearch } from "react-icons/io5";
@@ -9,25 +9,24 @@ import Stack from '@mui/material/Stack';
 import { MdModeEditOutline } from "react-icons/md";
 import { HiOutlineTrash } from "react-icons/hi";
 import { ReactComponent as Norecords } from "../../../../assets/images/admin/no-records.svg";
-import DeleteModal from '../../Common/DeleteModal/DeleteModal';
+import { ReactComponent as EmptyImage } from "../../../../assets/images/admin/empty-data.svg"
+import DeleteModal from '../../../../common/DeleteModal/DeleteModal';
 import PreLoader from '../../../../common/PreLoader/PreLoader';
+import axios from 'axios';
+import API_BASE_URL from '../../../../services/AuthService';
 
 const AdminList = () => {
   const navigate = useNavigate();
-  const [searchTerm, setSearchTerm] = useState('');
-  const [statusFilter, setStatusFilter] = useState('');
+  const [admins, setAdmins] = useState([]);
+  const [searchInput, setSearchInput] = useState('');
+  const [status, setStatus] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
-
   const [show, setShow] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [adminIdToDelete, setAdminIdToDelete] = useState(null);
+  const [totalAdmins, setTotalAdmins] = useState(0);
 
-  const setShowModal = () => {
-    setShow(true)
-  }
-  const handleCloseModal = () => {
-    setShow(false);
-  };
+  const itemsPerPage = 10;
 
   const tableHeadings = [
     { title: "S.No" },
@@ -40,69 +39,100 @@ const AdminList = () => {
     { title: "" },
   ];
 
-  const admins = [
-    {
-      id: 1,
-      adminID: "ADM_0001",
-      adminName: "Ganeshram",
-      mailID: "ganeshram@gmail.com",
-      mobileNumber: "9876543210",
-      location: "Rajapalayam",
-      status: "Active",
-    },
-    {
-      id: 2,
-      adminID: "ADM_0002",
-      adminName: "Dhanasekar",
-      mailID: "dhanasekar@gmail.com",
-      mobileNumber: "9876543210",
-      location: "Rajapalayam",
-      status: "In Active",
-    },
-  ];
+  const fetchAdmins = useCallback(async () => {
+    const token = sessionStorage.getItem("authToken");
+    if (!token) {
+      alert("Session expired. Please sign in to continue.");
+      navigate('/')
+      return;
+    }
+
+    const payload = {
+      pageNo: currentPage,
+      noOfDatas: itemsPerPage,
+      ...(status && { status }),
+      ...(searchInput && { input: searchInput }),
+    };
+
+    try {
+      const response = await axios.post(`${API_BASE_URL}/adminMaster/getAdminMasterListPage`,
+        payload,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (response.status === 200 || response.data?.success) {
+        setAdmins(response.data.adminMasterListPage || []);
+        setTotalAdmins(response.data.totalRecords || 0);
+      }
+    } catch (error) {
+      console.error("Error fetching admins:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  }, [currentPage, status, searchInput, navigate]);
+
+
+  useEffect(() => {
+    fetchAdmins();
+  }, [fetchAdmins]);
+
+  const handleEdit = async (adminId) => {
+    const token = sessionStorage.getItem("authToken");
+    if (!token) {
+      alert("Session expired. Please sign in to continue.");
+      navigate('/');
+      return;
+    }
+    try {
+      const response = await axios.get(`${API_BASE_URL}/adminMaster/viewAdminById/${adminId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (response.status === 200 || response.data?.success) {
+        navigate("editadmin", { state: { adminData: response.data } });
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } else {
+        alert("Failed to fetch admin details.");
+      }
+    } catch (error) {
+      alert("An error occurred while fetching admin details.");
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  const handleSearchChange = (e) => setSearchInput(e.target.value);
+  const handleStatusChange = (e) => setStatus(e.target.value);
+
+  const handleDeleteClick = (adminId) => {
+    setShow(true);
+    setAdminIdToDelete(adminId);
+  };
+
+  const handleCloseModal = () => { setShow(false); };
 
   const handleCreate = (e) => {
     e.preventDefault();
     setIsLoading(true);
     setTimeout(() => {
-      setIsLoading(false)
       navigate("createadmin");
-    }, 1000)
+    }, 300);
   };
 
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
 
-  const filteredAdmins = admins.filter((admin) => {
-    const matchesSearch =
-      admin.adminName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      admin.adminID.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesStatus =
-      statusFilter === '' || admin.status.toLowerCase() === statusFilter;
-    return matchesSearch && matchesStatus;
-  });
-
-  const handleSearchChange = (e) => {
-    setSearchTerm(e.target.value);
-  };
-
-  const handleStatusChange = (e) => {
-    setStatusFilter(e.target.value);
-  };
-
-  const handlePageChange = (event, page) => {
-    setCurrentPage(page);
-  };
-
-  const displayedAdmins = filteredAdmins.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
-  );
-
-  const handleEdit = (admin) => {
-    setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false)
-      navigate("editadmin", { state: { adminData: admin } });
-    }, 1000)
+    return `${day}/${month}/${year}`;
   };
 
   return (
@@ -124,8 +154,8 @@ const AdminList = () => {
                 <input
                   type="search"
                   className="search-input"
-                  placeholder="Search by Admin Name or ID"
-                  value={searchTerm}
+                  placeholder="Search by admin name or ID"
+                  value={searchInput}
                   onChange={handleSearchChange}
                 />
                 <IoSearch className="search-icon" />
@@ -137,7 +167,7 @@ const AdminList = () => {
                     name="status"
                     id="status-select"
                     className="status-select"
-                    value={statusFilter}
+                    value={status}
                     onChange={handleStatusChange}
                   >
                     <option value="">Status</option>
@@ -161,34 +191,42 @@ const AdminList = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {displayedAdmins.length === 0 ? (
-                    <tr className="no-data">
-                      <td colSpan={tableHeadings.length}>
-                        <Norecords />
-                        <h5>No Admins Found!</h5>
-                        <p>Once records are added, they’ll appear on this page.</p>
-                      </td>
-                    </tr>
+                  {admins.length === 0 ? (
+                    totalAdmins === 0 ? (
+                      <tr className="empty-data">
+                        <td colSpan={tableHeadings.length}>
+                          <EmptyImage />
+                          <p className='pt-3'>Add an admin to manage and oversee operations</p>
+                        </td>
+                      </tr>
+                    ) : (
+                      <tr className="no-data">
+                        <td colSpan={tableHeadings.length}>
+                          <Norecords />
+                          <h5>No Admins Found!</h5>
+                          <p>Once records are added, they’ll appear on this page.</p>
+                        </td>
+                      </tr>
+                    )
                   ) : (
-                    displayedAdmins.map((admin, index) => (
-                      <tr key={admin.id} className="list-item">
+                    admins.map((admin, index) => (
+                      <tr key={admin.adminId} className="list-item">
                         <td>{(currentPage - 1) * itemsPerPage + index + 1}</td>
-                        <td>{admin.adminID}</td>
-                        <td>{admin.adminName}</td>
-                        <td>{admin.mailID}</td>
+                        <td>{admin.adminId}</td>
+                        <td>{admin.userName}</td>
+                        <td>{admin.emailAddress}</td>
                         <td>{admin.mobileNumber}</td>
-                        <td>{admin.location}</td>
+                        <td>{formatDate(admin.joiningDate)}</td>
                         <td>
-                          <span className={`status ${admin.status.toLowerCase().replace(" ", "")}`}>
-                            {admin.status}
+                          <span className={`status ${admin.status ? 'active' : 'inactive'}`}>
+                            {admin.status ? "Active" : "In Active"}
                           </span>
                         </td>
                         <td>
-                          <span className='edit-icon' onClick={() => handleEdit(filteredAdmins)}>
+                          <span className="edit-icon" onClick={() => handleEdit(admin.adminId)}>
                             <MdModeEditOutline />
                           </span>
-
-                          <span className='delete-icon' onClick={setShowModal}>
+                          <span className="delete-icon" onClick={() => handleDeleteClick(admin.adminId)}>
                             <HiOutlineTrash />
                           </span>
                         </td>
@@ -203,16 +241,34 @@ const AdminList = () => {
           <div className="pagination-align">
             <Stack spacing={2}>
               <Pagination
-                count={Math.ceil(filteredAdmins.length / itemsPerPage)}
+                count={Math.ceil(totalAdmins / itemsPerPage)}
                 page={currentPage}
-                onChange={handlePageChange}
+                onChange={(e, value) => setCurrentPage(value)}
+                sx={{
+                  "& .Mui-selected": {
+                    backgroundColor: "#01848D !important",
+                    color: "#ffffff",
+                  },
+                  "& .Mui-selected:hover": {
+                    backgroundColor: "#028d96",
+                  },
+                  "& .Mui-disabled": {
+                    color: "var(--text-color)",
+                  },
+                }}
               />
             </Stack>
           </div>
         </section>
       )}
 
-      <DeleteModal show={show} handleClose={handleCloseModal} />
+      <DeleteModal
+        show={show}
+        handleClose={handleCloseModal}
+        entityId={adminIdToDelete}
+        entityType="Admin"
+        deleteEndpoint="/adminMaster/deleteAdminMasterById"
+        onDeleteSuccess={fetchAdmins} />
     </>
   );
 };

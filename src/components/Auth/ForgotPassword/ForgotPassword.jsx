@@ -57,7 +57,6 @@ const ForgotPassword = () => {
           hideProgressBar: true,
           theme: "light",
         });
-
         setTimeout(() => {
           navigate('/get-otp', { state: { email: email } });
         }, 1000);

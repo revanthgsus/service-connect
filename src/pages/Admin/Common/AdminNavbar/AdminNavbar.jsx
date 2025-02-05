@@ -7,9 +7,7 @@ import CustomLogo from '../../../../common/MainLogo/CustomLogo';
 import MobileLogo from '../../../../common/MainLogo/MobileLogo';
 import Badge from '@mui/material/Badge';
 import IconButton from '@mui/material/IconButton';
-import { IoNotificationsOutline } from "react-icons/io5";
-import { IoMoonOutline } from "react-icons/io5";
-import { IoSunny } from "react-icons/io5";
+import { IoNotificationsOutline, IoMoonOutline, IoSunny } from "react-icons/io5";
 import ThemeContext from '../../../../contexts/ThemeContext';
 import AdminDropdown from './../AdminDropdown/AdminDropdown';
 

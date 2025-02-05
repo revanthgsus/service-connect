@@ -6,7 +6,7 @@ import { ReactComponent as AdvisorIcon } from "../../../../assets/images/admin/s
 import { ReactComponent as ManagerIcon } from "../../../../assets/images/admin/service-manager.svg";
 import { ReactComponent as CustomerIcon } from "../../../../assets/images/admin/customer.svg";
 
-const AdminSidebar = ({ isOpen }) => {
+const AdminSidebar = ({ isOpen, handleCloseSidebar }) => {
   const sidebarItems = [
     {
       title: 'Dashboard',
@@ -39,6 +39,7 @@ const AdminSidebar = ({ isOpen }) => {
               <NavLink
                 to={`/${item.link}`}
                 className={({ isActive }) => (isActive ? "active-link" : "")}
+                onClick={handleCloseSidebar}
                 aria-label={item.title}>
                 <span>{item.icon}</span>
                 <span className='sidebar-content'>{item.title}</span>

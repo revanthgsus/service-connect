@@ -1,11 +1,11 @@
 import React from 'react';
-import './Dashboard.css'
-import Kpi from './../Kpi/Kpi';
+import "./AdminDashboard.css"
+import Kpi from '../Kpi/Kpi';
+import { Col, Row } from 'react-bootstrap';
 import RevenueChart from '../RevenueChart/RevenueChart';
 import CustomerGraph from '../CustomerGraph/CustomerGraph';
-import { Row, Col } from 'react-bootstrap';
 
-const Dashboard = () => {
+const AdminDashboard = () => {
   return (
     <>
       <Kpi />
@@ -21,4 +21,4 @@ const Dashboard = () => {
   )
 }
 
-export default Dashboard;
+export default AdminDashboard;

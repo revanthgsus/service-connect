@@ -10,8 +10,8 @@ const Logout = ({ show, handleClose }) => {
   const { logout } = useContext(AuthContext);
 
   const handleLogout = () => {
-    if (sessionStorage.getItem('theme') === 'light') {
-      sessionStorage.removeItem('theme');
+    if (sessionStorage.getItem('theme')) {
+      sessionStorage.removeItem('theme', 'light');
     }
 
     logout();

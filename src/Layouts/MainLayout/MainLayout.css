@@ -1,15 +1,8 @@
-.admin-layout {
+.main-layout {
   min-height: 100vh;
 }
 
-.admin-layout .layout-container {
-  display: flex;
-  width: 100%;
-  height: 100%;
-  padding-top: 68px;
-}
-
-.admin-layout .layout-main {
+.main-layout .layout-main {
   flex: 1;
   overflow-y: auto;
   width: 100%;
@@ -18,12 +11,17 @@
   background-color: var(--main-bg-color);
 }
 
-.admin-layout .layout-main::-webkit-scrollbar {
+.main-layout .layout-main::-webkit-scrollbar {
   display: none;
 }
 
+.layout-container {
+  padding-top: 68px;
+  height: 100%;
+}
+
 @media only screen and (max-width:768px) {
-  .admin-layout .layout-main {
+  .main-layout .layout-main {
     padding: 25px 15px;
   }
 }

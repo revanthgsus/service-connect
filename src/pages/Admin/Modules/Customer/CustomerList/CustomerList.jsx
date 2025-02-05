@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import "./CustomerList.css";
 import { HiPlus } from "react-icons/hi";
 import { IoSearch } from "react-icons/io5";
@@ -8,27 +8,25 @@ import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import { MdModeEditOutline } from "react-icons/md";
 import { HiOutlineTrash } from "react-icons/hi";
-import { ReactComponent as Norecords } from "../../../../../assets/images/admin/customer/no-records.svg"
-import DeleteModal from '../../../Common/DeleteModal/DeleteModal';
-import PreLoader from '../../../../../common/PreLoader/PreLoader';
+import { ReactComponent as Norecords } from "../../../../../assets/images/admin/customer/no-records.svg";
+import { ReactComponent as EmptyImage } from "../../../../../assets/images/admin/customer/empty-data.svg"
+import DeleteModal from '../../../../../common/DeleteModal/DeleteModal';
+import PreLoader from './../../../../../common/PreLoader/PreLoader';
+import axios from 'axios';
+import API_BASE_URL from '../../../../../services/AuthService';
 
 const CustomerList = () => {
   const navigate = useNavigate();
-  const [searchTerm, setSearchTerm] = useState('');
-  const [statusFilter, setStatusFilter] = useState('');
+  const [customers, setCustomers] = useState([]);
+  const [searchInput, setSearchInput] = useState('');
+  const [status, setStatus] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
+  const [show, setShow] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [customerIdToDelete, setCustomerIdToDelete] = useState(null);
+  const [totalCustomers, setTotalCustomers] = useState(0);
 
   const itemsPerPage = 10;
-
-  const [show, setShow] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-
-  const setShowModal = () => {
-    setShow(true)
-  }
-  const handleCloseModal = () => {
-    setShow(false);
-  };
 
   const tableHeadings = [
     { title: "S.No" },
@@ -36,74 +34,104 @@ const CustomerList = () => {
     { title: "Customer Name" },
     { title: "Mail ID" },
     { title: "Mobile Number" },
-    { title: "JoiningDate" },
+    { title: "Joining Date" },
     { title: "Status" },
     { title: "" },
   ];
 
-  const Customers = [
-    {
-      id: 1,
-      customerID: "CUST_00001",
-      customerName: "Revanth",
-      mailID: "revanth@gmail.com",
-      mobileNumber: "9876543210",
-      JoiningDate: "01/12/2025",
-      status: "Active",
-    },
-    {
-      id: 2,
-      customerID: "CUST_00001",
-      customerName: "Mari vignesh Rao",
-      mailID: "mari@gmail.com",
-      mobileNumber: "9876543210",
-      JoiningDate: "01/12/2025",
-      status: "In Active",
-    },
+  const fetchCustomers = useCallback(async () => {
+    const token = sessionStorage.getItem("authToken");
+    if (!token) {
+      alert("Session expired. Please sign in to continue.");
+      navigate('/')
+      return;
+    }
 
-  ];
+    const payload = {
+      pageNo: currentPage,
+      noOfDatas: itemsPerPage,
+      ...(status && { status }),
+      ...(searchInput && { input: searchInput }),
+    };
+
+    try {
+      const response = await axios.post(`${API_BASE_URL}/customerMaster/getCustomerMasterListPage`,
+        payload,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (response.status === 200 || response.data?.success) {
+        setCustomers(response.data.customerMasterListPage || []);
+        setTotalCustomers(response.data.totalRecords || 0);
+      }
+    } catch (error) {
+      console.error("Error fetching customers:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  }, [currentPage, status, searchInput, navigate]);
+
+
+  useEffect(() => {
+    fetchCustomers();
+  }, [fetchCustomers]);
+
+  const handleEdit = async (customerId) => {
+    const token = sessionStorage.getItem("authToken");
+    if (!token) {
+      alert("Session expired. Please sign in to continue.");
+      navigate('/');
+      return;
+    }
+    try {
+      const response = await axios.get(`${API_BASE_URL}/customerMaster/viewCustomerById/${customerId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (response.status === 200 || response.data?.success) {
+        navigate("editcustomer", { state: { customerData: response.data } });
+      } else {
+        alert("Failed to fetch customer details.");
+      }
+    } catch (error) {
+      alert("An error occurred while fetching customer details.");
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  const handleSearchChange = (e) => setSearchInput(e.target.value);
+  const handleStatusChange = (e) => setStatus(e.target.value);
+
+  const handleDeleteClick = (customerId) => {
+    setShow(true);
+    setCustomerIdToDelete(customerId);
+  };
+
+  const handleCloseModal = () => { setShow(false); };
 
   const handleCreate = (e) => {
     e.preventDefault();
     setIsLoading(true);
     setTimeout(() => {
-      setIsLoading(false)
       navigate("createcustomer");
-    }, 1000)
+    }, 300);
   };
 
-  const filteredCustomers = Customers.filter((customer) => {
-    const matchesSearch =
-      customer.customerName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      customer.customerID.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesStatus =
-      statusFilter === '' || customer.status.toLowerCase() === statusFilter.toLowerCase();
-    return matchesSearch && matchesStatus;
-  });
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
 
-  const handleSearchChange = (e) => {
-    setSearchTerm(e.target.value);
-  };
-
-  const handleStatusChange = (e) => {
-    setStatusFilter(e.target.value);
-  };
-
-  const handlePageChange = (event, page) => {
-    setCurrentPage(page);
-  };
-
-  const displayedCustomers = filteredCustomers.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
-  );
-
-  const handleEdit = (customer) => {
-    setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false)
-      navigate("editcustomer", { state: { customerData: customer } });
-    }, 1000)
+    return `${day}/${month}/${year}`;
   };
 
   return (
@@ -112,7 +140,7 @@ const CustomerList = () => {
       {!isLoading && (
         <section className="customer-list">
           <div className="top-alignment">
-            <h5 className="customer-heading">Customers List</h5>
+            <h5 className="customer-heading">Customer List</h5>
             <button type="button" className="add-button" onClick={handleCreate}>
               <HiPlus />
               Add Customer
@@ -125,8 +153,8 @@ const CustomerList = () => {
                 <input
                   type="search"
                   className="search-input"
-                  placeholder="Search by Customer Name or ID"
-                  value={searchTerm}
+                  placeholder="Search by customer name or ID"
+                  value={searchInput}
                   onChange={handleSearchChange}
                 />
                 <IoSearch className="search-icon" />
@@ -138,7 +166,7 @@ const CustomerList = () => {
                     name="status"
                     id="status-select"
                     className="status-select"
-                    value={statusFilter}
+                    value={status}
                     onChange={handleStatusChange}
                   >
                     <option value="">Status</option>
@@ -162,34 +190,42 @@ const CustomerList = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {displayedCustomers.length === 0 ? (
-                    <tr className="no-data">
-                      <td colSpan={tableHeadings.length}>
-                        <Norecords />
-                        <h5>No Customers Found!</h5>
-                        <p>Once records are added, they’ll appear on this page.</p>
-                      </td>
-                    </tr>
+                  {customers.length === 0 ? (
+                    totalCustomers === 0 ? (
+                      <tr className="empty-data">
+                        <td colSpan={tableHeadings.length}>
+                          <EmptyImage />
+                          <p className='pt-3'>Add your first customer to begin</p>
+                        </td>
+                      </tr>
+                    ) : (
+                      <tr className="no-data">
+                        <td colSpan={tableHeadings.length}>
+                          <Norecords />
+                          <h5>No Customers Found!</h5>
+                          <p>Once records are added, they’ll appear on this page.</p>
+                        </td>
+                      </tr>
+                    )
                   ) : (
-                    displayedCustomers.map((customer, index) => (
-                      <tr key={customer.id} className="list-item">
+                    customers.map((customer, index) => (
+                      <tr key={customer.customerId} className="list-item">
                         <td>{(currentPage - 1) * itemsPerPage + index + 1}</td>
-                        <td>{customer.customerID}</td>
-                        <td>{customer.customerName}</td>
-                        <td>{customer.mailID}</td>
+                        <td>{customer.customerId}</td>
+                        <td>{customer.userName}</td>
+                        <td>{customer.emailAddress}</td>
                         <td>{customer.mobileNumber}</td>
-                        <td>{customer.JoiningDate}</td>
+                        <td>{formatDate(customer.joiningDate)}</td>
                         <td>
-                          <span className={`status ${customer.status.toLowerCase().replace(" ", "")}`}>
-                            {customer.status}
+                          <span className={`status ${customer.status ? 'active' : 'inactive'}`}>
+                            {customer.status ? "Active" : "In Active"}
                           </span>
                         </td>
                         <td>
-                          <span className='edit-icon' onClick={() => handleEdit(customer)}>
+                          <span className="edit-icon" onClick={() => handleEdit(customer.customerId)}>
                             <MdModeEditOutline />
                           </span>
-
-                          <span className='delete-icon' onClick={setShowModal}>
+                          <span className="delete-icon" onClick={() => handleDeleteClick(customer.customerId)}>
                             <HiOutlineTrash />
                           </span>
                         </td>
@@ -204,17 +240,34 @@ const CustomerList = () => {
           <div className="pagination-align">
             <Stack spacing={2}>
               <Pagination
-                count={Math.ceil(filteredCustomers.length / itemsPerPage)}
+                count={Math.ceil(totalCustomers / itemsPerPage)}
                 page={currentPage}
-                onChange={handlePageChange}
+                onChange={(e, value) => setCurrentPage(value)}
+                sx={{
+                  "& .Mui-selected": {
+                    backgroundColor: "#01848D !important",
+                    color: "#ffffff",
+                  },
+                  "& .Mui-selected:hover": {
+                    backgroundColor: "#028d96",
+                  },
+                  "& .Mui-disabled": {
+                    color: "var(--text-color)",
+                  },
+                }}
               />
             </Stack>
           </div>
         </section>
       )}
 
-
-      <DeleteModal show={show} handleClose={handleCloseModal} />
+      <DeleteModal
+        show={show}
+        handleClose={handleCloseModal}
+        entityId={customerIdToDelete}
+        entityType="Customer"
+        deleteEndpoint="/customerMaster/deleteCustomerMasterById"
+        onDeleteSuccess={fetchCustomers} />
     </>
   );
 };

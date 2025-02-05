@@ -1,3 +1,8 @@
+.customer-sidebar {
+  z-index: 9;
+  min-height: calc(100vh - 68px);
+}
+
 .customer-sidebar .sidebar-link {
   list-style-type: none;
   padding: 0px 20px;
@@ -10,10 +15,12 @@
   padding: 40px 0px;
   display: flex;
   flex-direction: column;
+  height: 100%;
 }
 
 .customer-sidebar .sidebar-section.open {
-  width: 95px;
+  width: 85px;
+  transition: .3s linear width;
 }
 
 .customer-sidebar .sidebar-section.open .sidebar-content {
@@ -118,5 +125,11 @@
   .customer-sidebar .sidebar-section {
     width: 260px;
     font-size: 14px;
+  }
+}
+
+@media only screen and (Min-width:1400px) {
+  .customer-sidebar .sidebar-section {
+    width: 300px;
   }
 }

@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import "../ManagerList/ManagerList.css";
+import "./ManagerList.css";
 import { HiPlus } from "react-icons/hi";
 import { IoSearch } from "react-icons/io5";
 import { useNavigate } from 'react-router-dom';
@@ -9,7 +9,8 @@ import Stack from '@mui/material/Stack';
 import { MdModeEditOutline } from "react-icons/md";
 import { HiOutlineTrash } from "react-icons/hi";
 import { ReactComponent as Norecords } from "../../../../../assets/images/admin/manager/no-records.svg";
-import DeleteModal from '../../../Common/DeleteModal/DeleteModal';
+import { ReactComponent as EmptyImage } from "../../../../../assets/images/admin/manager/empty-data.svg"
+import DeleteModal from '../../../../../common/DeleteModal/DeleteModal';
 import PreLoader from './../../../../../common/PreLoader/PreLoader';
 import axios from 'axios';
 import API_BASE_URL from '../../../../../services/AuthService';
@@ -20,10 +21,12 @@ const ManagerList = () => {
   const [searchInput, setSearchInput] = useState('');
   const [status, setStatus] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
-
   const [show, setShow] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [managerIdToDelete, setManagerIdToDelete] = useState(null);
+  const [totalManagers, setTotalManagers] = useState(0);
+
+  const itemsPerPage = 10;
 
   const tableHeadings = [
     { title: "S.No" },
@@ -38,10 +41,9 @@ const ManagerList = () => {
 
   const fetchManagers = useCallback(async () => {
     const token = sessionStorage.getItem("authToken");
-
     if (!token) {
-      alert("Auth token is missing");
-      setIsLoading(false);
+      alert("Session expired. Please sign in to continue.");
+      navigate('/')
       return;
     }
 
@@ -53,8 +55,7 @@ const ManagerList = () => {
     };
 
     try {
-      const response = await axios.post(
-        `${API_BASE_URL}/managerMaster/getManagerMasterListPage`,
+      const response = await axios.post(`${API_BASE_URL}/managerMaster/getManagerMasterListPage`,
         payload,
         {
           headers: {
@@ -64,54 +65,73 @@ const ManagerList = () => {
         }
       );
 
-      if (response.status === 200) {
-        console.log("API response:", response.data);
-        setManagers(response.data || []);
+      if (response.status === 200 || response.data?.success) {
+        setManagers(response.data.managerMasterListPage || []);
+        setTotalManagers(response.data.totalRecords || 0);
       }
     } catch (error) {
       console.error("Error fetching managers:", error);
     } finally {
       setIsLoading(false);
     }
-  }, [currentPage, status, searchInput]);
+  }, [currentPage, status, searchInput, navigate]);
+
 
   useEffect(() => {
     fetchManagers();
   }, [fetchManagers]);
 
-  const handleSearchChange = (e) => {
-    setSearchInput(e.target.value);
-  };
+  const handleEdit = async (managerId) => {
+    const token = sessionStorage.getItem("authToken");
+    if (!token) {
+      alert("Session expired. Please sign in to continue.");
+      navigate('/');
+      return;
+    }
+    try {
+      const response = await axios.get(`${API_BASE_URL}/managerMaster/viewManagerById/${managerId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
-  const handleStatusChange = (e) => {
-    setStatus(e.target.value);
-  };
+      if (response.status === 200 || response.data?.success) {
+        navigate("editmanager", { state: { managerData: response.data } });
+      } else {
+        alert("Failed to fetch manager details.");
+      }
+    } catch (error) {
+      alert("An error occurred while fetching manager details.");
+    } finally {
+      setIsLoading(false);
+    }
+  }
 
-  const handlePageChange = (event, value) => {
-    setCurrentPage(value);
-  };
+  const handleSearchChange = (e) => setSearchInput(e.target.value);
+  const handleStatusChange = (e) => setStatus(e.target.value);
 
-  const setShowModal = () => {
+  const handleDeleteClick = (managerId) => {
     setShow(true);
+    setManagerIdToDelete(managerId);
   };
 
-  const handleCloseModal = () => {
-    setShow(false);
-  };
+  const handleCloseModal = () => { setShow(false); };
 
   const handleCreate = (e) => {
     e.preventDefault();
     setIsLoading(true);
     setTimeout(() => {
       navigate("createmanager");
-    }, 500);
+    }, 300);
   };
 
-  const handleEdit = (manager) => {
-    setIsLoading(true);
-    setTimeout(() => {
-      navigate("editmanager", { state: { managerData: manager } });
-    }, 500);
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+
+    return `${day}/${month}/${year}`;
   };
 
   return (
@@ -133,7 +153,7 @@ const ManagerList = () => {
                 <input
                   type="search"
                   className="search-input"
-                  placeholder="Search by Manager Name or ID"
+                  placeholder="Search by manager name or ID"
                   value={searchInput}
                   onChange={handleSearchChange}
                 />
@@ -151,7 +171,7 @@ const ManagerList = () => {
                   >
                     <option value="">Status</option>
                     <option value="active">Active</option>
-                    <option value="inactive">Inactive</option>
+                    <option value="inactive">In Active</option>
                   </select>
                   <IoIosArrowDown className="arrow-icon" />
                 </div>
@@ -170,7 +190,24 @@ const ManagerList = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {managers.length > 0 ? (
+                  {managers.length === 0 ? (
+                    totalManagers === 0 ? (
+                      <tr className="empty-data">
+                        <td colSpan={tableHeadings.length}>
+                          <EmptyImage />
+                          <p className='pt-3'>Start your team—add your first Service Manager today!</p>
+                        </td>
+                      </tr>
+                    ) : (
+                      <tr className="no-data">
+                        <td colSpan={tableHeadings.length}>
+                          <Norecords />
+                          <h5>No Managers Found!</h5>
+                          <p>Once records are added, they’ll appear on this page.</p>
+                        </td>
+                      </tr>
+                    )
+                  ) : (
                     managers.map((manager, index) => (
                       <tr key={manager.managerId} className="list-item">
                         <td>{(currentPage - 1) * itemsPerPage + index + 1}</td>
@@ -178,28 +215,22 @@ const ManagerList = () => {
                         <td>{manager.userName}</td>
                         <td>{manager.emailAddress}</td>
                         <td>{manager.mobileNumber}</td>
-                        <td>{manager.joiningDate}</td>
+                        <td>{formatDate(manager.joiningDate)}</td>
                         <td>
-                          <span className="status">{manager.status}</span>
+                          <span className={`status ${manager.status ? 'active' : 'inactive'}`}>
+                            {manager.status ? "Active" : "In Active"}
+                          </span>
                         </td>
                         <td>
-                          <span className="edit-icon" onClick={() => handleEdit(manager)}>
+                          <span className="edit-icon" onClick={() => handleEdit(manager.managerId)}>
                             <MdModeEditOutline />
                           </span>
-                          <span className="delete-icon" onClick={setShowModal}>
+                          <span className="delete-icon" onClick={() => handleDeleteClick(manager.managerId)}>
                             <HiOutlineTrash />
                           </span>
                         </td>
                       </tr>
                     ))
-                  ) : (
-                    <tr className="no-data">
-                      <td colSpan={tableHeadings.length}>
-                        <Norecords />
-                        <h5>No Managers Found!</h5>
-                        <p>Once records are added, they’ll appear on this page.</p>
-                      </td>
-                    </tr>
                   )}
                 </tbody>
               </table>
@@ -209,9 +240,9 @@ const ManagerList = () => {
           <div className="pagination-align">
             <Stack spacing={2}>
               <Pagination
-                count={Math.ceil(managers.length / itemsPerPage)}
+                count={Math.ceil(totalManagers / itemsPerPage)}
                 page={currentPage}
-                onChange={handlePageChange}
+                onChange={(e, value) => setCurrentPage(value)}
                 sx={{
                   "& .Mui-selected": {
                     backgroundColor: "#01848D !important",
@@ -230,7 +261,13 @@ const ManagerList = () => {
         </section>
       )}
 
-      <DeleteModal show={show} handleClose={handleCloseModal} />
+      <DeleteModal
+        show={show}
+        handleClose={handleCloseModal}
+        entityId={managerIdToDelete}
+        entityType="Manager"
+        deleteEndpoint="/managerMaster/deleteManagerMasterById"
+        onDeleteSuccess={fetchManagers} />
     </>
   );
 };

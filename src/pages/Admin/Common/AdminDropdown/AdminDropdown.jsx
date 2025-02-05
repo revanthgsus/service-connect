@@ -11,30 +11,18 @@ import Logout from '../../../../common/Logout/Logout';
 const AdminDropdown = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [show, setShow] = useState(false);
+  const [role, setRole] = useState(null);
+
+  useEffect(() => {
+    const storedRole = sessionStorage.getItem("userRole");
+    setRole(storedRole);
+  }, []);
 
   const setShowModal = () => {
     setShow(true)
   }
   const handleCloseModal = () => {
     setShow(false);
-  };
-
-  const dropdownList = [
-    {
-      title: 'Admin List',
-      icon: <HiOutlineUsers />,
-      link: "/admin/adminlist"
-    },
-    {
-      title: 'View Profile',
-      icon: <AiOutlineUser />,
-      link: "/admin/profile"
-    }
-  ];
-
-  const logoutItem = {
-    title: 'Logout',
-    icon: <TbLogout />,
   };
 
   const toggleDropdown = () => {
@@ -63,19 +51,25 @@ const AdminDropdown = () => {
         {isDropdownOpen && (
           <div className="dropdownfile">
             <ul>
-              {dropdownList.map((item, index) => (
-                <li key={index}>
-                  <Link to={item.link}>
-                    {item.icon}
-                    <span>{item.title}</span>
+              {role === "Super Admin" && (
+                <li>
+                  <Link to="/admin/adminlist" onClick={() => setIsDropdownOpen(false)}>
+                    <HiOutlineUsers />
+                    <span>Admin List</span>
                   </Link>
                 </li>
-              ))}
+              )}
+              <li>
+                <Link to="/admin/profile" onClick={() => setIsDropdownOpen(false)}>
+                  <AiOutlineUser />
+                  <span>View Profile</span>
+                </Link>
+              </li>
               <hr className="mt-2 mb-1" />
               <li className="logout-link" onClick={setShowModal}>
-                <Link>
-                  {logoutItem.icon}
-                  <span>{logoutItem.title}</span>
+                <Link to="#">
+                  <TbLogout />
+                  <span>Logout</span>
                 </Link>
               </li>
             </ul>

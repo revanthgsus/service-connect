@@ -3,12 +3,11 @@ import ThemeContext from '../../contexts/ThemeContext';
 
 const ThemeProvider = ({ children }) => {
   const [theme, setTheme] = useState(() => {
-    const savedTheme = sessionStorage.getItem('theme');
-    return savedTheme ? savedTheme : 'light';
+    return sessionStorage.getItem('theme') || 'light';
   });
 
   useEffect(() => {
-    document.body.className = `theme--${theme}`;
+    document.documentElement.setAttribute('data-theme', theme);
     sessionStorage.setItem('theme', theme);
   }, [theme]);
 

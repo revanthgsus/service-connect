@@ -9,7 +9,7 @@ import { ReactComponent as InvoiceIcon } from "../../../../assets/images/custome
 import { ReactComponent as PaymentsIcon } from "../../../../assets/images/customer/sidebar/payment.svg";
 
 
-const CustomerSidebar = ({ isOpen }) => {
+const CustomerSidebar = ({ isOpen, handleCloseSidebar }) => {
   const sidebarItems = [
     {
       title: 'Dashboard',
@@ -52,6 +52,7 @@ const CustomerSidebar = ({ isOpen }) => {
               <NavLink
                 to={`/${item.link}`}
                 className={({ isActive }) => (isActive ? "active-link" : "")}
+                onClick={handleCloseSidebar}
                 aria-label={item.title}>
                 <span>{item.icon}</span>
                 <span className='sidebar-content'>{item.title}</span>
