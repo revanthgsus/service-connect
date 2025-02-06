@@ -1,12 +1,12 @@
 .main-layout {
-  min-height: 100vh;
+  height: 100vh;
 }
 
 .main-layout .layout-main {
   flex: 1;
   overflow-y: auto;
   width: 100%;
-  height: 100%;
+  height: calc(100vh - 68px);
   padding: 30px;
   background-color: var(--main-bg-color);
 }

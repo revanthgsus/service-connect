@@ -68,7 +68,7 @@
 .manager-list .list-alignment::-webkit-scrollbar {
   background: inherit;
   border-radius: 0px;
-  height: 15px;
+  height: 7px;
 }
 
 .manager-list .list-alignment::-webkit-scrollbar-track {

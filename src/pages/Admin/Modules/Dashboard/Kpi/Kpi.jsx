@@ -11,36 +11,16 @@ import API_BASE_URL from '../../../../../services/AuthService';
 import PreLoader from '../../../../../common/PreLoader/PreLoader';
 
 const Kpi = () => {
-  const [KpiCards, setKpiCards] = useState([]);
+  const [kpiCards, setKpiCards] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
 
-  const KpiData = useMemo(() => [
-    {
-      id: 1,
-      title: 'Total Managers',
-      value: '0',
-      icon: <ManagerIcon />,
-    },
-    {
-      id: 2,
-      title: 'Total Advisors',
-      value: '0',
-      icon: <AdvisorIcon />,
-    },
-    {
-      id: 3,
-      title: 'Total Customers',
-      value: '0',
-      icon: <CustomerIcon />,
-    },
-    {
-      id: 4,
-      title: 'Total Admins',
-      value: '0',
-      icon: <AdminIcon />,
-    },
-  ])
+  const kpiData = useMemo(() => [
+    { id: 1, title: 'Total Managers', value: '0', icon: <ManagerIcon /> },
+    { id: 2, title: 'Total Advisors', value: '0', icon: <AdvisorIcon /> },
+    { id: 3, title: 'Total Customers', value: '0', icon: <CustomerIcon /> },
+    { id: 4, title: 'Total Admins', value: '0', icon: <AdminIcon /> },
+  ], []);
 
   useEffect(() => {
     const token = sessionStorage.getItem('authToken');
@@ -59,12 +39,12 @@ const Kpi = () => {
           },
         });
 
-        if (response.status === 200 || response.data?.success) {
+        if (response.status === 200 && response.data) {
           setKpiCards([
-            { ...KpiData[0], value: response.data.totalManagers || 0 },
-            { ...KpiData[1], value: response.data.totalAdvisors || 0 },
-            { ...KpiData[2], value: response.data.totalCustomers || 0 },
-            { ...KpiData[3], value: response.data.totalAdmins || 0 },
+            { ...kpiData[0], value: response.data.totalManagers || 0 },
+            { ...kpiData[1], value: response.data.totalAdvisors || 0 },
+            { ...kpiData[2], value: response.data.totalCustomers || 0 },
+            { ...kpiData[3], value: response.data.totalAdmins || 0 },
           ]);
         }
       } catch (error) {
@@ -75,32 +55,31 @@ const Kpi = () => {
     };
 
     fetchKpiData();
-  }, [navigate]);
+  }, [navigate, kpiData]);
 
   return (
-    <>
-      <section className="dashboard-kpi">
-        <h5 className="dashboard-heading">Admin Dashboard</h5>
-        <div className="kpi-alignment">
-          {isLoading ? (
-            <PreLoader />
-          ) : (
-            <Row>
-              {KpiCards.map((data) => (
-                <Col key={data.id} xl={3} sm={6} className='py-2'>
-                  <div className="kpi-item">
-                    <div className="kpi-icon">{data.icon}</div>
-                    <div className="kpi-value">
-                      <h6>{data.title}</h6>
-                      <h3>{data.value}</h3>
-                    </div>
+    <section className="dashboard-kpi">
+      <h5 className="dashboard-heading">Admin Dashboard</h5>
+      <div className="kpi-alignment">
+        {isLoading ? (
+          <PreLoader />
+        ) : (
+          <Row>
+            {kpiCards.map((data) => (
+              <Col key={data.id} xl={3} sm={6} className="py-2">
+                <div className="kpi-item">
+                  <div className="kpi-icon">{data.icon}</div>
+                  <div className="kpi-value">
+                    <h6>{data.title}</h6>
+                    <h3>{data.value}</h3>
                   </div>
-                </Col>
-              ))}
-            </Row>)}
-        </div>
-      </section>
-    </>
+                </div>
+              </Col>
+            ))}
+          </Row>
+        )}
+      </div>
+    </section>
   );
 };
 

@@ -1,6 +1,6 @@
 .admin-sidebar {
   z-index: 9;
-  min-height: calc(100vh - 68px);
+  height: calc(100vh - 68px);
 }
 
 .admin-sidebar .sidebar-link {
@@ -15,7 +15,12 @@
   padding: 40px 0px;
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: calc(100vh - 68px);
+  overflow-y: auto;
+}
+
+.admin-sidebar .sidebar-section::-webkit-scrollbar {
+  display: none;
 }
 
 .admin-sidebar .sidebar-section.open {
