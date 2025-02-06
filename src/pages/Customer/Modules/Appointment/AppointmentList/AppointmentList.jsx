@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import "./AppointmentList.css";
 import { HiPlus } from "react-icons/hi";
 import { IoSearch } from "react-icons/io5";
@@ -9,25 +9,20 @@ import Stack from '@mui/material/Stack';
 import { FaRegEye } from "react-icons/fa6";
 import { HiOutlineTrash } from "react-icons/hi";
 import { ReactComponent as Norecords } from "../../../../../assets/images/customer/no-records.svg";
-import DeleteModal from '../../../Common/DeleteModal/DeleteModal';
+import DeleteModal from '../../../../../common/DeleteModal/DeleteModal';
 import PreLoader from './../../../../../common/PreLoader/PreLoader';
 
 const AppointmentList = () => {
   const navigate = useNavigate();
-  const [searchTerm, setSearchTerm] = useState('');
-  const [statusFilter, setStatusFilter] = useState('');
+  const [status, setStatus] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
-
+  const [searchInput, setSearchInput] = useState('');
   const [show, setShow] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [appointments, setAppointments] = useState([]);
+  const [totalAppointment, setTotalAppointment] = useState(0);
 
-  const setShowModal = () => {
-    setShow(true)
-  }
-  const handleCloseModal = () => {
-    setShow(false);
-  };
+  const itemsPerPage = 10;
 
   const tableHeadings = [
     { title: "S.No" },
@@ -39,89 +34,43 @@ const AppointmentList = () => {
     { title: "" },
   ];
 
-  const Appointments = [
-    {
-      id: 1,
-      serviceType: "Car Routine Maintenance",
-      appointmentDate: "12/02/2025",
-      serialNumber: "EX12345BAT2023",
-      urgencyLevel: "Urgent",
-      status: "Accepted",
-    },
-    {
-      id: 2,
-      serviceType: "Battery Testing",
-      appointmentDate: "13/02/2025",
-      serialNumber: "EX12345BAT2023",
-      urgencyLevel: "Standard",
-      status: "Accepted",
-    },
-    {
-      id: 3,
-      serviceType: "Oil and filter change",
-      appointmentDate: "14/02/2025",
-      serialNumber: "EX12345BAT2023",
-      urgencyLevel: "Urgent",
-      status: "Pending",
-    },
-    {
-      id: 4,
-      serviceType: "Tire replacement",
-      appointmentDate: "14/02/2025",
-      serialNumber: "EX12345BAT2023",
-      urgencyLevel: "Urgent",
-      status: "Rejected",
-    },
-    {
-      id: 5,
-      serviceType: "Car Routine Maintenance",
-      appointmentDate: "16/02/2025",
-      serialNumber: "EX12345BAT2023",
-      urgencyLevel: "Urgent",
-      status: "Accepted",
-    },
-  ];
+  useEffect(() => {
+    setAppointments([
+      { id: 1, serviceType: "Car Routine Maintenance", appointmentDate: "12/02/2025", serialNumber: "EX12345BAT2023", urgencyLevel: "Urgent", status: "Accepted" },
+      { id: 2, serviceType: "Battery Testing", appointmentDate: "13/02/2025", serialNumber: "EX12345BAT2023", urgencyLevel: "Standard", status: "Accepted" },
+      { id: 3, serviceType: "Oil and filter change", appointmentDate: "14/02/2025", serialNumber: "EX12345BAT2023", urgencyLevel: "Urgent", status: "Pending" },
+      { id: 4, serviceType: "Tire replacement", appointmentDate: "14/02/2025", serialNumber: "EX12345BAT2023", urgencyLevel: "Urgent", status: "Rejected" },
+      { id: 5, serviceType: "Car Routine Maintenance", appointmentDate: "16/02/2025", serialNumber: "EX12345BAT2023", urgencyLevel: "Urgent", status: "Accepted" },
+    ]);
+    setTotalAppointment(5);
+  }, []);
+
+  const handleSearchChange = (e) => {
+    setSearchInput(e.target.value);
+  };
+
+  const handleStatusChange = (e) => {
+    setStatus(e.target.value);
+  };
+
+  const setShowModal = () => { setShow(true) }
+  const handleCloseModal = () => { setShow(false) };
 
   const handleCreate = (e) => {
     e.preventDefault();
     setIsLoading(true);
     setTimeout(() => {
-      setIsLoading(false)
       navigate("request");
-    }, 1000)
+    }, 200)
   };
-
-  const filteredServiceTypes = Appointments.filter((appointment) => {
-    const matchesSearch =
-      appointment.serviceType.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesStatus =
-      statusFilter === '' || appointment.status.toLowerCase() === statusFilter.toLowerCase();
-    return matchesSearch && matchesStatus;
-  });
-
-  const handleSearchChange = (e) => {
-    setSearchTerm(e.target.value);
-  };
-
-  const handleStatusChange = (e) => {
-    setStatusFilter(e.target.value);
-  };
-
-  const handlePageChange = (event, page) => {
-    setCurrentPage(page);
-  };
-
-  const displayedAppointments = filteredServiceTypes.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
-  );
 
   const handleView = (e) => {
+    e.preventDefault();
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false)
       navigate("request");
-    }, 1000)
+    }, 200)
   };
 
   return (
@@ -143,7 +92,7 @@ const AppointmentList = () => {
                   type="search"
                   className="search-input"
                   placeholder="Search by Service type"
-                  value={searchTerm}
+                  value={searchInput}
                   onChange={handleSearchChange}
                 />
                 <IoSearch className="search-icon" />
@@ -155,7 +104,7 @@ const AppointmentList = () => {
                     name="status"
                     id="status-select"
                     className="status-select"
-                    value={statusFilter}
+                    value={status}
                     onChange={handleStatusChange}
                   >
                     <option value="">Status</option>
@@ -180,7 +129,7 @@ const AppointmentList = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {displayedAppointments.length === 0 ? (
+                  {appointments.length === 0 ? (
                     <tr className="no-data">
                       <td colSpan={tableHeadings.length}>
                         <Norecords />
@@ -189,7 +138,7 @@ const AppointmentList = () => {
                       </td>
                     </tr>
                   ) : (
-                    displayedAppointments.map((appointment, index) => (
+                    appointments.map((appointment, index) => (
                       <tr key={appointment.id} className="list-item">
                         <td>{(currentPage - 1) * itemsPerPage + index + 1}</td>
                         <td>{appointment.serviceType}</td>
@@ -221,16 +170,23 @@ const AppointmentList = () => {
           <div className="pagination-align">
             <Stack spacing={2}>
               <Pagination
-                count={Math.ceil(filteredServiceTypes.length / itemsPerPage)}
+                count={Math.ceil(totalAppointment.length / itemsPerPage)}
                 page={currentPage}
-                onChange={handlePageChange}
+                onChange={(e, value) => setCurrentPage(value)}
               />
             </Stack>
           </div>
         </section>
       )}
 
-      <DeleteModal show={show} handleClose={handleCloseModal} />
+      <DeleteModal
+        show={show}
+        handleClose={handleCloseModal}
+      // entityId={managerIdToDelete}
+      // entityType="Manager"
+      // deleteEndpoint="/managerMaster/deleteManagerMasterById"
+      // onDeleteSuccess={fetchManagers}
+      />
     </>
   );
 };

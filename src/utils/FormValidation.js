@@ -55,7 +55,6 @@ const AdvisorValidationSchema = Yup.object({
     .required("Status is required"),
 })
 
-
 // Customer validation
 const CustomerValidationSchema = Yup.object({
   userName: Yup.string().required("User name is required"),

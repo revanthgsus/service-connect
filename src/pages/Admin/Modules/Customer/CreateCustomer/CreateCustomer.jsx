@@ -101,7 +101,7 @@ const CreateCustomer = () => {
       label: "Pincode",
       name: "pincode",
       placeholder: "Enter pincode",
-      type: "number",
+      type: "text",
     },
     {
       label: "State",

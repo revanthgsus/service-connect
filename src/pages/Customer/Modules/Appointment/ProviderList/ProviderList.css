@@ -114,14 +114,12 @@
   margin: 30px 0px;
 }
 
-.provider-list .nearby-advisor {
+.advisor-heading {
   font-family: 'Be Vietnam Pro', sans-serif;
   color: #ffffff;
-  background: var(--main-btn-color);
+  background: var(--brand-color);
   margin-bottom: 0px;
-  border-top-right-radius: 5px;
-  border-top-left-radius: 5px;
-  padding: 20px 35px;
+  padding: 20px 25px;
 }
 
 .provider-list .checkbox-wrapper {
@@ -136,8 +134,8 @@
 }
 
 @media only screen and (min-width :1200px) and (max-width: 1399px) {
-  .provider-list .nearby-advisor {
-    padding: 15px 25px;
+  .advisor-heading {
+    padding: 15px 20px;
     font-size: 16px;
   }
 }

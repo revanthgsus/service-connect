@@ -125,8 +125,6 @@ const CreateManager = () => {
       status: values.status === "Active",
     };
 
-    // setLoading(true);
-
     try {
       const response = await axios.post(
         `${API_BASE_URL}/managerMaster/addOrUpdateManagerMaster`,

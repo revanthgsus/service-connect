@@ -133,7 +133,7 @@ const LoginPage = () => {
                     value={formData.password}
                     onChange={handleChange}
                   />
-                  <span className="input-icon" onClick={handlePasswordToggle}>
+                  <span className="input-icon" onClick={handlePasswordToggle}  >
                     {showPassword ? <Visibility /> : <VisibilityOff />}
                   </span>
                 </div>

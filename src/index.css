@@ -18,6 +18,10 @@ input[type="search"]::-webkit-search-cancel-button {
   display: none;
 }
 
+input[type="password"]::-ms-reveal {
+  display: none;
+}
+
 label {
   color: var(--text-color);
   font-weight: 400;

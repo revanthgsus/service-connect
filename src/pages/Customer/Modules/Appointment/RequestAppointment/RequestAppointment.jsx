@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './RequestAppointment.css';
 import { Col, Row } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
@@ -7,23 +7,23 @@ import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import { ReactComponent as Locationicon } from "../../../../../assets/images/customer/appointment/location-icon.svg"
 import ProviderList from './../ProviderList/ProviderList';
-import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
-import { MobileTimePicker } from '@mui/x-date-pickers/MobileTimePicker';
-import dayjs from 'dayjs';
+// import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
+// import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+// import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
+// import { MobileTimePicker } from '@mui/x-date-pickers/MobileTimePicker';
+// import dayjs from 'dayjs';
 
 const RequestAppointment = () => {
   const navigate = useNavigate();
 
   const [serviceType, setServiceType] = useState('');
-  const [urgencyLevel, setUrgencyLevel] = useState('');
-  const [providerShow, setProviderShow] = useState(true);
+  // const [urgencyLevel, setUrgencyLevel] = useState('');
+  const [providerShow, setProviderShow] = useState(false);
 
-  useEffect(() => {
-    setProviderShow(false);
-  }, [])
-
+  const handleView = (e) => {
+    e.preventDefault()
+    setProviderShow(true)
+  }
   const ServiceTypes = [
     'Oil Change',
     'Tire Rotation',
@@ -33,23 +33,23 @@ const RequestAppointment = () => {
     'Engine Diagnostics',
   ];
 
-  const AppointmentDate = [
-    {
-      label: 'Appointment Date',
-      name: 'appointmentdate',
-      placeholder: 'Enter date',
-      type: 'date',
-    }
-  ];
+  // const AppointmentDate = [
+  //   {
+  //     label: 'Appointment Date',
+  //     name: 'appointmentdate',
+  //     placeholder: 'Enter date',
+  //     type: 'date',
+  //   }
+  // ];
 
-  const AppointmentTime = [
-    {
-      label: 'Start Time',
-      name: 'starttime',
-      placeholder: 'Enter time',
-      type: 'time',
-    },
-  ];
+  // const AppointmentTime = [
+  //   {
+  //     label: 'Start Time',
+  //     name: 'starttime',
+  //     placeholder: 'Enter time',
+  //     type: 'time',
+  //   },
+  // ];
 
   const LocationData = [
     {
@@ -60,36 +60,40 @@ const RequestAppointment = () => {
     },
   ];
 
-  const ProductData = [
-    {
-      label: 'Product Name',
-      name: 'productname',
-      placeholder: 'Enter product name',
-      type: 'text',
-    },
-    {
-      label: 'Product Serial Number',
-      name: 'serialnumber',
-      placeholder: 'Enter serial number',
-      type: 'text',
-    },
-  ];
+  // const ProductData = [
+  //   {
+  //     label: 'Product Name',
+  //     name: 'productname',
+  //     placeholder: 'Enter product name',
+  //     type: 'text',
+  //   },
+  //   {
+  //     label: 'Product Serial Number',
+  //     name: 'serialnumber',
+  //     placeholder: 'Enter serial number',
+  //     type: 'text',
+  //   },
+  // ];
 
-  const UrgencyOptions = ['Standard', 'Urgent', 'Scheduled'];
+  // const UrgencyOptions = ['Standard', 'Urgent', 'Scheduled'];
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setProviderShow(true)
-  };
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   setProviderShow(true)
+  // };
 
-  const handleCancel = (e) => {
-    e.preventDefault();
-    navigate(-1);
-  };
+  // const handleCancel = (e) => {
+  //   e.preventDefault();
+  //   navigate(-1);
+  // };
 
   const handleBack = (e) => {
     e.preventDefault();
     navigate(-1);
+  };
+
+  const handleCloseProvider = () => {
+    setProviderShow(false);
   };
 
   return (
@@ -100,7 +104,7 @@ const RequestAppointment = () => {
           <h5>Schedule Appointment</h5>
         </div>
 
-        <form onSubmit={handleSubmit}>
+        <form >
           <div className="request-form">
             <h5 className="preference-heading">Select Your Preferences</h5>
             <Row className="add-fields">
@@ -145,7 +149,7 @@ const RequestAppointment = () => {
                 </div>
               </Col>
 
-              {AppointmentDate.map((field, index) => (
+              {/* {AppointmentDate.map((field, index) => (
                 <Col key={index} xxl={4} xl={4} lg={4} md={6} sm={6}>
                   <div className="input-wrapper">
                     <div className="form-group">
@@ -182,10 +186,10 @@ const RequestAppointment = () => {
                     </div>
                   </div>
                 </Col>
-              ))}
+              ))} */}
 
 
-              {AppointmentTime.map((field, index) => (
+              {/* {AppointmentTime.map((field, index) => (
                 <Col key={index} xxl={4} xl={4} lg={4} md={6} sm={6}>
                   <div className="input-wrapper">
                     <div className="form-group">
@@ -225,7 +229,7 @@ const RequestAppointment = () => {
                     </div>
                   </div>
                 </Col>
-              ))}
+              ))} */}
 
 
               {LocationData.map((field, index) => (
@@ -247,7 +251,7 @@ const RequestAppointment = () => {
                   </div>
                 </Col>
               ))}
-
+              {/* 
               {ProductData.map((field, index) => (
                 <Col key={index} xxl={4} xl={4} lg={4} md={6} sm={6}>
                   <div className="input-wrapper">
@@ -263,9 +267,9 @@ const RequestAppointment = () => {
                     </div>
                   </div>
                 </Col>
-              ))}
+              ))} */}
 
-              <Col xxl={8} xl={8} lg={8} md={8} sm={7}>
+              {/* <Col xxl={8} xl={8} lg={8} md={8} sm={7}>
                 <div className="urgency-options input-wrapper">
                   <label>Urgency Level</label>
                   <div className="radio-group">
@@ -290,22 +294,22 @@ const RequestAppointment = () => {
                     ))}
                   </div>
                 </div>
-              </Col>
+              </Col> */}
               <Col className='provider-container'>
                 <div >
-                  <button type="submit" className="provider-btn">View Provider</button>
+                  <button type="submit" className="provider-btn" onClick={handleView}>View Provider</button>
                 </div>
               </Col>
             </Row>
           </div>
         </form>
 
-        {providerShow && <ProviderList />}
+        {providerShow && <ProviderList show={providerShow} handleClose={handleCloseProvider} />}
 
-        <div className="form-submit-button">
+        {/* <div className="form-submit-button">
           <button type="button" className="cancel-button" onClick={handleCancel}>Cancel</button>
           <button type="submit" className="request-button">Request Appointment</button>
-        </div>
+        </div> */}
       </section>
     </>
   );
