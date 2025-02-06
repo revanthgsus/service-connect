@@ -107,9 +107,6 @@ const LoginPage = () => {
               <div className='input-container'>
                 <label htmlFor="username" className="form-label">User Name</label>
                 <div className="input-wrapper">
-                  <span className="input-icon">
-                    <PersonIcon />
-                  </span>
                   <input
                     type="text"
                     name="username"
@@ -118,6 +115,9 @@ const LoginPage = () => {
                     value={formData.username}
                     onChange={handleChange}
                   />
+                  <span className="input-icon">
+                    <PersonIcon />
+                  </span>
                 </div>
                 {error.username && <span className='error-message'>{error.username}</span>}
               </div>
@@ -125,9 +125,6 @@ const LoginPage = () => {
               <div className="input-container">
                 <label htmlFor="password" className="form-label">Password</label>
                 <div className="input-wrapper">
-                  <span className="input-icon" onClick={handlePasswordToggle}>
-                    {showPassword ? <Visibility /> : <VisibilityOff />}
-                  </span>
                   <input
                     type={showPassword ? 'text' : 'password'}
                     name="password"
@@ -136,6 +133,9 @@ const LoginPage = () => {
                     value={formData.password}
                     onChange={handleChange}
                   />
+                  <span className="input-icon" onClick={handlePasswordToggle}>
+                    {showPassword ? <Visibility /> : <VisibilityOff />}
+                  </span>
                 </div>
                 {error.password && <span className='error-message'>{error.password}</span>}
                 {error.general && <span className="error-message">{error.general}</span>}

@@ -5,8 +5,8 @@ import DashboardBanner from '../../assets/images/comman/hero-banner.png';
 const Banner = () => {
   return (
     <>
-      <div className='banner-alignment'>
-        <div className='bannerimage-container'>
+      <div className='banner-container'>
+        <div className='banner-image-container'>
           <img src={DashboardBanner} className='img-fluid banner-image' alt='banner-img' />
         </div>
         <div className='banner-content'>

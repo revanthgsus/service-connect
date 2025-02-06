@@ -1,21 +1,29 @@
 import React from 'react';
 import './ServiceKpi.css';
+import { ReactComponent as CompletedIcon } from "../../../../../assets/images/customer/dashboard/completed.svg";
+import { ReactComponent as InprogressIcon } from "../../../../../assets/images/customer/dashboard/inprogress.svg";
+import { ReactComponent as TotalIcon } from "../../../../../assets/images/customer/dashboard/inprogress.svg";
 
 const ServiceKpi = () => {
   return (
     <>
-      <div>
+      <div className='service-data'>
         <div>
           <h6>Completed Services</h6>
-          <h3>12</h3>
+          <div className='completed-data'>
+            <h4>12</h4>
+            <span><CompletedIcon className='completed-icon' /></span>
+          </div>
         </div>
         <div>
+          <InprogressIcon />
           <h6>In Progress Service</h6>
-          <h3>10</h3>
+          <h4>10</h4>
         </div>
         <div>
+          <TotalIcon />
           <h6>Total service</h6>
-          <h3>10</h3>
+          <h4>10</h4>
         </div></div>
     </>
   )

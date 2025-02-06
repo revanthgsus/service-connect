@@ -1,0 +1,22 @@
+.service-data {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* border: 1px solid var(--border-color); */
+  box-shadow: var(--shadow-color);
+  border-radius: 5px;
+  padding: 10px
+}
+
+.completed-data {
+  display: flex;
+  justify-content: space-between;
+}
+
+.completed-icon {
+  background-color: #7DB300;
+  border-radius: 50%;
+  display: block;
+  padding: 5px;
+}
+

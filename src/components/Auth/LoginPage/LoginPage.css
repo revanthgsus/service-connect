@@ -61,6 +61,8 @@
   top: 45%;
   transform: translateY(-50%);
   cursor: pointer;
+  display: flex;
+  align-items: center;
 }
 
 .login-form {

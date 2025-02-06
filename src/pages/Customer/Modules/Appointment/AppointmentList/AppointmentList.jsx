@@ -8,7 +8,7 @@ import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import { FaRegEye } from "react-icons/fa6";
 import { HiOutlineTrash } from "react-icons/hi";
-import { ReactComponent as Norecords } from "../../../../../assets/images/customer/no-records.svg"
+import { ReactComponent as Norecords } from "../../../../../assets/images/customer/no-records.svg";
 import DeleteModal from '../../../Common/DeleteModal/DeleteModal';
 import PreLoader from './../../../../../common/PreLoader/PreLoader';
 
