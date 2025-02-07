@@ -62,7 +62,6 @@
 
 .manager-list .list-alignment {
   overflow-x: auto;
-  cursor: pointer;
 }
 
 .manager-list .list-alignment::-webkit-scrollbar {
@@ -79,6 +78,7 @@
 .manager-list .list-alignment::-webkit-scrollbar-thumb {
   background: #d6d6d6;
   border-radius: 10px;
+  cursor: pointer;
 }
 
 .manager-list .list-alignment::-webkit-scrollbar-thumb:hover {

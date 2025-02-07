@@ -2,6 +2,7 @@ import React, { lazy, Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import PreLoader from '../common/PreLoader/PreLoader';
 import MainLayout from '../Layouts/MainLayout/MainLayout';
+import ScrollTop from '../common/ScrollTop/ScrollTop';
 
 const CustomerDashboard = lazy(() => import('../pages/Customer/Modules/Dashboard/CustomerDashboard/CustomerDashboard'));
 const AppointmentList = lazy(() => import("../pages/Customer/Modules/Appointment/AppointmentList/AppointmentList"));
@@ -18,6 +19,7 @@ const ViewPayment = lazy(() => import("../pages/Customer/Modules/Payments/ViewPa
 const CustomerRouter = () => {
   return (
     <>
+      <ScrollTop />
       <Suspense fallback={<PreLoader />}>
         <Routes>
           <Route path='/' element={<MainLayout />}>

@@ -61,7 +61,7 @@ const AppointmentList = () => {
     setIsLoading(true);
     setTimeout(() => {
       navigate("request");
-    }, 200)
+    }, 300)
   };
 
   const handleView = (e) => {
@@ -70,7 +70,7 @@ const AppointmentList = () => {
     setTimeout(() => {
       setIsLoading(false)
       navigate("request");
-    }, 200)
+    }, 300)
   };
 
   return (

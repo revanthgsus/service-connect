@@ -106,7 +106,7 @@ const EditAdvisor = () => {
       label: "Pincode",
       name: "pincode",
       placeholder: "Enter pincode",
-      type: "number",
+      type: "text",
     },
     {
       label: "Department",
@@ -324,9 +324,7 @@ const EditAdvisor = () => {
                                   onBlur={handleBlur}
                                   onChange={(e) => {
                                     let newValue = e.target.value;
-                                    if (field.name === "pincode") {
-                                      newValue = newValue.replace(/[^0-9]/g, "").slice(0, 6);
-                                    } else if (field.name === "mobileNumber") {
+                                    if (field.name === "mobileNumber") {
                                       newValue = newValue.replace(/[^0-9]/g, "").slice(0, 10);
                                     }
                                     handleChange({ target: { name: field.name, value: newValue } });
@@ -375,10 +373,16 @@ const EditAdvisor = () => {
                                   name={field.name}
                                   placeholder={field.placeholder}
                                   value={values[field.name]}
-                                  onChange={handleChange}
                                   onBlur={handleBlur}
                                   className="form-control"
                                   readOnly={field.readOnly}
+                                  onChange={(e) => {
+                                    let newValue = e.target.value;
+                                    if (field.name === "pincode") {
+                                      newValue = newValue.replace(/[^0-9]/g, "").slice(0, 6);
+                                    }
+                                    handleChange({ target: { name: field.name, value: newValue } });
+                                  }}
                                 />
                               )}
                               <ErrorMessage name={field.name} component="div" className="error-message" />

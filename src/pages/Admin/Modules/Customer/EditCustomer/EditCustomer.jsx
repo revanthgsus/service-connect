@@ -104,7 +104,7 @@ const EditCustomer = () => {
       label: "Pincode",
       name: "pincode",
       placeholder: "Enter pincode",
-      type: "number",
+      type: "text",
     },
     {
       label: "State",
@@ -317,9 +317,7 @@ const EditCustomer = () => {
                                   onBlur={handleBlur}
                                   onChange={(e) => {
                                     let newValue = e.target.value;
-                                    if (field.name === "pincode") {
-                                      newValue = newValue.replace(/[^0-9]/g, "").slice(0, 6);
-                                    } else if (field.name === "mobileNumber") {
+                                    if (field.name === "mobileNumber") {
                                       newValue = newValue.replace(/[^0-9]/g, "").slice(0, 10);
                                     }
                                     handleChange({ target: { name: field.name, value: newValue } });
@@ -368,10 +366,16 @@ const EditCustomer = () => {
                                   name={field.name}
                                   placeholder={field.placeholder}
                                   value={values[field.name]}
-                                  onChange={handleChange}
                                   onBlur={handleBlur}
                                   className="form-control"
                                   readOnly={field.readOnly}
+                                  onChange={(e) => {
+                                    let newValue = e.target.value;
+                                    if (field.name === "pincode") {
+                                      newValue = newValue.replace(/[^0-9]/g, "").slice(0, 6);
+                                    }
+                                    handleChange({ target: { name: field.name, value: newValue } });
+                                  }}
                                 />
                               )}
                               <ErrorMessage name={field.name} component="div" className="error-message" />
@@ -384,7 +388,7 @@ const EditCustomer = () => {
 
                   <div className="form-submit-button">
                     <button type="button" className="cancel-button" onClick={handleCancel}>Cancel</button>
-                    <button type="submit" className="save-button">Save</button>
+                    <button type="submit" className="save-button" disabled={loading}>Save</button>
                   </div>
                 </Form>
               )}

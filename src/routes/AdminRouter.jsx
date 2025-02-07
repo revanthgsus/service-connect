@@ -2,6 +2,7 @@ import React, { lazy, Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import PreLoader from '../common/PreLoader/PreLoader';
 import MainLayout from '../Layouts/MainLayout/MainLayout';
+import ScrollTop from '../common/ScrollTop/ScrollTop';
 
 const AdminDashboard = lazy(() => import('../pages/Admin/Modules/Dashboard/AdminDashboard/AdminDashboard'));
 const ManagerList = lazy(() => import('./../pages/Admin/Modules/ServiceManager/ManagerList/ManagerList'));
@@ -20,39 +21,42 @@ const Profile = lazy(() => import('../pages/Admin/Common/Profile/Profile'));
 
 const AdminRouter = () => {
   return (
-    <Suspense fallback={<PreLoader />}>
-      <Routes >
-        <Route path="/" element={<MainLayout />}>
-          <Route path="dashboard" element={<AdminDashboard />}></Route>
+    <>
+      <ScrollTop />
+      <Suspense fallback={<PreLoader />}>
+        <Routes >
+          <Route path="/" element={<MainLayout />}>
+            <Route path="dashboard" element={<AdminDashboard />}></Route>
 
-          <Route path='manager' >
-            <Route index element={<ManagerList />} />
-            <Route path='createmanager' element={<CreateManager />} />
-            <Route path='editmanager' element={<EditManager />} />
+            <Route path='manager' >
+              <Route index element={<ManagerList />} />
+              <Route path='createmanager' element={<CreateManager />} />
+              <Route path='editmanager' element={<EditManager />} />
+            </Route>
+
+            <Route path='advisor' >
+              <Route index element={<AdvisorList />} />
+              <Route path='createadvisor' element={<CreateAdvisor />} />
+              <Route path='editadvisor' element={<EditAdvisor />} />
+            </Route>
+
+            <Route path='customer' >
+              <Route index element={<CustomerList />} />
+              <Route path='createcustomer' element={<CreateCustomer />} />
+              <Route path='editcustomer' element={<EditCustomer />} />
+            </Route>
+
+            <Route path='adminlist' >
+              <Route index element={<AdminList />} />
+              <Route path='createadmin' element={<CreateAdmin />} />
+              <Route path='editadmin' element={<EditAdmin />} />
+            </Route>
+
+            <Route path="profile" element={<Profile />} />
           </Route>
-
-          <Route path='advisor' >
-            <Route index element={<AdvisorList />} />
-            <Route path='createadvisor' element={<CreateAdvisor />} />
-            <Route path='editadvisor' element={<EditAdvisor />} />
-          </Route>
-
-          <Route path='customer' >
-            <Route index element={<CustomerList />} />
-            <Route path='createcustomer' element={<CreateCustomer />} />
-            <Route path='editcustomer' element={<EditCustomer />} />
-          </Route>
-
-          <Route path='adminlist' >
-            <Route index element={<AdminList />} />
-            <Route path='createadmin' element={<CreateAdmin />} />
-            <Route path='editadmin' element={<EditAdmin />} />
-          </Route>
-
-          <Route path="profile" element={<Profile />} />
-        </Route>
-      </Routes >
-    </Suspense>
+        </Routes >
+      </Suspense>
+    </>
   )
 }
 

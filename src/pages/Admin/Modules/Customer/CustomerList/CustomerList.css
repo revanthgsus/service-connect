@@ -78,6 +78,7 @@
 .customer-list .list-alignment::-webkit-scrollbar-thumb {
   background: #d6d6d6;
   border-radius: 10px;
+  cursor: pointer;
 }
 
 .customer-list .list-alignment::-webkit-scrollbar-thumb:hover {

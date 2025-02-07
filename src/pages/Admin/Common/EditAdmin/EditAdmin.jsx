@@ -293,6 +293,7 @@ const EditAdmin = () => {
                                   className="form-control"
                                   value={values[field.name]}
                                   onBlur={handleBlur}
+                                  readOnly={field.readOnly}
                                   onChange={(e) => {
                                     if (field.name === 'mobileNumber') {
                                       const newValue = e.target.value.replace(/[^0-9]/g, '').slice(0, 10);

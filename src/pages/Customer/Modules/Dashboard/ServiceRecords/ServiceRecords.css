@@ -28,7 +28,6 @@
 
 .service-records .list-alignment {
   overflow-x: auto;
-  cursor: pointer;
 }
 
 .service-records .list-alignment::-webkit-scrollbar {
@@ -45,6 +44,7 @@
 .service-records .list-alignment::-webkit-scrollbar-thumb {
   background: #d6d6d6;
   border-radius: 10px;
+  cursor: pointer;
 }
 
 .service-records .list-alignment::-webkit-scrollbar-thumb:hover {

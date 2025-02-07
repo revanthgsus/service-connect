@@ -96,7 +96,12 @@ const ManagerList = () => {
       });
 
       if (response.status === 200 || response.data?.success) {
+        window.scrollTo(0, 0);
         navigate("editmanager", { state: { managerData: response.data } });
+        if (window.scrollY > 100) {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+
       } else {
         alert("Failed to fetch manager details.");
       }

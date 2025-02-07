@@ -58,28 +58,34 @@ const Kpi = () => {
   }, [navigate, kpiData]);
 
   return (
-    <section className="dashboard-kpi">
-      <h5 className="dashboard-heading">Admin Dashboard</h5>
-      <div className="kpi-alignment">
-        {isLoading ? (
-          <PreLoader />
-        ) : (
-          <Row>
-            {kpiCards.map((data) => (
-              <Col key={data.id} xl={3} sm={6} className="py-2">
-                <div className="kpi-item">
-                  <div className="kpi-icon">{data.icon}</div>
-                  <div className="kpi-value">
-                    <h6>{data.title}</h6>
-                    <h3>{data.value}</h3>
-                  </div>
-                </div>
-              </Col>
-            ))}
-          </Row>
-        )}
-      </div>
-    </section>
+    <>
+      {isLoading ? (
+        <PreLoader />
+      ) : (
+        <section className="dashboard-kpi">
+          <h5 className="dashboard-heading">Admin Dashboard</h5>
+          <div className="kpi-alignment">
+            {isLoading ? (
+              <PreLoader />
+            ) : (
+              <Row>
+                {kpiCards.map((data) => (
+                  <Col key={data.id} xl={3} sm={6} className="py-2">
+                    <div className="kpi-item">
+                      <div className="kpi-icon">{data.icon}</div>
+                      <div className="kpi-value">
+                        <h6>{data.title}</h6>
+                        <h3>{data.value}</h3>
+                      </div>
+                    </div>
+                  </Col>
+                ))}
+              </Row>
+            )}
+          </div>
+        </section>
+      )}
+    </>
   );
 };
 
