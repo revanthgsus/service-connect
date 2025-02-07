@@ -7,17 +7,16 @@ import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import { ReactComponent as Locationicon } from "../../../../../assets/images/customer/appointment/location-icon.svg"
 import ProviderList from './../ProviderList/ProviderList';
-// import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
-// import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-// import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
-// import { MobileTimePicker } from '@mui/x-date-pickers/MobileTimePicker';
-// import dayjs from 'dayjs';
+import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
+import { MobileTimePicker } from '@mui/x-date-pickers/MobileTimePicker';
+import dayjs from 'dayjs';
 
 const RequestAppointment = () => {
   const navigate = useNavigate();
-
   const [serviceType, setServiceType] = useState('');
-  // const [urgencyLevel, setUrgencyLevel] = useState('');
+  const [urgencyLevel, setUrgencyLevel] = useState('');
   const [providerShow, setProviderShow] = useState(false);
 
   const handleView = (e) => {
@@ -33,23 +32,23 @@ const RequestAppointment = () => {
     'Engine Diagnostics',
   ];
 
-  // const AppointmentDate = [
-  //   {
-  //     label: 'Appointment Date',
-  //     name: 'appointmentdate',
-  //     placeholder: 'Enter date',
-  //     type: 'date',
-  //   }
-  // ];
+  const AppointmentDate = [
+    {
+      label: 'Appointment Date',
+      name: 'appointmentdate',
+      placeholder: 'Enter date',
+      type: 'date',
+    }
+  ];
 
-  // const AppointmentTime = [
-  //   {
-  //     label: 'Start Time',
-  //     name: 'starttime',
-  //     placeholder: 'Enter time',
-  //     type: 'time',
-  //   },
-  // ];
+  const AppointmentTime = [
+    {
+      label: 'Start Time',
+      name: 'starttime',
+      placeholder: 'Enter time',
+      type: 'time',
+    },
+  ];
 
   const LocationData = [
     {
@@ -60,22 +59,22 @@ const RequestAppointment = () => {
     },
   ];
 
-  // const ProductData = [
-  //   {
-  //     label: 'Product Name',
-  //     name: 'productname',
-  //     placeholder: 'Enter product name',
-  //     type: 'text',
-  //   },
-  //   {
-  //     label: 'Product Serial Number',
-  //     name: 'serialnumber',
-  //     placeholder: 'Enter serial number',
-  //     type: 'text',
-  //   },
-  // ];
+  const ProductData = [
+    {
+      label: 'Product Name',
+      name: 'productname',
+      placeholder: 'Enter product name',
+      type: 'text',
+    },
+    {
+      label: 'Product Serial Number',
+      name: 'serialnumber',
+      placeholder: 'Enter serial number',
+      type: 'text',
+    },
+  ];
 
-  // const UrgencyOptions = ['Standard', 'Urgent', 'Scheduled'];
+  const UrgencyOptions = ['Standard', 'Urgent', 'Scheduled'];
 
   // const handleSubmit = (e) => {
   //   e.preventDefault();
@@ -126,13 +125,22 @@ const RequestAppointment = () => {
                             "& .MuiOutlinedInput-root": {
                               fontSize: "14px",
                               padding: "0px",
+                              color: "var(--text- color)",
                               "& fieldset": {
                                 border: "none",
                               },
                             },
+                            "& .MuiInputBase-input": {
+                              color: "var(--text-color) !important",
+                            },
                             "& .MuiAutocomplete-endAdornment": {
                               position: "absolute",
                               right: "0px !important",
+                              color: "var(--placeholder-color)",
+                            },
+                            "& .MuiInputBase-input::placeholder": {
+                              color: "var(--placeholder-color)",
+                              opacity: 1,
                             },
                             "&:hover .MuiOutlinedInput-notchedOutline": {
                               borderColor: "transparent",
@@ -143,13 +151,55 @@ const RequestAppointment = () => {
                           }}
                         />
                       )}
+                      componentsProps={{
+                        clearIndicator: {
+                          sx: {
+                            display: serviceType ? "flex" : "none",
+                            color: "var(--icon-color)",
+                          },
+                        },
+                      }}
                     />
-
                   </div>
                 </div>
               </Col>
 
-              {/* {AppointmentDate.map((field, index) => (
+              {LocationData.map((field, index) => (
+                <Col key={index} xxl={4} xl={4} lg={4} md={6} sm={6}>
+                  <div className="input-wrapper">
+                    <label htmlFor={field.name}>{field.label}</label>
+                    <div className="form-group location-input">
+                      <input
+                        id={field.name}
+                        type={field.type}
+                        name={field.name}
+                        placeholder={field.placeholder}
+                        className="form-control"
+                      />
+                      <span className='input-icon'>
+                        <Locationicon />
+                      </span>
+                    </div>
+                  </div>
+                </Col>
+              ))}
+
+              <Col className='provider-container'>
+                <div >
+                  <button type="submit" className="provider-btn" onClick={handleView}>View Provider</button>
+                </div>
+              </Col>
+            </Row>
+          </div>
+
+          <div className="request-form">
+            <Row className="add-fields">
+              <Col><span></span></Col>
+            </Row>
+          </div>
+          <div className="request-form">
+            <Row className="add-fields">
+              {AppointmentDate.map((field, index) => (
                 <Col key={index} xxl={4} xl={4} lg={4} md={6} sm={6}>
                   <div className="input-wrapper">
                     <div className="form-group">
@@ -186,10 +236,9 @@ const RequestAppointment = () => {
                     </div>
                   </div>
                 </Col>
-              ))} */}
+              ))}
 
-
-              {/* {AppointmentTime.map((field, index) => (
+              {AppointmentTime.map((field, index) => (
                 <Col key={index} xxl={4} xl={4} lg={4} md={6} sm={6}>
                   <div className="input-wrapper">
                     <div className="form-group">
@@ -219,8 +268,7 @@ const RequestAppointment = () => {
                             "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
                               borderColor: "transparent",
                             },
-                          }}
-                        >
+                          }}>
                           <DemoItem>
                             <MobileTimePicker defaultValue={dayjs('2025-10-20T12:00')} />
                           </DemoItem>
@@ -229,29 +277,8 @@ const RequestAppointment = () => {
                     </div>
                   </div>
                 </Col>
-              ))} */}
-
-
-              {LocationData.map((field, index) => (
-                <Col key={index} xxl={4} xl={4} lg={4} md={6} sm={6}>
-                  <div className="input-wrapper">
-                    <label htmlFor={field.name}>{field.label}</label>
-                    <div className="form-group location-input">
-                      <input
-                        id={field.name}
-                        type={field.type}
-                        name={field.name}
-                        placeholder={field.placeholder}
-                        className="form-control"
-                      />
-                      <span className='input-icon'>
-                        <Locationicon />
-                      </span>
-                    </div>
-                  </div>
-                </Col>
               ))}
-              {/* 
+
               {ProductData.map((field, index) => (
                 <Col key={index} xxl={4} xl={4} lg={4} md={6} sm={6}>
                   <div className="input-wrapper">
@@ -262,14 +289,13 @@ const RequestAppointment = () => {
                         type={field.type}
                         name={field.name}
                         placeholder={field.placeholder}
-                        className="form-control"
-                      />
+                        className="form-control" />
                     </div>
                   </div>
                 </Col>
-              ))} */}
+              ))}
 
-              {/* <Col xxl={8} xl={8} lg={8} md={8} sm={7}>
+              <Col xxl={8} xl={8} lg={8} md={8} sm={7}>
                 <div className="urgency-options input-wrapper">
                   <label>Urgency Level</label>
                   <div className="radio-group">
@@ -282,28 +308,22 @@ const RequestAppointment = () => {
                           name="urgencyLevel"
                           value={option}
                           checked={urgencyLevel === option}
-                          onChange={(e) => setUrgencyLevel(e.target.value)}
-                        />
+                          onChange={(e) => setUrgencyLevel(e.target.value)} />
                         <label
                           className="form-check-label"
-                          htmlFor={`urgency-${option}`}
-                        >
+                          htmlFor={`urgency-${option}`}>
                           {option}
                         </label>
                       </div>
                     ))}
                   </div>
                 </div>
-              </Col> */}
-              <Col className='provider-container'>
-                <div >
-                  <button type="submit" className="provider-btn" onClick={handleView}>View Provider</button>
-                </div>
               </Col>
             </Row>
           </div>
-        </form>
 
+
+        </form>
         {providerShow && <ProviderList show={providerShow} handleClose={handleCloseProvider} />}
 
         {/* <div className="form-submit-button">

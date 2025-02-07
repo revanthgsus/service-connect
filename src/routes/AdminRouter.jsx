@@ -2,7 +2,6 @@ import React, { lazy, Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import PreLoader from '../common/PreLoader/PreLoader';
 import MainLayout from '../Layouts/MainLayout/MainLayout';
-import ScrollTop from '../common/ScrollTop/ScrollTop';
 
 const AdminDashboard = lazy(() => import('../pages/Admin/Modules/Dashboard/AdminDashboard/AdminDashboard'));
 const ManagerList = lazy(() => import('./../pages/Admin/Modules/ServiceManager/ManagerList/ManagerList'));
@@ -22,7 +21,6 @@ const Profile = lazy(() => import('../pages/Admin/Common/Profile/Profile'));
 const AdminRouter = () => {
   return (
     <>
-      <ScrollTop />
       <Suspense fallback={<PreLoader />}>
         <Routes >
           <Route path="/" element={<MainLayout />}>

@@ -1,117 +1,17 @@
-.provider-list .checkbox-wrapper input[type="checkbox"] {
+.offcanvas {
+  width: 450px !important;
+}
+
+.provider-list .checkbox-wrapper input[type="radio"] {
   display: none;
-}
-
-.provider-list .checkbox-wrapper label {
-  padding: 0;
-  margin: 0;
-  line-height: 1;
-}
-
-.provider-list .item .cbx {
-  position: relative;
-  top: 3px;
-  display: inline-block;
-  width: 18px;
-  height: 18px;
-  border: 1px solid #007D85;
-  border-radius: 50px;
-  cursor: pointer;
-}
-
-.provider-list .item .cbx svg {
-  position: relative;
-  top: 0px;
-  transform: scale(0);
-  fill: none;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  transition: .3s linear ease-out;
-}
-
-.provider-list .checkbox-wrapper .item .cbx::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin: -10px 0 0 -10px;
-  width: 20px;
-  height: 20px;
-  border-radius: 100%;
-  background: #007D85;
-  transform: scale(0);
-}
-
-.provider-list .checkbox-wrapper .item .cbx::after {
-  content: '';
-  position: absolute;
-  top: 5px;
-  left: 5px;
-  width: 3px;
-  height: 3px;
-  border-radius: 5px;
-  box-shadow: 0 -18px 0 #007D85, 12px -12px 0 #007D85, 18px 0 0 #007D85, 12px 12px 0 #007D85, 0 18px 0 #007D85, -12px 12px 0 #007D85, -18px 0 0 #007D85, -12px -12px 0 #007D85;
-  transform: scale(0);
 }
 
 .provider-list .checkbox-wrapper .item .advisor-detail {
   position: relative;
   cursor: pointer;
-  transition: color 0.3s ease;
-  display: flex;
-  justify-content: space-between;
+  transition: color 0.2s ease;
   width: 100%;
-}
-
-/* .provider-list .checkbox-wrapper .item .advisor-detail::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 0;
-  width: 0;
-  height: 1px;
-  background: #9098a9;
-} */
-
-.provider-list .checkbox-wrapper .item:checked+.cbx {
-  border-color: transparent;
-}
-
-.provider-list .checkbox-wrapper .item input:checked+.cbx svg {
-  transform: scale(1);
-  stroke-width: 2px;
-  stroke: #007D85;
-  transition: all 0.4s ease;
-  transition-delay: 0.1s;
-}
-
-.provider-list .checkbox-wrapper .item input:checked+.cbx::after {
-  transform: scale(1);
-  opacity: 0;
-  transition: all 0.6s ease;
-}
-
-.provider-list .checkbox-wrapper .item input:checked+.cbx::before {
-  transform: scale(1);
-  opacity: 0;
-  transition: all 0.6s ease;
-}
-
-.provider-list .checkbox-wrapper .item:checked~.advisor-detail {
-  color: #9098a9;
-}
-
-.provider-list .checkbox-wrapper .item:checked~.advisor-detail:after {
-  width: 100%;
-  transition: all 0.4s ease;
-}
-
-.provider-list {
-  border: 1px solid var(--border-color);
-  box-shadow: var(--shadow-color);
-  border-radius: 5px;
-  background-color: var(--navbar-color);
-  margin: 30px 0px;
+  padding: 0px;
 }
 
 .advisor-heading {
@@ -123,7 +23,24 @@
 }
 
 .provider-list .checkbox-wrapper {
-  padding: 15px 25px;
+  padding: 20px 15px;
+  border-radius: 5px;
+  box-shadow: rgb(121 121 121 / 15%) 0px 1px 20px 0px;
+  border: 1.5px solid #dbdbdb;
+  transition: .2s ease-out all;
+  background-color: #ffffff;
+  cursor: pointer;
+}
+
+.provider-list .radio-label {
+  margin: 10px 0px 0px 0px;
+  padding: 0px;
+  width: 100%;
+}
+
+.provider-list .checkbox-wrapper:hover {
+  border: 1.5px solid #02a4b0;
+  transition: .2s linear all;
 }
 
 .provider-list .suggestion-advisor {
@@ -131,11 +48,70 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  gap: 20px;
+  font-family: 'Be Vietnam Pro', sans-serif;
+}
+
+.advisor-heading .offcanvas-title {
+  font-family: 'Be Vietnam Pro', sans-serif;
+}
+
+.advisor-heading .btn-close {
+  font-size: 10px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  box-shadow: rgb(199 199 199 / 24%) 0px 3px 8px;
+  opacity: 0.8;
+}
+
+.advisor-heading .btn-close:hover {
+  opacity: 1;
+  transition: 0.3s linear all;
+}
+
+.provider-list .name-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.provider-list .name-container svg {
+  font-size: 35px;
+  color: #036d74;
+}
+
+.provider-list .first-container p {
+  font-size: 14px;
+  margin-bottom: 0px;
+  font-weight: 400;
+  color: #525252;
+}
+
+.provider-list .first-container h6 {
+  color: #2e2e2e;
+}
+
+.provider-list .second-container p {
+  margin-bottom: 5px;
+  font-size: 14px;
+  text-align: center;
+  color: #525252;
+}
+
+.provider-list .checkbox-wrapper:has(input[type="radio"]:checked) {
+  border: 1.5px solid #02a4b0;
+  background-color: #00c0cc21;
 }
 
 @media only screen and (min-width :1200px) and (max-width: 1399px) {
   .advisor-heading {
     padding: 15px 20px;
+    font-size: 12px;
+  }
+
+  .advisor-heading .offcanvas-title {
+    font-family: 'Be Vietnam Pro', sans-serif;
     font-size: 16px;
   }
 }

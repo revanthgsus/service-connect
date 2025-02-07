@@ -139,17 +139,17 @@ const EditManager = () => {
       if (response.status === 200 || response.data?.success) {
         toast.success(response.data.message, {
           position: "top-center",
-          autoClose: 1000,
+          autoClose: 500,
           hideProgressBar: true,
           theme: "light",
         });
         setTimeout(() => {
           navigate("/admin/manager");
-        }, 1000);
+        }, 500);
       } else {
         toast.error((response.data?.error), {
           position: "top-center",
-          autoClose: 1000,
+          autoClose: 500,
           hideProgressBar: true,
           theme: "light",
         });
@@ -157,7 +157,7 @@ const EditManager = () => {
     } catch (err) {
       toast.error("An error occurred while saving the data.", {
         position: "top-center",
-        autoClose: 1000,
+        autoClose: 500,
         hideProgressBar: true,
         theme: "light",
       });
@@ -386,7 +386,7 @@ const EditManager = () => {
       <CancelModal cancelShow={cancelShow} handleCancelClose={handleCancelClose} />
       <ToastContainer
         position="top-center"
-        autoClose={1000}
+        autoClose={500}
         hideProgressBar={true}
         theme="light"
       />
