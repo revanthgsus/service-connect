@@ -10,12 +10,21 @@ const SelectedProvider = ({ selectedAdvisor }) => {
           {selectedAdvisor && (
             <div className="selected-advisor">
               <h5>Selected Advisor</h5>
-              <div className="advisor-card">
-                <HiOutlineUserCircle size={40} />
-                <div className="advisor-info">
-                  <h6>{selectedAdvisor.name}</h6>
-                  <p>{selectedAdvisor.center}</p>
-                  <p>{selectedAdvisor.rating} | {selectedAdvisor.distance}</p>
+              <div className="item d-flex">
+                <div className="advisor-detail w-100">
+                  <div className="advisor-info">
+                    <div className="name-container">
+                      <HiOutlineUserCircle />
+                      <div className="first-container">
+                        <h6>{selectedAdvisor.name}</h6>
+                        <p>{selectedAdvisor.center}</p>
+                      </div>
+                    </div>
+                    <div className="second-container">
+                      <p>{selectedAdvisor.rating}</p>
+                      <p>{selectedAdvisor.distance}</p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

@@ -18,7 +18,10 @@ const ManagerValidationSchema = Yup.object({
   confirmPassword: Yup.string()
     .oneOf([Yup.ref("password")], "Passwords do not match")
     .required("Confirm password is required"),
-  joiningDate: Yup.date().typeError("Invalid date format").required("Joining date is required"),
+  joiningDate: Yup.date()
+    .nullable()
+    .typeError("Invalid date format")
+    .required("Joining date is required"),
   designation: Yup.string().required("Designation is required"),
   branchName: Yup.string().required("Branch name is required"),
   branchLocation: Yup.string().required("Branch location is required"),
@@ -42,7 +45,10 @@ const AdvisorValidationSchema = Yup.object({
   confirmPassword: Yup.string()
     .oneOf([Yup.ref("password")], "Passwords do not match")
     .required("Confirm password is required"),
-  joiningDate: Yup.date().typeError("Invalid date format").required("Joining date is required"),
+  joiningDate: Yup.date()
+    .nullable()
+    .typeError("Invalid date format")
+    .required("Joining date is required"),
   designation: Yup.string().required("Designation is required"),
   branchName: Yup.string().required("Branch name is required"),
   branchAddress: Yup.string().required("Branch Address is required"),
@@ -70,7 +76,10 @@ const CustomerValidationSchema = Yup.object({
   confirmPassword: Yup.string()
     .oneOf([Yup.ref("password")], "Passwords do not match")
     .required("Confirm password is required"),
-  joiningDate: Yup.date().typeError("Invalid date format").required("Joining date is required"),
+  joiningDate: Yup.date()
+    .nullable()
+    .typeError("Invalid date format")
+    .required("Joining date is required"),
   addressLine1: Yup.string().required("Address line1 is required"),
   addressLine2: Yup.string().required("Address line2 is required"),
   city: Yup.string().required("City is required"),
@@ -93,7 +102,10 @@ const AdminValidationSchema = Yup.object({
     .required("Mobile number is required"),
   role: Yup.string().required("Role is required"),
   location: Yup.string().required("Location is required"),
-  joiningDate: Yup.date().typeError("Invalid date format").required("Joining date is required"),
+  joiningDate: Yup.date()
+    .nullable()
+    .typeError("Invalid date format")
+    .required("Joining date is required"),
   password: Yup.string()
     .matches(passwordRegex, "Password: 8-12 chars, uppercase, numbers, special chars")
     .required("Password is required"),

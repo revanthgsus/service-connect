@@ -98,7 +98,7 @@
   width: 100%;
   border: 1px solid #b1b1b1bd;
   border-radius: 5px;
-  padding: 8px 15px;
+  padding: 8px 10px 8px 15px;
   font-family: 'Be Vietnam Pro', sans-serif;
   background-color: var(--navbar-color);
   color: var(--text-color);
@@ -241,6 +241,10 @@ input[type="number"]::-webkit-outer-spin-button {
 
   .schedule-appointment .form-group {
     margin-bottom: 10px;
+  }
+
+  .schedule-appointment .provider-container {
+    margin-top: 15px;
   }
 }
 

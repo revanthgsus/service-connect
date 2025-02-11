@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import "./EditManager.css";
 import { Col, Row } from 'react-bootstrap';
 import { IoIosArrowDown, IoMdArrowRoundBack } from "react-icons/io";
@@ -8,7 +8,6 @@ import CancelModal from '../../../../../common/CancelModal/CancelModal';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import axios from 'axios';
 import dayjs from 'dayjs';
 import API_BASE_URL from '../../../../../services/AuthService';
@@ -25,6 +24,10 @@ const EditManager = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [cancelShow, setCancelShow] = useState(false);
+
+  const [formErrors, setFormErrors] = useState({});
+  const [formTouched, setFormTouched] = useState({});
+  const fieldRefs = useRef({});
 
   const initialValues = {
     managerId: managerData?.managerId || '',
@@ -114,7 +117,18 @@ const EditManager = () => {
     },
   ];
 
-  const handleSubmit = async (values) => {
+  useEffect(() => {
+    if (Object.keys(formErrors).length > 0) {
+      const firstErrorField = Object.keys(formErrors).find(field => formTouched[field]);
+      if (firstErrorField && fieldRefs.current[firstErrorField]) {
+        setTimeout(() => {
+          fieldRefs.current[firstErrorField].scrollIntoView({ behavior: "smooth", block: "center" });
+        }, 100);
+      }
+    }
+  }, [formErrors, formTouched]);
+
+  const handleSubmit = useCallback(async (values, { setSubmitting }) => {
     const token = localStorage.getItem("authToken");
     if (!token) {
       alert("Session expired. Please sign in to continue.");
@@ -163,8 +177,9 @@ const EditManager = () => {
       });
     } finally {
       setLoading(false);
+      setSubmitting(false);
     }
-  };
+  }, [navigate])
 
   const handleCancel = (e) => {
     e.preventDefault();
@@ -180,21 +195,24 @@ const EditManager = () => {
 
   return (
     <>
-      {loading ?
-        (
-          <PreLoader />
-        ) : (
-          <section className="edit-manager">
-            <div className="edit-header">
-              <IoMdArrowRoundBack onClick={handleBack} />
-              <h5>Edit Service Manager</h5>
-            </div>
-            <Formik
-              initialValues={initialValues}
-              validationSchema={ManagerValidationSchema}
-              onSubmit={handleSubmit}
-            >
-              {({ values, handleChange, handleBlur, setFieldValue }) => (
+      {loading ? (<PreLoader />
+      ) : (
+        <section className="edit-manager">
+          <div className="edit-header">
+            <IoMdArrowRoundBack onClick={handleBack} />
+            <h5>Edit Service Manager</h5>
+          </div>
+          <Formik
+            initialValues={initialValues}
+            validationSchema={ManagerValidationSchema}
+            onSubmit={handleSubmit}
+            validateOnChange={true}
+            validateOnBlur={true}
+          >
+            {({ values, handleChange, setFieldValue, touched, errors }) => {
+              setFormErrors(errors);
+              setFormTouched(touched);
+              return (
                 <Form>
                   <div className="edit-form">
                     <h5 className="editmanager-heading">Manager Information</h5>
@@ -214,7 +232,7 @@ const EditManager = () => {
                                     className="form-control"
                                     value={values.password}
                                     onChange={handleChange}
-                                    onBlur={handleBlur} />
+                                    ref={(el) => (fieldRefs.current[field.name] = el)} />
                                   <span
                                     className="input-icon"
                                     onClick={() => setShowPassword(prevData => !prevData)}>
@@ -231,7 +249,7 @@ const EditManager = () => {
                                     className="form-control"
                                     value={values.confirmPassword}
                                     onChange={handleChange}
-                                    onBlur={handleBlur}
+                                    ref={(el) => (fieldRefs.current[field.name] = el)}
                                   />
                                   <span
                                     className="input-icon"
@@ -242,56 +260,39 @@ const EditManager = () => {
                                 </div>
                               ) : field.name === "joiningDate" ? (
                                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                  <DemoContainer components={['DatePicker']}
-                                    sx={{ paddingTop: "0px" }}>
-                                    <DatePicker className="form-control date-picker"
-                                      value={values.joiningDate ? dayjs(values.joiningDate, "DD/MM/YYYY") : null}
-                                      onChange={(date) => setFieldValue("joiningDate", dayjs(date).format("DD/MM/YYYY"))}
-                                      format='DD/MM/YYYY'
-                                      sx={{
-                                        "& .MuiOutlinedInput-root": {
-                                          outline: "0",
-                                          fontSize: "11px",
-                                          paddingRight: "4px",
-                                          "& fieldset": {
-                                            border: "0px",
+                                  <DatePicker className="form-control date-picker"
+                                    value={values.joiningDate ? dayjs(values.joiningDate) : null}
+                                    onChange={(date) => setFieldValue("joiningDate", date || null)}
+                                    format='DD/MM/YYYY'
+                                    slotProps={{
+                                      textField: {
+                                        inputRef: (el) => (fieldRefs.current["joiningDate"] = el),
+                                      },
+                                    }}
+                                    sx={{
+                                      "& .MuiOutlinedInput-root": {
+                                        outline: "0",
+                                        fontSize: "11px",
+                                        paddingRight: "4px",
+                                        "& fieldset": {
+                                          border: "0px",
+                                        },
+                                        "& button": {
+                                          padding: "5px 8px",
+                                          "& svg": {
+                                            width: "16px",
+                                            color: "var(--input-icon-color)",
                                           },
-                                          "& button": {
-                                            padding: "5px 8px",
-                                            "& svg": {
-                                              width: "16px",
-                                              color: "var(--input-icon-color)",
-                                            },
-                                          },
                                         },
-                                        "&:hover .MuiOutlinedInput-notchedOutline": {
-                                          borderColor: "transparent",
-                                        },
-                                        "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                                          borderColor: "transparent",
-                                        },
-                                      }} />
-                                  </DemoContainer>
+                                      },
+                                      "&:hover .MuiOutlinedInput-notchedOutline": {
+                                        borderColor: "transparent",
+                                      },
+                                      "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                                        borderColor: "transparent",
+                                      },
+                                    }} />
                                 </LocalizationProvider>
-                              ) : field.options ? (
-                                <div className="custom-select">
-                                  <select
-                                    id={field.name}
-                                    name={field.name}
-                                    className="form-control"
-                                    onChange={handleChange}
-                                    value={values[field.name]}
-                                    onBlur={handleBlur}
-                                  >
-                                    <option value="">{field.placeholder}</option>
-                                    {field.options.map((option, idx) => (
-                                      <option key={idx} value={option}>
-                                        {option}
-                                      </option>
-                                    ))}
-                                  </select>
-                                  <IoIosArrowDown className="custom-arrow-icon" />
-                                </div>
                               ) : (
                                 <input
                                   id={field.name}
@@ -300,7 +301,6 @@ const EditManager = () => {
                                   placeholder={field.placeholder}
                                   className="form-control"
                                   value={values[field.name]}
-                                  onBlur={handleBlur}
                                   onChange={(e) => {
                                     if (field.name === 'mobileNumber') {
                                       const newValue = e.target.value.replace(/[^0-9]/g, '').slice(0, 10);
@@ -309,6 +309,7 @@ const EditManager = () => {
                                       handleChange(e);
                                     }
                                   }}
+                                  ref={(el) => (fieldRefs.current[field.name] = el)}
                                 />
                               )}
                               <ErrorMessage name={field.name} component="div" className="error-message" />
@@ -335,7 +336,7 @@ const EditManager = () => {
                                     className="form-control"
                                     value={values[field.name]}
                                     onChange={handleChange}
-                                    onBlur={handleBlur}
+                                    ref={(el) => (fieldRefs.current[field.name] = el)}
                                   >
                                     <option value="">{field.placeholder}</option>
                                     {field.options.map((option, idx) => (
@@ -354,7 +355,7 @@ const EditManager = () => {
                                   placeholder={field.placeholder}
                                   value={values[field.name]}
                                   onChange={handleChange}
-                                  onBlur={handleBlur}
+                                  ref={(el) => (fieldRefs.current[field.name] = el)}
                                   className="form-control"
                                   readOnly={field.readOnly}
                                 />
@@ -371,10 +372,10 @@ const EditManager = () => {
                     <button type="button" className="cancel-button" onClick={handleCancel}>Cancel</button>
                     <button type="submit" className="save-button">Save</button>
                   </div>
-                </Form>
-              )}
-            </Formik>
-          </section>)}
+                </Form>)
+            }}
+          </Formik>
+        </section>)}
 
       <CancelModal cancelShow={cancelShow} handleCancelClose={handleCancelClose} />
       <ToastContainer

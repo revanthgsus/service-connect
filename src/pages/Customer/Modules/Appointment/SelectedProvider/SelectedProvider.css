@@ -8,6 +8,49 @@
   padding: 20px 35px;
 }
 
+.selected-advisor .advisor-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  padding: 20px 25px;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-color);
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  background-color: var(--navbar-color);
+}
+
+.selected-advisor .first-container p {
+  font-size: 15px;
+  margin-bottom: 0px;
+  font-weight: 400;
+  color: var(--sub-text-color);
+}
+
+.selected-advisor .second-container p {
+  margin-bottom: 5px;
+  font-size: 14px;
+  text-align: center;
+  color: var(--sub-text-color);
+}
+
+.selected-advisor .name-container svg {
+  font-size: 40px;
+  color: var(--hamburger-color);
+}
+
+.selected-advisor .name-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+.selected-advisor .first-container h6 {
+  color: var(--text-color);
+}
 
 @media only screen and (min-width: 1200px) and (max-width: 1399px) {
   .selected-advisor h5 {

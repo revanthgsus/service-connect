@@ -12,7 +12,7 @@ import ComplaintDetails from '../ComplaintDetails/ComplaintDetails';
 
 const RequestAppointment = () => {
   const navigate = useNavigate();
-  const [serviceType, setServiceType] = useState('');
+  const [serviceType, setServiceType] = useState(null);
   const [providerShow, setProviderShow] = useState(false);
   const [selectedAdvisor, setSelectedAdvisor] = useState(null);
 
@@ -44,10 +44,7 @@ const RequestAppointment = () => {
   //   e.preventDefault();
   //   navigate(-1);
   // };
-  const handleBack = (e) => {
-    e.preventDefault();
-    navigate(-1);
-  };
+  const handleBack = () => { navigate(-1) };
 
   const handleView = (e) => {
     e.preventDefault()
@@ -161,7 +158,7 @@ const RequestAppointment = () => {
           <ComplaintDetails selectedAdvisor={selectedAdvisor} />
         </form>
 
-        {providerShow && <ProviderList show={providerShow} handleClose={handleCloseProvider} onSelectAdvisor={handleSelectAdvisor} />}
+        <ProviderList show={providerShow} handleClose={handleCloseProvider} onSelectAdvisor={handleSelectAdvisor} />
 
         {/* <div className="form-submit-button">
           <button type="button" className="cancel-button" onClick={handleCancel}>Cancel</button>
