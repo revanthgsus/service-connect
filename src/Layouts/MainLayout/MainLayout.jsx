@@ -16,11 +16,10 @@ const MainLayout = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
-  const handleResize = () => {
-    setIsMobile(window.innerWidth <= 768);
-  };
-
   useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
     window.addEventListener('resize', handleResize);
     return () => {
       window.removeEventListener('resize', handleResize);
@@ -37,7 +36,7 @@ const MainLayout = () => {
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      const sidebar = document.querySelector('.admin-sidebar');
+      const sidebar = document.querySelector('.sidebar');
       if (sidebar && !sidebar.contains(event.target)) {
         setIsOpen(false);
       }

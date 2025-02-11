@@ -17,6 +17,7 @@
 
 .admin-dropdown .dropdownfile ul li {
   padding: 10px 15px;
+  cursor: pointer;
 }
 
 .admin-dropdown .dropdownfile ul li:hover {

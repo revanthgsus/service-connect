@@ -40,7 +40,7 @@ const CustomerList = () => {
   ];
 
   const fetchCustomers = useCallback(async () => {
-    const token = sessionStorage.getItem("authToken");
+    const token = localStorage.getItem("authToken");
     if (!token) {
       alert("Session expired. Please sign in to continue.");
       navigate('/')
@@ -82,7 +82,7 @@ const CustomerList = () => {
   }, [fetchCustomers]);
 
   const handleEdit = async (customerId) => {
-    const token = sessionStorage.getItem("authToken");
+    const token = localStorage.getItem("authToken");
     if (!token) {
       alert("Session expired. Please sign in to continue.");
       navigate('/');

@@ -25,6 +25,7 @@ const ManagerList = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [managerIdToDelete, setManagerIdToDelete] = useState(null);
   const [totalManagers, setTotalManagers] = useState(0);
+  const [debouncedSearch, setDebouncedSearch] = useState('');
 
   const itemsPerPage = 10;
 
@@ -39,8 +40,15 @@ const ManagerList = () => {
     { title: "" },
   ];
 
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedSearch(searchInput);
+    }, 500);
+    return () => clearTimeout(handler);
+  }, [searchInput]);
+
   const fetchManagers = useCallback(async () => {
-    const token = sessionStorage.getItem("authToken");
+    const token = localStorage.getItem("authToken");
     if (!token) {
       alert("Session expired. Please sign in to continue.");
       navigate('/')
@@ -51,7 +59,7 @@ const ManagerList = () => {
       pageNo: currentPage,
       noOfDatas: itemsPerPage,
       ...(status && { status }),
-      ...(searchInput && { input: searchInput }),
+      ...(debouncedSearch && { input: debouncedSearch }),
     };
 
     try {
@@ -74,7 +82,7 @@ const ManagerList = () => {
     } finally {
       setIsLoading(false);
     }
-  }, [currentPage, status, searchInput, navigate]);
+  }, [currentPage, status, debouncedSearch, navigate]);
 
 
   useEffect(() => {
@@ -82,7 +90,7 @@ const ManagerList = () => {
   }, [fetchManagers]);
 
   const handleEdit = async (managerId) => {
-    const token = sessionStorage.getItem("authToken");
+    const token = localStorage.getItem("authToken");
     if (!token) {
       alert("Session expired. Please sign in to continue.");
       navigate('/');
@@ -96,7 +104,6 @@ const ManagerList = () => {
       });
 
       if (response.status === 200 || response.data?.success) {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
         navigate("editmanager", { state: { managerData: response.data } });
       } else {
         alert("Failed to fetch manager details.");
@@ -124,15 +131,6 @@ const ManagerList = () => {
     setTimeout(() => {
       navigate("createmanager");
     }, 300);
-  };
-
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    const day = String(date.getDate()).padStart(2, '0');
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const year = date.getFullYear();
-
-    return `${day}/${month}/${year}`;
   };
 
   return (
@@ -216,7 +214,7 @@ const ManagerList = () => {
                         <td>{manager.userName}</td>
                         <td>{manager.emailAddress}</td>
                         <td>{manager.mobileNumber}</td>
-                        <td>{formatDate(manager.joiningDate)}</td>
+                        <td>{manager.joiningDate}</td>
                         <td>
                           <span className={`status ${manager.status ? 'active' : 'inactive'}`}>
                             {manager.status ? "Active" : "In Active"}

@@ -33,7 +33,7 @@ const EditManager = () => {
     mobileNumber: managerData?.mobileNumber || '',
     password: '',
     confirmPassword: '',
-    joiningDate: managerData?.joiningDate ? dayjs(managerData.joiningDate) : null,
+    joiningDate: managerData?.joiningDate || '',
     designation: "Service Manager",
     branchName: managerData?.branchName || '',
     branchLocation: managerData?.branchLocation || '',
@@ -115,7 +115,7 @@ const EditManager = () => {
   ];
 
   const handleSubmit = async (values) => {
-    const token = sessionStorage.getItem("authToken");
+    const token = localStorage.getItem("authToken");
     if (!token) {
       alert("Session expired. Please sign in to continue.");
       navigate('/')
@@ -124,8 +124,8 @@ const EditManager = () => {
 
     const updatedValues = {
       ...values,
-      joiningDate: values.joiningDate ? dayjs(values.joiningDate).format("YYYY-MM-DD") : "",
-      status: values.status === "Active" ? true : false,
+      joiningDate: values.joiningDate ? dayjs(values.joiningDate).format("DD/MM/YYYY") : '',
+      status: values.status === "Active",
     };
 
     try {
@@ -194,7 +194,7 @@ const EditManager = () => {
               validationSchema={ManagerValidationSchema}
               onSubmit={handleSubmit}
             >
-              {({ values, handleChange, handleBlur }) => (
+              {({ values, handleChange, handleBlur, setFieldValue }) => (
                 <Form>
                   <div className="edit-form">
                     <h5 className="editmanager-heading">Manager Information</h5>
@@ -245,15 +245,8 @@ const EditManager = () => {
                                   <DemoContainer components={['DatePicker']}
                                     sx={{ paddingTop: "0px" }}>
                                     <DatePicker className="form-control date-picker"
-                                      value={values.joiningDate ? dayjs(values.joiningDate) : null}
-                                      onChange={(date) => {
-                                        handleChange({
-                                          target: {
-                                            name: 'joiningDate',
-                                            value: date ? dayjs(date).format("YYYY-MM-DD") : "",
-                                          },
-                                        });
-                                      }}
+                                      value={values.joiningDate ? dayjs(values.joiningDate, "DD/MM/YYYY") : null}
+                                      onChange={(date) => setFieldValue("joiningDate", dayjs(date).format("DD/MM/YYYY"))}
                                       format='DD/MM/YYYY'
                                       sx={{
                                         "& .MuiOutlinedInput-root": {

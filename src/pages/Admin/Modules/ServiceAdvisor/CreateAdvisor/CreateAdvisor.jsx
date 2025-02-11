@@ -16,6 +16,7 @@ import { Formik, Form, ErrorMessage } from 'formik';
 import { AdvisorValidationSchema } from '../../../../../utils/FormValidation';
 import PreLoader from '../../../../../common/PreLoader/PreLoader';
 import { toast, ToastContainer } from 'react-toastify';
+import MultiSelect from './MultiSelect';
 
 const CreateAdvisor = () => {
   const navigate = useNavigate();
@@ -112,12 +113,6 @@ const CreateAdvisor = () => {
       type: "text",
     },
     {
-      label: "Service Type",
-      name: "serviceType",
-      placeholder: "Enter servive type",
-      type: "text",
-    },
-    {
       label: "Status",
       name: "status",
       placeholder: "Select status",
@@ -125,8 +120,17 @@ const CreateAdvisor = () => {
     },
   ];
 
+  const ServiceType = [
+    {
+      label: "Service Type",
+      name: "serviceType",
+      placeholder: "Enter servive type",
+      type: "mutli-select",
+    },
+  ]
+
   const handleSubmit = async (values) => {
-    const token = sessionStorage.getItem('authToken');
+    const token = localStorage.getItem('authToken');
     if (!token) {
       alert("Session expired. Please sign in to continue.");
       navigate('/');
@@ -385,6 +389,22 @@ const CreateAdvisor = () => {
                           </div>
                         </Col>
                       ))}
+
+                      {ServiceType.map((field, index) => (
+                        <Col key={index} xxl={4} xl={4} lg={4} md={6} sm={6}>
+                          <div className="input-wrapper">
+                            <div className="form-group">
+                              <label htmlFor="serviceType">Service Type</label>
+                              <div className="multi-select-wrapper">
+                                <MultiSelect
+                                  selectedValues={values.serviceType}
+                                  onChange={(newValue) => setFieldValue("serviceType", newValue)} />
+                              </div>
+                              <ErrorMessage name={field.name} component="div" className="error-message" />
+                            </div>
+                          </div>
+                        </Col>
+                      ))}
                     </Row>
                   </div>
 
@@ -392,18 +412,12 @@ const CreateAdvisor = () => {
                     <button type="button" className="cancel-button" onClick={handleCancel}>Cancel</button>
                     <button type="submit" className="save-button">Save</button>
                   </div>
-                </Form>
-              )}
+                </Form>)}
             </Formik>
           </section>)}
 
       <CancelModal cancelShow={cancelShow} handleCancelClose={handleCancelClose} />
-      <ToastContainer
-        position="top-center"
-        autoClose={1000}
-        hideProgressBar={true}
-        theme="light"
-      />
+      <ToastContainer position="top-center" autoClose={1000} hideProgressBar={true} theme="light" />
     </>
   );
 };

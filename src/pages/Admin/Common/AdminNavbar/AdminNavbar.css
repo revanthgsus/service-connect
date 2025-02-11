@@ -83,3 +83,9 @@
     gap: unset;
   }
 }
+
+@media screen and (min-width:1400px) {
+  .admin-navbar .navbar-brand {
+    gap: 100px;
+  }
+}

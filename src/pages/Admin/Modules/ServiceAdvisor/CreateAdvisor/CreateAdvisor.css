@@ -162,6 +162,15 @@ input[type="number"]::-webkit-outer-spin-button {
   color: var(--text-color);
 }
 
+.create-advisor .multiselect {
+  border: 1px solid #85858500;
+  border-radius: 5px;
+  padding: 0px 0px;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  background-color: var(--navbar-color);
+  color: var(--text-color);
+}
+
 @media only screen and (max-width:575px) {
   .create-advisor .form-submit-button {
     justify-content: center;
@@ -201,6 +210,10 @@ input[type="number"]::-webkit-outer-spin-button {
   }
 
   .create-advisor .input-wrapper label {
+    font-size: 14px;
+  }
+
+  .create-advisor .multiselect {
     font-size: 14px;
   }
 }

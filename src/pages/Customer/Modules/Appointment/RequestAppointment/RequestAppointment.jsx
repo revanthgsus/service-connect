@@ -5,24 +5,17 @@ import { useNavigate } from 'react-router-dom';
 import { IoMdArrowRoundBack } from 'react-icons/io';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
-import { ReactComponent as Locationicon } from "../../../../../assets/images/customer/appointment/location-icon.svg"
-import ProviderList from './../ProviderList/ProviderList';
-import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
-import { MobileTimePicker } from '@mui/x-date-pickers/MobileTimePicker';
-import dayjs from 'dayjs';
+import { ReactComponent as Locationicon } from "../../../../../assets/images/customer/appointment/location-icon.svg";
+import ProviderList from '../ProviderListShow/ProviderList';
+import SelectedProvider from '../SelectedProvider/SelectedProvider';
+import ComplaintDetails from '../ComplaintDetails/ComplaintDetails';
 
 const RequestAppointment = () => {
   const navigate = useNavigate();
   const [serviceType, setServiceType] = useState('');
-  const [urgencyLevel, setUrgencyLevel] = useState('');
   const [providerShow, setProviderShow] = useState(false);
+  const [selectedAdvisor, setSelectedAdvisor] = useState(null);
 
-  const handleView = (e) => {
-    e.preventDefault()
-    setProviderShow(true)
-  }
   const ServiceTypes = [
     'Oil Change',
     'Tire Rotation',
@@ -30,24 +23,6 @@ const RequestAppointment = () => {
     'Battery Check',
     'Engine Diagnostics',
     'Engine Diagnostics',
-  ];
-
-  const AppointmentDate = [
-    {
-      label: 'Appointment Date',
-      name: 'appointmentdate',
-      placeholder: 'Enter date',
-      type: 'date',
-    }
-  ];
-
-  const AppointmentTime = [
-    {
-      label: 'Start Time',
-      name: 'starttime',
-      placeholder: 'Enter time',
-      type: 'time',
-    },
   ];
 
   const LocationData = [
@@ -59,22 +34,6 @@ const RequestAppointment = () => {
     },
   ];
 
-  const ProductData = [
-    {
-      label: 'Product Name',
-      name: 'productname',
-      placeholder: 'Enter product name',
-      type: 'text',
-    },
-    {
-      label: 'Product Serial Number',
-      name: 'serialnumber',
-      placeholder: 'Enter serial number',
-      type: 'text',
-    },
-  ];
-
-  const UrgencyOptions = ['Standard', 'Urgent', 'Scheduled'];
 
   // const handleSubmit = (e) => {
   //   e.preventDefault();
@@ -85,14 +44,22 @@ const RequestAppointment = () => {
   //   e.preventDefault();
   //   navigate(-1);
   // };
-
   const handleBack = (e) => {
     e.preventDefault();
     navigate(-1);
   };
 
+  const handleView = (e) => {
+    e.preventDefault()
+    setProviderShow(true)
+  };
+
   const handleCloseProvider = () => {
     setProviderShow(false);
+  };
+
+  const handleSelectAdvisor = (advisor) => {
+    setSelectedAdvisor(advisor);
   };
 
   return (
@@ -185,146 +152,16 @@ const RequestAppointment = () => {
               ))}
 
               <Col className='provider-container'>
-                <div >
-                  <button type="submit" className="provider-btn" onClick={handleView}>View Provider</button>
-                </div>
+                <button type="submit" className="provider-btn" onClick={handleView}>View Provider</button>
               </Col>
             </Row>
           </div>
 
-          <div className="request-form">
-            <Row className="add-fields">
-              <Col><span></span></Col>
-            </Row>
-          </div>
-          <div className="request-form">
-            <Row className="add-fields">
-              {AppointmentDate.map((field, index) => (
-                <Col key={index} xxl={4} xl={4} lg={4} md={6} sm={6}>
-                  <div className="input-wrapper">
-                    <div className="form-group">
-                      <label htmlFor={field.name}>{field.label}</label>
-                      <LocalizationProvider dateAdapter={AdapterDayjs}>
-                        <DatePicker
-                          className="form-control date-picker"
-                          format="DD/MM/YYYY"
-                          sx={{
-                            "& .MuiOutlinedInput-root": {
-                              outline: "0",
-                              fontSize: "10px",
-                              paddingRight: "4px",
-                              "& fieldset": {
-                                border: "0px",
-                              },
-                              "& button": {
-                                padding: "5px 8px",
-                                "& svg": {
-                                  width: "16px",
-                                  color: "var(--input-icon-color)",
-                                },
-                              },
-                            },
-                            "&:hover .MuiOutlinedInput-notchedOutline": {
-                              borderColor: "transparent",
-                            },
-                            "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                              borderColor: "transparent",
-                            },
-                          }}
-                        />
-                      </LocalizationProvider>
-                    </div>
-                  </div>
-                </Col>
-              ))}
-
-              {AppointmentTime.map((field, index) => (
-                <Col key={index} xxl={4} xl={4} lg={4} md={6} sm={6}>
-                  <div className="input-wrapper">
-                    <div className="form-group">
-                      <label htmlFor={field.name}>{field.label}</label>
-                      <LocalizationProvider dateAdapter={AdapterDayjs}>
-                        <DemoContainer
-                          components={['TimePicker', 'MobileTimePicker', 'DesktopTimePicker']}
-                          className="time-picker"
-                          sx={{
-                            "& .MuiStack-root": {
-                              paddingTop: "0px !important",
-                              outline: "none"
-                            },
-                            "& .MuiOutlinedInput-root": {
-                              outline: "none",
-                              "& fieldset": {
-                                border: "1px solid transparent",
-                              },
-                            },
-                            "& .MuiOutlinedInput-input": {
-                              padding: "8px 15px",
-                              border: "1px solid transparent"
-                            },
-                            "&:hover .MuiOutlinedInput-notchedOutline": {
-                              borderColor: "transparent",
-                            },
-                            "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                              borderColor: "transparent",
-                            },
-                          }}>
-                          <DemoItem>
-                            <MobileTimePicker defaultValue={dayjs('2025-10-20T12:00')} />
-                          </DemoItem>
-                        </DemoContainer>
-                      </LocalizationProvider>
-                    </div>
-                  </div>
-                </Col>
-              ))}
-
-              {ProductData.map((field, index) => (
-                <Col key={index} xxl={4} xl={4} lg={4} md={6} sm={6}>
-                  <div className="input-wrapper">
-                    <div className="form-group">
-                      <label htmlFor={field.name}>{field.label}</label>
-                      <input
-                        id={field.name}
-                        type={field.type}
-                        name={field.name}
-                        placeholder={field.placeholder}
-                        className="form-control" />
-                    </div>
-                  </div>
-                </Col>
-              ))}
-
-              <Col xxl={8} xl={8} lg={8} md={8} sm={7}>
-                <div className="urgency-options input-wrapper">
-                  <label>Urgency Level</label>
-                  <div className="radio-group">
-                    {UrgencyOptions.map((option, index) => (
-                      <div key={index} className="form-check">
-                        <input
-                          className="form-check-input"
-                          type="radio"
-                          id={`urgency-${option}`}
-                          name="urgencyLevel"
-                          value={option}
-                          checked={urgencyLevel === option}
-                          onChange={(e) => setUrgencyLevel(e.target.value)} />
-                        <label
-                          className="form-check-label"
-                          htmlFor={`urgency-${option}`}>
-                          {option}
-                        </label>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </Col>
-            </Row>
-          </div>
-
-
+          <SelectedProvider selectedAdvisor={selectedAdvisor} />
+          <ComplaintDetails selectedAdvisor={selectedAdvisor} />
         </form>
-        {providerShow && <ProviderList show={providerShow} handleClose={handleCloseProvider} />}
+
+        {providerShow && <ProviderList show={providerShow} handleClose={handleCloseProvider} onSelectAdvisor={handleSelectAdvisor} />}
 
         {/* <div className="form-submit-button">
           <button type="button" className="cancel-button" onClick={handleCancel}>Cancel</button>

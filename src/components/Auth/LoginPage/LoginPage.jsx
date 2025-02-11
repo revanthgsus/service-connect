@@ -75,7 +75,7 @@ const LoginPage = () => {
         });
 
         setTimeout(() => {
-          navigate(redirectTo);
+          navigate(redirectTo, { replace: true });
         }, 500);
       } else {
         setError((prev) => ({ ...prev, general: 'Invalid username and password' }));

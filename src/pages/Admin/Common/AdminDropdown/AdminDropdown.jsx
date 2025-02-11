@@ -14,7 +14,7 @@ const AdminDropdown = () => {
   const [role, setRole] = useState(null);
 
   useEffect(() => {
-    const storedRole = sessionStorage.getItem("userRole");
+    const storedRole = localStorage.getItem("userRole");
     setRole(storedRole);
   }, []);
 

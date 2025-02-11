@@ -112,7 +112,7 @@ const CreateManager = () => {
   ];
 
   const handleSubmit = async (values) => {
-    const token = sessionStorage.getItem('authToken');
+    const token = localStorage.getItem('authToken');
     if (!token) {
       alert("Session expired. Please sign in to continue.");
       navigate('/');

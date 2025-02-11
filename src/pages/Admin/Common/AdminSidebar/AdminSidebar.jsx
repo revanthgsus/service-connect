@@ -31,7 +31,7 @@ const AdminSidebar = ({ isOpen, handleCloseSidebar }) => {
   ];
 
   return (
-    <div className='admin-sidebar'>
+    <div className='admin-sidebar sidebar'>
       <aside className={`sidebar-section ${isOpen ? "open" : "closed"}`}>
         {sidebarItems.map((item, index) => (
           <ul key={index} className='sidebar-link'>

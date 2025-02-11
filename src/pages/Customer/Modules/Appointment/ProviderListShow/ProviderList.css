@@ -2,11 +2,11 @@
   width: 450px !important;
 }
 
-.provider-list .checkbox-wrapper input[type="radio"] {
+.provider-list .radio-wrapper input[type="radio"] {
   display: none;
 }
 
-.provider-list .checkbox-wrapper .item .advisor-detail {
+.provider-list .radio-wrapper .item .advisor-detail {
   position: relative;
   cursor: pointer;
   transition: color 0.2s ease;
@@ -22,11 +22,11 @@
   padding: 20px 25px;
 }
 
-.provider-list .checkbox-wrapper {
+.provider-list .radio-wrapper {
   padding: 20px 15px;
   border-radius: 5px;
   box-shadow: rgb(121 121 121 / 15%) 0px 1px 20px 0px;
-  border: 1.5px solid #dbdbdb;
+  border: 1.5px solid #e8e8e8cc;
   transition: .2s ease-out all;
   background-color: #ffffff;
   cursor: pointer;
@@ -38,9 +38,9 @@
   width: 100%;
 }
 
-.provider-list .checkbox-wrapper:hover {
+.provider-list .radio-wrapper:hover {
   border: 1.5px solid #02a4b0;
-  transition: .2s linear all;
+  transition: .2s ease-out all;
 }
 
 .provider-list .suggestion-advisor {
@@ -99,7 +99,7 @@
   color: #525252;
 }
 
-.provider-list .checkbox-wrapper:has(input[type="radio"]:checked) {
+.provider-list .radio-wrapper:has(input[type="radio"]:checked) {
   border: 1.5px solid #02a4b0;
   background-color: #00c0cc21;
 }

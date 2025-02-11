@@ -30,6 +30,7 @@
   --input-icon-color: #707070;
   --actions-color: #EEEEEE;
   --actions-icon-color: #5a5a5a;
+  --error-msg-color: #ff0000
 }
 
 [data-theme="light"] {
@@ -58,6 +59,7 @@
   --input-icon-color: #707070;
   --actions-color: #EEEEEE;
   --actions-icon-color: #5a5a5a;
+  --error-msg-color: #ff0000
 }
 
 [data-theme="dark"] {
@@ -86,4 +88,5 @@
   --input-icon-color: #dcdcdc;
   --actions-color: #485463;
   --actions-icon-color: #ececec;
+  --error-msg-color: #fd4545
 }

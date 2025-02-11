@@ -44,7 +44,7 @@ const CustomerSidebar = ({ isOpen, handleCloseSidebar }) => {
   ];
 
   return (
-    <div className='customer-sidebar'>
+    <div className='customer-sidebar sidebar'>
       <aside className={`sidebar-section ${isOpen ? "open" : "closed"}`}>
         {sidebarItems.map((item, index) => (
           <ul key={index} className='sidebar-link'>

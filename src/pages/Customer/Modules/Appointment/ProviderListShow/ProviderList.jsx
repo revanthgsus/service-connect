@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import "./ProviderList.css";
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import { HiOutlineUserCircle } from "react-icons/hi2";
 
-const ProviderList = ({ show, handleClose }) => {
-  const [selectedAdvisor, setSelectedAdvisor] = useState(null);
+const ProviderList = ({ show, handleClose, onSelectAdvisor }) => {
 
   const advisors = [
     {
@@ -30,10 +29,6 @@ const ProviderList = ({ show, handleClose }) => {
     },
   ];
 
-  const handleSelection = (advisor) => {
-    setSelectedAdvisor(advisor);
-
-  }
   return (
     <Offcanvas show={show} onHide={handleClose} placement='end'>
       <Offcanvas.Header closeButton className='advisor-heading'>
@@ -42,14 +37,16 @@ const ProviderList = ({ show, handleClose }) => {
       <Offcanvas.Body>
         <div className='provider-list'>
           {advisors.map((advisor) => (
-            <label htmlFor={`advisor-${advisor.id}`} className="radio-label">
-              <div className="checkbox-wrapper" key={advisor.id}>
+            <label key={advisor.id} htmlFor={`advisor-${advisor.id}`} className="radio-label">
+              <div className="radio-wrapper">
                 <input
                   type="radio"
                   id={`advisor-${advisor.id}`}
+                  name="advisor"
                   className="hidden"
-                  checked={selectedAdvisor === advisor.id}
-                  onChange={() => handleSelection(advisor)} />
+                  checked={onSelectAdvisor?.id === advisor.id}
+                  onChange={() => onSelectAdvisor(advisor)}
+                />
                 <div className="item d-flex">
                   <div className="advisor-detail">
                     <div className='suggestion-advisor'>
@@ -74,6 +71,6 @@ const ProviderList = ({ show, handleClose }) => {
       </Offcanvas.Body>
     </Offcanvas>
   );
-}
+};
 
 export default ProviderList;

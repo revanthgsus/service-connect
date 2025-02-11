@@ -17,6 +17,7 @@
 
 .customer-dropdown .dropdownfile ul li {
   padding: 10px 15px;
+  cursor: pointer;
 }
 
 .customer-dropdown .dropdownfile ul li:hover {
