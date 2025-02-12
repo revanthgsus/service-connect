@@ -25,6 +25,7 @@ const AdminList = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [adminIdToDelete, setAdminIdToDelete] = useState(null);
   const [totalAdmins, setTotalAdmins] = useState(0);
+  const [debouncedSearch, setDebouncedSearch] = useState('');
 
   const itemsPerPage = 10;
 
@@ -39,6 +40,13 @@ const AdminList = () => {
     { title: "" },
   ];
 
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedSearch(searchInput);
+    }, 300);
+    return () => clearTimeout(handler);
+  }, [searchInput]);
+
   const fetchAdmins = useCallback(async () => {
     const token = localStorage.getItem("authToken");
     if (!token) {
@@ -51,7 +59,7 @@ const AdminList = () => {
       pageNo: currentPage,
       noOfDatas: itemsPerPage,
       ...(status && { status }),
-      ...(searchInput && { input: searchInput }),
+      ...(debouncedSearch && { input: debouncedSearch }),
     };
 
     try {
@@ -74,7 +82,7 @@ const AdminList = () => {
     } finally {
       setIsLoading(false);
     }
-  }, [currentPage, status, searchInput, navigate]);
+  }, [currentPage, status, debouncedSearch, navigate]);
 
 
   useEffect(() => {
@@ -97,7 +105,6 @@ const AdminList = () => {
 
       if (response.status === 200 || response.data?.success) {
         navigate("editadmin", { state: { adminData: response.data } });
-        window.scrollTo({ top: 0, behavior: "smooth" });
       } else {
         alert("Failed to fetch admin details.");
       }
@@ -124,15 +131,6 @@ const AdminList = () => {
     setTimeout(() => {
       navigate("createadmin");
     }, 300);
-  };
-
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    const day = String(date.getDate()).padStart(2, '0');
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const year = date.getFullYear();
-
-    return `${day}/${month}/${year}`;
   };
 
   return (
@@ -216,7 +214,7 @@ const AdminList = () => {
                         <td>{admin.userName}</td>
                         <td>{admin.emailAddress}</td>
                         <td>{admin.mobileNumber}</td>
-                        <td>{formatDate(admin.joiningDate)}</td>
+                        <td>{admin.joiningDate}</td>
                         <td>
                           <span className={`status ${admin.status ? 'active' : 'inactive'}`}>
                             {admin.status ? "Active" : "In Active"}

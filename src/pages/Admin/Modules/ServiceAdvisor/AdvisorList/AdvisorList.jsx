@@ -25,6 +25,7 @@ const AdvisorList = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [advisorIdToDelete, setAdvisorIdToDelete] = useState(null);
   const [totalAdvisors, setTotalAdvisors] = useState(0);
+  const [debouncedSearch, setDebouncedSearch] = useState('');
 
   const itemsPerPage = 10;
 
@@ -39,6 +40,13 @@ const AdvisorList = () => {
     { title: "" },
   ];
 
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedSearch(searchInput);
+    }, 300);
+    return () => clearTimeout(handler);
+  }, [searchInput]);
+
   const fetchAdvisors = useCallback(async () => {
     const token = localStorage.getItem("authToken");
     if (!token) {
@@ -51,7 +59,7 @@ const AdvisorList = () => {
       pageNo: currentPage,
       noOfDatas: itemsPerPage,
       ...(status && { status }),
-      ...(searchInput && { input: searchInput }),
+      ...(debouncedSearch && { input: debouncedSearch }),
     };
 
     try {
@@ -74,7 +82,7 @@ const AdvisorList = () => {
     } finally {
       setIsLoading(false);
     }
-  }, [currentPage, status, searchInput, navigate]);
+  }, [currentPage, status, debouncedSearch, navigate]);
 
 
   useEffect(() => {
@@ -123,15 +131,6 @@ const AdvisorList = () => {
     setTimeout(() => {
       navigate("createadvisor");
     }, 300);
-  };
-
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    const day = String(date.getDate()).padStart(2, '0');
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const year = date.getFullYear();
-
-    return `${day}/${month}/${year}`;
   };
 
   return (
@@ -215,7 +214,7 @@ const AdvisorList = () => {
                         <td>{advisor.userName}</td>
                         <td>{advisor.emailAddress}</td>
                         <td>{advisor.mobileNumber}</td>
-                        <td>{formatDate(advisor.joiningDate)}</td>
+                        <td>{advisor.joiningDate}</td>
                         <td>
                           <span className={`status ${advisor.status ? 'active' : 'inactive'}`}>
                             {advisor.status ? "Active" : "In Active"}

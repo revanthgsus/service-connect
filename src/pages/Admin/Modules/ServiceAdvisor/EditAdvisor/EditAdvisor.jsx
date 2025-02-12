@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import "./EditAdvisor.css";
 import { Col, Row } from 'react-bootstrap';
 import { IoIosArrowDown, IoMdArrowRoundBack } from "react-icons/io";
@@ -8,7 +8,6 @@ import CancelModal from '../../../../../common/CancelModal/CancelModal';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import axios from 'axios';
 import dayjs from 'dayjs';
 import API_BASE_URL from '../../../../../services/AuthService';
@@ -16,6 +15,7 @@ import { Formik, Form, ErrorMessage } from 'formik';
 import { AdvisorValidationSchema } from '../../../../../utils/FormValidation';
 import PreLoader from '../../../../../common/PreLoader/PreLoader';
 import { toast, ToastContainer } from 'react-toastify';
+import MultiSelect from '../CreateAdvisor/MultiSelect';
 
 const EditAdvisor = () => {
   const navigate = useNavigate();
@@ -26,6 +26,10 @@ const EditAdvisor = () => {
   const [loading, setLoading] = useState(false);
   const [cancelShow, setCancelShow] = useState(false);
 
+  const [formErrors, setFormErrors] = useState({});
+  const [formTouched, setFormTouched] = useState({});
+  const fieldRefs = useRef({});
+
   const initialValues = {
     advisorId: advisorData?.advisorId || '',
     userName: advisorData?.userName || '',
@@ -33,7 +37,7 @@ const EditAdvisor = () => {
     mobileNumber: advisorData?.mobileNumber || '',
     password: '',
     confirmPassword: '',
-    joiningDate: advisorData?.joiningDate ? dayjs(advisorData.joiningDate) : null,
+    joiningDate: advisorData?.joiningDate ? dayjs(advisorData.joiningDate, "DD/MM/YYYY").format("YYYY-MM-DD") : '',
     designation: "Service Advisor",
     branchName: advisorData?.branchName || '',
     branchAddress: advisorData?.branchAddress || '',
@@ -115,12 +119,6 @@ const EditAdvisor = () => {
       type: "text",
     },
     {
-      label: "Service Type",
-      name: "serviceType",
-      placeholder: "Enter servive type",
-      type: "text",
-    },
-    {
       label: "Status",
       name: "status",
       placeholder: "Select status",
@@ -128,8 +126,28 @@ const EditAdvisor = () => {
     },
   ];
 
-  const handleSubmit = async (values) => {
-    const token = sessionStorage.getItem("authToken");
+  const ServiceType = [
+    {
+      label: "Service Type",
+      name: "serviceType",
+      placeholder: "Enter servive type",
+      type: "mutli-select",
+    },
+  ];
+
+  useEffect(() => {
+    if (Object.keys(formErrors).length > 0) {
+      const firstErrorField = Object.keys(formErrors).find(field => formTouched[field]);
+      if (firstErrorField && fieldRefs.current[firstErrorField]) {
+        setTimeout(() => {
+          fieldRefs.current[firstErrorField].scrollIntoView({ behavior: "smooth", block: "center" });
+        }, 100);
+      }
+    }
+  }, [formErrors, formTouched]);
+
+  const handleSubmit = useCallback(async (values, { setSubmitting }) => {
+    const token = localStorage.getItem("authToken");
     if (!token) {
       alert("Session expired. Please sign in to continue.");
       navigate('/')
@@ -138,7 +156,7 @@ const EditAdvisor = () => {
 
     const updatedValues = {
       ...values,
-      joiningDate: values.joiningDate ? dayjs(values.joiningDate).format("YYYY-MM-DD") : "",
+      joiningDate: values.joiningDate ? dayjs(values.joiningDate).format("DD/MM/YYYY") : "",
       status: values.status === "Active" ? true : false,
     };
 
@@ -151,34 +169,20 @@ const EditAdvisor = () => {
       });
 
       if (response.status === 200 || response.data?.success) {
-        toast.success(response.data.message, {
-          position: "top-center",
-          autoClose: 1000,
-          hideProgressBar: true,
-          theme: "light",
-        });
+        toast.success(response.data.message);
         setTimeout(() => {
           navigate("/admin/advisor");
         }, 1000);
       } else {
-        toast.error((response.data?.error), {
-          position: "top-center",
-          autoClose: 1000,
-          hideProgressBar: true,
-          theme: "light",
-        });
+        toast.error(response.data?.error);
       }
     } catch (err) {
-      toast.error("An error occurred while saving the data.", {
-        position: "top-center",
-        autoClose: 1000,
-        hideProgressBar: true,
-        theme: "light",
-      });
+      toast.error("An error occurred while saving the data.");
     } finally {
       setLoading(false);
+      setSubmitting(false);
     }
-  };
+  }, [navigate])
 
   const handleCancel = (e) => {
     e.preventDefault();
@@ -194,21 +198,23 @@ const EditAdvisor = () => {
 
   return (
     <>
-      {loading ?
-        (
-          <PreLoader />
-        ) : (
-          <section className="edit-advisor">
-            <div className="edit-header">
-              <IoMdArrowRoundBack onClick={handleBack} />
-              <h5>Edit Service Advisor</h5>
-            </div>
-            <Formik
-              initialValues={initialValues}
-              validationSchema={AdvisorValidationSchema}
-              onSubmit={handleSubmit}
-            >
-              {({ values, handleChange, handleBlur }) => (
+      {loading ? (<PreLoader />
+      ) : (
+        <section className="edit-advisor">
+          <div className="edit-header">
+            <IoMdArrowRoundBack onClick={handleBack} />
+            <h5>Edit Service Advisor</h5>
+          </div>
+          <Formik
+            initialValues={initialValues}
+            validationSchema={AdvisorValidationSchema}
+            onSubmit={handleSubmit}
+            validateOnChange={true}
+            validateOnBlur={true}>
+            {({ values, handleChange, setFieldValue, touched, errors }) => {
+              setFormErrors(errors);
+              setFormTouched(touched);
+              return (
                 <Form>
                   <div className="edit-form">
                     <h5 className="editadvisor-heading">Advisor Information</h5>
@@ -228,7 +234,8 @@ const EditAdvisor = () => {
                                     className="form-control"
                                     value={values.password}
                                     onChange={handleChange}
-                                    onBlur={handleBlur} />
+                                    ref={(el) => (fieldRefs.current[field.name] = el)}
+                                  />
                                   <span
                                     className="input-icon"
                                     onClick={() => setShowPassword(prevData => !prevData)}>
@@ -245,7 +252,7 @@ const EditAdvisor = () => {
                                     className="form-control"
                                     value={values.confirmPassword}
                                     onChange={handleChange}
-                                    onBlur={handleBlur}
+                                    ref={(el) => (fieldRefs.current[field.name] = el)}
                                   />
                                   <span
                                     className="input-icon"
@@ -256,63 +263,39 @@ const EditAdvisor = () => {
                                 </div>
                               ) : field.name === "joiningDate" ? (
                                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                  <DemoContainer components={['DatePicker']}
-                                    sx={{ paddingTop: "0px" }}>
-                                    <DatePicker className="form-control date-picker"
-                                      value={values.joiningDate ? dayjs(values.joiningDate) : null}
-                                      onChange={(date) => {
-                                        handleChange({
-                                          target: {
-                                            name: 'joiningDate',
-                                            value: date ? dayjs(date).format("YYYY-MM-DD") : "",
-                                          },
-                                        });
-                                      }}
-                                      format='DD/MM/YYYY'
-                                      sx={{
-                                        "& .MuiOutlinedInput-root": {
-                                          outline: "0",
-                                          fontSize: "11px",
-                                          paddingRight: "4px",
-                                          "& fieldset": {
-                                            border: "0px",
-                                          },
-                                          "& button": {
-                                            padding: "5px 8px",
-                                            "& svg": {
-                                              width: "16px",
-                                              color: "var(--input-icon-color)",
-                                            },
+                                  <DatePicker className="form-control date-picker"
+                                    value={values.joiningDate ? dayjs(values.joiningDate) : null}
+                                    onChange={(date) => setFieldValue("joiningDate", date || null)}
+                                    format='DD/MM/YYYY'
+                                    slotProps={{
+                                      textField: {
+                                        inputRef: (el) => (fieldRefs.current["joiningDate"] = el),
+                                      },
+                                    }}
+                                    sx={{
+                                      "& .MuiOutlinedInput-root": {
+                                        outline: "0",
+                                        fontSize: "11px",
+                                        paddingRight: "4px",
+                                        "& fieldset": {
+                                          border: "0px",
+                                        },
+                                        "& button": {
+                                          padding: "5px 8px",
+                                          "& svg": {
+                                            width: "16px",
+                                            color: "var(--input-icon-color)",
                                           },
                                         },
-                                        "&:hover .MuiOutlinedInput-notchedOutline": {
-                                          borderColor: "transparent",
-                                        },
-                                        "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                                          borderColor: "transparent",
-                                        },
-                                      }} />
-                                  </DemoContainer>
+                                      },
+                                      "&:hover .MuiOutlinedInput-notchedOutline": {
+                                        borderColor: "transparent",
+                                      },
+                                      "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                                        borderColor: "transparent",
+                                      },
+                                    }} />
                                 </LocalizationProvider>
-                              ) : field.options ? (
-                                <div className="custom-select">
-                                  <select
-                                    id={field.name}
-                                    name={field.name}
-                                    className="form-control"
-                                    onChange={handleChange}
-                                    value={values[field.name]}
-                                    onBlur={handleBlur}
-                                  >
-                                    <option value="">{field.placeholder}</option>
-                                    {field.options.map((option, idx) => (
-                                      <option key={idx} value={option}>
-                                        {option}
-                                      </option>
-                                    ))}
-                                  </select>
-                                  <IoIosArrowDown className="custom-arrow-icon" />
-                                </div>
                               ) : (
                                 <input
                                   id={field.name}
@@ -321,7 +304,6 @@ const EditAdvisor = () => {
                                   placeholder={field.placeholder}
                                   className="form-control"
                                   value={values[field.name]}
-                                  onBlur={handleBlur}
                                   onChange={(e) => {
                                     let newValue = e.target.value;
                                     if (field.name === "mobileNumber") {
@@ -329,6 +311,7 @@ const EditAdvisor = () => {
                                     }
                                     handleChange({ target: { name: field.name, value: newValue } });
                                   }}
+                                  ref={(el) => (fieldRefs.current[field.name] = el)}
                                 />
                               )}
                               <ErrorMessage name={field.name} component="div" className="error-message" />
@@ -355,8 +338,7 @@ const EditAdvisor = () => {
                                     className="form-control"
                                     value={values[field.name]}
                                     onChange={handleChange}
-                                    onBlur={handleBlur}
-                                  >
+                                    ref={(el) => (fieldRefs.current[field.name] = el)}>
                                     <option value="">{field.placeholder}</option>
                                     {field.options.map((option, idx) => (
                                       <option key={idx} value={option}>
@@ -373,8 +355,8 @@ const EditAdvisor = () => {
                                   name={field.name}
                                   placeholder={field.placeholder}
                                   value={values[field.name]}
-                                  onBlur={handleBlur}
                                   className="form-control"
+                                  ref={(el) => (fieldRefs.current[field.name] = el)}
                                   readOnly={field.readOnly}
                                   onChange={(e) => {
                                     let newValue = e.target.value;
@@ -390,6 +372,23 @@ const EditAdvisor = () => {
                           </div>
                         </Col>
                       ))}
+
+                      {ServiceType.map((field, index) => (
+                        <Col key={index} xxl={4} xl={4} lg={4} md={6} sm={6}>
+                          <div className="input-wrapper">
+                            <div className="form-group">
+                              <label htmlFor="serviceType">Service Type</label>
+                              <div className="multi-select-wrapper">
+                                <MultiSelect
+                                  selectedValues={values.serviceType}
+                                  onChange={(newValue) => setFieldValue("serviceType", newValue)}
+                                  ref={(el) => (fieldRefs.current[field.name] = el)} />
+                              </div>
+                              <ErrorMessage name={field.name} component="div" className="error-message" />
+                            </div>
+                          </div>
+                        </Col>
+                      ))}
                     </Row>
                   </div>
 
@@ -397,10 +396,10 @@ const EditAdvisor = () => {
                     <button type="button" className="cancel-button" onClick={handleCancel}>Cancel</button>
                     <button type="submit" className="save-button">Save</button>
                   </div>
-                </Form>
-              )}
-            </Formik>
-          </section>)}
+                </Form>)
+            }}
+          </Formik>
+        </section>)}
 
       <CancelModal cancelShow={cancelShow} handleCancelClose={handleCancelClose} />
       <ToastContainer

@@ -25,6 +25,7 @@ const CustomerList = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [customerIdToDelete, setCustomerIdToDelete] = useState(null);
   const [totalCustomers, setTotalCustomers] = useState(0);
+  const [debouncedSearch, setDebouncedSearch] = useState('');
 
   const itemsPerPage = 10;
 
@@ -39,6 +40,13 @@ const CustomerList = () => {
     { title: "" },
   ];
 
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedSearch(searchInput);
+    }, 300);
+    return () => clearTimeout(handler);
+  }, [searchInput]);
+
   const fetchCustomers = useCallback(async () => {
     const token = localStorage.getItem("authToken");
     if (!token) {
@@ -51,7 +59,7 @@ const CustomerList = () => {
       pageNo: currentPage,
       noOfDatas: itemsPerPage,
       ...(status && { status }),
-      ...(searchInput && { input: searchInput }),
+      ...(debouncedSearch && { input: debouncedSearch }),
     };
 
     try {
@@ -74,7 +82,7 @@ const CustomerList = () => {
     } finally {
       setIsLoading(false);
     }
-  }, [currentPage, status, searchInput, navigate]);
+  }, [currentPage, status, debouncedSearch, navigate]);
 
 
   useEffect(() => {
@@ -123,15 +131,6 @@ const CustomerList = () => {
     setTimeout(() => {
       navigate("createcustomer");
     }, 300);
-  };
-
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    const day = String(date.getDate()).padStart(2, '0');
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const year = date.getFullYear();
-
-    return `${day}/${month}/${year}`;
   };
 
   return (
@@ -215,7 +214,7 @@ const CustomerList = () => {
                         <td>{customer.userName}</td>
                         <td>{customer.emailAddress}</td>
                         <td>{customer.mobileNumber}</td>
-                        <td>{formatDate(customer.joiningDate)}</td>
+                        <td>{customer.joiningDate}</td>
                         <td>
                           <span className={`status ${customer.status ? 'active' : 'inactive'}`}>
                             {customer.status ? "Active" : "In Active"}

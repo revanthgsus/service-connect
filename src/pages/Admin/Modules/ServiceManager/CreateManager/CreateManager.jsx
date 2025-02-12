@@ -150,30 +150,15 @@ const CreateManager = () => {
       );
 
       if (response.status === 200 || response.data?.success) {
-        toast.success(response.data.message, {
-          position: "top-center",
-          autoClose: 500,
-          hideProgressBar: true,
-          theme: "light",
-        });
+        toast.success(response.data.message);
         setTimeout(() => {
           navigate("/admin/manager");
-        }, 500);
+        }, 1000);
       } else {
-        toast.error(response.data?.error, {
-          position: "top-center",
-          autoClose: 500,
-          hideProgressBar: true,
-          theme: "light",
-        });
+        toast.error(response.data.error);
       }
     } catch (err) {
-      toast.error("An error occurred while saving the data.", {
-        position: "top-center",
-        autoClose: 500,
-        hideProgressBar: true,
-        theme: "light",
-      });
+      toast.error("An error occurred while saving the data.");
     } finally {
       setLoading(false);
       setSubmitting(false);
@@ -380,7 +365,7 @@ const CreateManager = () => {
       <CancelModal cancelShow={cancelShow} handleCancelClose={handleCancelClose} />
       <ToastContainer
         position="top-center"
-        autoClose={500}
+        autoClose={1000}
         hideProgressBar={true}
         theme="light" />
     </>
