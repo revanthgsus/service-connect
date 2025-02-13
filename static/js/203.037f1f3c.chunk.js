@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkservice_connect=self.webpackChunkservice_connect||[]).push([[203],{9203:(e,c,s)=>{s.r(c),s.d(c,{default:()=>n});s(5043);var i=s(579);const n=()=>(0,i.jsx)("div",{children:"DailyActivity"})}}]);
-//# sourceMappingURL=203.037f1f3c.chunk.js.map
