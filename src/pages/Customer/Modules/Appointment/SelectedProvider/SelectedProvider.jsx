@@ -5,11 +5,10 @@ import { HiOutlineUserCircle } from 'react-icons/hi2';
 const SelectedProvider = ({ selectedAdvisor }) => {
   return (
     <>
-      <div className="selected-container mt-3">
+      <div className="selected-container mt-4">
         <div className="advisor-profile">
           {selectedAdvisor && (
             <div className="selected-advisor">
-              <h5>Selected Advisor</h5>
               <div className="item d-flex">
                 <div className="advisor-detail w-100">
                   <div className="advisor-info">

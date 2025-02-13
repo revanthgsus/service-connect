@@ -1,3 +1,152 @@
-.complaint-form .appointment-field {
+.complaint-table .table-align th {
+  font-family: 'Be Vietnam Pro', sans-serif;
+  margin-bottom: 0px;
   padding: 15px 25px;
+  font-weight: 600;
+  text-align: start;
+}
+
+.complaint-table {
+  box-shadow: var(--shadow-color);
+  border-radius: 5px;
+  background-color: var(--navbar-color);
+  width: 100%;
+  white-space: nowrap;
+}
+
+.complaint-table .complaint-section {
+  overflow-x: auto;
+}
+
+.complaint-table .table-align {
+  background: var(--main-btn-color);
+  color: #ffffff;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+}
+
+.complaint-table .sno {
+  width: 0%;
+}
+
+.complaint-table .item {
+  width: 30%;
+}
+
+.complaint-table .description {
+  width: 80%;
+}
+
+.complaint-table .table-list tr td {
+  padding: 15px 15px;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  color: var(--text-color);
+  text-align: start;
+  border-right: 1px solid var(--border-color);
+}
+
+.complaint-table .table-list tr td:nth-last-child(2) {
+  border-right: none;
+}
+
+.complaint-table .table-list tr td:first-child {
+  text-align: center;
+}
+
+.complaint-table .table-list tr {
+  border-bottom: 1px solid var(--border-color);
+}
+
+.complaint-table tr td textarea {
+  width: 100%;
+  border: 1px solid #b1b1b1bd;
+  border-radius: 5px;
+  padding: 6px 10px;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  background-color: var(--navbar-color);
+  color: var(--text-color);
+  resize: none;
+}
+
+.complaint-table tr td textarea:hover {
+  border: 1px solid #01848d;
+  transition: .2s linear all;
+}
+
+.complaint-table tr td textarea:focus-visible {
+  outline: 1px solid #01848d;
+  box-shadow: none;
+  border: 1px solid #01848d;
+}
+
+.complaint-table .add-btn-cell {
+  text-align: end !important;
+}
+
+.complaint-table .add-btn-cell button {
+  border: 1px solid var(--border-color);
+  padding: 6px 20px;
+  border-radius: 30px;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  background: #eaeaea;
+  color: #404040;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.complaint-table .add-btn-cell button:hover {
+  background: #dcdcdc;
+  transition: .2s linear all;
+}
+
+.complaint-table .add-btn-cell button svg {
+  font-size: 16px;
+  margin-right: 0px;
+  vertical-align: sub;
+  color: #404040;
+}
+
+.complaint-table .close-icon svg {
+  color: #6c6c6c;
+  font-size: 16px;
+}
+
+.complaint-table .close-icon span {
+  background-color: #efefefde;
+  padding: 5px 7px;
+  display: inline-block;
+  border-radius: 3px;
+  cursor: pointer;
+  visibility: hidden;
+}
+
+.complaint-table .table-list tr:hover .close-icon span {
+  visibility: visible;
+}
+
+.complaint-table .close-icon span:hover {
+  background-color: #e2e2e2;
+  transition: 0.3s ease-in all;
+}
+
+.complaint-table .close-icon span:hover svg {
+  color: #fa6161;
+  transition: 0.3s ease-in all;
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1399px) {
+  .complaint-table .table-align th {
+    font-size: 14px;
+  }
+
+  .complaint-table .table-list tr td {
+    font-size: 14px;
+    padding: 13px 15px;
+  }
+}
+
+@media only screen and (min-width: 1400px) {
+  .complaint-table tr td textarea {
+    padding: 10px 15px;
+  }
 }

@@ -55,14 +55,6 @@ const ActivityList = () => {
     },
     {
       id: 4,
-      serviceID: "SR-12348",
-      serviceType: "Tire replacement",
-      appointmentDate: "14/02/2025",
-      urgencyLevel: "Urgent",
-      status: "In Progress",
-    },
-    {
-      id: 5,
       serviceID: "SR-12345",
       serviceType: "Car Routine Maintenance",
       appointmentDate: "16/02/2025",
@@ -101,7 +93,7 @@ const ActivityList = () => {
     setTimeout(() => {
       setIsLoading(false)
       navigate("dailyactivity");
-    }, 1000)
+    }, 500)
   };
 
   return (

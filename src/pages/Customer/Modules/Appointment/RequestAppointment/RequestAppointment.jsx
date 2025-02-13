@@ -9,12 +9,16 @@ import { ReactComponent as Locationicon } from "../../../../../assets/images/cus
 import ProviderList from '../ProviderListShow/ProviderList';
 import SelectedProvider from '../SelectedProvider/SelectedProvider';
 import ComplaintDetails from '../ComplaintDetails/ComplaintDetails';
+import PreferenceDetails from '../PreferenceDetails/PreferenceDetails';
+import CancelModal from '../../../../../common/CancelModal/CancelModal';
 
 const RequestAppointment = () => {
   const navigate = useNavigate();
   const [serviceType, setServiceType] = useState(null);
   const [providerShow, setProviderShow] = useState(false);
   const [selectedAdvisor, setSelectedAdvisor] = useState(null);
+  const [cancelShow, setCancelShow] = useState(false);
+
 
   const ServiceTypes = [
     'Oil Change',
@@ -34,17 +38,24 @@ const RequestAppointment = () => {
     },
   ];
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    navigate(-1)
+  };
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   setProviderShow(true)
-  // };
+  const handleCancel = (e) => {
+    e.preventDefault();
+    setCancelShow(true)
+  };
 
-  // const handleCancel = (e) => {
-  //   e.preventDefault();
-  //   navigate(-1);
-  // };
-  const handleBack = () => { navigate(-1) };
+  const handleCancelClose = (e) => {
+    e.preventDefault()
+    setCancelShow(false)
+  };
+
+  const handleBack = () => {
+    setCancelShow(true)
+  };
 
   const handleView = (e) => {
     e.preventDefault()
@@ -131,8 +142,8 @@ const RequestAppointment = () => {
               {LocationData.map((field, index) => (
                 <Col key={index} xxl={4} xl={4} lg={4} md={6} sm={6}>
                   <div className="input-wrapper">
-                    <label htmlFor={field.name}>{field.label}</label>
                     <div className="form-group location-input">
+                      <label htmlFor={field.name}>{field.label}</label>
                       <input
                         id={field.name}
                         type={field.type}
@@ -155,16 +166,20 @@ const RequestAppointment = () => {
           </div>
 
           <SelectedProvider selectedAdvisor={selectedAdvisor} />
+          <PreferenceDetails selectedAdvisor={selectedAdvisor} />
           <ComplaintDetails selectedAdvisor={selectedAdvisor} />
         </form>
 
         <ProviderList show={providerShow} handleClose={handleCloseProvider} onSelectAdvisor={handleSelectAdvisor} />
 
-        {/* <div className="form-submit-button">
-          <button type="button" className="cancel-button" onClick={handleCancel}>Cancel</button>
-          <button type="submit" className="request-button">Request Appointment</button>
-        </div> */}
+        {selectedAdvisor && (
+          <div className="form-submit-button">
+            <button type="button" className="cancel-button" onClick={handleCancel}>Cancel</button>
+            <button type="submit" className="request-button" onClick={handleSubmit}>Request Appointment</button>
+          </div>
+        )}
       </section>
+      <CancelModal cancelShow={cancelShow} handleCancelClose={handleCancelClose} />
     </>
   );
 };

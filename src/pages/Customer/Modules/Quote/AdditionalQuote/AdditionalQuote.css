@@ -1,0 +1,157 @@
+.additional-container .add-header {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 15px;
+}
+
+.additional-container .add-header svg {
+  font-size: 20px;
+  color: var(--text-color);
+  cursor: pointer;
+}
+
+.additional-container .add-header h5 {
+  margin-bottom: 0px;
+  color: var(--text-color);
+  font-family: 'Be Vietnam Pro', sans-serif;
+}
+
+.additional-container .table-list {
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-color);
+  border-radius: 5px;
+  background-color: var(--navbar-color);
+  overflow-x: auto;
+}
+
+.additional-container .quote-table {
+  width: 100%;
+}
+
+.additional-container .table-align {
+  background: var(--main-btn-color);
+  color: #ffffff;
+}
+
+.additional-container .table-heading {
+  padding: 15px 15px;
+  font-weight: 500;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  text-align: start;
+  white-space: nowrap;
+}
+
+.additional-container .list-item td:first-child {
+  text-align: center;
+}
+
+.additional-container .quote-table td {
+  padding: 15px 15px;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  color: var(--text-color);
+  text-align: start;
+}
+
+.additional-container .list-item .view-image {
+  background-color: #e2e2e2;
+  padding: 4px 13px;
+  border-radius: 30px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  color: #485463;
+  transition: .2s ease-out all;
+  font-size: 12px;
+}
+
+.additional-container .list-item .view-image:hover {
+  background-color: #d2d2d2;
+  transition: .2s linear all;
+}
+
+.additional-container .list-item {
+  vertical-align: baseline;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.additional-container .quote-table td:nth-child(2) {
+  width: 20%;
+}
+
+.additional-container .lb-header .lb-button.next,
+.lb-header .lb-button.prev {
+  display: none;
+}
+
+.additional-container .close-icon svg {
+  color: #FF4426;
+  font-size: 20px;
+}
+
+.additional-container .close-icon {
+  background-color: #FFE3E0;
+  padding: 5px 5px;
+  display: inline-flex;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: .2s ease-out all;
+}
+
+.additional-container .close-icon:hover {
+  background-color: #ffcbc6;
+  transition: .2s linear all;
+}
+
+.additional-container .accept-icon svg {
+  color: #00A956;
+  font-size: 20px;
+}
+
+.additional-container .accept-icon {
+  background-color: #D7F6E4;
+  padding: 5px 5px;
+  display: inline-flex;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: .2s ease-out all;
+}
+
+.additional-container .accept-icon:hover {
+  background-color: #baffd7;
+  transition: .2s linear all;
+}
+
+.additional-container .action-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+@media only screen and (max-width: 575px) {
+  /* .additional-container .add-header {
+    display: block;
+  } */
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1399px) {
+  .additional-container .add-header h5 {
+    font-size: 16px;
+  }
+
+  .additional-container .table-heading {
+    font-size: 14px;
+  }
+
+  .additional-container .list-item td:first-child {
+    font-size: 14px;
+  }
+
+  .additional-container .quote-table td {
+    font-size: 14px;
+  }
+}

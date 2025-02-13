@@ -66,10 +66,8 @@ const AppointmentList = () => {
 
   const handleView = (e) => {
     e.preventDefault();
-    setIsLoading(true);
     setTimeout(() => {
-      setIsLoading(false)
-      navigate("request");
+      navigate("view");
     }, 300)
   };
 
