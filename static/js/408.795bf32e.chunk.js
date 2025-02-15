@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkservice_connect=self.webpackChunkservice_connect||[]).push([[408],{9408:(e,c,n)=>{n.r(c),n.d(c,{default:()=>t});n(5043);var s=n(579);const t=()=>(0,s.jsx)(s.Fragment,{children:"ViewAppointment"})}}]);
-//# sourceMappingURL=408.795bf32e.chunk.js.map

@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkservice_connect=self.webpackChunkservice_connect||[]).push([[670],{6670:(e,c,s)=>{s.r(c),s.d(c,{default:()=>r});s(5043);var n=s(579);const r=()=>(0,n.jsx)("div",{children:"AdvisorRouter"})}}]);
-//# sourceMappingURL=670.cbafc08b.chunk.js.map

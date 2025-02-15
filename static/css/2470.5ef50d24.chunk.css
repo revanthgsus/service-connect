@@ -1,0 +1,2 @@
+.main-layout{height:100vh}.main-layout .layout-main{background-color:var(--main-bg-color);flex:1 1;height:calc(100vh - 68px);overflow-y:auto;padding:30px;width:100%}.main-layout .layout-main::-webkit-scrollbar{display:none}.layout-container{height:100%;padding-top:68px}@media only screen and (max-width:768px){.main-layout .layout-main{padding:25px 15px}}
+/*# sourceMappingURL=2470.5ef50d24.chunk.css.map*/
