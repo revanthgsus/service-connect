@@ -10,6 +10,12 @@ const AdminSidebar = lazy(() => import('../../pages/Admin/Common/AdminSidebar/Ad
 const CustomerNavbar = lazy(() => import('../../pages/Customer/Common/CustomerNavbar/CustomerNavbar'));
 const CustomerSidebar = lazy(() => import('../../pages/Customer/Common/CustomerSidebar/CustomerSidebar'));
 
+const AdvisorNavbar = lazy(() => import('../../pages/Advisor/Comman/AdvisorNavbar/AdvisorNavbar'));
+const AdvisorSidebar = lazy(() => import('../../pages/Advisor/Comman/AdvisorSidebar/AdvisorSidebar'));
+
+const ManagerNavbar = lazy(() => import('../../pages/Manager/Comman/ManagerNavbar/ManagerNavbar'));
+const ManagerSidebar = lazy(() => import('../../pages/Manager/Comman/ManagerSidebar/ManagerSidebar'));
+
 const MainLayout = () => {
   const { user } = useAuth();
   const role = user?.role?.toLowerCase();
@@ -62,12 +68,16 @@ const MainLayout = () => {
           Navbar: CustomerNavbar,
           Sidebar: CustomerSidebar,
         };
-      case 'manager':
-        // Define manager layout here
-        return {};
       case 'advisor':
-        // Define advisor layout here
-        return {};
+        return {
+          Navbar: AdvisorNavbar,
+          Sidebar: AdvisorSidebar,
+        };
+      case 'manager':
+        return {
+          Navbar: ManagerNavbar,
+          Sidebar: ManagerSidebar,
+        };
       default:
         return {};
     }

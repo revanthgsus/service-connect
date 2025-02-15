@@ -50,6 +50,10 @@
   white-space: nowrap;
 }
 
+.invoice-list .list-item td:nth-last-child(2) {
+  text-align: center;
+}
+
 .invoice-list .search-input {
   border: 1px solid var(--input-border-color);
   padding: 8px 20px;

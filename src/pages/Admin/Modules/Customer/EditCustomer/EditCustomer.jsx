@@ -122,6 +122,7 @@ const EditCustomer = () => {
     },
   ];
 
+  // Scroll to particular input function
   useEffect(() => {
     if (Object.keys(formErrors).length > 0) {
       const firstErrorField = Object.keys(formErrors).find(field => formTouched[field]);
@@ -155,16 +156,18 @@ const EditCustomer = () => {
         },
       });
 
-      if (response.status === 200 || response.data?.success) {
+      if (response.status === 200 && response.data?.success) {
         toast.success(response.data.message);
         setTimeout(() => {
           navigate("/admin/customer");
-        }, 1000);
+        }, 500);
       } else {
-        toast.error(response.data.error);
+        toast.error(response.data?.error || "Failed to save customer. Please try again.", {
+          style: { width: "100%" }, closeButton: false
+        });
       }
     } catch (err) {
-      toast.error("An error occurred while saving the data.");
+      toast.error(err.response?.data?.message || "Something went wrong. Try again.");
     } finally {
       setLoading(false);
       setSubmitting(false);

@@ -39,6 +39,56 @@
   border-bottom-right-radius: 5px;
   border-bottom-left-radius: 5px;
   background-color: var(--navbar-color);
+  padding: 20px 25px;
+  font-family: 'Be Vietnam Pro', sans-serif;
+}
+
+.activity-container .activity-status .MuiStepLabel-root {
+  padding: 5px 0px;
+}
+
+.activity-container .activity-status .MuiStepIcon-root {
+  height: 2em;
+  width: 2em;
+  font-size: 12px;
+}
+
+.activity-container .activity-status .MuiStepLabel-label {
+  font-family: 'Be Vietnam Pro', sans-serif;
+  color: var(--text-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.activity-container .activity-status .MuiCollapse-wrapperInner {
+  font-family: 'Be Vietnam Pro', sans-serif;
+  line-height: 22px;
+  color: var(--sub-text-color);
+}
+
+.activity-container .activity-status .Mui-completed svg {
+  color: #007d85;
+}
+
+.activity-container .activity-status .Mui-active svg {
+  color: #007d85;
+}
+
+.activity-container .activity-status .completed {
+  background-color: #d7f6e4;
+  color: #00A956;
+}
+
+.activity-container .activity-status .inprogress {
+  background-color: #FEE5C9;
+  color: #FFA206;
+}
+
+.activity-container .activity-status .status {
+  padding: 2px 15px;
+  border-radius: 100px;
+  text-align: center;
 }
 
 @media only screen and (min-width: 1200px) and (max-width: 1399px) {
@@ -51,6 +101,10 @@
   }
 
   .activity-container .activity-top p {
+    font-size: 14px;
+  }
+
+  .activity-container .activity-status .MuiCollapse-wrapperInner {
     font-size: 14px;
   }
 }

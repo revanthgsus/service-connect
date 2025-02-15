@@ -15,7 +15,7 @@ const DailyActivity = lazy(() => import("../pages/Customer/Modules/Activity/Dail
 const InvoiceList = lazy(() => import("../pages/Customer/Modules/Invoice/InvoiceList/InvoiceList"));
 const ViewInvoice = lazy(() => import("../pages/Customer/Modules/Invoice/ViewInvoice/ViewInvoice"));
 const PaymentList = lazy(() => import("../pages/Customer/Modules/Payments/PaymentList/PaymentList"));
-const ViewPayment = lazy(() => import("../pages/Customer/Modules/Payments/ViewPayment/ViewPayment"));
+// const ViewPayment = lazy(() => import("../pages/Customer/Modules/Payments/ViewPayment/ViewPayment"));
 
 const CustomerRouter = () => {
   return (
@@ -49,11 +49,9 @@ const CustomerRouter = () => {
               <Route path='viewinvoice' element={<ViewInvoice />} />
             </Route>
 
-            <Route path='payment' >
+            <Route path='transaction' >
               <Route index element={<PaymentList />} />
-              <Route path='viewpayment' element={<ViewPayment />} />
             </Route>
-
           </Route>
         </Routes>
       </Suspense>

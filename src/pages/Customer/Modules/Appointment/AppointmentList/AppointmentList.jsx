@@ -11,6 +11,7 @@ import { HiOutlineTrash } from "react-icons/hi";
 import { ReactComponent as Norecords } from "../../../../../assets/images/customer/no-records.svg";
 import DeleteModal from '../../../../../common/DeleteModal/DeleteModal';
 import PreLoader from './../../../../../common/PreLoader/PreLoader';
+import RejectModal from '../../../../../common/RejectModal/RejectModal';
 
 const AppointmentList = () => {
   const navigate = useNavigate();
@@ -21,6 +22,8 @@ const AppointmentList = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [appointments, setAppointments] = useState([]);
   const [totalAppointment, setTotalAppointment] = useState(0);
+  const [showRejectModal, setShowRejectModal] = useState(false);
+  const [rejectReason, setRejectReason] = useState("");
 
   const itemsPerPage = 10;
 
@@ -39,7 +42,10 @@ const AppointmentList = () => {
       { id: 1, serviceType: "Car Routine Maintenance", appointmentDate: "12/02/2025", serialNumber: "EX12345BAT2023", urgencyLevel: "Urgent", status: "Accepted" },
       { id: 2, serviceType: "Battery Testing", appointmentDate: "13/02/2025", serialNumber: "EX12345BAT2023", urgencyLevel: "Standard", status: "Accepted" },
       { id: 3, serviceType: "Oil and filter change", appointmentDate: "14/02/2025", serialNumber: "EX12345BAT2023", urgencyLevel: "Urgent", status: "Pending" },
-      { id: 4, serviceType: "Tire replacement", appointmentDate: "14/02/2025", serialNumber: "EX12345BAT2023", urgencyLevel: "Urgent", status: "Rejected" },
+      {
+        id: 4, serviceType: "Tire replacement", appointmentDate: "14/02/2025", serialNumber: "EX12345BAT2023", urgencyLevel: "Urgent", status: "Rejected",
+        rejectReason: "The requested service is not available in your area at the moment. Please check back later or choose another service.",
+      },
       { id: 5, serviceType: "Car Routine Maintenance", appointmentDate: "16/02/2025", serialNumber: "EX12345BAT2023", urgencyLevel: "Urgent", status: "Accepted" },
     ]);
     setTotalAppointment(5);
@@ -64,11 +70,13 @@ const AppointmentList = () => {
     }, 300)
   };
 
-  const handleView = (e) => {
-    e.preventDefault();
-    setTimeout(() => {
+  const handleView = (appointment) => {
+    if (appointment.status === "Rejected" && appointment.rejectReason) {
+      setRejectReason(appointment.rejectReason);
+      setShowRejectModal(true);
+    } else {
       navigate("view");
-    }, 300)
+    }
   };
 
   return (
@@ -149,7 +157,7 @@ const AppointmentList = () => {
                           </span>
                         </td>
                         <td>
-                          <span className='view-icon' onClick={handleView}>
+                          <span className='view-icon' onClick={() => handleView(appointment)}>
                             <FaRegEye />
                           </span>
 
@@ -176,6 +184,10 @@ const AppointmentList = () => {
           </div>
         </section>
       )}
+
+      <RejectModal
+        showRejectModal={showRejectModal}
+        handleCloseReject={() => setShowRejectModal(false)} reason={rejectReason} />
 
       <DeleteModal
         show={show}

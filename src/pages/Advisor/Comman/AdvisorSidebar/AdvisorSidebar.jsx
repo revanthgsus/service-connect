@@ -1,50 +1,43 @@
 import React from 'react';
-import "./CustomerSidebar.css";
+import "./AdvisorSidebar.css";
 import { NavLink } from 'react-router-dom';
-import { ReactComponent as DashboardIcon } from "../../../../assets/images/customer/sidebar/dashboard.svg";
-import { ReactComponent as AppointmentIcon } from "../../../../assets/images/customer/sidebar/appointment.svg";
-import { ReactComponent as QuotesIcon } from "../../../../assets/images/customer/sidebar/quotes.svg";
-import { ReactComponent as ActivityIcon } from "../../../../assets/images/customer/sidebar/activity.svg";
-import { ReactComponent as InvoiceIcon } from "../../../../assets/images/customer/sidebar/invoice.svg";
-import { ReactComponent as TransactionIcon } from "../../../../assets/images/customer/sidebar/transaction.svg";
+import { ReactComponent as DashboardIcon } from "../../../../assets/images/advisor/sidebar/dashboard.svg";
+import { ReactComponent as AppointmentIcon } from "../../../../assets/images/advisor/sidebar/appointment.svg";
+import { ReactComponent as QuotesIcon } from "../../../../assets/images/advisor/sidebar/quotes.svg";
+import { ReactComponent as ActivityIcon } from "../../../../assets/images/advisor/sidebar/activity.svg";
+import { ReactComponent as InvoiceIcon } from "../../../../assets/images/advisor/sidebar/invoice.svg";
 
-
-const CustomerSidebar = ({ isOpen, handleCloseSidebar }) => {
+const AdvisorSidebar = ({ isOpen, handleCloseSidebar }) => {
   const sidebarItems = [
     {
       title: 'Dashboard',
       icon: <DashboardIcon />,
-      link: "customer/dashboard"
+      link: "advisor/dashboard"
     },
     {
       title: 'Appointments',
       icon: <AppointmentIcon />,
-      link: "customer/appointments"
+      link: "advisor/appointments"
     },
     {
       title: 'Quotes',
       icon: <QuotesIcon />,
-      link: "customer/quotes"
+      link: "advisor/quotes"
     },
     {
       title: 'Service Activity',
       icon: <ActivityIcon />,
-      link: "customer/activity"
+      link: "advisor/activity"
     },
     {
       title: 'Invoice',
       icon: <InvoiceIcon />,
-      link: "customer/invoice"
-    },
-    {
-      title: 'Transaction',
-      icon: <TransactionIcon />,
-      link: "customer/transaction"
+      link: "advisor/invoice"
     },
   ];
 
   return (
-    <div className='customer-sidebar sidebar'>
+    <div className='advisor-sidebar sidebar'>
       <aside className={`sidebar-section ${isOpen ? "open" : "closed"}`}>
         {sidebarItems.map((item, index) => (
           <ul key={index} className='sidebar-link'>
@@ -65,4 +58,4 @@ const CustomerSidebar = ({ isOpen, handleCloseSidebar }) => {
   );
 };
 
-export default CustomerSidebar;
+export default AdvisorSidebar;
