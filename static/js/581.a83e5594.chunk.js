@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkservice_connect=self.webpackChunkservice_connect||[]).push([[581],{581:(e,c,n)=>{n.r(c),n.d(c,{default:()=>t});n(5043);var s=n(579);const t=()=>(0,s.jsx)("div",{children:"ManageAppointment"})}}]);
+//# sourceMappingURL=581.a83e5594.chunk.js.map

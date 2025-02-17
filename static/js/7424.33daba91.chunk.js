@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkservice_connect=self.webpackChunkservice_connect||[]).push([[7424],{7424:(e,c,s)=>{s.r(c),s.d(c,{default:()=>i});s(5043);var t=s(579);const i=()=>(0,t.jsx)("div",{children:"ActivityLists"})}}]);
+//# sourceMappingURL=7424.33daba91.chunk.js.map

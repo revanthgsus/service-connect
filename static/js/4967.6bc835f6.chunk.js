@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkservice_connect=self.webpackChunkservice_connect||[]).push([[4967],{4967:(e,c,n)=>{n.r(c),n.d(c,{default:()=>r});n(5043);var s=n(579);const r=()=>(0,s.jsx)("div",{children:"CreateInvoice"})}}]);
+//# sourceMappingURL=4967.6bc835f6.chunk.js.map

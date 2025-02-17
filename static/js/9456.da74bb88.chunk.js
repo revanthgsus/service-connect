@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkservice_connect=self.webpackChunkservice_connect||[]).push([[9456],{9456:(e,c,n)=>{n.r(c),n.d(c,{default:()=>r});n(5043);var s=n(579);const r=()=>(0,s.jsx)("div",{children:"ManagerProfile"})}}]);
+//# sourceMappingURL=9456.da74bb88.chunk.js.map
