@@ -59,12 +59,14 @@ const AdminDropdown = () => {
                   </Link>
                 </li>
               )}
-              <li>
-                <Link to="/admin/profile" onClick={() => setIsDropdownOpen(false)}>
-                  <AiOutlineUser />
-                  <span>View Profile</span>
-                </Link>
-              </li>
+              {role === "Admin" && (
+                <li>
+                  <Link to="/admin/profile" onClick={() => setIsDropdownOpen(false)}>
+                    <AiOutlineUser />
+                    <span>View Profile</span>
+                  </Link>
+                </li>
+              )}
               <hr className="mt-2 mb-1" />
               <li className="logout-link" onClick={setShowModal}>
                 <Link to="#">

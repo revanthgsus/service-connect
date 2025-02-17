@@ -56,8 +56,8 @@ const LoginPage = () => {
         headers: { 'Content-Type': 'application/json' },
       });
 
-      if (response.data?.token && response.data?.role) {
-        login(response.data.token, response.data.role);
+      if (response.data?.token && response.data?.role && response.data?.userId) {
+        login(response.data.token, response.data.role, response.data.userId);
 
         const roleRoutes = {
           "Super Admin": '/admin/dashboard',

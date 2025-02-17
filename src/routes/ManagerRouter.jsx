@@ -2,26 +2,31 @@ import React, { lazy, Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import PreLoader from '../common/PreLoader/PreLoader';
 import MainLayout from '../Layouts/MainLayout/MainLayout';
+import ProtectedRoute from './ProtectedRoute';
 
-const CustomerDashboard = lazy(() => import('../pages/Customer/Modules/Dashboard/CustomerDashboard/CustomerDashboard'));
-const AppointmentList = lazy(() => import("../pages/Customer/Modules/Appointment/AppointmentList/AppointmentList"));
-const RequestAppointment = lazy(() => import("../pages/Customer/Modules/Appointment/RequestAppointment/RequestAppointment"));
+const ManagerDashboard = lazy(() => import('../pages/Manager/Modules/Dashboard/ManagerDashboard/ManagerDashboard'));
+
+const ServiceList = lazy(() => import("../pages/Manager/Modules/ServiceList/ServiceList"));
+const ManagerProfile = lazy(() => import("../pages//Manager/Comman/ManagerProfile/ManagerProfile"));
 
 const ManagerRouter = () => {
   return (
     <>
       <Suspense fallback={<PreLoader />}>
         <Routes>
-          <Route path='/' element={<MainLayout />}>
-            <Route path="dashboard">
-              <Route index element={<CustomerDashboard />} />
-            </Route>
+          <Route element={<ProtectedRoute allowedRoles={["Manager"]} />}>
+            <Route path='/' element={<MainLayout />}>
+              <Route path="dashboard">
+                <Route index element={<ManagerDashboard />} />
+              </Route>
 
-            <Route path='appointments' >
-              <Route index element={<AppointmentList />} />
-              <Route path='request' element={<RequestAppointment />} />
+              <Route path='list' >
+                <Route index element={<ServiceList />} />
+              </Route>
+
+              <Route path="profile" element={<ManagerProfile />} />
             </Route>
-          </Route>
+          </Route >
         </Routes>
       </Suspense>
     </>

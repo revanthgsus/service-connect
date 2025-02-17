@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Suspense, lazy, useCallback } from 'react';
 import './MainLayout.css';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import PreLoader from '../../common/PreLoader/PreLoader';
 
@@ -18,9 +18,16 @@ const ManagerSidebar = lazy(() => import('../../pages/Manager/Comman/ManagerSide
 
 const MainLayout = () => {
   const { user } = useAuth();
+  const navigate = useNavigate();
   const role = user?.role?.toLowerCase();
   const [isOpen, setIsOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  useEffect(() => {
+    if (!user) {
+      navigate('/', { replace: true });
+    }
+  }, [user, navigate]);
 
   useEffect(() => {
     const handleResize = () => {

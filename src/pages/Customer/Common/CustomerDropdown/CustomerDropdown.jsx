@@ -13,7 +13,7 @@ const CustomerDropdown = () => {
     {
       title: 'View Profile',
       icon: <AiOutlineUser />,
-      link: "/admin/profile"
+      link: "/customer/profile"
     }
   ];
 
