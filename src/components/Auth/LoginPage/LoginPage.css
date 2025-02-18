@@ -79,7 +79,6 @@
   color: #111111;
   font-size: 28px;
   font-weight: 700;
-  font-family: 'Be Vietnam Pro', sans-serif;
   text-align: center;
 }
 
@@ -118,7 +117,6 @@
 
 .login-form p {
   color: #666666;
-  font-family: 'Be Vietnam Pro', sans-serif;
   font-size: 16px;
   padding-bottom: 10px;
   text-align: center;
@@ -135,7 +133,6 @@
   border: 1.5px solid #858585;
   border-radius: 8px;
   padding: 10px 15px;
-  font-family: 'Be Vietnam Pro', sans-serif;
 }
 
 .form-label {
@@ -143,7 +140,6 @@
   font-weight: 500;
   padding: 5px 0px;
   display: block;
-  font-family: 'Be Vietnam Pro', sans-serif;
 }
 
 .input-container {
@@ -155,7 +151,6 @@
   padding: 10px 15px;
   border-radius: 30px;
   border: 1px solid transparent;
-  font-family: 'Be Vietnam Pro', sans-serif;
   font-size: 16px;
   font-weight: 600;
   background: linear-gradient(90deg, rgba(0, 125, 133, 1) 0%,
@@ -179,7 +174,6 @@
 .forgot-link {
   color: #0089DC;
   text-decoration: none;
-  font-family: 'Be Vietnam Pro', sans-serif;
   font-size: 14px;
   font-weight: 400;
   float: inline-end;

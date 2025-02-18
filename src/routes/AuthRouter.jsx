@@ -4,7 +4,7 @@ import LoginPage from '../components/Auth/LoginPage/LoginPage';
 import ForgotPassword from '../components/Auth/ForgotPassword/ForgotPassword';
 import GetOtp from '../components/Auth/GetOtp/GetOtp';
 import NewPassword from '../components/Auth/NewPassword/NewPassword';
-import NotFound from './NotFound';
+import NotFound from './../common/NotFound/NotFound';
 
 const AuthRouter = () => {
   return (

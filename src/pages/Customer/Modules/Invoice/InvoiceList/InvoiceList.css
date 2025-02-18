@@ -44,7 +44,6 @@
 
 .invoice-list .list-item td {
   padding: 15px 15px;
-  font-family: 'Be Vietnam Pro', sans-serif;
   color: var(--text-color);
   text-align: start;
   white-space: nowrap;
@@ -171,7 +170,52 @@
   color: #FF4426;
 }
 
-.invoice-list .view-icon {
+.invoice-list .status.partialpaid {
+  background-color: #C2EDFE;
+  color: #0073CB;
+}
+
+.invoice-list .paynow-btn {
+  background-color: #008f99;
+  color: rgb(247, 247, 247);
+  border-radius: 5px;
+  padding: 8px 15px;
+  cursor: pointer;
+}
+
+.invoice-list .paynow-btn:hover {
+  background-color: #00737b;
+  transition: .2s linear all;
+}
+
+.invoice-list .paynow-btn.disabled {
+  pointer-events: none;
+  cursor: not-allowed;
+  background-color: #ccc;
+  color: #7f7f7f;
+}
+
+.invoice-list .download-icon {
+  background-color: var(--actions-color);
+  padding: 5px 8px;
+  border-radius: 3px;
+  transition: 0.3s ease-out all;
+  color: var(--actions-icon-color);
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.invoice-list .download-icon:hover {
+  background-color: #00737b;
+  transition: .3s ease-in-out all;
+  color: rgb(255, 255, 255);
+}
+
+.invoice-list .list-item td:last-child {
+  padding-left: 0px;
+}
+
+/* .invoice-list .view-icon {
   background-color: var(--actions-color);
   padding: 7px 10px;
   border-radius: 3px;
@@ -188,11 +232,10 @@
 
 .invoice-list .view-icon:hover svg {
   transform: scale(1.2)
-}
+} */
 
 .css-1l5xwdx-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected {
   background-color: #02858D !important;
-  font-family: 'Be Vietnam Pro', sans-serif;
   color: #ffffff;
 }
 
@@ -247,7 +290,7 @@
 
   .invoice-list .list-item td {
     font-size: 13px;
-    padding: 10px 15px;
+    padding: 12px 15px;
   }
 
   .invoice-heading {

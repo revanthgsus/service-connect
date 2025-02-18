@@ -96,19 +96,16 @@
   }
 }
 
-
 @media only screen and (min-width:576px) and (max-width:767px) {
   .Delete-popup .modal-dialog {
     width: 410px;
   }
-
 }
 
 @media only screen and (min-width:768px) and (max-width:1119px) {
   .Delete-popup .modal-dialog {
     width: 410px;
   }
-
 }
 
 @media only screen and (min-width: 1200px) and (max-width: 1399px) {

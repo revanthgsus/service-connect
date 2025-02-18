@@ -20,7 +20,6 @@
 
 .admin-navbar .moon-icon path {
   color: var(--icon-color);
-  transition: .3s linear all;
 }
 
 .admin-navbar .profile-icon path {
@@ -53,15 +52,9 @@
 
 .admin-navbar .sun-icon {
   color: var(--icon-color);
-  transition: .3s linear all;
-}
-
-.admin-navbar .theme-toggle-btn {
-  transition: .10s linear all;
 }
 
 @media only screen and (max-width:768px) {
-
   .admin-navbar .navbar-brand {
     gap: 0px;
     padding: 15px 0px;

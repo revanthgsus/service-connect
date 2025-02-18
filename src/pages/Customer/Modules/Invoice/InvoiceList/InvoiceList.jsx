@@ -1,61 +1,67 @@
 import React, { useState } from 'react';
 import "./InvoiceList.css";
 import { IoSearch } from "react-icons/io5";
-import { useNavigate } from 'react-router-dom';
 import { IoIosArrowDown } from "react-icons/io";
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
-import { FaRegEye } from "react-icons/fa6";
 import { ReactComponent as Norecords } from "../../../../../assets/images/customer/no-records.svg"
 import PreLoader from './../../../../../common/PreLoader/PreLoader';
+import { MdOutlineFileDownload } from "react-icons/md";
+import InvoiceModal from '../InvoiceModal/InvoiceModal';
 
 const InvoiceList = () => {
-  const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
-
   const [isLoading, setIsLoading] = useState(false);
+  const [invoiceShow, setInvoiceShow] = useState(false);
+  const [selectedInvoice, setSelectedInvoice] = useState(null);
+
+  const itemsPerPage = 10;
 
   const tableHeadings = [
     { title: "S.No" },
+    { title: "Service ID" },
     { title: "Invoice ID" },
-    { title: "Billing Name" },
-    { title: "Service Type" },
     { title: "Due Date" },
-    { title: "Status" },
     { title: "Total Amount" },
+    { title: "Paid" },
+    { title: "Due  " },
+    { title: "Status" },
+    { title: "" },
     { title: "" },
   ];
 
   const InvoiceData = [
     {
       id: 1,
+      serviceID: "SR-25686",
       invoiceID: "INV-00001",
-      billingName: "Revanth",
-      serviceType: "Car Routine Maintenance",
       dueDate: "12/02/2025",
-      status: "Paid",
       totalAmount: "₹5000",
+      paidAmount: "₹500",
+      dueAmount: "₹4500",
+      status: "Partial Paid",
     },
     {
       id: 2,
-      invoiceID: "INV-00002",
-      billingName: "Priya",
-      serviceType: "Car Routine Maintenance",
-      dueDate: "15/02/2025",
-      status: "Un Paid",
-      totalAmount: "₹50000",
+      serviceID: "SR-25686",
+      invoiceID: "INV-00001",
+      dueDate: "12/02/2025",
+      totalAmount: "₹5000",
+      paidAmount: "₹500",
+      dueAmount: "₹4500",
+      status: "Paid",
     },
     {
       id: 3,
-      invoiceID: "INV-00003",
-      billingName: "Bowyaa",
-      serviceType: "Car Routine Maintenance",
+      serviceID: "SR-25686",
+      invoiceID: "INV-00001",
       dueDate: "12/02/2025",
-      status: "Un Paid",
-      totalAmount: "₹7500",
+      totalAmount: "₹5000",
+      paidAmount: "₹500",
+      dueAmount: "₹4500",
+      status: "Unpaid",
     },
 
   ];
@@ -85,18 +91,22 @@ const InvoiceList = () => {
     currentPage * itemsPerPage
   );
 
-  const handleView = (e) => {
-    setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false)
-      navigate("viewinvoice");
-    }, 1000)
+  const handlePay = (invoice) => {
+    setSelectedInvoice(invoice);
+    setInvoiceShow(true);
+    setIsLoading(false)
+  };
+
+  const handleCloseModal = () => setInvoiceShow(false);
+
+  const handleDownload = (e) => {
+    e.preventDefault()
   };
 
   return (
     <>
-      {isLoading && <PreLoader />}
-      {!isLoading && (
+      {isLoading ? (<PreLoader />
+      ) : (
         <section className="invoice-list">
           <h5 className="invoice-heading">Invoice List</h5>
 
@@ -120,9 +130,9 @@ const InvoiceList = () => {
                     id="status-select"
                     className="status-select"
                     value={statusFilter}
-                    onChange={handleStatusChange}
-                  >
+                    onChange={handleStatusChange}>
                     <option value="">Status</option>
+                    <option value="partialpaid">Partial Paid</option>
                     <option value="paid">Paid</option>
                     <option value="unpaid">Un Paid</option>
                   </select>
@@ -155,19 +165,29 @@ const InvoiceList = () => {
                     displayedInvoice.map((invoice, index) => (
                       <tr key={invoice.id} className="list-item">
                         <td>{(currentPage - 1) * itemsPerPage + index + 1}</td>
+                        <td>{invoice.serviceID}</td>
                         <td>{invoice.invoiceID}</td>
-                        <td>{invoice.billingName}</td>
-                        <td>{invoice.serviceType}</td>
                         <td>{invoice.dueDate}</td>
+                        <td>{invoice.totalAmount}</td>
+                        <td>{invoice.paidAmount}</td>
+                        <td>{invoice.dueAmount}</td>
                         <td>
                           <span className={`status ${invoice.status.toLowerCase().replace(" ", "")}`}>
                             {invoice.status}
                           </span>
                         </td>
-                        <td>{invoice.totalAmount}</td>
                         <td>
-                          <span className='view-icon' onClick={handleView}>
-                            <FaRegEye />
+                          {invoice.status.toLowerCase() === "paid" ? (
+                            <span className='paynow-btn disabled'>Pay Now</span>
+                          ) : (
+                            <span className='paynow-btn' onClick={() => handlePay(invoice)}>
+                              Pay Now
+                            </span>
+                          )}
+                        </td>
+                        <td>
+                          <span className='download-icon' onClick={handleDownload}>
+                            <MdOutlineFileDownload />
                           </span>
                         </td>
                       </tr>
@@ -189,6 +209,7 @@ const InvoiceList = () => {
           </div>
         </section>
       )}
+      <InvoiceModal show={invoiceShow} onHide={handleCloseModal} invoice={selectedInvoice} />
     </>
   );
 };

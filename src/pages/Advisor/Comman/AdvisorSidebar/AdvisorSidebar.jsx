@@ -6,6 +6,7 @@ import { ReactComponent as AppointmentIcon } from "../../../../assets/images/adv
 import { ReactComponent as QuotesIcon } from "../../../../assets/images/advisor/sidebar/quotes.svg";
 import { ReactComponent as ActivityIcon } from "../../../../assets/images/advisor/sidebar/activity.svg";
 import { ReactComponent as InvoiceIcon } from "../../../../assets/images/advisor/sidebar/invoice.svg";
+import { ReactComponent as TransactionIcon } from "../../../../assets/images/advisor/sidebar/transaction.svg";
 
 const AdvisorSidebar = ({ isOpen, handleCloseSidebar }) => {
   const sidebarItems = [
@@ -33,6 +34,11 @@ const AdvisorSidebar = ({ isOpen, handleCloseSidebar }) => {
       title: 'Invoice',
       icon: <InvoiceIcon />,
       link: "advisor/invoice"
+    },
+    {
+      title: 'Transaction',
+      icon: <TransactionIcon />,
+      link: "customer/transaction"
     },
   ];
 

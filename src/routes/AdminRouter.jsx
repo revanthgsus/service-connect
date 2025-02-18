@@ -8,13 +8,16 @@ const AdminDashboard = lazy(() => import('../pages/Admin/Modules/Dashboard/Admin
 const ManagerList = lazy(() => import('./../pages/Admin/Modules/ServiceManager/ManagerList/ManagerList'));
 const CreateManager = lazy(() => import('./../pages/Admin/Modules/ServiceManager/CreateManager/CreateManager'));
 const EditManager = lazy(() => import('./../pages/Admin/Modules/ServiceManager/EditManager/EditManager'));
+
 const AdvisorList = lazy(() => import('../pages/Admin/Modules/ServiceAdvisor/AdvisorList/AdvisorList'));
 const CreateAdvisor = lazy(() => import('../pages/Admin/Modules/ServiceAdvisor/CreateAdvisor/CreateAdvisor'));
 const EditAdvisor = lazy(() => import('../pages/Admin/Modules/ServiceAdvisor/EditAdvisor/EditAdvisor'));
+
 const CustomerList = lazy(() => import('../pages/Admin/Modules/Customer/CustomerList/CustomerList'));
 const CreateCustomer = lazy(() => import('../pages/Admin/Modules/Customer/CreateCustomer/CreateCustomer'));
 const EditCustomer = lazy(() => import('../pages/Admin/Modules/Customer/EditCustomer/EditCustomer'));
 const AdminList = lazy(() => import('../pages/Admin/Common/AdminList/AdminList'));
+
 const CreateAdmin = lazy(() => import('../pages/Admin/Common/CreateAdmin/CreateAdmin'));
 const EditAdmin = lazy(() => import('../pages/Admin/Common/EditAdmin/EditAdmin'));
 const AdminProfile = lazy(() => import('../pages/Admin/Common/AdminProfile/AdminProfile'));

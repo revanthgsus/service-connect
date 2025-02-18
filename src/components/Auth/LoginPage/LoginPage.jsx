@@ -139,7 +139,6 @@ const LoginPage = () => {
                 </div>
                 {error.password && <span className='error-message'>{error.password}</span>}
                 {error.general && <span className="error-message">{error.general}</span>}
-
               </div>
 
               <Link to='/forgot-password' className='forgot-link'>Forgot Password?</Link>

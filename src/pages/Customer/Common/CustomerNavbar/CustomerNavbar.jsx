@@ -1,15 +1,13 @@
 import React, { useContext } from 'react';
 import "./CustomerNavbar.css";
+import Menubtn from './../../../../common/Menubtn/Menubtn';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import MobileLogo from '../../../../common/MainLogo/MobileLogo';
 import Badge from '@mui/material/Badge';
 import IconButton from '@mui/material/IconButton';
-import { IoNotificationsOutline } from "react-icons/io5";
-import { IoMoonOutline } from "react-icons/io5";
-import { IoSunny } from "react-icons/io5";
+import { IoNotificationsOutline, IoMoonOutline, IoSunny } from "react-icons/io5";
 import ThemeContext from '../../../../contexts/ThemeContext';
-import Menubtn from './../../../../common/Menubtn/Menubtn';
 import CustomLogo from './../../../../common/MainLogo/CustomLogo';
 import CustomerDropdown from './../CustomerDropdown/CustomerDropdown';
 
@@ -33,7 +31,7 @@ const CustomerNavbar = ({ handleDrawerToggle, isOpen }) => {
           </div>
           <div className="navbar-icons">
             <IconButton>
-              <Badge badgeContent={9} color="error">
+              <Badge badgeContent={7} color="error">
                 <IoNotificationsOutline className="notification" />
               </Badge>
             </IconButton>

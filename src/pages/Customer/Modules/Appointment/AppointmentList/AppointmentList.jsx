@@ -7,9 +7,7 @@ import { IoIosArrowDown } from "react-icons/io";
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import { FaRegEye } from "react-icons/fa6";
-import { HiOutlineTrash } from "react-icons/hi";
 import { ReactComponent as Norecords } from "../../../../../assets/images/customer/no-records.svg";
-import DeleteModal from '../../../../../common/DeleteModal/DeleteModal';
 import PreLoader from './../../../../../common/PreLoader/PreLoader';
 import RejectModal from '../../../../../common/RejectModal/RejectModal';
 
@@ -18,7 +16,6 @@ const AppointmentList = () => {
   const [status, setStatus] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [searchInput, setSearchInput] = useState('');
-  const [show, setShow] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [appointments, setAppointments] = useState([]);
   const [totalAppointment, setTotalAppointment] = useState(0);
@@ -58,9 +55,6 @@ const AppointmentList = () => {
   const handleStatusChange = (e) => {
     setStatus(e.target.value);
   };
-
-  const setShowModal = () => { setShow(true) }
-  const handleCloseModal = () => { setShow(false) };
 
   const handleCreate = (e) => {
     e.preventDefault();
@@ -160,10 +154,6 @@ const AppointmentList = () => {
                           <span className='view-icon' onClick={() => handleView(appointment)}>
                             <FaRegEye />
                           </span>
-
-                          <span className='delete-icon' onClick={setShowModal}>
-                            <HiOutlineTrash />
-                          </span>
                         </td>
                       </tr>
                     ))
@@ -188,15 +178,6 @@ const AppointmentList = () => {
       <RejectModal
         showRejectModal={showRejectModal}
         handleCloseReject={() => setShowRejectModal(false)} reason={rejectReason} />
-
-      <DeleteModal
-        show={show}
-        handleClose={handleCloseModal}
-      // entityId={managerIdToDelete}
-      // entityType="Manager"
-      // deleteEndpoint="/managerMaster/deleteManagerMasterById"
-      // onDeleteSuccess={fetchManagers}
-      />
     </>
   );
 };

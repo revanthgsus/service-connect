@@ -244,26 +244,6 @@
   transform: scale(1.2)
 }
 
-.appointment-list .delete-icon {
-  background-color: var(--actions-color);
-  padding: 7px 10px;
-  border-radius: 3px;
-  transition: 0.3s ease-out all;
-  display: inline-block;
-  margin: 0px 15px;
-  color: var(--actions-icon-color);
-}
-
-.appointment-list .delete-icon:hover {
-  background-color: #fb5454;
-  color: white;
-  transition: 0.3s linear all;
-}
-
-.appointment-list .delete-icon:hover svg {
-  transform: scale(1.2);
-}
-
 .css-1l5xwdx-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected {
   background-color: #02858D !important;
   font-family: 'Be Vietnam Pro', sans-serif;

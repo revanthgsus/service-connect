@@ -67,7 +67,7 @@ const AdminDropdown = () => {
                   </Link>
                 </li>
               )}
-              <hr className="mt-2 mb-1" />
+              <hr className="mt-0 mb-2" />
               <li className="logout-link" onClick={setShowModal}>
                 <Link to="#">
                   <TbLogout />
