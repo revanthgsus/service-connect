@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkservice_connect=self.webpackChunkservice_connect||[]).push([[5529],{5529:(e,c,s)=>{s.r(c),s.d(c,{default:()=>i});s(5043);var n=s(579);const i=()=>(0,n.jsx)("div",{children:"InvoiceLists"})}}]);
-//# sourceMappingURL=5529.a8ce304c.chunk.js.map
