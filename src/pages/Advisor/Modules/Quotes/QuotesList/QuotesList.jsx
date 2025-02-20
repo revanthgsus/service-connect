@@ -5,8 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import { IoIosArrowDown } from "react-icons/io";
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
-import { FaRegEye } from "react-icons/fa6";
-import { ReactComponent as Norecords } from "../../../../../assets/images/customer/no-records.svg"
+import OpenInNewOutlinedIcon from '@mui/icons-material/OpenInNewOutlined';
+import { ReactComponent as Norecords } from "../../../../../assets/images/advisor/no-records.svg";
 import PreLoader from './../../../../../common/PreLoader/PreLoader';
 
 const QuotesList = () => {
@@ -14,16 +14,17 @@ const QuotesList = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
-
   const [isLoading, setIsLoading] = useState(false);
+  const [totalQuotes, setTotalQuotes] = useState(0);
+  const itemsPerPage = 10;
 
   const tableHeadings = [
     { title: "S.No" },
-    { title: "Service ID" },
-    { title: "Service Type" },
-    { title: "Appointment Date" },
+    { title: "Cust ID" },
+    { title: "Customer Name" },
     { title: "Urgency Level" },
+    { title: "Appointment Date" },
+    { title: "Location" },
     { title: "Status" },
     { title: "" },
   ];
@@ -31,53 +32,32 @@ const QuotesList = () => {
   const QuotesData = [
     {
       id: 1,
-      serviceID: "SR-12345",
-      serviceType: "Car Routine Maintenance",
-      appointmentDate: "12/02/2025",
+      custID: "Cust_001",
+      customerName: "John Doe",
       urgencyLevel: "Urgent",
+      appointmentDate: "12/02/2025",
+      location: "Chennai",
       status: "Accepted",
     },
     {
       id: 2,
-      serviceID: "SR-12346",
-      serviceType: "Battery Testing",
-      appointmentDate: "13/02/2025",
-      urgencyLevel: "Standard",
-      status: "Accepted",
+      custID: "Cust_002",
+      customerName: "John Doe",
+      urgencyLevel: "Urgent",
+      appointmentDate: "14/02/2025",
+      location: "Chennai",
+      status: "Requested",
     },
     {
       id: 3,
-      serviceID: "SR-12347",
-      serviceType: "Oil and filter change",
+      custID: "Cust_001",
+      customerName: "John Doe",
+      urgencyLevel: "Scheduled",
       appointmentDate: "14/02/2025",
-      urgencyLevel: "Urgent",
-      status: "In Progress",
-    },
-    {
-      id: 4,
-      serviceID: "SR-12348",
-      serviceType: "Tire replacement",
-      appointmentDate: "14/02/2025",
-      urgencyLevel: "Urgent",
-      status: "In Progress",
-    },
-    {
-      id: 5,
-      serviceID: "SR-12345",
-      serviceType: "Car Routine Maintenance",
-      appointmentDate: "16/02/2025",
-      urgencyLevel: "Urgent",
-      status: "Accepted",
-    },
+      location: "Chennai",
+      status: "Rejected",
+    }
   ];
-
-  const filteredServiceID = QuotesData.filter((quote) => {
-    const matchesSearch =
-      quote.serviceID.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesStatus =
-      statusFilter === '' || quote.status.toLowerCase() === statusFilter.toLowerCase();
-    return matchesSearch && matchesStatus;
-  });
 
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
@@ -91,23 +71,19 @@ const QuotesList = () => {
     setCurrentPage(page);
   };
 
-  const displayedQuotes = filteredServiceID.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
-  );
-
   const handleView = (e) => {
     setIsLoading(true);
+    setTotalQuotes(false)
     setTimeout(() => {
       setIsLoading(false)
-      navigate("quotesummary");
-    }, 1000)
+      navigate("view");
+    }, 500)
   };
 
   return (
     <>
-      {isLoading && <PreLoader />}
-      {!isLoading && (
+      {isLoading ? (<PreLoader />
+      ) : (
         <section className="quote-list">
           <h5 className="quote-heading">Quotes</h5>
 
@@ -135,7 +111,8 @@ const QuotesList = () => {
                   >
                     <option value="">Status</option>
                     <option value="accepted">Accepted</option>
-                    <option value="inprogress">In Progress</option>
+                    <option value="requested">Requested</option>
+                    <option value="rejected">Rejected</option>
                   </select>
                   <IoIosArrowDown className="arrow-icon" />
                 </div>
@@ -154,7 +131,7 @@ const QuotesList = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {displayedQuotes.length === 0 ? (
+                  {QuotesData.length === 0 ? (
                     <tr className="no-data">
                       <td colSpan={tableHeadings.length}>
                         <Norecords />
@@ -163,13 +140,14 @@ const QuotesList = () => {
                       </td>
                     </tr>
                   ) : (
-                    displayedQuotes.map((quote, index) => (
+                    QuotesData.map((quote, index) => (
                       <tr key={quote.id} className="list-item">
                         <td>{(currentPage - 1) * itemsPerPage + index + 1}</td>
-                        <td>{quote.serviceID}</td>
-                        <td>{quote.serviceType}</td>
-                        <td>{quote.appointmentDate}</td>
+                        <td>{quote.custID}</td>
+                        <td>{quote.customerName}</td>
                         <td>{quote.urgencyLevel}</td>
+                        <td>{quote.appointmentDate}</td>
+                        <td>{quote.location}</td>
                         <td>
                           <span className={`status ${quote.status.toLowerCase().replace(" ", "")}`}>
                             {quote.status}
@@ -177,7 +155,7 @@ const QuotesList = () => {
                         </td>
                         <td>
                           <span className='view-icon' onClick={handleView}>
-                            <FaRegEye />
+                            <OpenInNewOutlinedIcon />
                           </span>
                         </td>
                       </tr>
@@ -191,7 +169,7 @@ const QuotesList = () => {
           <div className="pagination-align">
             <Stack spacing={2}>
               <Pagination
-                count={Math.ceil(filteredServiceID.length / itemsPerPage)}
+                count={Math.ceil(totalQuotes.length / itemsPerPage)}
                 page={currentPage}
                 onChange={handlePageChange}
               />

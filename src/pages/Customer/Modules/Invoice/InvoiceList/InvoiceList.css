@@ -202,7 +202,7 @@
   transition: 0.3s ease-out all;
   color: var(--actions-icon-color);
   cursor: pointer;
-  font-size: 18px;
+  font-size: 16px;
 }
 
 .invoice-list .download-icon:hover {

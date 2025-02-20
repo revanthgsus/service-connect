@@ -1,6 +1,50 @@
 .piechart {
   box-shadow: var(--shadow-color);
   border-radius: 5px;
-  padding: 30px 0px;
   background-color: var(--span-color);
+  padding: 30px 15px;
+  border: 1px solid var(--border-color);
+  height: 100%;
+}
+
+.piechart .chart-select {
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: 1px solid var(--input-border-color);
+  outline: 1px solid transparent;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  color: var(--text-color);
+  font-size: 13px;
+  appearance: none;
+  background-color: var(--input-color);
+  cursor: pointer;
+  width: 100%;
+}
+
+.piechart .status-wrapper {
+  position: relative;
+  width: 100px;
+  display: inline-block;
+}
+
+.piechart .status-wrapper svg {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  pointer-events: none;
+  color: var(--input-icon-color);
+}
+
+.piechart .chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 10px;
+}
+
+.piechart .chart-header h6 {
+  color: var(--text-color);
+  margin-bottom: 0px;
 }

@@ -5,8 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import { IoIosArrowDown } from "react-icons/io";
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
-import { FaRegEye } from "react-icons/fa6";
-import { ReactComponent as Norecords } from "../../../../../assets/images/customer/no-records.svg"
+import OpenInNewOutlinedIcon from '@mui/icons-material/OpenInNewOutlined';
+import { ReactComponent as Norecords } from "../../../../../assets/images/advisor/no-records.svg"
 import PreLoader from './../../../../../common/PreLoader/PreLoader';
 
 const ActivityLists = () => {
@@ -22,8 +22,8 @@ const ActivityLists = () => {
     { title: "S.No" },
     { title: "Service ID" },
     { title: "Service Type" },
-    { title: "Appointment Date" },
     { title: "Urgency Level" },
+    { title: "Expected Date" },
     { title: "Status" },
     { title: "" },
   ];
@@ -33,27 +33,27 @@ const ActivityLists = () => {
       id: 1,
       serviceID: "SR-12345",
       serviceType: "Car Routine Maintenance",
-      appointmentDate: "12/02/2025",
       urgencyLevel: "Urgent",
+      expectedDate: "10/02/2025",
       status: "Completed",
     },
     {
       id: 2,
       serviceID: "SR-12346",
       serviceType: "Battery Testing",
-      appointmentDate: "13/02/2025",
       urgencyLevel: "Standard",
-      status: "Completed",
+      expectedDate: "10/02/2025",
+      status: "In Queue",
     },
     {
       id: 3,
       serviceID: "SR-12347",
       serviceType: "Oil and filter change",
-      appointmentDate: "14/02/2025",
       urgencyLevel: "Urgent",
+      expectedDate: "10/02/2025",
       status: "In Progress",
     },
-   
+
   ];
 
   const filteredServiceID = ActivityData.filter((activity) => {
@@ -85,7 +85,7 @@ const ActivityLists = () => {
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false)
-      navigate("dailyactivity");
+      navigate("addactivity");
     }, 500)
   };
 
@@ -119,6 +119,7 @@ const ActivityLists = () => {
                     onChange={handleStatusChange}
                   >
                     <option value="">Status</option>
+                    <option value="inqueue">In Queue</option>
                     <option value="completed">Completed</option>
                     <option value="inprogress">In Progress</option>
                   </select>
@@ -153,8 +154,8 @@ const ActivityLists = () => {
                         <td>{(currentPage - 1) * itemsPerPage + index + 1}</td>
                         <td>{activity.serviceID}</td>
                         <td>{activity.serviceType}</td>
-                        <td>{activity.appointmentDate}</td>
                         <td>{activity.urgencyLevel}</td>
+                        <td>{activity.expectedDate}</td>
                         <td>
                           <span className={`status ${activity.status.toLowerCase().replace(" ", "")}`}>
                             {activity.status}
@@ -162,7 +163,7 @@ const ActivityLists = () => {
                         </td>
                         <td>
                           <span className='view-icon' onClick={handleView}>
-                            <FaRegEye />
+                            <OpenInNewOutlinedIcon />
                           </span>
                         </td>
                       </tr>

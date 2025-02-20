@@ -38,7 +38,7 @@ const AdvisorSidebar = ({ isOpen, handleCloseSidebar }) => {
     {
       title: 'Transaction',
       icon: <TransactionIcon />,
-      link: "customer/transaction"
+      link: "advisor/transaction"
     },
   ];
 

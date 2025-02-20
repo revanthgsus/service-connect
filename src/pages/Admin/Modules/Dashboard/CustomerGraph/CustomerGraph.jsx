@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactECharts from 'echarts-for-react';
-import './CustomerGraph.css'
+import './CustomerGraph.css';
+import { IoIosArrowDown } from "react-icons/io";
 
 const CustomerGraph = () => {
   const option = {
@@ -15,10 +16,10 @@ const CustomerGraph = () => {
       itemHeight: 20,
       itemStyle: {
         borderWidth: 2,
-        borderRadius: 5,
+        borderRadius: 10,
       },
     },
-    color: ['#A6EFEB', '#91CDEE'],
+    color: ['#57E5A9', '#28BDC4'],
     series: [
       {
         name: 'Customers Chart',
@@ -44,10 +45,20 @@ const CustomerGraph = () => {
 
   return (
     <>
-      <ReactECharts
-        option={option}
-        className='piechart'
-      />
+      <div id="chart" className='piechart'>
+        <div className="chart-header">
+          <h6>Cutomer Overview</h6>
+          <div className="status-wrapper">
+            <select className="chart-select">
+              <option value="Weekly">Weekly</option>
+              <option value="Monthly">Monthly</option>
+              <option value="Yearly">Yearly</option>
+            </select>
+            <IoIosArrowDown className="arrow-icon" />
+          </div>
+        </div>
+        <ReactECharts option={option} />
+      </div >
     </>
   )
 }

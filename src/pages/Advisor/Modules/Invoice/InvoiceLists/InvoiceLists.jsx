@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import "./InvoiceLists.css";
 import { IoSearch } from "react-icons/io5";
 import { IoIosArrowDown } from "react-icons/io";
@@ -6,9 +7,11 @@ import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import { ReactComponent as Norecords } from "../../../../../assets/images/customer/no-records.svg"
 import PreLoader from './../../../../../common/PreLoader/PreLoader';
-import { MdOutlineFileDownload } from "react-icons/md";
+import { FaRegEye } from "react-icons/fa6";
+import { HiPlus } from "react-icons/hi";
 
 const InvoiceLists = () => {
+  const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
@@ -22,8 +25,8 @@ const InvoiceLists = () => {
     { title: "Invoice ID" },
     { title: "Due Date" },
     { title: "Total Amount" },
-    { title: "Paid" },
-    { title: "Due  " },
+    { title: "Paid Amount" },
+    { title: "Due Amount" },
     { title: "Status" },
     { title: "" },
     { title: "" },
@@ -88,18 +91,28 @@ const InvoiceLists = () => {
     currentPage * itemsPerPage
   );
 
+  const handleView = (e) => {
+    e.preventDefault();
+    setIsLoading(false)
+    navigate('viewinvoice')
+  }
 
-  const handleDownload = (e) => {
-    e.preventDefault()
-    setIsLoading(false);
-  };
+  const handleCreate = (e) => {
+    e.preventDefault();
+    navigate('generate')
+  }
 
   return (
     <>
       {isLoading ? (<PreLoader />
       ) : (
         <section className="invoice-list">
-          <h5 className="invoice-heading">Invoice List</h5>
+          <div className="top-alignment">
+            <h5 className="invoice-heading">Invoice List</h5>
+            <button type="button" className="add-button" onClick={handleCreate}>
+              <HiPlus />New Invoice
+            </button>
+          </div>
 
           <div className="table-list">
             <div className="list-top">
@@ -167,10 +180,9 @@ const InvoiceLists = () => {
                             {invoice.status}
                           </span>
                         </td>
-
                         <td>
-                          <span className='download-icon' onClick={handleDownload}>
-                            <MdOutlineFileDownload />
+                          <span className='view-icon' onClick={handleView}>
+                            <FaRegEye />
                           </span>
                         </td>
                       </tr>

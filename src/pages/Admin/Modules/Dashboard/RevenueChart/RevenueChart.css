@@ -1,6 +1,63 @@
 .revenuegraph {
+  font-family: 'Be Vietnam Pro', sans-serif;
   box-shadow: var(--shadow-color);
   border-radius: 5px;
-  padding: 30px 20px;
-  background-color: var(--span-color);
+  padding: 30px 15px;
+  border: 1px solid var(--border-color);
+  background: var(--graph-color)
 }
+
+.revenuegraph .apexcharts-title-text {
+  font-size: 14px;
+  font-weight: 600;
+  font-family: 'Be Vietnam Pro', sans-serif;
+}
+
+.revenuegraph .chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 8px;
+}
+
+.revenuegraph .chart-select {
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: 1px solid var(--input-border-color);
+  outline: 1px solid transparent;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  color: var(--text-color);
+  font-size: 13px;
+  appearance: none;
+  background-color: var(--input-color);
+  cursor: pointer;
+  position: relative;
+  width: 100%;
+}
+
+.revenuegraph .status-wrapper {
+  position: relative;
+  width: 100px;
+  display: inline-block;
+}
+
+.revenuegraph .status-wrapper svg {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  pointer-events: none;
+  color: var(--input-icon-color);
+}
+
+.revenuegraph .chart-header h6 {
+  color: var(--text-color);
+  margin-bottom: 0px;
+}
+
+/* @media only screen and (max-width:575px) {
+  .revenuegraph {
+    margin-bottom: 30px;
+  }
+} */

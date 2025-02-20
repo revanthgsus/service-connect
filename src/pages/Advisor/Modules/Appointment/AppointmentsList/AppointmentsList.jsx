@@ -5,10 +5,10 @@ import { useNavigate } from 'react-router-dom';
 import { IoIosArrowDown } from "react-icons/io";
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
-import { FaRegEye } from "react-icons/fa6";
-import { ReactComponent as Norecords } from "../../../../../assets/images/customer/no-records.svg";
+import { ReactComponent as Norecords } from "../../../../../assets/images/advisor/no-records.svg";
 import PreLoader from './../../../../../common/PreLoader/PreLoader';
 import RejectModal from '../../../../../common/RejectModal/RejectModal';
+import OpenInNewOutlinedIcon from '@mui/icons-material/OpenInNewOutlined';
 
 const AppointmentsList = () => {
   const navigate = useNavigate();
@@ -25,24 +25,45 @@ const AppointmentsList = () => {
 
   const tableHeadings = [
     { title: "S.No" },
-    { title: "Service Type" },
-    { title: "Appointment Date" },
-    { title: "Serial Number" },
+    { title: "Cust ID" },
+    { title: "Customer Name" },
     { title: "Urgency Level" },
+    { title: "Appointment Date" },
+    { title: "Location" },
     { title: "Status" },
     { title: "" },
   ];
 
   useEffect(() => {
     setAppointments([
-      { id: 1, serviceType: "Car Routine Maintenance", appointmentDate: "12/02/2025", serialNumber: "EX12345BAT2023", urgencyLevel: "Urgent", status: "Accepted" },
-      { id: 2, serviceType: "Battery Testing", appointmentDate: "13/02/2025", serialNumber: "EX12345BAT2023", urgencyLevel: "Standard", status: "Accepted" },
-      { id: 3, serviceType: "Oil and filter change", appointmentDate: "14/02/2025", serialNumber: "EX12345BAT2023", urgencyLevel: "Urgent", status: "Pending" },
       {
-        id: 4, serviceType: "Tire replacement", appointmentDate: "14/02/2025", serialNumber: "EX12345BAT2023", urgencyLevel: "Urgent", status: "Rejected",
+        id: 1,
+        custID: "CUST_001",
+        customerName: "John Doe",
+        urgencyLevel: "Urgent",
+        appointmentDate: "12/02/2025",
+        location: "Chennai",
+        status: "Accepted"
+      },
+      {
+        id: 2,
+        custID: "CUST_002",
+        customerName: "John Doe",
+        urgencyLevel: "Urgent",
+        appointmentDate: "12/02/2025",
+        location: "Mumbai",
+        status: "Rejected",
         rejectReason: "The requested service is not available in your area at the moment. Please check back later or choose another service.",
       },
-      { id: 5, serviceType: "Car Routine Maintenance", appointmentDate: "16/02/2025", serialNumber: "EX12345BAT2023", urgencyLevel: "Urgent", status: "Accepted" },
+      {
+        id: 3,
+        custID: "CUST_003",
+        customerName: "John Doe",
+        urgencyLevel: "Urgent",
+        appointmentDate: "12/02/2025",
+        location: "Mumbai",
+        status: "Scheduled"
+      }
     ]);
     setTotalAppointment(5);
   }, []);
@@ -54,6 +75,7 @@ const AppointmentsList = () => {
   const handleStatusChange = (e) => {
     setStatus(e.target.value);
   };
+
   const handleView = (appointment) => {
     setIsLoading(false)
     if (appointment.status === "Rejected" && appointment.rejectReason) {
@@ -66,12 +88,11 @@ const AppointmentsList = () => {
 
   return (
     <>
-      {isLoading && <PreLoader />}
-      {!isLoading && (
+      {isLoading ? (<PreLoader />
+      ) : (
         <section className="appointment-list">
           <div className="top-alignment">
-            <h5 className="appointment-heading">Appointments</h5>
-
+            <h5 className="appointment-heading">Appointments List</h5>
           </div>
 
           <div className="table-list">
@@ -98,7 +119,7 @@ const AppointmentsList = () => {
                   >
                     <option value="">Status</option>
                     <option value="accepted">Accepted</option>
-                    <option value="pending">Pending</option>
+                    <option value="scheduled">Scheduled</option>
                     <option value="rejected">Rejected</option>
                   </select>
                   <IoIosArrowDown className="arrow-icon" />
@@ -122,7 +143,7 @@ const AppointmentsList = () => {
                     <tr className="no-data">
                       <td colSpan={tableHeadings.length}>
                         <Norecords />
-                        <h5>No Service Type Found!</h5>
+                        <h5>No Appointments Found!</h5>
                         <p>Once records are added, they’ll appear on this page.</p>
                       </td>
                     </tr>
@@ -130,10 +151,11 @@ const AppointmentsList = () => {
                     appointments.map((appointment, index) => (
                       <tr key={appointment.id} className="list-item">
                         <td>{(currentPage - 1) * itemsPerPage + index + 1}</td>
-                        <td>{appointment.serviceType}</td>
-                        <td>{appointment.appointmentDate}</td>
-                        <td>{appointment.serialNumber}</td>
+                        <td>{appointment.custID}</td>
+                        <td>{appointment.customerName}</td>
                         <td>{appointment.urgencyLevel}</td>
+                        <td>{appointment.appointmentDate}</td>
+                        <td>{appointment.location}</td>
                         <td>
                           <span className={`status ${appointment.status.toLowerCase().replace(" ", "")}`}>
                             {appointment.status}
@@ -141,7 +163,7 @@ const AppointmentsList = () => {
                         </td>
                         <td>
                           <span className='view-icon' onClick={() => handleView(appointment)}>
-                            <FaRegEye />
+                            <OpenInNewOutlinedIcon />
                           </span>
                         </td>
                       </tr>

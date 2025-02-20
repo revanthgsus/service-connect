@@ -1,5 +1,4 @@
 .quote-heading {
-  font-family: 'Be Vietnam Pro', sans-serif;
   color: var(--text-color);
   margin-bottom: 15px;
   line-height: 38px;
@@ -33,7 +32,6 @@
 .quote-list .table-heading {
   padding: 20px 15px;
   font-weight: 500;
-  font-family: 'Be Vietnam Pro', sans-serif;
   text-align: start;
   white-space: nowrap;
 }
@@ -44,7 +42,6 @@
 
 .quote-list .list-item td {
   padding: 15px 15px;
-  font-family: 'Be Vietnam Pro', sans-serif;
   color: var(--text-color);
   text-align: start;
   white-space: nowrap;
@@ -55,7 +52,6 @@
   padding: 8px 20px;
   border-radius: 20px;
   outline: 1px solid transparent;
-  font-family: 'Be Vietnam Pro', sans-serif;
   color: var(--text-color);
   width: 100%;
   font-size: 14px;
@@ -89,7 +85,6 @@
 
 .quote-list .no-data td {
   padding: 30px 25px;
-  font-family: 'Be Vietnam Pro', sans-serif;
   color: var(--text-color);
   text-align: center;
 }
@@ -115,7 +110,6 @@
   padding: 8px 20px;
   border-radius: 20px;
   outline: 1px solid transparent;
-  font-family: 'Be Vietnam Pro', sans-serif;
   color: var(--text-color);
   width: 100%;
   font-size: 14px;

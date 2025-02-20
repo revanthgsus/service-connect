@@ -10,10 +10,10 @@ const AdminDashboard = () => {
     <>
       <Kpi />
       <Row className='mt-4'>
-        <Col xl={7} lg={7} md={6}>
+        <Col xxl={8} xl={8} lg={8} md={12} sm={12}>
           <RevenueChart />
         </Col>
-        <Col xl={5} lg={5} md={6}>
+        <Col xxl={4} xl={4} lg={4} md={12} sm={12}>
           <CustomerGraph />
         </Col>
       </Row>

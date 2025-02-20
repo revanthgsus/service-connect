@@ -1,65 +1,31 @@
 .reject-popup .modal-dialog {
-  font-family: 'Be Vietnam Pro', sans-serif;
   height: 80vh;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.reject-popup-icon {
-  margin: auto;
-  width: 70px;
-  height: fit-content;
-  margin-bottom: 15px;
-}
-
-.reject-popup .modal-header {
-  padding: 40px 30px 10px 30px;
-}
-
 .reject-popup .modal-body {
   text-align: center;
-  padding: 20px 30px 20px 30px;
+  padding: 0px 30px 20px 30px;
 }
 
 .reject-popup .modal-footer {
   display: flex;
   justify-content: center;
-  padding: 0px 30px 40px 30px;
+  padding: 20px 30px 40px 30px;
 }
 
-.delete-actions-btn {
-  width: 100%;
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-}
-
-.delete-actions-btn .cancel-btn {
-  padding: 10px 10px;
-  border-radius: 30px;
-  border: 1px solid transparent;
-  background-color: #EEEEEE;
-  color: #131313;
-  width: 100%;
-}
-
-.delete-actions-btn .dlt-confirm-btn {
-  padding: 10px 10px;
-  border-radius: 30px;
-  border: 1px solid transparent;
-  background-color: #f93827;
-  color: white;
-  width: 100%;
+.reject-popup .modal-header .btn-close {
+  font-size: 12px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  margin-right: 5px;
 }
 
 .reject-popup .cancel-btn:hover {
   background-color: #d5d5d5;
-  transition: .3s linear all;
-}
-
-.reject-popup .dlt-confirm-btn:hover {
-  background-color: #d71301;
   transition: .3s linear all;
 }
 
@@ -79,11 +45,34 @@
   animation: zoomIn 0.3s ease-out;
 }
 
-.reject-popup .modal-header .btn-close {
-  font-size: 12px;
-  background-color: #ffffff;
-  border-radius: 50%;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+.reject-popup .reject-btn {
+  background-color: #007d85;
+  border: 1px solid #0000;
+  border-radius: 30px;
+  color: #fff;
+  padding: 10px;
+  width: 100%;
+}
+
+.reject-popup .reject-btn:hover {
+  background-color: #007078;
+  transition: all .3s linear;
+}
+
+.reject-popup .text-area {
+  padding: 15px 20px;
+  resize: none;
+  border: 1px solid #9f9f9f;
+}
+
+.reject-popup .text-area:hover {
+  border: 1px solid #01848d;
+  transition: all .2s linear;
+}
+
+.reject-popup .text-area:focus-visible {
+  box-shadow: none;
+  outline: 1px solid #01848d;
 }
 
 @media only screen and (Max-width:575px) {
@@ -96,51 +85,24 @@
   }
 }
 
-
 @media only screen and (min-width:576px) and (max-width:767px) {
   .reject-popup .modal-dialog {
-    width: 410px;
+    width: 450px;
   }
-
 }
 
 @media only screen and (min-width:768px) and (max-width:1119px) {
   .reject-popup .modal-dialog {
-    width: 410px;
+    width: 450px;
   }
-
 }
 
 @media only screen and (min-width: 1200px) and (max-width: 1399px) {
-  .reject-popup .modal-dialog {
-    width: 420px;
-    max-width: 100%;
-  }
-
-  .reject-popup .modal-body h5 {
-    font-size: 16px;
-  }
-
   .reject-popup .modal-body p {
     font-size: 14px;
   }
 
-  .reject-popup .modal-body {
-    padding: 0px 30px 10px 30px;
-  }
-
-  .reject-popup .modal-header {
-    padding: 30px 30px 10px 30px;
-  }
-
   .reject-popup .modal-footer {
-    padding: 0px 30px 30px 30px;
+    padding: 10px 30px 30px 30px;
   }
-
-  .delete-actions-btn .cancel-btn,
-  .delete-actions-btn .dlt-confirm-btn {
-    padding: 8px 10px;
-    font-size: 14px;
-  }
-
 }

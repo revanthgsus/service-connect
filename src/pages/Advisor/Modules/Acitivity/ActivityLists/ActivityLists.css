@@ -150,7 +150,7 @@
 }
 
 .activity-list .status {
-  padding: 3px 10px;
+  padding: 3px 5px;
   border-radius: 100px;
   width: 100%;
   text-align: center;
@@ -162,18 +162,28 @@
   color: #00A956;
 }
 
-.activity-list .status.inprogress {
+.activity-list .status.inqueue {
   background-color: #C2EDFE;
   color: #0073CB;
 }
 
+.activity-list .status.inprogress {
+  background-color: #f8e6d2;
+  color: #FFA206;
+}
+
 .activity-list .view-icon {
   background-color: var(--actions-color);
-  padding: 7px 10px;
+  padding: 7px 7px;
   border-radius: 3px;
   transition: 0.3s ease-out all;
   display: inline-block;
   color: var(--actions-icon-color);
+  cursor: pointer;
+}
+
+.activity-list .view-icon svg {
+  font-size: 18px;
 }
 
 .activity-list .view-icon:hover {
@@ -183,7 +193,7 @@
 }
 
 .activity-list .view-icon:hover svg {
-  transform: scale(1.2)
+  transform: scale(1.1)
 }
 
 .css-1l5xwdx-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected {

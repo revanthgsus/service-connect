@@ -1,5 +1,4 @@
 .quote-heading {
-  font-family: 'Be Vietnam Pro', sans-serif;
   color: var(--text-color);
   margin-bottom: 15px;
   line-height: 38px;
@@ -33,7 +32,6 @@
 .quote-list .table-heading {
   padding: 20px 15px;
   font-weight: 500;
-  font-family: 'Be Vietnam Pro', sans-serif;
   text-align: start;
   white-space: nowrap;
 }
@@ -55,7 +53,6 @@
   padding: 8px 20px;
   border-radius: 20px;
   outline: 1px solid transparent;
-  font-family: 'Be Vietnam Pro', sans-serif;
   color: var(--text-color);
   width: 100%;
   font-size: 14px;
@@ -89,7 +86,6 @@
 
 .quote-list .no-data td {
   padding: 30px 25px;
-  font-family: 'Be Vietnam Pro', sans-serif;
   color: var(--text-color);
   text-align: center;
 }
@@ -115,7 +111,6 @@
   padding: 8px 20px;
   border-radius: 20px;
   outline: 1px solid transparent;
-  font-family: 'Be Vietnam Pro', sans-serif;
   color: var(--text-color);
   width: 100%;
   font-size: 14px;
@@ -162,14 +157,19 @@
   color: #00A956;
 }
 
-.quote-list .status.inprogress {
+.quote-list .status.requested {
   background-color: #C2EDFE;
   color: #0073CB;
 }
 
+.quote-list .status.rejected {
+  background-color: #FFE3E0;
+  color: #FF4426;
+}
+
 .quote-list .view-icon {
   background-color: var(--actions-color);
-  padding: 7px 10px;
+  padding: 7px 7px;
   border-radius: 3px;
   transition: 0.3s ease-out all;
   display: inline-block;
@@ -182,8 +182,12 @@
   transition: 0.3s linear all;
 }
 
+.quote-list .view-icon svg {
+  font-size: 18px;
+}
+
 .quote-list .view-icon:hover svg {
-  transform: scale(1.2)
+  transform: scale(1.1)
 }
 
 .css-1l5xwdx-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected {

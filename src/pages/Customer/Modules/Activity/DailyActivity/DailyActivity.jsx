@@ -63,7 +63,7 @@ const DailyActivity = () => {
         <section className='activity-container'>
           <div className="activity-header">
             <IoMdArrowRoundBack onClick={handleBack} />
-            <h5>Additional quotes</h5>
+            <h5>Service Activity</h5>
           </div>
           <div className='activity-top'>
             <p>{activityHeading.advisorName}</p>
