@@ -232,6 +232,7 @@
   transition: 0.3s ease-out all;
   display: inline-block;
   color: var(--actions-icon-color);
+  cursor: pointer;
 }
 
 .appointment-list .view-icon:hover {

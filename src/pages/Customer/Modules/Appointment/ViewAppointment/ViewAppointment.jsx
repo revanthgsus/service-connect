@@ -3,7 +3,7 @@ import './ViewAppointment.css'
 
 const ViewAppointment = () => {
   return (
-    <>ViewAppointment</>
+    <>No Appointment</>
   )
 }
 

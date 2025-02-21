@@ -64,7 +64,7 @@ const LoginPage = () => {
           "Admin": '/admin/dashboard',
           "Customer": '/customer/dashboard',
           "Manager": '/manager/dashboard',
-          "Advisor": '/advisor/dashboard',
+          "Advisor": '/advisor/appointments',
         };
         const redirectTo = roleRoutes[response.data.role] || '/';
 

@@ -9,10 +9,10 @@ const CustomerDashboard = () => {
   return (
     <>
       <Row>
-        <Col xxl={8} xl={7}>
+        <Col xxl={8} xl={8}>
           <Banner />
         </Col>
-        <Col xxl={4} xl={5}>
+        <Col xxl={4} xl={4} className='mt-xl-0 mt-4'>
           <ServiceKpi />
         </Col>
       </Row >

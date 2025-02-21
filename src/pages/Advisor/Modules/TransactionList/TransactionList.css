@@ -44,13 +44,13 @@
   white-space: nowrap;
 }
 
-.transaction-list .list-item td:nth-last-child(2) {
+/* .transaction-list .list-item td:nth-last-child(2) {
   text-align: center;
-}
+} */
 
-.transaction-list .list-item td:nth-last-child(3) {
+/* .transaction-list .list-item td:nth-last-child(3) {
   text-align: center;
-}
+} */
 
 .transaction-list .search-input {
   border: 1px solid var(--input-border-color);
@@ -291,6 +291,10 @@
   transform: scale(1.02);
   transition: .2s linear all;
 }
+
+/* .transaction-list .table-align th:nth-child(2) {
+  text-align: center;
+} */
 
 @media only screen and (max-width:575px) {
   .transaction-list .list-top {

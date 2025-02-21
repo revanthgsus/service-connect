@@ -36,13 +36,13 @@ const AppointmentList = () => {
 
   useEffect(() => {
     setAppointments([
-      { id: 1, serviceType: "Car Routine Maintenance", appointmentDate: "12/02/2025", serialNumber: "EX12345BAT2023", urgencyLevel: "Urgent", status: "Accepted" },
-      { id: 2, serviceType: "Battery Testing", appointmentDate: "13/02/2025", serialNumber: "EX12345BAT2023", urgencyLevel: "Standard", status: "Accepted" },
-      { id: 3, serviceType: "Oil and filter change", appointmentDate: "14/02/2025", serialNumber: "EX12345BAT2023", urgencyLevel: "Urgent", status: "Pending" },
       {
-        id: 4, serviceType: "Tire replacement", appointmentDate: "14/02/2025", serialNumber: "EX12345BAT2023", urgencyLevel: "Urgent", status: "Rejected",
+        id: 1, serviceType: "Tire replacement", appointmentDate: "14/02/2025", serialNumber: "EX12345BAT2023", urgencyLevel: "Urgent", status: "Rejected",
         rejectReason: "The requested service is not available in your area at the moment. Please check back later or choose another service.",
       },
+      { id: 2, serviceType: "Battery Testing", appointmentDate: "13/02/2025", serialNumber: "EX12345BAT2023", urgencyLevel: "Standard", status: "Accepted" },
+      { id: 3, serviceType: "Oil and filter change", appointmentDate: "14/02/2025", serialNumber: "EX12345BAT2023", urgencyLevel: "Urgent", status: "Pending" },
+      { id: 4, serviceType: "Car Routine Maintenance", appointmentDate: "12/02/2025", serialNumber: "EX12345BAT2023", urgencyLevel: "Urgent", status: "Accepted" },
       { id: 5, serviceType: "Car Routine Maintenance", appointmentDate: "16/02/2025", serialNumber: "EX12345BAT2023", urgencyLevel: "Urgent", status: "Accepted" },
     ]);
     setTotalAppointment(5);
