@@ -13,6 +13,7 @@
     "@mui/styled-engine-sc": "^6.1.10",
     "@mui/toolpad": "^0.1.20",
     "@mui/x-date-pickers": "^7.24.0",
+    "@vercel/speed-insights": "^1.2.0",
     "ajv-keywords": "^5.1.0",
     "apexcharts": "^4.4.0",
     "axios": "^1.7.9",
