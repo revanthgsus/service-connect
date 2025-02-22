@@ -71,7 +71,7 @@
     ]
   },
   "devDependencies": {
-    "gh-pages": "^6.2.0",
+    "gh-pages": "^6.3.0",
     "webpack-cli": "^6.0.1",
     "webpack-dev-server": "^5.2.0",
     "workbox-webpack-plugin": "^7.3.0"
