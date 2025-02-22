@@ -1,10 +1,10 @@
 import React from 'react';
 import AppRouter from './routes/AppRouter';
-import { HashRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 const Main = () => {
   return (
-    <Router>
+    <Router basename='/service-connect'>
       <AppRouter />
     </Router>
   )
