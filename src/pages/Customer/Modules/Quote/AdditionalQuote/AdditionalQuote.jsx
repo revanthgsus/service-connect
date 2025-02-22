@@ -4,7 +4,6 @@ import './AdditionalQuote.css';
 import { IoMdArrowRoundBack } from "react-icons/io";
 import PreLoader from '../../../../../common/PreLoader/PreLoader';
 import { FaRegEye } from "react-icons/fa6";
-import Lightbox from "react-awesome-lightbox";
 import ViewImageIcon from '../../../../../assets/images/customer/quotes/add-image.svg';
 import { IoClose } from "react-icons/io5";
 import { LuCheck } from "react-icons/lu";
@@ -111,11 +110,12 @@ const AdditionalQuote = () => {
           </div>
 
           {isOpen && currentImage && (
-            <Lightbox
+            <span
               showTitle={false}
               images={[{ url: currentImage }]}
               onClose={() => setIsOpen(false)}
             />
+
           )}
         </section>
       )}

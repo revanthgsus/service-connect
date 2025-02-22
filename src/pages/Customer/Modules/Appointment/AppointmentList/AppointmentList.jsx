@@ -21,7 +21,6 @@ const AppointmentList = () => {
   const [totalAppointment, setTotalAppointment] = useState(0);
   const [showRejectModal, setShowRejectModal] = useState(false);
   const [rejectReason, setRejectReason] = useState("");
-
   const itemsPerPage = 10;
 
   const tableHeadings = [
