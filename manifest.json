@@ -1,6 +1,6 @@
 {
-  "short_name": "Service Connect Web Application",
-  "name": "Service Connect",
+  "short_name": "Service Connect",
+  "name": "Service Connect: Your Trusted Service Partner",
   "icons": [
     {
       "src": "icons/favicon.ico",
@@ -23,6 +23,5 @@
   "display": "standalone",
   "orientation": "portrait",
   "theme_color": "#000000",
-  "background_color": "#ffffff",
-  "prefer_related_applications": false
+  "background_color": "#ffffff"
 }
