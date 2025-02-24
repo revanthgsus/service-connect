@@ -1,19 +1,19 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import "./CreateAdmin.css";
+import { useNavigate } from 'react-router-dom';
 import { Col, Row } from 'react-bootstrap';
 import { IoIosArrowDown, IoMdArrowRoundBack } from "react-icons/io";
 import { MdVisibility, MdVisibilityOff } from "react-icons/md";
-import CancelModal from '../../../../common/CancelModal/CancelModal';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import axios from 'axios';
+import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import dayjs from 'dayjs';
+import axios from 'axios';
 import API_BASE_URL from '../../../../services/AuthService';
 import { Formik, Form, ErrorMessage } from 'formik';
 import { AdminValidationSchema } from '../../../../utils/FormValidation';
 import PreLoader from '../../../../common/PreLoader/PreLoader';
+import CancelModal from '../../../../common/CancelModal/CancelModal';
 import { toast, ToastContainer } from 'react-toastify';
 
 const CreateAdmin = () => {
@@ -111,8 +111,10 @@ const CreateAdmin = () => {
   const handleSubmit = useCallback(async (values, { setSubmitting }) => {
     const token = localStorage.getItem('authToken');
     if (!token) {
-      alert("Session expired. Please sign in to continue.");
-      navigate('/');
+      toast.error("Session expired. Please sign in again.", {
+        autoClose: 2000,
+      });
+      setTimeout(() => navigate("/"), 2000);
       return;
     }
 
@@ -133,13 +135,17 @@ const CreateAdmin = () => {
         }
       );
 
-      if (response.status === 200 || response.data?.success) {
-        toast.success(response.data.message);
+      if (response?.data?.status === "failed") {
+        toast.error(response?.data?.error || "Failed to update admin. Please try again.", {
+          style: { width: "100%" }, closeButton: false
+        });
+      } else if (response?.data?.status === "success") {
+        toast.success(response?.data?.message || "Admin updated successfully.");
         setTimeout(() => {
           navigate("/admin/adminlist");
         }, 1000);
       } else {
-        toast.error(response.data.error);
+        toast.error("Unexpected response. Please try again later.");
       }
     } catch (err) {
       toast.error("An error occurred while saving the data.");
@@ -228,7 +234,7 @@ const CreateAdmin = () => {
                                 </div>
                               ) : field.name === "joiningDate" ? (
                                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                  <DatePicker className="form-control date-picker"
+                                  <DesktopDatePicker className="form-control date-picker"
                                     value={values.joiningDate ? dayjs(values.joiningDate) : null}
                                     onChange={(date) => setFieldValue("joiningDate", date || null)}
                                     format='DD/MM/YYYY'

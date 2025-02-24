@@ -14,6 +14,7 @@ import DeleteModal from '../../../../../common/DeleteModal/DeleteModal';
 import PreLoader from './../../../../../common/PreLoader/PreLoader';
 import axios from 'axios';
 import API_BASE_URL from '../../../../../services/AuthService';
+import { toast, ToastContainer } from 'react-toastify';
 
 const CustomerList = () => {
   const navigate = useNavigate();
@@ -50,8 +51,10 @@ const CustomerList = () => {
   const fetchCustomers = useCallback(async () => {
     const token = localStorage.getItem("authToken");
     if (!token) {
-      alert("Session expired. Please sign in to continue.");
-      navigate('/')
+      toast.error("Session expired. Please sign in again.", {
+        autoClose: 2000,
+      });
+      setTimeout(() => navigate("/"), 2000);
       return;
     }
 
@@ -73,12 +76,15 @@ const CustomerList = () => {
         }
       );
 
-      if (response.status === 200 || response.data?.success) {
+      if (response?.status === 200 || response?.data?.success) {
         setCustomers(response.data.customerMasterListPage || []);
         setTotalCustomers(response.data.totalRecords || 0);
       }
+      else {
+        toast.error("An error occurred while fetching customer data.");
+      }
     } catch (error) {
-      console.error("Error fetching customers:", error);
+      toast.error("An error occurred while saving the data.");
     } finally {
       setIsLoading(false);
     }
@@ -92,8 +98,10 @@ const CustomerList = () => {
   const handleEdit = async (customerId) => {
     const token = localStorage.getItem("authToken");
     if (!token) {
-      alert("Session expired. Please sign in to continue.");
-      navigate('/');
+      toast.error("Session expired. Please sign in again.", {
+        autoClose: 2000,
+      });
+      setTimeout(() => navigate("/"), 2000);
       return;
     }
     try {
@@ -103,13 +111,13 @@ const CustomerList = () => {
         },
       });
 
-      if (response.status === 200 || response.data?.success) {
+      if (response?.status === 200 || response?.data?.success) {
         navigate("editcustomer", { state: { customerData: response.data } });
       } else {
-        alert("Failed to fetch customer details.");
+        toast.error("An error occurred while fetching customer data.");
       }
     } catch (error) {
-      alert("An error occurred while fetching customer details.");
+      toast.error("An error occurred while saving the data.");
     } finally {
       setIsLoading(false);
     }
@@ -243,15 +251,15 @@ const CustomerList = () => {
                 page={currentPage}
                 onChange={(e, value) => setCurrentPage(value)}
                 sx={{
+                  "& .MuiPaginationItem-root": {
+                    color: "var(--text-color)",
+                  },
                   "& .Mui-selected": {
                     backgroundColor: "#01848D !important",
                     color: "#ffffff",
                   },
                   "& .Mui-selected:hover": {
-                    backgroundColor: "#028d96",
-                  },
-                  "& .Mui-disabled": {
-                    color: "var(--text-color)",
+                    backgroundColor: "#028d96 !important",
                   },
                 }}
               />
@@ -267,6 +275,12 @@ const CustomerList = () => {
         entityType="Customer"
         deleteEndpoint="/customerMaster/deleteCustomerMasterById"
         onDeleteSuccess={fetchCustomers} />
+      <ToastContainer
+        position="top-center"
+        autoClose={1000}
+        hideProgressBar={true}
+        theme="light"
+      />
     </>
   );
 };

@@ -1,19 +1,19 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import "./EditManager.css";
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Col, Row } from 'react-bootstrap';
 import { IoIosArrowDown, IoMdArrowRoundBack } from "react-icons/io";
 import { MdVisibility, MdVisibilityOff } from "react-icons/md";
-import { useLocation, useNavigate } from 'react-router-dom';
-import CancelModal from '../../../../../common/CancelModal/CancelModal';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import axios from 'axios';
+import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import dayjs from 'dayjs';
+import axios from 'axios';
 import API_BASE_URL from '../../../../../services/AuthService';
 import { Formik, Form, ErrorMessage } from 'formik';
 import { ManagerValidationSchema } from '../../../../../utils/FormValidation';
 import PreLoader from '../../../../../common/PreLoader/PreLoader';
+import CancelModal from '../../../../../common/CancelModal/CancelModal';
 import { toast, ToastContainer } from 'react-toastify';
 
 const EditManager = () => {
@@ -36,7 +36,7 @@ const EditManager = () => {
     mobileNumber: managerData?.mobileNumber || '',
     password: '',
     confirmPassword: '',
-    joiningDate: managerData?.joiningDate ? dayjs(managerData.joiningDate, "DD/MM/YYYY").format("YYYY-MM-DD") : '',
+    joiningDate: managerData?.joiningDate ? dayjs(managerData.joiningDate, "DD/MM/YYYY") : null,
     designation: "Service Manager",
     branchName: managerData?.branchName || '',
     branchLocation: managerData?.branchLocation || '',
@@ -131,8 +131,10 @@ const EditManager = () => {
   const handleSubmit = useCallback(async (values, { setSubmitting }) => {
     const token = localStorage.getItem("authToken");
     if (!token) {
-      alert("Session expired. Please sign in to continue.");
-      navigate('/')
+      toast.error("Session expired. Please sign in again.", {
+        autoClose: 2000,
+      });
+      setTimeout(() => navigate("/"), 2000);
       return;
     }
 
@@ -150,13 +152,17 @@ const EditManager = () => {
         },
       });
 
-      if (response.status === 200 || response.data?.success) {
-        toast.success(response.data.message);
+      if (response?.data?.status === "failed") {
+        toast.error(response?.data?.error || "Failed to update manager. Please try again.", {
+          style: { width: "100%" }, closeButton: false
+        });
+      } else if (response?.data?.status === "success") {
+        toast.success(response?.data?.message || "Manager updated successfully.");
         setTimeout(() => {
           navigate("/admin/manager");
         }, 1000);
       } else {
-        toast.error((response.data?.error));
+        toast.error("Unexpected response. Please try again later.");
       }
     } catch (err) {
       toast.error("An error occurred while saving the data.");
@@ -171,7 +177,7 @@ const EditManager = () => {
     setCancelShow(true);
   };
 
-  const handleCancelClose = () => { setCancelShow(false); };
+  const handleCancelClose = () => { setCancelShow(false) };
 
   const handleBack = (e) => {
     e.preventDefault();
@@ -245,8 +251,8 @@ const EditManager = () => {
                                 </div>
                               ) : field.name === "joiningDate" ? (
                                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                  <DatePicker className="form-control date-picker"
-                                    value={values.joiningDate ? dayjs(values.joiningDate) : null}
+                                  <DesktopDatePicker className="form-control date-picker"
+                                    value={values.joiningDate}
                                     onChange={(date) => setFieldValue("joiningDate", date || null)}
                                     format='DD/MM/YYYY'
                                     slotProps={{

@@ -14,6 +14,7 @@ import DeleteModal from '../../../../common/DeleteModal/DeleteModal';
 import PreLoader from '../../../../common/PreLoader/PreLoader';
 import axios from 'axios';
 import API_BASE_URL from '../../../../services/AuthService';
+import { toast, ToastContainer } from 'react-toastify';
 
 const AdminList = () => {
   const navigate = useNavigate();
@@ -50,8 +51,10 @@ const AdminList = () => {
   const fetchAdmins = useCallback(async () => {
     const token = localStorage.getItem("authToken");
     if (!token) {
-      alert("Session expired. Please sign in to continue.");
-      navigate('/')
+      toast.error("Session expired. Please sign in again.", {
+        autoClose: 2000,
+      });
+      setTimeout(() => navigate("/"), 2000);
       return;
     }
 
@@ -73,12 +76,14 @@ const AdminList = () => {
         }
       );
 
-      if (response.status === 200 || response.data?.success) {
+      if (response?.status === 200 || response?.data?.success) {
         setAdmins(response.data.adminMasterListPage || []);
         setTotalAdmins(response.data.totalRecords || 0);
+      } else {
+        toast.error("An error occurred while fetching customer data.");
       }
     } catch (error) {
-      console.error("Error fetching admins:", error);
+      toast.error("An error occurred while saving the data.");
     } finally {
       setIsLoading(false);
     }
@@ -92,8 +97,10 @@ const AdminList = () => {
   const handleEdit = async (adminId) => {
     const token = localStorage.getItem("authToken");
     if (!token) {
-      alert("Session expired. Please sign in to continue.");
-      navigate('/');
+      toast.error("Session expired. Please sign in again.", {
+        autoClose: 2000,
+      });
+      setTimeout(() => navigate("/"), 2000);
       return;
     }
     try {
@@ -103,13 +110,13 @@ const AdminList = () => {
         },
       });
 
-      if (response.status === 200 || response.data?.success) {
+      if (response?.status === 200 || response?.data?.success) {
         navigate("editadmin", { state: { adminData: response.data } });
       } else {
-        alert("Failed to fetch admin details.");
+        toast.error("An error occurred while fetching customer data.");
       }
     } catch (error) {
-      alert("An error occurred while fetching admin details.");
+      toast.error("An error occurred while saving the data.");
     } finally {
       setIsLoading(false);
     }
@@ -243,15 +250,15 @@ const AdminList = () => {
                 page={currentPage}
                 onChange={(e, value) => setCurrentPage(value)}
                 sx={{
+                  "& .MuiPaginationItem-root": {
+                    color: "var(--text-color)",
+                  },
                   "& .Mui-selected": {
                     backgroundColor: "#01848D !important",
                     color: "#ffffff",
                   },
                   "& .Mui-selected:hover": {
-                    backgroundColor: "#028d96",
-                  },
-                  "& .Mui-disabled": {
-                    color: "var(--text-color)",
+                    backgroundColor: "#028d96 !important",
                   },
                 }}
               />
@@ -267,6 +274,12 @@ const AdminList = () => {
         entityType="Admin"
         deleteEndpoint="/adminMaster/deleteAdminMasterById"
         onDeleteSuccess={fetchAdmins} />
+      <ToastContainer
+        position="top-center"
+        autoClose={1000}
+        hideProgressBar={true}
+        theme="light"
+      />
     </>
   );
 };

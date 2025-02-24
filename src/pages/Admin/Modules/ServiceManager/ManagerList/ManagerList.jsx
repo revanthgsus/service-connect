@@ -14,6 +14,7 @@ import DeleteModal from '../../../../../common/DeleteModal/DeleteModal';
 import PreLoader from './../../../../../common/PreLoader/PreLoader';
 import axios from 'axios';
 import API_BASE_URL from '../../../../../services/AuthService';
+import { toast, ToastContainer } from 'react-toastify';
 
 const ManagerList = () => {
   const navigate = useNavigate();
@@ -50,8 +51,10 @@ const ManagerList = () => {
   const fetchManagers = useCallback(async () => {
     const token = localStorage.getItem("authToken");
     if (!token) {
-      alert("Session expired. Please sign in to continue.");
-      navigate('/')
+      toast.error("Session expired. Please sign in again.", {
+        autoClose: 2000,
+      });
+      setTimeout(() => navigate("/"), 2000);
       return;
     }
 
@@ -73,12 +76,15 @@ const ManagerList = () => {
         }
       );
 
-      if (response.status === 200 || response.data?.success) {
+      if (response?.status === 200 || response?.data?.success) {
         setManagers(response.data.managerMasterListPage || []);
         setTotalManagers(response.data.totalRecords || 0);
       }
+      else {
+        toast.error("An error occurred while fetching manager data.");
+      }
     } catch (error) {
-      console.error("Error fetching managers:", error);
+      toast.error("An error occurred while saving the data.");
     } finally {
       setIsLoading(false);
     }
@@ -92,10 +98,13 @@ const ManagerList = () => {
   const handleEdit = async (managerId) => {
     const token = localStorage.getItem("authToken");
     if (!token) {
-      alert("Session expired. Please sign in to continue.");
-      navigate('/');
+      toast.error("Session expired. Please sign in again.", {
+        autoClose: 2000,
+      });
+      setTimeout(() => navigate("/"), 2000);
       return;
     }
+
     try {
       const response = await axios.get(`${API_BASE_URL}/managerMaster/viewManagerById/${managerId}`, {
         headers: {
@@ -103,13 +112,13 @@ const ManagerList = () => {
         },
       });
 
-      if (response.status === 200 || response.data?.success) {
+      if (response?.status === 200 || response?.data?.success) {
         navigate("editmanager", { state: { managerData: response.data } });
       } else {
-        alert("Failed to fetch manager details.");
+        toast.error("An error occurred while fetching manager data.");
       }
     } catch (error) {
-      alert("An error occurred while fetching manager details.");
+      toast.error("An error occurred while saving the data.");
     } finally {
       setIsLoading(false);
     }
@@ -123,7 +132,7 @@ const ManagerList = () => {
     setManagerIdToDelete(managerId);
   };
 
-  const handleCloseModal = () => { setShow(false); };
+  const handleCloseModal = () => { setShow(false) };
 
   const handleCreate = (e) => {
     e.preventDefault();
@@ -243,15 +252,15 @@ const ManagerList = () => {
                 page={currentPage}
                 onChange={(e, value) => setCurrentPage(value)}
                 sx={{
+                  "& .MuiPaginationItem-root": {
+                    color: "var(--text-color)",
+                  },
                   "& .Mui-selected": {
                     backgroundColor: "#01848D !important",
                     color: "#ffffff",
                   },
                   "& .Mui-selected:hover": {
-                    backgroundColor: "#028d96",
-                  },
-                  "& .Mui-disabled": {
-                    color: "var(--text-color)",
+                    backgroundColor: "#028d96 !important",
                   },
                 }}
               />
@@ -267,6 +276,12 @@ const ManagerList = () => {
         entityType="Manager"
         deleteEndpoint="/managerMaster/deleteManagerMasterById"
         onDeleteSuccess={fetchManagers} />
+      <ToastContainer
+        position="top-center"
+        autoClose={1000}
+        hideProgressBar={true}
+        theme="light"
+      />
     </>
   );
 };

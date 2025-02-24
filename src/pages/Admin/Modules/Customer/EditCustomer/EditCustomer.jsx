@@ -167,7 +167,7 @@ const EditCustomer = () => {
         toast.success(response?.data?.message || "Customer updated successfully.");
         setTimeout(() => {
           navigate("/admin/customer");
-        }, 500);
+        }, 1000);
       } else {
         toast.error("Unexpected response. Please try again later.");
       }
