@@ -7,7 +7,7 @@ import { MdVisibility, MdVisibilityOff } from "react-icons/md";
 import CancelModal from '../../../../../common/CancelModal/CancelModal';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import axios from 'axios';
 import dayjs from 'dayjs';
 import API_BASE_URL from '../../../../../services/AuthService';
@@ -252,7 +252,7 @@ const CreateCustomer = () => {
                                 </div>
                               ) : field.name === "joiningDate" ? (
                                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                  <DatePicker className="form-control date-picker"
+                                  <DesktopDatePicker className="form-control date-picker"
                                     value={values.joiningDate ? dayjs(values.joiningDate) : null}
                                     onChange={(date) => setFieldValue("joiningDate", date || null)}
                                     slotProps={{
