@@ -12,13 +12,15 @@ const useCustomerProfile = (customerId) => {
   const [error, setError] = useState(null);
   const hasFetched = useRef(false);
 
+  const token = localStorage.getItem("authToken");
+  const handleSessionExpiration = useCallback(() => {
+    toast.error('Session expired. Please sign in again.', { autoClose: 2000 });
+    setTimeout(() => navigate('/'), 2000);
+  }, [navigate]);
+
+  // API Call: Fetch Customer Profile
   const fetchCustomerProfile = useCallback(async () => {
-    const token = localStorage.getItem("authToken");
-    if (!token || !customerId) {
-      toast.error("Session expired. Please sign in again.", { autoClose: 2000, });
-      setTimeout(() => navigate("/"), 2000);
-      return;
-    }
+    if (!token || !customerId) return handleSessionExpiration();
 
     try {
       const response = await axios.get(`${API_BASE_URL}/customerMaster/viewCustomerById/${customerId}`, {
@@ -26,10 +28,21 @@ const useCustomerProfile = (customerId) => {
           Authorization: `Bearer ${token}`
         },
       });
+
       if (response?.data) {
-        setCustomer(response.data);
+        let customerData = response.data;
+
+        try {
+          const mediaResponse = await axios.get(`${UPLOAD_FILE_API}/advisorMaster/viewMediaFile/${customerId}`);
+          if (mediaResponse?.data) {
+            customerData.profileImageUrl = mediaResponse.data;
+          }
+        } catch (mediaError) {
+          console.warn('Failed to fetch media file:', mediaError);
+        }
+        setCustomer(customerData);
       } else {
-        toast.error("No data found.");
+        toast.error('No data found.');
       }
     } catch (error) {
       toast.error("Failed to fetch customer profile.");
@@ -37,7 +50,7 @@ const useCustomerProfile = (customerId) => {
     } finally {
       setIsLoading(false);
     }
-  }, [customerId, navigate])
+  }, [customerId, token, handleSessionExpiration])
 
   useEffect(() => {
     if (!hasFetched.current) {
@@ -46,26 +59,15 @@ const useCustomerProfile = (customerId) => {
     }
   }, [fetchCustomerProfile]);
 
+  // API Call: Upload Profile Image
   const uploadMediaFile = async (file, setSelectedImage) => {
-    if (!file) {
-      toast.error("Please select a file to upload.");
-      return;
-    }
-
-    const token = localStorage.getItem("authToken");
-    if (!token || !customerId) {
-      toast.error("Session expired. Please sign in again.");
-      setTimeout(() => navigate("/"), 2000);
-      return;
-    }
+    if (!file) return toast.error('Please select a file to upload.');
+    if (!token || !customerId) return handleSessionExpiration();
 
     const formData = new FormData();
     formData.append("file", file);
 
     try {
-      console.log('File:', file);
-      console.log('Form Data:', formData);
-
       const response = await axios.post(`${UPLOAD_FILE_API}/advisorMaster/uploadMediaFile/${customerId}`, formData,
         {
           headers: {
@@ -74,32 +76,25 @@ const useCustomerProfile = (customerId) => {
           },
         });
 
-      console.log("Upload Response:", response);
-
       if (response?.data?.profileImageUrl) {
         setCustomer((prev) => ({ ...prev, profileImageUrl: response.data.profileImageUrl }));
         setSelectedImage(response.data.profileImageUrl);
         toast.success("Profile picture updated successfully.");
-      }
-      else {
+      } else {
         toast.error("Failed to update profile picture.");
       }
     } catch (error) {
       console.error("Error uploading profile image:", error);
-      toast.error(error?.response?.data || "Failed to upload profile picture.");
+      toast.error(error?.response?.data?.message || "Failed to upload profile picture.");
       setError(error);
     } finally {
       setIsLoading(false);
     }
   }
 
+  // API Call: Update Password
   const updatePassword = async (currentPassword, newPassword, confirmPassword) => {
-    const token = localStorage.getItem("authToken");
-    if (!token || !customerId) {
-      toast.error("Session expired. Please sign in again.", { autoClose: 2000 });
-      setTimeout(() => navigate("/"), 2000);
-      return;
-    }
+    if (!token || !customerId) return handleSessionExpiration();
 
     const payload = {
       confirmPassword,
