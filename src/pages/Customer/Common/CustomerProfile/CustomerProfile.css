@@ -20,24 +20,14 @@
   color: var(--text-color);
 }
 
-.customer-profile .sidebar-align {
-  padding-left: 0px;
-}
-
 .customer-profile .profile-sidebar {
   border: 1px solid var(--border-color);
   box-shadow: var(--shadow-color);
   border-radius: 5px;
   background-color: var(--navbar-color);
   padding: 20px 20px;
-}
-
-.customer-profile .profile-content {
-  border: 1px solid var(--border-color);
-  box-shadow: var(--shadow-color);
-  border-radius: 5px;
-  background-color: var(--navbar-color);
-  padding: 20px 20px;
+  min-height: 80vh;
+  height: 100%;
 }
 
 .customer-profile input[type="file"] {
@@ -97,7 +87,8 @@
 
 .customer-profile .profile-title {
   text-align: center;
-  margin: 15px 0px;
+  margin-top: 15px;
+  margin-bottom: 40px;
 }
 
 .customer-profile .profile-title h6 {
@@ -211,29 +202,98 @@
   align-items: center;
 }
 
+.customer-profile .save-button {
+  padding: 8px 0px;
+  border-radius: 30px;
+  border: 1px solid transparent;
+  background: var(--main-btn-color);
+  color: #ffffff;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  font-weight: 500;
+  width: 100px;
+}
+
+.customer-profile .save-button:hover {
+  background: #007281;
+}
+
+.customer-profile .cancel-button {
+  padding: 8px 0px;
+  border-radius: 30px;
+  border: 1px solid transparent;
+  background-color: #EEEEEE;
+  color: #5a5a5a;
+  font-weight: 500;
+  width: 100px;
+}
+
+.customer-profile .cancel-button:hover {
+  background-color: #d5d5d5;
+  transition: .3s linear all;
+}
+
+.customer-profile .save-btn-container {
+  padding: 20px 0px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 20px;
+}
+
 @media only screen and (max-width:575px) {
-  .customer-profile .sidebar-align {
-    padding-right: 0px;
+  .customer-profile .profile-content {
+    margin-top: 20px;
   }
 }
+
+/* @media only screen and (min-width:576px)and (max-width:767px) {
+  .customer-profile .profile-content {
+    margin-top: 20px;
+  }
+} */
+
+/* @media only screen and (min-width:768px)and (max-width:992px) {
+  .customer-profile .profile-content {
+    margin-top: 20px;
+  }
+} */
 
 @media only screen and (min-width: 1200px) and (max-width: 1399px) {
   .customer-profile .profile-header h5 {
     font-size: 16px;
   }
 
-  .customer-profile .sidebar-align {
-    padding-left: 0px;
-  }
-
   .customer-profile .input-control {
     font-size: 14px;
     padding: 7px 10px;
+  }
+
+  .customer-profile .save-btn-container {
+    gap: 10px;
+  }
+
+  .customer-profile .cancel-button,
+  .customer-profile .save-button {
+    font-size: 12px;
+    padding: 7px 0px;
   }
 }
 
 @media only screen and (min-width:1400px) {
   .customer-profile .sidebar-align {
     padding-left: 0px;
+  }
+
+  .customer-profile .profile-container {
+    margin-top: 50px;
+  }
+
+  .customer-profile .profile-sidebar {
+    padding: 30px 30px;
+  }
+
+  .customer-profile .profile-image {
+    width: 170px;
+    height: 170px;
   }
 }

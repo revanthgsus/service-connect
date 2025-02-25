@@ -18,7 +18,8 @@ const CustomerDropdown = () => {
     setShow(false);
   };
 
-  const toggleDropdown = () => {
+  const toggleDropdown = (e) => {
+    e.stopPropagation();
     setIsDropdownOpen(!isDropdownOpen);
   };
 
@@ -44,8 +45,8 @@ const CustomerDropdown = () => {
         {isDropdownOpen && (
           <div className="dropdownfile">
             <ul>
-              <li>
-                <Link to="/customer/profile" onClick={() => setIsDropdownOpen(false)}>
+              <li onClick={() => setIsDropdownOpen(false)}>
+                <Link to="/customer/profile" >
                   <AiOutlineUser />
                   <span>View Profile</span>
                 </Link>

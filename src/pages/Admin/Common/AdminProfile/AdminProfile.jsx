@@ -44,7 +44,7 @@ const AdminProfile = () => {
         <IoMdArrowRoundBack className="back-icon" />
         <h5>My Profile</h5>
       </div>
-      <Container>
+      <Container fluid>
         <Row>
           <Col xxl={4} xl={4} lg={4} className='sidebar-align'>
             <div className="profile-sidebar">

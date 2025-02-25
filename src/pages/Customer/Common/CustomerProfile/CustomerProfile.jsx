@@ -8,8 +8,14 @@ import ProfileModal from '../../../../common/ProfileModal/ProfileModal';
 import PasswordIcon from '../../../../assets/images/comman/empty-password.svg';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import PreLoader from '../../../../common/PreLoader/PreLoader';
+import useCustomerProfile from '../../../../hooks/useCustomerProfile';
+import { ToastContainer } from 'react-toastify';
 
 const CustomerProfile = () => {
+  const customerId = localStorage.getItem("userId");
+  const { customer, isLoading, uploadMediaFile, updatePassword } = useCustomerProfile(customerId);
+
   const [showPopup, setShowPopup] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
   const [showPasswordFields, setShowPasswordFields] = useState(false);
@@ -17,10 +23,14 @@ const CustomerProfile = () => {
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
+  const [currentPassword, setCurrentPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+
   const profileDetails = [
-    { title: "Email Address", value: "customer@example.com" },
-    { title: "Mobile Number", value: "9876543210" },
-    { title: "Joining Date", value: "01/01/2024" }
+    { title: "Email Address", value: customer?.emailAddress || "N/A" },
+    { title: "Mobile Number", value: customer?.mobileNumber || "N/A" },
+    { title: "Joining Date", value: customer?.joiningDate || "N/A" }
   ];
 
   const handlePasswordToggle = (field) => {
@@ -29,138 +39,164 @@ const CustomerProfile = () => {
     if (field === "confirm") setShowConfirmPassword((prev) => !prev);
   };
 
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const imageUrl = URL.createObjectURL(file);
-      setSelectedImage(imageUrl);
+  const handlePasswordUpdate = async () => {
+    if (!currentPassword || !newPassword || !confirmPassword) {
+      alert("Please fill in all fields.");
+      return;
     }
+    if (newPassword !== confirmPassword) {
+      alert("New Password and Confirm Password do not match.");
+      return;
+    }
+
+    await updatePassword(currentPassword, newPassword, confirmPassword);
+    setCurrentPassword('');
+    setNewPassword('');
+    setConfirmPassword('');
   };
 
   return (
-    <section className='customer-profile'>
-      <div className="profile-header">
-        <IoMdArrowRoundBack className="back-icon" />
-        <h5>My Profile</h5>
-      </div>
-      <Container>
-        <Row>
-          <Col xxl={4} xl={4} lg={4} className='sidebar-align'>
-            <div className="profile-sidebar">
-              <h6 className='heading'>Personal Information</h6>
-              <hr className='horizontal-line' />
-
-              <div className='profile-container'>
-                <div className="profile-image" onClick={() => setShowPopup(true)}>
-                  {selectedImage ? (
-                    <img src={selectedImage} alt="Profile" className="uploaded-image" />
-                  ) : (
-                    <TbUserCircle className="default-icon" />
-                  )}
-                  <input
-                    type="file"
-                    id='file'
-                    accept="image/png, image/jpeg, image/jpg, image/svg, image/heif, image/heic"
-                    onChange={handleFileChange} />
-                  <span>
-                    <CiEdit />
-                  </span>
+    <>
+      {isLoading ? (<PreLoader />) : (
+        <section className='customer-profile'>
+          <div className="profile-header">
+            <IoMdArrowRoundBack className="back-icon" />
+            <h5>My Profile</h5>
+          </div>
+          <Container fluid>
+            <Row>
+              <Col xxl={4} xl={4} lg={4} md={6} sm={6} className='sidebar-align'>
+                <div className="profile-sidebar">
+                  <h6 className='heading'>Personal Information</h6>
+                  <hr className='horizontal-line' />
+                  <div className='profile-container'>
+                    <div className="profile-image" onClick={() => setShowPopup(true)}>
+                      {selectedImage || customer?.profileImageUrl ? (
+                        <img src={selectedImage || customer?.profileImageUrl} alt="Profile" className="uploaded-image" />
+                      ) : (
+                        <TbUserCircle className="default-icon" />
+                      )}
+                      <span><CiEdit /></span>
+                    </div>
+                  </div>
+                  <div className='profile-title'>
+                    <h6>{customer?.userName || "Username"}</h6>
+                    <p>{customer?.city || "Location"}</p>
+                  </div>
+                  <div className="profile-details">
+                    {profileDetails.map((item, index) => (
+                      <div key={index} className="profile-item">
+                        <span className="profile-label">{item.title}</span>
+                        <span className="profile-value">{item.value}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              </Col>
 
-              <div className='profile-title'>
-                <h6>Username</h6>
-                <p>Location</p>
-              </div>
-
-              <div className="profile-details">
-                {profileDetails.map((item, index) => (
-                  <div key={index} className="profile-item">
-                    <span className="profile-label">{item.title}</span>
-                    <span className="profile-value">{item.value}</span>
+              <Col xxl={8} xl={8} lg={8} md={6} sm={6} className="profile-content">
+                <div className="profile-sidebar">
+                  <div className='password-header'>
+                    <h6>Change Password</h6>
+                    <span className='edit-icon' onClick={() => setShowPasswordFields(!showPasswordFields)}>
+                      <CiEdit />
+                    </span>
                   </div>
-                ))}
-              </div>
-            </div>
-          </Col>
-          <Col xxl={8} xl={8} lg={8} className="profile-content">
-            <div className='password-header'>
-              <h6>Change Password</h6>
-              <span className='edit-icon' onClick={() => setShowPasswordFields(!showPasswordFields)}>
-                <CiEdit />
-              </span>
-            </div>
-            <hr className='mt-1 horizontal-line' />
+                  <hr className='mt-1 horizontal-line' />
 
-            {!showPasswordFields ? (
-              <div className='passoword-input'>
-                <img src={PasswordIcon} alt='passwordicon' className='img-fluid' />
-                <p>
-                  <strong>Make it Unique - </strong>
-                  Your password should be specific to your account and not reused across multiple services.</p>
-              </div>
-            ) : (
-              <Row>
-                <Col xxl={4} xl={4} lg={4}>
-                  <div className="password-container">
-                    <label htmlFor="current-password" className="password-label">Current Password</label>
-                    <div className="password-wrapper">
-                      <input
-                        type={showPassword ? 'text' : 'password'}
-                        name="current-password"
-                        placeholder="Enter password"
-                        className='input-control'
-                      />
-                      <span className="password-icon" onClick={() => handlePasswordToggle("current")}  >
-                        {showPassword ? <Visibility /> : <VisibilityOff />}
-                      </span>
+                  {!showPasswordFields ? (
+                    <div className='passoword-input'>
+                      <img src={PasswordIcon} alt='passwordicon' className='img-fluid' />
+                      <p>
+                        <strong>Make it Unique - </strong>
+                        Your password should be specific to your account and not reused across multiple services.</p>
                     </div>
-                  </div>
-                </Col>
-                <Col xxl={4} xl={4} lg={4}>
-                  <div className="password-container">
-                    <label htmlFor="new-password" className="password-label">New Password</label>
-                    <div className="password-wrapper">
-                      <input
-                        type={showNewPassword ? 'text' : 'password'}
-                        name="new-password"
-                        placeholder="Enter password"
-                        className='input-control'
-                      />
-                      <span className="password-icon" onClick={() => handlePasswordToggle("new")}  >
-                        {showNewPassword ? <Visibility /> : <VisibilityOff />}
-                      </span>
-                    </div>
-                  </div>
-                </Col>
-                <Col xxl={4} xl={4} lg={4}>
-                  <div className="password-container">
-                    <label htmlFor="confirm-password" className="password-label">Confirm Password</label>
-                    <div className="password-wrapper">
-                      <input
-                        type={showConfirmPassword ? 'text' : 'password'}
-                        name="confirm-password"
-                        placeholder="Enter password"
-                        className='input-control'
-                      />
-                      <span className="password-icon" onClick={() => handlePasswordToggle("confirm")}  >
-                        {showConfirmPassword ? <Visibility /> : <VisibilityOff />}
-                      </span>
-                    </div>
-                  </div>
-                </Col>
-              </Row>
-            )}
-          </Col>
-        </Row>
-      </Container>
+                  ) : (
+                    <div>
+                      <Row>
+                        <Col xxl={4} xl={4} lg={4} >
+                          <div className="password-container">
+                            <label htmlFor="current-password" className="password-label">Current Password</label>
+                            <div className="password-wrapper">
+                              <input
+                                type={showPassword ? 'text' : 'password'}
+                                name="current-password"
+                                placeholder="Enter password"
+                                onChange={(e) => setCurrentPassword(e.target.value)}
+                                className='input-control'
+                              />
+                              <span className="password-icon" onClick={() => handlePasswordToggle("current")}  >
+                                {showPassword ? <Visibility /> : <VisibilityOff />}
+                              </span>
+                            </div>
+                          </div>
+                        </Col>
+                        <Col xxl={4} xl={4} lg={4} >
+                          <div className="password-container">
+                            <label htmlFor="new-password" className="password-label">New Password</label>
+                            <div className="password-wrapper">
+                              <input
+                                type={showNewPassword ? 'text' : 'password'}
+                                name="new-password"
+                                placeholder="Enter password"
+                                className='input-control'
+                                onChange={(e) => setNewPassword(e.target.value)}
+                              />
+                              <span className="password-icon" onClick={() => handlePasswordToggle("new")}  >
+                                {showNewPassword ? <Visibility /> : <VisibilityOff />}
+                              </span>
+                            </div>
+                          </div>
+                        </Col>
+                        <Col xxl={4} xl={4} lg={4} >
+                          <div className="password-container">
+                            <label htmlFor="confirm-password" className="password-label">Confirm Password</label>
+                            <div className="password-wrapper">
+                              <input
+                                type={showConfirmPassword ? 'text' : 'password'}
+                                name="confirm-password"
+                                placeholder="Enter password"
+                                className='input-control'
+                                onChange={(e) => setConfirmPassword(e.target.value)}
+                              />
+                              <span className="password-icon" onClick={() => handlePasswordToggle("confirm")}  >
+                                {showConfirmPassword ? <Visibility /> : <VisibilityOff />}
+                              </span>
+                            </div>
+                          </div>
+                        </Col>
+                      </Row>
 
-      <ProfileModal
-        showPopup={showPopup}
-        setShowPopup={setShowPopup}
-        setSelectedImage={setSelectedImage}
-        selectedImage={selectedImage} />
-    </section>
+                      <div class="save-btn-container">
+                        <button type="submit" class="cancel-button"
+                          onClick={() => setShowPasswordFields(false)}>
+                          Cancel
+                        </button>
+                        <button type="submit" class="save-button" onClick={handlePasswordUpdate}>
+                          Save
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </Col>
+            </Row>
+          </Container>
+
+          <ProfileModal
+            showPopup={showPopup}
+            setShowPopup={setShowPopup}
+            setSelectedImage={setSelectedImage}
+            selectedImage={selectedImage}
+            uploadMediaFile={uploadMediaFile} />
+        </section>
+      )}
+      <ToastContainer
+        position="top-center"
+        autoClose={1000}
+        hideProgressBar={true}
+        theme="light" />
+    </>
   );
 };
 
