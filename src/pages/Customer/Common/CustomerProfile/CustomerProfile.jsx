@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import './CustomerProfile.css';
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { Container, Col, Row } from 'react-bootstrap';
@@ -9,12 +9,20 @@ import PasswordIcon from '../../../../assets/images/comman/empty-password.svg';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import PreLoader from '../../../../common/PreLoader/PreLoader';
+import { ToastContainer, toast } from 'react-toastify';
 import useCustomerProfile from '../../../../hooks/useCustomerProfile';
-import { ToastContainer } from 'react-toastify';
+import usePasswordUpdate from '../../../../hooks/usePasswordUpdate';
+import useMediaUpload from '../../../../hooks/useMediaUpload';
+import { Form, Formik, ErrorMessage } from 'formik';
+import { PasswordValidation } from '../../../../utils/passwordValidation';
 
 const CustomerProfile = () => {
-  const customerId = localStorage.getItem("userId");
-  const { customer, isLoading, uploadMediaFile, updatePassword } = useCustomerProfile(customerId);
+  const userId = localStorage.getItem("userId");
+
+  const [customer, setCustomer] = useState({});
+  const { isLoading } = useCustomerProfile(userId, setCustomer);
+  const { updatePassword } = usePasswordUpdate(userId);
+  const { uploadMediaFile, viewMedia } = useMediaUpload(userId, setCustomer);
 
   const [showPopup, setShowPopup] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
@@ -23,9 +31,13 @@ const CustomerProfile = () => {
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  const [currentPassword, setCurrentPassword] = useState('');
-  const [newPassword, setNewPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [formErrors, setFormErrors] = useState({});
+  const [formTouched, setFormTouched] = useState({});
+  const fieldRefs = useRef({});
+
+  useEffect(() => {
+    viewMedia();
+  }, [viewMedia])
 
   const profileDetails = [
     { title: "Email Address", value: customer?.emailAddress || "N/A" },
@@ -39,20 +51,30 @@ const CustomerProfile = () => {
     if (field === "confirm") setShowConfirmPassword((prev) => !prev);
   };
 
-  const handlePasswordUpdate = async () => {
-    if (!currentPassword || !newPassword || !confirmPassword) {
-      alert("Please fill in all fields.");
-      return;
+  useEffect(() => {
+    if (Object.keys(formErrors).length > 0) {
+      const firstErrorField = Object.keys(formErrors).find(field => formTouched[field]);
+      if (firstErrorField && fieldRefs.current[firstErrorField]) {
+        setTimeout(() => {
+          fieldRefs.current[firstErrorField].scrollIntoView({ behavior: "smooth", block: "center" });
+        }, 100);
+      }
     }
-    if (newPassword !== confirmPassword) {
-      alert("New Password and Confirm Password do not match.");
-      return;
-    }
+  }, [formErrors, formTouched]);
 
-    await updatePassword(currentPassword, newPassword, confirmPassword);
-    setCurrentPassword('');
-    setNewPassword('');
-    setConfirmPassword('');
+  const handlePasswordUpdate = async (values) => {
+    const { currentPassword, newPassword, confirmPassword } = values;
+    if (newPassword !== confirmPassword) {
+      toast.error("New Password and Confirm Password do not match.");
+      return;
+    }
+    try {
+      await updatePassword(currentPassword, newPassword);
+      // toast.success("Password updated successfully!");
+      // setShowPasswordFields(false);
+    } catch (error) {
+      toast.error("Failed to update password. Try again.");
+    }
   };
 
   return (
@@ -112,71 +134,86 @@ const CustomerProfile = () => {
                         Your password should be specific to your account and not reused across multiple services.</p>
                     </div>
                   ) : (
-                    <div>
-                      <Row>
-                        <Col xxl={4} xl={4} lg={4} >
-                          <div className="password-container">
-                            <label htmlFor="current-password" className="password-label">Current Password</label>
-                            <div className="password-wrapper">
-                              <input
-                                type={showPassword ? 'text' : 'password'}
-                                name="current-password"
-                                placeholder="Enter password"
-                                onChange={(e) => setCurrentPassword(e.target.value)}
-                                className='input-control'
-                              />
-                              <span className="password-icon" onClick={() => handlePasswordToggle("current")}  >
-                                {showPassword ? <Visibility /> : <VisibilityOff />}
-                              </span>
-                            </div>
-                          </div>
-                        </Col>
-                        <Col xxl={4} xl={4} lg={4} >
-                          <div className="password-container">
-                            <label htmlFor="new-password" className="password-label">New Password</label>
-                            <div className="password-wrapper">
-                              <input
-                                type={showNewPassword ? 'text' : 'password'}
-                                name="new-password"
-                                placeholder="Enter password"
-                                className='input-control'
-                                onChange={(e) => setNewPassword(e.target.value)}
-                              />
-                              <span className="password-icon" onClick={() => handlePasswordToggle("new")}  >
-                                {showNewPassword ? <Visibility /> : <VisibilityOff />}
-                              </span>
-                            </div>
-                          </div>
-                        </Col>
-                        <Col xxl={4} xl={4} lg={4} >
-                          <div className="password-container">
-                            <label htmlFor="confirm-password" className="password-label">Confirm Password</label>
-                            <div className="password-wrapper">
-                              <input
-                                type={showConfirmPassword ? 'text' : 'password'}
-                                name="confirm-password"
-                                placeholder="Enter password"
-                                className='input-control'
-                                onChange={(e) => setConfirmPassword(e.target.value)}
-                              />
-                              <span className="password-icon" onClick={() => handlePasswordToggle("confirm")}  >
-                                {showConfirmPassword ? <Visibility /> : <VisibilityOff />}
-                              </span>
-                            </div>
-                          </div>
-                        </Col>
-                      </Row>
+                    <Formik
+                      initialValues={{ currentPassword: '', newPassword: '', confirmPassword: '' }}
+                      validationSchema={PasswordValidation}
+                      onSubmit={handlePasswordUpdate}
+                    >
+                      {({ handleChange, touched, errors }) => {
+                        setFormErrors(errors);
+                        setFormTouched(touched);
+                        return (
+                          <Form>
+                            <Row>
+                              <Col xxl={4} xl={4} lg={4} >
+                                <div className="password-container">
+                                  <label htmlFor="current-password" className="password-label">Current Password</label>
+                                  <div className="password-wrapper">
+                                    <input
+                                      type={showPassword ? 'text' : 'password'}
+                                      name="current-password"
+                                      placeholder="Enter password"
+                                      onChange={handleChange}
+                                      className='input-control'
+                                    />
+                                    <span className="password-icon" onClick={() => handlePasswordToggle("current")}  >
+                                      {showPassword ? <Visibility /> : <VisibilityOff />}
+                                    </span>
+                                    <ErrorMessage name="currentPassword" component="div" className="error-message" />
+                                  </div>
+                                </div>
+                              </Col>
 
-                      <div class="save-btn-container">
-                        <button type="submit" class="cancel-button"
-                          onClick={() => setShowPasswordFields(false)}>
-                          Cancel
-                        </button>
-                        <button type="submit" class="save-button" onClick={handlePasswordUpdate}>
-                          Save
-                        </button>
-                      </div>
-                    </div>
+                              <Col xxl={4} xl={4} lg={4} >
+                                <div className="password-container">
+                                  <label htmlFor="new-password" className="password-label">New Password</label>
+                                  <div className="password-wrapper">
+                                    <input
+                                      type={showNewPassword ? 'text' : 'password'}
+                                      name="new-password"
+                                      placeholder="Enter password"
+                                      className='input-control'
+                                      onChange={handleChange}
+                                    />
+                                    <span className="password-icon" onClick={() => handlePasswordToggle("new")}  >
+                                      {showNewPassword ? <Visibility /> : <VisibilityOff />}
+                                    </span>
+                                    <ErrorMessage name="newPassword" component="div" className="error-message" />
+                                  </div>
+                                </div>
+                              </Col>
+                              <Col xxl={4} xl={4} lg={4} >
+                                <div className="password-container">
+                                  <label htmlFor="confirm-password" className="password-label">Confirm Password</label>
+                                  <div className="password-wrapper">
+                                    <input
+                                      type={showConfirmPassword ? 'text' : 'password'}
+                                      name="confirm-password"
+                                      placeholder="Enter password"
+                                      className='input-control'
+                                      onChange={handleChange}
+                                    />
+                                    <span className="password-icon" onClick={() => handlePasswordToggle("confirm")}  >
+                                      {showConfirmPassword ? <Visibility /> : <VisibilityOff />}
+                                    </span>
+                                    <ErrorMessage name="confirmPassword" component="div" className="error-message" />
+                                  </div>
+                                </div>
+                              </Col>
+                            </Row>
+
+                            <div class="save-btn-container">
+                              <button type="submit" class="cancel-button"
+                                onClick={() => setShowPasswordFields(false)}>
+                                Cancel
+                              </button>
+                              <button type="submit" class="save-button" onClick={handlePasswordUpdate}>
+                                Save
+                              </button>
+                            </div>
+                          </Form>)
+                      }}
+                    </Formik>
                   )}
                 </div>
               </Col>

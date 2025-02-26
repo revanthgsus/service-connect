@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import "./CustomerDropdown.css";
 import { BsPersonCircle } from "react-icons/bs";
 import IconButton from '@mui/material/IconButton';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AiOutlineUser } from "react-icons/ai";
 import { TbLogout } from "react-icons/tb";
 import Logout from '../../../../common/Logout/Logout';
@@ -10,6 +10,7 @@ import Logout from '../../../../common/Logout/Logout';
 const CustomerDropdown = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [show, setShow] = useState(false);
+  const navigate = useNavigate();
 
   const setShowModal = () => {
     setShow(true)
@@ -36,6 +37,12 @@ const CustomerDropdown = () => {
     };
   }, []);
 
+  const handleView = (e) => {
+    e.preventDefault();
+    navigate("/customer/profile");
+    setIsDropdownOpen(false);
+  }
+
   return (
     <>
       <div className='customer-dropdown'>
@@ -45,11 +52,11 @@ const CustomerDropdown = () => {
         {isDropdownOpen && (
           <div className="dropdownfile">
             <ul>
-              <li onClick={() => setIsDropdownOpen(false)}>
-                <Link to="/customer/profile" >
+              <li onClick={handleView}>
+                <div>
                   <AiOutlineUser />
                   <span>View Profile</span>
-                </Link>
+                </div>
               </li>
               <hr className="mt-0 mb-2" />
               <li className="logout-link" onClick={setShowModal}>
