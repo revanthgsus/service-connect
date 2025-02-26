@@ -15,16 +15,20 @@ const CustomerGraph = () => {
       itemWidth: 20,
       itemHeight: 20,
       itemStyle: {
-        borderWidth: 2,
-        borderRadius: 10,
+        borderRadius: 7.5,
+      },
+      textStyle: {
+        fontFamily: 'Be Vietnam Pro, sans-serif',
+        fontSize: 16,
+        color: 'var(--text-color)',
       },
     },
     color: ['#57E5A9', '#28BDC4'],
     series: [
       {
-        name: 'Customers Chart',
+        name: 'Customers',
         type: 'pie',
-        radius: '50%',
+        radius: '80%',
         data: [
           { value: 1050, name: 'New Customers' },
           { value: 700, name: 'Previous Customers' },
@@ -44,22 +48,20 @@ const CustomerGraph = () => {
   };
 
   return (
-    <>
-      <div id="chart" className='piechart'>
-        <div className="chart-header">
-          <h6>Cutomer Overview</h6>
-          <div className="status-wrapper">
-            <select className="chart-select">
-              <option value="Weekly">Weekly</option>
-              <option value="Monthly">Monthly</option>
-              <option value="Yearly">Yearly</option>
-            </select>
-            <IoIosArrowDown className="arrow-icon" />
-          </div>
+    <div id="chart" className='piechart'>
+      <div className="chart-header">
+        <h6>Cutomer Overview</h6>
+        <div className="status-wrapper">
+          <select className="chart-select">
+            <option value="Weekly">Weekly</option>
+            <option value="Monthly">Monthly</option>
+            <option value="Yearly">Yearly</option>
+          </select>
+          <IoIosArrowDown className="arrow-icon" />
         </div>
-        <ReactECharts option={option} />
-      </div >
-    </>
+      </div>
+      <ReactECharts option={option} />
+    </div >
   )
 }
 

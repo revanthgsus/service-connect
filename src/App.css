@@ -33,6 +33,9 @@
   --error-msg-color: #ff0000;
   --sub-text-color: #525252;
   --graph-color: linear-gradient(135deg, #C5F4FF 0%, #e5faff 15%, #ffffff 50%, #ffffff 75%, #ffffff 100%);
+  --complete-color: linear-gradient(180deg, #e5faef 0%, #fafffc 15%, #ffffff 50%, #ffffff 75%, #ffffff 100%);
+  --progress-color: linear-gradient(180deg, #ffeccd 0%, #fffaf1 15%, #ffffff 50%, #ffffff 75%, #ffffff 100%);
+  --cancel-color: linear-gradient(180deg, #ffdad4 0%, #fff4f2 15%, #ffffff 50%, #ffffff 75%, #ffffff 100%);
 }
 
 [data-theme="light"] {
@@ -64,6 +67,9 @@
   --error-msg-color: #ff0000;
   --sub-text-color: #525252;
   --graph-color: linear-gradient(135deg, #C5F4FF 0%, #e5faff 15%, #ffffff 50%, #ffffff 75%, #ffffff 100%);
+  --complete-color: linear-gradient(180deg, #e5faef 0%, #fafffc 15%, #ffffff 50%, #ffffff 75%, #ffffff 100%);
+  --progress-color: linear-gradient(180deg, #ffeccd 0%, #fffaf1 15%, #ffffff 50%, #ffffff 75%, #ffffff 100%);
+  --cancel-color: linear-gradient(180deg, #ffdad4 0%, #fff4f2 15%, #ffffff 50%, #ffffff 75%, #ffffff 100%);
 }
 
 [data-theme="dark"] {
@@ -95,4 +101,7 @@
   --error-msg-color: #fd4545;
   --sub-text-color: #c5c5c5;
   --graph-color: #2f3742;
+  --complete-color: #2f3742;
+  --progress-color: #2f3742;
+  --cancel-color: #2f3742;
 }
