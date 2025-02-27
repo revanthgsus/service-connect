@@ -79,7 +79,7 @@ const QuotesSummary = () => {
                 <span>Additional Quotes</span>
               </Badge>
             </IconButton>
-          </div >
+          </div>
 
           <div className="table-list">
             <div className="list-alignment">

@@ -52,6 +52,7 @@
   color: #fff;
   padding: 10px;
   width: 100%;
+  cursor: pointer;
 }
 
 .reject-popup .reject-btn:hover {

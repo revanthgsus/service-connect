@@ -82,7 +82,7 @@ const AppointmentsList = () => {
       setRejectReason(appointment.rejectReason);
       setShowRejectModal(true);
     } else {
-      navigate("/advisor/appointments");
+      navigate("view");
     }
   };
 

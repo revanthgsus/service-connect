@@ -7,12 +7,14 @@ import Stack from '@mui/material/Stack';
 import { ReactComponent as Norecords } from "../../../../assets/images/advisor/no-records.svg";
 import PreLoader from '../../../../common/PreLoader/PreLoader';
 import { MdOutlineFileDownload } from "react-icons/md";
+import PaymentReceipt from '../../../../common/PaymentReceipt/PaymentReceipt';
 
 const TransactionList = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
+  const [selectedTransaction, setSelectedTransaction] = useState(null);
 
   const itemsPerPage = 10;
 
@@ -76,6 +78,7 @@ const TransactionList = () => {
 
   const handlePageChange = (event, page) => {
     setCurrentPage(page);
+    setIsLoading(false);
   };
 
   const displayedTransactions = filteredTransactions.slice(
@@ -83,10 +86,10 @@ const TransactionList = () => {
     currentPage * itemsPerPage
   );
 
-  const handleDownload = (e) => {
-    e.preventDefault();
-    setIsLoading(false);
-  };
+  // const handleDownload = (e) => {
+  //   e.preventDefault();
+  //   setIsLoading(false);
+  // };
 
   return (
     <>
@@ -156,7 +159,7 @@ const TransactionList = () => {
                         <td>{transaction.paidDate}</td>
                         <td>{transaction.paidAmount}</td>
                         <td>
-                          <span className='download-icon' onClick={handleDownload}>
+                          <span className='download-icon' onClick={(e) => setSelectedTransaction(transaction)}>
                             <MdOutlineFileDownload />
                           </span>
                         </td>
@@ -167,6 +170,8 @@ const TransactionList = () => {
               </table>
             </div>
           </div>
+
+          {selectedTransaction && <PaymentReceipt transaction={selectedTransaction} />}
 
           <div className="pagination-align">
             <Stack spacing={2}>

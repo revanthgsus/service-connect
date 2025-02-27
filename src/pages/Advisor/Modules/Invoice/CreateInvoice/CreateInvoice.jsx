@@ -105,7 +105,7 @@ const CreateInvoice = () => {
 
   const handleGenerate = (e) => {
     e.preventDefault()
-    navigate(-1)
+    navigate('/advisor/invoice/viewinvoice')
     setLoading(false)
   }
   return (

@@ -10,6 +10,7 @@ import IconButton from '@mui/material/IconButton';
 import { IoNotificationsOutline, IoMoonOutline, IoSunny } from "react-icons/io5";
 import ThemeContext from '../../../../contexts/ThemeContext';
 import AdvisorDropdown from './../AdvisorDropdown/AdvisorDropdown';
+import { MdMailOutline } from "react-icons/md";
 
 const AdvisorNavbar = ({ handleDrawerToggle, isOpen }) => {
   const { theme, toggleTheme } = useContext(ThemeContext);
@@ -31,7 +32,12 @@ const AdvisorNavbar = ({ handleDrawerToggle, isOpen }) => {
           </div>
           <div className="navbar-icons">
             <IconButton>
-              <Badge badgeContent={0} color="error">
+              <Badge badgeContent={1} color="error">
+                <MdMailOutline className="notification" />
+              </Badge>
+            </IconButton>
+            <IconButton>
+              <Badge badgeContent={4} color="error">
                 <IoNotificationsOutline className="notification" />
               </Badge>
             </IconButton>

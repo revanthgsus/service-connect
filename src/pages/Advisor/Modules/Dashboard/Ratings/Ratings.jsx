@@ -1,28 +1,32 @@
-import React, { useState } from 'react';
-import { Box, Rating } from '@mui/material';
-import Typography from '@mui/material/Typography';
+import React from 'react';
+import './Ratings.css';
+import { Box, Rating, Typography } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 const Ratings = () => {
-  const [value, setValue] = useState(3);
+  const navigate = useNavigate();
+  const ratingValue = 4.0;
+  const totalRatings = 275;
+
+  const handleClick = (e) => {
+    e.preventDefault()
+    navigate('ratings');
+  }
 
   return (
     <>
-      <section>
+      <section className='rating-toolbar'>
         <div className='rating-header'>
-          <div className='password-header'>
-            <h6>Customer Ratings</h6>
-            <button>View All</button>
-          </div>
-          <hr className='mt-1 horizontal-line' />
+          <h6>Customer Ratings</h6>
+          <button type='button' className='view-btn' onClick={handleClick}>View All</button>
         </div>
-        <div>
-          <h3>4.0</h3>
-          <span>
-            <Box sx={{ '& > legend': { mt: 2 } }}>
-              <Typography component="legend">Read only</Typography>
-              <Rating name="read-only" value={value} readOnly />
-            </Box>
-          </span>
+        <hr className='mt-1 horizontal-line' />
+        <div className='rating-content'>
+          <h2>{ratingValue.toFixed(1)}</h2>
+          <Box>
+            <Rating value={ratingValue} precision={0.1} readOnly />
+            <Typography className='rating-number'>{totalRatings} Ratings</Typography>
+          </Box>
         </div>
       </section>
     </>

@@ -5,6 +5,7 @@ import MainLayout from '../Layouts/MainLayout/MainLayout';
 import ProtectedRoute from './ProtectedRoute';
 
 const AdvisorDashboard = lazy(() => import('../pages/Advisor/Modules/Dashboard/AdvisorDashboard/AdvisorDashboard'));
+const Reviews = lazy(() => import('../pages/Advisor/Modules/Reviews/Reviews'));
 
 const AppointmentList = lazy(() => import('../pages/Advisor/Modules/Appointment/AppointmentsList/AppointmentsList'));
 const ManageAppointment = lazy(() => import("../pages/Advisor/Modules/Appointment/ManageAppointment/ManageAppointment"));
@@ -33,6 +34,7 @@ const AdvisorRouter = () => {
             <Route path='/' element={<MainLayout />}>
               <Route path="dashboard">
                 <Route index element={<AdvisorDashboard />} />
+                <Route path='ratings' element={<Reviews />} />
               </Route>
 
               <Route path='appointments' >

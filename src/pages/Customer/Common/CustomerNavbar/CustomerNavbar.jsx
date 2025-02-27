@@ -10,6 +10,7 @@ import { IoNotificationsOutline, IoMoonOutline, IoSunny } from "react-icons/io5"
 import ThemeContext from '../../../../contexts/ThemeContext';
 import CustomLogo from './../../../../common/MainLogo/CustomLogo';
 import CustomerDropdown from './../CustomerDropdown/CustomerDropdown';
+import { MdMailOutline } from "react-icons/md";
 
 const CustomerNavbar = ({ handleDrawerToggle, isOpen }) => {
   const { theme, toggleTheme } = useContext(ThemeContext);
@@ -30,6 +31,11 @@ const CustomerNavbar = ({ handleDrawerToggle, isOpen }) => {
             <Menubtn handleDrawerToggle={handleDrawerToggle} isOpen={isOpen} />
           </div>
           <div className="navbar-icons">
+            <IconButton>
+              <Badge badgeContent={1} color="error">
+                <MdMailOutline className="notification" />
+              </Badge>
+            </IconButton>
             <IconButton>
               <Badge badgeContent={7} color="error">
                 <IoNotificationsOutline className="notification" />
