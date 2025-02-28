@@ -27,6 +27,27 @@
   transition: 0.3s linear all;
 }
 
+.customer-dropdown .notify {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start !important;
+}
+
+.alignment {
+  display: flex;
+  gap: 20px !important;
+  align-items: flex-start !important;
+}
+
+.customer-dropdown .notify p {
+  margin-bottom: 5px;
+}
+
+.notified {
+  width: 25%;
+  right: 160px !important;
+}
+
 .customer-dropdown .dropdownfile::before {
   content: "";
   position: absolute;

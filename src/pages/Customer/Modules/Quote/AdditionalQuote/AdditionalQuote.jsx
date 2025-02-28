@@ -7,6 +7,8 @@ import { FaRegEye } from "react-icons/fa6";
 import ViewImageIcon from '../../../../../assets/images/customer/quotes/add-image.svg';
 import { IoClose } from "react-icons/io5";
 import { LuCheck } from "react-icons/lu";
+import Lightbox from "yet-another-react-lightbox";
+import "yet-another-react-lightbox/styles.css";
 
 const AdditionalQuote = () => {
   const navigate = useNavigate();
@@ -110,10 +112,10 @@ const AdditionalQuote = () => {
           </div>
 
           {isOpen && currentImage && (
-            <span
-              showTitle={false}
-              images={[{ url: currentImage }]}
-              onClose={() => setIsOpen(false)}
+            <Lightbox
+              slides={[{ src: currentImage }]}
+              open={isOpen}
+              close={() => setIsOpen(false)}
             />
 
           )}

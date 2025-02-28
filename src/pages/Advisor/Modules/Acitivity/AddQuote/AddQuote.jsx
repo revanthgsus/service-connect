@@ -118,8 +118,8 @@ const AddQuote = () => {
           </div>
 
           <div className="additional-quotes">
-            <Row className="d-flex justify-content-center">
-              <Col xxl={5} xl={5} lg={5} md={6} sm={8} className="mb-sm-4">
+            <Row className="d-flex justify-content-center align-items-center">
+              <Col xxl={5} xl={5} lg={5} md={6} sm={8}>
                 <div className={`image-container ${dragging ? "dragging" : ""}`}>
                   <div className="image-section"
                     onClick={triggerFileInput}

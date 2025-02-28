@@ -49,6 +49,14 @@ const ViewInvoice = () => {
       itemFee: "₹ 100",
       totalAmount: "₹ 1300",
     },
+    {
+      id: 3,
+      itemList: "Brake Check",
+      description: "Inspecting brake pads, rotors, and fluid to make sure your car can stop safely when needed",
+      laborFee: "₹ 300",
+      itemFee: "₹ 100",
+      totalAmount: "₹ 1300",
+    },
   ];
 
   const amountData = [

@@ -6,11 +6,12 @@ import Navbar from 'react-bootstrap/Navbar';
 import MobileLogo from '../../../../common/MainLogo/MobileLogo';
 import Badge from '@mui/material/Badge';
 import IconButton from '@mui/material/IconButton';
-import { IoNotificationsOutline, IoMoonOutline, IoSunny } from "react-icons/io5";
+import { IoMoonOutline, IoSunny } from "react-icons/io5";
 import ThemeContext from '../../../../contexts/ThemeContext';
 import CustomLogo from './../../../../common/MainLogo/CustomLogo';
 import CustomerDropdown from './../CustomerDropdown/CustomerDropdown';
 import { MdMailOutline } from "react-icons/md";
+import CustomerNotification from '../CustomerNotfication/CustomerNotification';
 
 const CustomerNavbar = ({ handleDrawerToggle, isOpen }) => {
   const { theme, toggleTheme } = useContext(ThemeContext);
@@ -31,14 +32,10 @@ const CustomerNavbar = ({ handleDrawerToggle, isOpen }) => {
             <Menubtn handleDrawerToggle={handleDrawerToggle} isOpen={isOpen} />
           </div>
           <div className="navbar-icons">
+            <CustomerNotification />
             <IconButton>
               <Badge badgeContent={1} color="error">
                 <MdMailOutline className="notification" />
-              </Badge>
-            </IconButton>
-            <IconButton>
-              <Badge badgeContent={7} color="error">
-                <IoNotificationsOutline className="notification" />
               </Badge>
             </IconButton>
             <IconButton onClick={toggleTheme} aria-label="Toggle Theme" className="theme-toggle-btn">

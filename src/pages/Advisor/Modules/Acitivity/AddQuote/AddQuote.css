@@ -176,7 +176,7 @@ input[type="number"]::-webkit-outer-spin-button {
   color: #fff;
   cursor: pointer;
   padding: 7px 20px;
-  float: inline-end;
+  float: right;
 }
 
 .additonal-container .send-btn:hover {

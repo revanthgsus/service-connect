@@ -7,15 +7,12 @@ import Stack from '@mui/material/Stack';
 import { ReactComponent as Norecords } from "../../../../assets/images/advisor/no-records.svg";
 import PreLoader from '../../../../common/PreLoader/PreLoader';
 import { MdOutlineFileDownload } from "react-icons/md";
-import PaymentReceipt from '../../../../common/PaymentReceipt/PaymentReceipt';
 
 const TransactionList = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
-  const [selectedTransaction, setSelectedTransaction] = useState(null);
-
   const itemsPerPage = 10;
 
   const tableHeadings = [
@@ -63,9 +60,10 @@ const TransactionList = () => {
   ];
 
   const filteredTransactions = transactionData.filter((transaction) => {
-    const matchesSearch = transaction.serviceID.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesStatus = statusFilter === '' || transaction.status.toLowerCase() === statusFilter.toLowerCase();
-    return matchesSearch && matchesStatus;
+    return (
+      transaction.serviceID.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      transaction.transactionID.toLowerCase().includes(searchTerm.toLowerCase())
+    );
   });
 
   const handleSearchChange = (e) => {
@@ -85,11 +83,6 @@ const TransactionList = () => {
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
   );
-
-  // const handleDownload = (e) => {
-  //   e.preventDefault();
-  //   setIsLoading(false);
-  // };
 
   return (
     <>
@@ -159,7 +152,7 @@ const TransactionList = () => {
                         <td>{transaction.paidDate}</td>
                         <td>{transaction.paidAmount}</td>
                         <td>
-                          <span className='download-icon' onClick={(e) => setSelectedTransaction(transaction)}>
+                          <span className='download-icon'>
                             <MdOutlineFileDownload />
                           </span>
                         </td>
@@ -171,7 +164,7 @@ const TransactionList = () => {
             </div>
           </div>
 
-          {selectedTransaction && <PaymentReceipt transaction={selectedTransaction} />}
+          {/* {selectedTransaction && <PaymentReceipt transaction={selectedTransaction} />} */}
 
           <div className="pagination-align">
             <Stack spacing={2}>

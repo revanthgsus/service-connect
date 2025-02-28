@@ -137,7 +137,7 @@
 
 .quote-list .pagination-align {
   padding: 15px 0px;
-  float: inline-end;
+  float: right;
 }
 
 .quote-list .list-item td:first-child {
@@ -174,6 +174,7 @@
   transition: 0.3s ease-out all;
   display: inline-block;
   color: var(--actions-icon-color);
+  cursor: pointer;
 }
 
 .quote-list .view-icon:hover {

@@ -19,7 +19,6 @@ const RequestAppointment = () => {
   const [selectedAdvisor, setSelectedAdvisor] = useState(null);
   const [cancelShow, setCancelShow] = useState(false);
 
-
   const ServiceTypes = [
     'Oil Change',
     'Tire Rotation',

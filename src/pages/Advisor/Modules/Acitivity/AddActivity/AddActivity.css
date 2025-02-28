@@ -142,7 +142,7 @@
 }
 
 .activity-container .status-wrapper {
-  float: inline-end;
+  float: right;
   width: 120px;
 }
 
@@ -215,6 +215,6 @@
 
 @media only screen and (min-width:1400px) {
   .activity-container .add-quote-header h5 {
-    font-size: 18px;
+    font-size: 16px;
   }
 }

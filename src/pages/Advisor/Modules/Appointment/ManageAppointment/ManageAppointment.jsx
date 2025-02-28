@@ -33,6 +33,11 @@ const ManageAppointment = () => {
       value: 'Car Routine Maintenance'
     },
     {
+      label: 'Preferred Location',
+      name: 'preferelocation',
+      value: 'kumaran colony,vadapalani'
+    },
+    {
       label: 'Appointment Date',
       name: 'appointmentdate',
       value: '01/02/2025'
@@ -42,11 +47,7 @@ const ManageAppointment = () => {
       name: 'starttime',
       value: '09.00AM'
     },
-    {
-      label: 'Preferred Location',
-      name: 'preferelocation',
-      value: 'kumaran colony,vadapalani'
-    },
+
     {
       label: 'Product Name',
       name: 'productname',

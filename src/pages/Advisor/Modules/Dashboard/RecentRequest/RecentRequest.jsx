@@ -1,8 +1,11 @@
 import React from 'react';
 import './RecentRequest.css';
 import DummyImg from '../../../../../assets/images/dummy.svg';
+import { useNavigate } from 'react-router-dom';
 
 const RecentRequest = () => {
+
+  const navigate = useNavigate();
   const RequestData = [
     { id: 1, serviceId: 'SR_23456', scheduledDate: '01/12/2024', urgencyLevel: 'urgent' },
     { id: 2, serviceId: 'SR_23457', scheduledDate: '02/12/2024', urgencyLevel: 'high' },
@@ -11,6 +14,11 @@ const RecentRequest = () => {
     { id: 5, serviceId: 'SR_23460', scheduledDate: '05/12/2024', urgencyLevel: 'urgent' },
     { id: 6, serviceId: 'SR_23461', scheduledDate: '06/12/2024', urgencyLevel: 'high' },
   ];
+
+  const handleRequest = (e) => {
+    e.preventDefault();
+    navigate('/advisor/appointments/view')
+  }
 
   return (
     <section className='recent-request'>
@@ -21,7 +29,7 @@ const RecentRequest = () => {
 
       <div className='request-list'>
         {RequestData.map((data) => (
-          <div key={data.id} className="request-item">
+          <div key={data.id} className="request-item" onClick={handleRequest}>
             <img src={DummyImg} alt="customer-img" className="customer-img" width="20%" />
             <div className="request-details">
               <h6>Service ID: {data.serviceId}</h6>

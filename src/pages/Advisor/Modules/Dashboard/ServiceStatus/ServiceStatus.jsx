@@ -35,7 +35,7 @@ const ServiceStatus = () => {
           <Col xxl={4} xl={4} lg={4} md={4}>
             <div className='service-container cancel'>
               <div className='service-value'>
-                <h6>Canceled Services</h6>
+                <h6>Canceled &emsp; Services</h6>
                 <h3>12</h3>
               </div>
               <div className='service-icon'>
