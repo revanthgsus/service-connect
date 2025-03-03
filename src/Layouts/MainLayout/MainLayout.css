@@ -11,9 +11,9 @@
   background-color: var(--main-bg-color);
 }
 
-.main-layout .layout-main::-webkit-scrollbar {
+/* .main-layout .layout-main::-webkit-scrollbar {
   display: none;
-}
+} */
 
 .layout-container {
   padding-top: 68px;

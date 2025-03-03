@@ -14,6 +14,7 @@ import axios from 'axios';
 import API_BASE_URL from '../../../services/AuthService';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
+import { toast } from 'react-toastify';
 
 const NewPassword = () => {
   const navigate = useNavigate();
@@ -22,7 +23,6 @@ const NewPassword = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [showModal, setShowModal] = useState(false);
-
   const location = useLocation();
   const otp = location.state?.otp;
 
@@ -69,12 +69,15 @@ const NewPassword = () => {
     };
 
     try {
-      const response = await axios.post(`${API_BASE_URL}/email/changePassword`, payload);
+      const response = await axios.post(`${API_BASE_URL}/email/changePassword`, payload, {
+        headers: { 'Content-Type': 'application/json' },
+      });
 
-      if (response.status === 200) {
+      if (response?.data?.status === "success") {
         setShowModal(true);
       } else {
-        setError('Something went wrong. Please try again.');
+        toast.error(response?.data?.message);
+        setLoading(false);
       }
     } catch (err) {
       setError(err.response?.data?.message || 'Something went wrong. Please try again.');

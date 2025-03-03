@@ -17,7 +17,7 @@
   flex-direction: column;
   height: calc(100vh - 68px);
   overflow-y: auto;
-  transition: 0.3s linear width;
+  transition: .3s linear width;
   white-space: nowrap;
 }
 

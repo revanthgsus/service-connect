@@ -34,7 +34,7 @@ const ForgotPassword = () => {
       return;
     }
 
-    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|org|net|edu)$/;
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (!emailPattern.test(email)) {
       setError('Please enter a valid email address');
       setLoading(false);
@@ -50,21 +50,23 @@ const ForgotPassword = () => {
         headers: { 'Content-Type': 'application/json' },
       });
 
-      if (response.status === 200) {
-        toast.info("OTP sent successfully!", {
+      if (response?.data?.status === "success") {
+        toast.success("OTP sent successfully!", {
           position: "top-center",
           autoClose: 1000,
           hideProgressBar: true,
           theme: "light",
         });
+        
         setTimeout(() => {
           navigate('/get-otp', { state: { email: email } });
         }, 1000);
       } else {
-        setError('Failed to send OTP, try again.');
+        toast.error(response?.data?.message);
+        setLoading(false)
       }
-    } catch (err) {
-      setError(err.response?.data?.message || 'Something went wrong. Please try again.');
+    } catch (error) {
+      setError(error.response?.data?.message || 'Something went wrong. Please try again.');
     } finally {
       setLoading(false);
     }

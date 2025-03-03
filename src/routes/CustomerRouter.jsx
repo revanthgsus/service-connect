@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import PreLoader from '../common/PreLoader/PreLoader';
 import MainLayout from '../Layouts/MainLayout/MainLayout';
 import ProtectedRoute from './ProtectedRoute';
+import NotFound from '../common/NotFound/NotFound';
 
 const CustomerDashboard = lazy(() => import('../pages/Customer/Modules/Dashboard/CustomerDashboard/CustomerDashboard'));
 
@@ -62,6 +63,8 @@ const CustomerRouter = () => {
 
               <Route path="profile" element={<CustomerProfile />} />
             </Route>
+
+            <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>
       </Suspense>

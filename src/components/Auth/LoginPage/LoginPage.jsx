@@ -56,8 +56,8 @@ const LoginPage = () => {
         headers: { 'Content-Type': 'application/json' },
       });
 
-      if (response.data?.token && response.data?.role && response.data?.userId) {
-        login(response.data?.token, response.data?.role, response.data?.userId);
+      if (response?.data?.token && response?.data?.role && response?.data?.userId) {
+        login(response?.data?.token, response?.data?.role, response?.data?.userId);
 
         const roleRoutes = {
           "Super Admin": '/admin/dashboard',
@@ -70,13 +70,12 @@ const LoginPage = () => {
 
         toast.success("Login Successfully!", {
           position: "top-center",
-          autoClose: 500,
+          autoClose: 1000,
           theme: "light",
         });
-
         setTimeout(() => {
           navigate(redirectTo, { replace: true });
-        }, 500);
+        }, 1000);
       } else {
         setError((prev) => ({ ...prev, general: 'Invalid username and password' }));
         setLoading(false);
@@ -104,6 +103,7 @@ const LoginPage = () => {
               <div className='underline-animation'></div>
               <p>Access your account to manage appointments and track customer satisfaction effortlessly, all in one place</p>
 
+              {/* user credential input */}
               <div className='input-container'>
                 <label htmlFor="username" className="form-label">User Name</label>
                 <div className="input-wrapper">
@@ -145,7 +145,7 @@ const LoginPage = () => {
               <button type='submit' className='login-btn'>
                 {loading ? (
                   <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-                    <CircularProgress size={24} sx={{ marginRight: 2 }} color="white" />Loggin in...</Box>
+                    <CircularProgress size={24} sx={{ marginRight: 2 }} color="white" />Logging in...</Box>
                 ) : ("Login")}
               </button>
             </form>
@@ -154,8 +154,7 @@ const LoginPage = () => {
 
         <ToastContainer
           position="top-center"
-          autoClose={500}
-          pauseOnHover
+          autoClose={1000}
           theme="light" />
       </section >
     </>

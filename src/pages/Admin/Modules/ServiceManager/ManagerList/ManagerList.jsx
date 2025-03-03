@@ -90,7 +90,6 @@ const ManagerList = () => {
     }
   }, [currentPage, status, debouncedSearch, navigate]);
 
-
   useEffect(() => {
     fetchManagers();
   }, [fetchManagers]);

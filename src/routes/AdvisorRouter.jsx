@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import PreLoader from '../common/PreLoader/PreLoader';
 import MainLayout from '../Layouts/MainLayout/MainLayout';
 import ProtectedRoute from './ProtectedRoute';
+import NotFound from '../common/NotFound/NotFound';
 
 const AdvisorDashboard = lazy(() => import('../pages/Advisor/Modules/Dashboard/AdvisorDashboard/AdvisorDashboard'));
 const Reviews = lazy(() => import('../pages/Advisor/Modules/Reviews/Reviews'));
@@ -66,6 +67,8 @@ const AdvisorRouter = () => {
 
               <Route path="profile" element={<AdvisorProfile />} />
             </Route>
+
+            <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>
       </Suspense>

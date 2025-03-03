@@ -18,7 +18,6 @@ import { PasswordValidation } from '../../../../utils/passwordValidation';
 
 const CustomerProfile = () => {
   const userId = localStorage.getItem("userId");
-
   const [customer, setCustomer] = useState({});
   const { isLoading } = useCustomerProfile(userId, setCustomer);
   const { updatePassword } = usePasswordUpdate(userId);

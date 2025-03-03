@@ -42,7 +42,7 @@ const ProfileModal = ({ showPopup, setShowPopup, setSelectedImage, selectedImage
         <Modal.Header closeButton>
           <Modal.Title>Update Profile Picture</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body className='d-flex justify-content-center'>
           <label htmlFor="fileInput" className="file-label">
             <div className="preview-container">
               {selectedImage ? (

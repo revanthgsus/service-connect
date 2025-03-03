@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import "./Logout.css";
-import { ReactComponent as LogoutIcon } from "../../assets/images/navbar/logout.svg";
+import { ReactComponent as LogoutIcon } from "../../assets/images/comman/logout.svg";
 import { Modal } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from './../../contexts/AuthContext';

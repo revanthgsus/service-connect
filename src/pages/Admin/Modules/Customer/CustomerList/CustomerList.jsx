@@ -9,7 +9,7 @@ import Stack from '@mui/material/Stack';
 import { MdModeEditOutline } from "react-icons/md";
 import { HiOutlineTrash } from "react-icons/hi";
 import { ReactComponent as Norecords } from "../../../../../assets/images/admin/customer/no-records.svg";
-import { ReactComponent as EmptyImage } from "../../../../../assets/images/admin/customer/empty-data.svg"
+import { ReactComponent as EmptyImage } from "../../../../../assets/images/admin/customer/empty-data.svg";
 import DeleteModal from '../../../../../common/DeleteModal/DeleteModal';
 import PreLoader from './../../../../../common/PreLoader/PreLoader';
 import axios from 'axios';

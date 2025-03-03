@@ -29,6 +29,7 @@ const MainLayout = () => {
     }
   }, [user, navigate]);
 
+  // mobile resize
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
@@ -47,6 +48,8 @@ const MainLayout = () => {
     }
   }, [isMobile]);
 
+
+  // outside clickable
   useEffect(() => {
     const handleClickOutside = (event) => {
       const sidebar = document.querySelector('.sidebar');
@@ -97,7 +100,7 @@ const MainLayout = () => {
       <Suspense fallback={<PreLoader />}>
         {Navbar && <Navbar handleDrawerToggle={handleDrawerToggle} isOpen={isOpen} />}
         <div className="layout-container d-flex">
-          {Sidebar && <Sidebar isOpen={isOpen} handleCloseSidebar={handleCloseSidebar} />}
+          {Sidebar && <Sidebar handleCloseSidebar={handleCloseSidebar} isOpen={isOpen} />}
           <main className="layout-main">
             <Outlet />
           </main>

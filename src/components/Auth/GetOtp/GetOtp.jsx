@@ -16,7 +16,6 @@ const GetOtp = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const email = location.state?.email;
-
   const [otp, setOtp] = useState(["", "", "", ""]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -62,8 +61,8 @@ const GetOtp = () => {
         headers: { 'Content-Type': 'application/json' },
       });
 
-      if (response.status === 200) {
-        toast.info("OTP Verified!", {
+      if (response?.data?.status === "success") {
+        toast.success("OTP Verified!", {
           position: "top-center",
           autoClose: 1000,
           hideProgressBar: true,
@@ -74,16 +73,11 @@ const GetOtp = () => {
           navigate('/new-password', { state: { otp: otp } });
         }, 1000);
       } else {
-        setError('Invalid OTP. Please try again.');
+        toast.error(response?.data?.message);
         setLoading(false);
       }
-    } catch (err) {
-      if (err.response?.status === 400 || err.response?.status === 401) {
-        setError(err.response?.data?.message || 'Invalid OTP. Please try again.');
-      } else {
-        setError('Something went wrong. Please try again.');
-      }
-      setLoading(false);
+    } catch (error) {
+      setError(error.response?.data?.message || 'Something went wrong. Please try again.');
     } finally {
       setLoading(false);
     }

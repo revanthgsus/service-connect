@@ -10,7 +10,7 @@ const AuthRouter = () => {
   return (
     <Routes>
       <Route path="/" element={<LoginPage />} />
-      <Route path="forgot-password" element={<ForgotPassword />} />
+      <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="/get-otp" element={<GetOtp />} />
       <Route path="/new-password" element={<NewPassword />} />
 

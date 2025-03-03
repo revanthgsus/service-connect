@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import PreLoader from '../common/PreLoader/PreLoader';
 import MainLayout from '../Layouts/MainLayout/MainLayout';
 import ProtectedRoute from './ProtectedRoute';
+import NotFound from '../common/NotFound/NotFound';
 
 const AdminDashboard = lazy(() => import('../pages/Admin/Modules/Dashboard/AdminDashboard/AdminDashboard'));
 const ManagerList = lazy(() => import('./../pages/Admin/Modules/ServiceManager/ManagerList/ManagerList'));
@@ -57,6 +58,8 @@ const AdminRouter = () => {
 
               <Route path="profile" element={<AdminProfile />} />
             </Route>
+
+            <Route path="*" element={<NotFound />} />
           </Route>
         </Routes >
       </Suspense>

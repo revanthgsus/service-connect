@@ -5,7 +5,9 @@ const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$
 
 // Manager validation
 const ManagerValidationSchema = Yup.object({
-  userName: Yup.string().required("User name is required"),
+  userName: Yup.string()
+    .matches(/^\S*$/, "User name cannot contain spaces")
+    .required("User name is required"),
   emailAddress: Yup.string()
     .matches(emailPattern, "Invalid email address")
     .required("Email address is required"),
@@ -101,7 +103,7 @@ const AdminValidationSchema = Yup.object({
     .matches(/^\d{10}$/, "Mobile number must be 10 digits")
     .required("Mobile number is required"),
   role: Yup.string().required("Role is required"),
-  location: Yup.string().required("Location is required"),
+  location: Yup.string().required("Location is required"),  
   joiningDate: Yup.date()
     .nullable()
     .typeError("Invalid date format")

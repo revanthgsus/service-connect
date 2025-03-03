@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import PreLoader from '../common/PreLoader/PreLoader';
 import MainLayout from '../Layouts/MainLayout/MainLayout';
 import ProtectedRoute from './ProtectedRoute';
+import NotFound from '../common/NotFound/NotFound';
 
 const ManagerDashboard = lazy(() => import('../pages/Manager/Modules/Dashboard/ManagerDashboard/ManagerDashboard'));
 
@@ -26,6 +27,8 @@ const ManagerRouter = () => {
 
               <Route path="profile" element={<ManagerProfile />} />
             </Route>
+            
+            <Route path="*" element={<NotFound />} />
           </Route >
         </Routes>
       </Suspense>
