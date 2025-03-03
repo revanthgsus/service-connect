@@ -16,17 +16,37 @@
   display: flex;
   flex-direction: column;
   height: calc(100vh - 68px);
-  overflow-y: auto;
+  overflow-y: scroll;
+  overflow-x: hidden;
   transition: .3s linear width;
   white-space: nowrap;
 }
 
 .admin-sidebar .sidebar-section::-webkit-scrollbar {
-  display: none;
+  background: transparent;
+  border-radius: 0px;
+  height: 5px;
+  width: 5px;
+}
+
+.admin-sidebar .sidebar-section::-webkit-scrollbar-track {
+  border-radius: 10px;
+  height: 5px;
+}
+
+.admin-sidebar .sidebar-section::-webkit-scrollbar-thumb {
+  background: #e8e8e89c;
+  border-radius: 10px;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.admin-sidebar .sidebar-section::-webkit-scrollbar-thumb:hover {
+  background: #dfdfdfd0;
 }
 
 .admin-sidebar .sidebar-section.open {
-  width: 85px;
+  width: 90px;
   transition: .3s linear width;
 }
 
@@ -76,7 +96,6 @@
 
 .admin-sidebar .sidebar-content {
   font-weight: 600;
-  font-family: 'Be Vietnam Pro', sans-serif;
 }
 
 .admin-sidebar .sidebar-link .active-link::before {
@@ -94,15 +113,17 @@
 
 @media only screen and (Max-width:767px) {
   .admin-sidebar .sidebar-section {
-    display: none;
-    width: 100%;
     position: fixed;
     left: 0;
+    transform: translateX(-100%);
+    transition: .3s linear all;
+    width: 0%;
   }
 
   .admin-sidebar .sidebar-section.open {
-    display: block;
-    width: 270px;
+    transform: translateX(0);
+    transition: .3s ease-out all;
+    width: 260px;
   }
 
   .admin-sidebar .sidebar-section.open .sidebar-content {
@@ -112,7 +133,7 @@
 
 @media only screen and (min-width:768px) and (max-width:1119px) {
   .admin-sidebar .sidebar-section {
-    width: 95px;
+    width: 90px;
   }
 
   .admin-sidebar .sidebar-section.open {

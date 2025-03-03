@@ -112,7 +112,7 @@
 
 @media only screen and (min-width:768px) and (max-width:1119px) {
   .customer-sidebar .sidebar-section {
-    width: 95px;
+    width: 90px;
   }
 
   .customer-sidebar .sidebar-section.open {

@@ -6,7 +6,7 @@ import { ReactComponent as AdvisorIcon } from "../../../../assets/images/admin/s
 import { ReactComponent as ManagerIcon } from "../../../../assets/images/admin/service-manager.svg";
 import { ReactComponent as CustomerIcon } from "../../../../assets/images/admin/customer.svg";
 
-const AdminSidebar = ({ isOpen, handleCloseSidebar }) => {
+const AdminSidebar = ({ isOpen, handleCloseSidebar, sidebarRef }) => {
   const sidebarItems = [
     {
       title: 'Dashboard',
@@ -32,7 +32,7 @@ const AdminSidebar = ({ isOpen, handleCloseSidebar }) => {
 
   return (
     <div className='admin-sidebar sidebar'>
-      <aside className={`sidebar-section ${isOpen ? "open" : "closed"}`}>
+      <aside className={`sidebar-section ${isOpen ? "open" : "closed"}`} ref={sidebarRef}>
         {sidebarItems.map((item, index) => (
           <ul key={index} className='sidebar-link'>
             <li>

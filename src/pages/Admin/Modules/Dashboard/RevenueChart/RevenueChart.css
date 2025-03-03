@@ -1,8 +1,7 @@
 .revenuegraph {
-  font-family: 'Be Vietnam Pro', sans-serif;
   box-shadow: var(--shadow-color);
   border-radius: 5px;
-  padding: 30px 15px;
+  padding: 25px 15px 15px 15px;
   border: 1px solid var(--border-color);
   background: var(--graph-color)
 }
@@ -10,14 +9,13 @@
 .revenuegraph .apexcharts-title-text {
   font-size: 14px;
   font-weight: 600;
-  font-family: 'Be Vietnam Pro', sans-serif;
 }
 
 .revenuegraph .chart-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0px 8px;
+  padding: 0px 10px;
 }
 
 .revenuegraph .chart-select {

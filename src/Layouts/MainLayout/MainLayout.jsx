@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Suspense, lazy, useCallback } from 'react';
+import React, { useState, useEffect, Suspense, lazy, useCallback, useRef } from 'react';
 import './MainLayout.css';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
@@ -22,6 +22,8 @@ const MainLayout = () => {
   const role = user?.role?.toLowerCase();
   const [isOpen, setIsOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const sidebarRef = useRef(null);
+  const menuBtnRef = useRef(null);
 
   useEffect(() => {
     if (!user) {
@@ -29,7 +31,7 @@ const MainLayout = () => {
     }
   }, [user, navigate]);
 
-  // mobile resize
+  // Handle window resize
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
@@ -40,7 +42,9 @@ const MainLayout = () => {
     };
   }, []);
 
-  const handleDrawerToggle = () => { setIsOpen(!isOpen) };
+  const handleDrawerToggle = () => {
+    setIsOpen((prev) => !prev);
+  };
 
   const handleCloseSidebar = useCallback(() => {
     if (isMobile) {
@@ -48,15 +52,19 @@ const MainLayout = () => {
     }
   }, [isMobile]);
 
-
-  // outside clickable
+  // Handle clicks outside the sidebar and menu button
   useEffect(() => {
     const handleClickOutside = (event) => {
-      const sidebar = document.querySelector('.sidebar');
-      if (sidebar && !sidebar.contains(event.target)) {
+      if (
+        sidebarRef.current &&
+        !sidebarRef.current.contains(event.target) &&
+        menuBtnRef.current &&
+        !menuBtnRef.current.contains(event.target)
+      ) {
         setIsOpen(false);
       }
     };
+
     if (isMobile) {
       document.addEventListener('mousedown', handleClickOutside);
     }
@@ -98,9 +106,9 @@ const MainLayout = () => {
   return (
     <section className="main-layout">
       <Suspense fallback={<PreLoader />}>
-        {Navbar && <Navbar handleDrawerToggle={handleDrawerToggle} isOpen={isOpen} />}
+        {Navbar && <Navbar handleDrawerToggle={handleDrawerToggle} isOpen={isOpen} menuBtnRef={menuBtnRef} />}
         <div className="layout-container d-flex">
-          {Sidebar && <Sidebar handleCloseSidebar={handleCloseSidebar} isOpen={isOpen} />}
+          {Sidebar && <Sidebar handleCloseSidebar={handleCloseSidebar} isOpen={isOpen} sidebarRef={sidebarRef} />}
           <main className="layout-main">
             <Outlet />
           </main>

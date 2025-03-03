@@ -11,7 +11,7 @@ import { IoNotificationsOutline, IoMoonOutline, IoSunny } from "react-icons/io5"
 import ThemeContext from '../../../../contexts/ThemeContext';
 import AdminDropdown from './../AdminDropdown/AdminDropdown';
 
-const AdminNavbar = ({ handleDrawerToggle, isOpen }) => {
+const AdminNavbar = ({ handleDrawerToggle, isOpen, menuBtnRef }) => {
   const { theme, toggleTheme } = useContext(ThemeContext);
 
   return (
@@ -27,7 +27,7 @@ const AdminNavbar = ({ handleDrawerToggle, isOpen }) => {
                 <MobileLogo />
               </div>
             </Navbar.Brand>
-            <Menubtn handleDrawerToggle={handleDrawerToggle} isOpen={isOpen} />
+            <Menubtn handleDrawerToggle={handleDrawerToggle} isOpen={isOpen} menuBtnRef={menuBtnRef} />
           </div>
           <div className="navbar-icons">
             <IconButton>

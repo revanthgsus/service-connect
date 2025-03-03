@@ -1,5 +1,4 @@
 .dashboard-heading {
-  font-family: 'Be Vietnam Pro', sans-serif;
   color: var(--text-color);
   padding-bottom: 20px;
   margin-bottom: 0px;
@@ -61,10 +60,6 @@
   }
 }
 
-.kpi-value {
-  font-family: 'Be Vietnam Pro', sans-serif;
-}
-
 .kpi-icon {
   background-color: #00949e;
   color: #dbdbdb;
@@ -75,6 +70,7 @@
 .kpi-icon svg {
   width: 25px;
   height: 25px;
+  display: block;
 }
 
 .kpi-value h6 {
