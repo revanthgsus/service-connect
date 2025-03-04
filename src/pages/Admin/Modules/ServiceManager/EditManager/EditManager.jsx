@@ -191,7 +191,7 @@ const EditManager = () => {
         <section className="edit-manager">
           <div className="edit-header">
             <IoMdArrowRoundBack onClick={handleBack} />
-            <h5>Edit Service Manager</h5>
+            <h5>Edit Manager</h5>
           </div>
           <Formik
             initialValues={initialValues}

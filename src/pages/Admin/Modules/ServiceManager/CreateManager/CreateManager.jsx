@@ -190,7 +190,7 @@ const CreateManager = () => {
         <section className="create-manager">
           <div className="create-header">
             <IoMdArrowRoundBack onClick={handleBack} />
-            <h5>Create Service Manager</h5>
+            <h5>Create Manager</h5>
           </div>
           <Formik
             initialValues={initialValues}

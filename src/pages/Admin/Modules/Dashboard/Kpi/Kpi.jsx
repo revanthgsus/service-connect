@@ -9,6 +9,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import API_BASE_URL from '../../../../../services/AuthService';
 import PreLoader from '../../../../../common/PreLoader/PreLoader';
+import { toast } from 'react-toastify';
 
 const Kpi = () => {
   const [kpiCards, setKpiCards] = useState([]);
@@ -39,16 +40,16 @@ const Kpi = () => {
           },
         });
 
-        if (response.status === 200 && response.data) {
+        if (response?.status === 200) {
           setKpiCards([
-            { ...kpiData[0], value: response.data.totalManagers || 0 },
-            { ...kpiData[1], value: response.data.totalAdvisors || 0 },
-            { ...kpiData[2], value: response.data.totalCustomers || 0 },
-            { ...kpiData[3], value: response.data.totalAdmins || 0 },
+            { ...kpiData[0], value: response?.data?.totalManagers || 0 },
+            { ...kpiData[1], value: response?.data?.totalAdvisors || 0 },
+            { ...kpiData[2], value: response?.data?.totalCustomers || 0 },
+            { ...kpiData[3], value: response?.data?.totalAdmins || 0 },
           ]);
         }
       } catch (error) {
-        console.error('Error fetching total counts:', error);
+        toast.error(error?.response?.error || "Error fetching counts");
       } finally {
         setIsLoading(false);
       }
@@ -65,23 +66,19 @@ const Kpi = () => {
         <section className="dashboard-kpi">
           <h5 className="dashboard-heading">Admin Dashboard</h5>
           <div className="kpi-alignment">
-            {isLoading ? (
-              <PreLoader />
-            ) : (
-              <Row>
-                {kpiCards.map((data) => (
-                  <Col key={data.id} xl={3} sm={6} className="py-2">
-                    <div className="kpi-item">
-                      <div className="kpi-icon">{data.icon}</div>
-                      <div className="kpi-value">
-                        <h6>{data.title}</h6>
-                        <h3>{data.value}</h3>
-                      </div>
+            <Row>
+              {kpiCards.map((data) => (
+                <Col key={data.id} xl={3} sm={6} className="py-2">
+                  <div className="kpi-item">
+                    <div className="kpi-icon">{data.icon}</div>
+                    <div className="kpi-value">
+                      <h6>{data.title}</h6>
+                      <h3>{data.value}</h3>
                     </div>
-                  </Col>
-                ))}
-              </Row>
-            )}
+                  </div>
+                </Col>
+              ))}
+            </Row>
           </div>
         </section>
       )}

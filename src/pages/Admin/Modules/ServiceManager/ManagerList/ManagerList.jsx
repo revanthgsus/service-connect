@@ -147,10 +147,10 @@ const ManagerList = () => {
       {!isLoading && (
         <section className="manager-list">
           <div className="top-alignment">
-            <h5 className="manager-heading">Service Manager List</h5>
+            <h5 className="manager-heading">Manager List</h5>
             <button type="button" className="add-button" onClick={handleCreate}>
               <HiPlus />
-              Add Service Manager
+              Add Manager
             </button>
           </div>
 

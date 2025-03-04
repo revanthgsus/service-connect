@@ -74,17 +74,11 @@ const InvoiceList = () => {
     return matchesSearch && matchesStatus;
   });
 
-  const handleSearchChange = (e) => {
-    setSearchTerm(e.target.value);
-  };
+  const handleSearchChange = (e) => { setSearchTerm(e.target.value) };
 
-  const handleStatusChange = (e) => {
-    setStatusFilter(e.target.value);
-  };
+  const handleStatusChange = (e) => { setStatusFilter(e.target.value) };
 
-  const handlePageChange = (event, page) => {
-    setCurrentPage(page);
-  };
+  const handlePageChange = (event, page) => { setCurrentPage(page) };
 
   const displayedInvoice = filteredInvoiceID.slice(
     (currentPage - 1) * itemsPerPage,

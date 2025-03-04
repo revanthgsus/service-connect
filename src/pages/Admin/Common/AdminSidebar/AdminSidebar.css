@@ -16,29 +16,30 @@
   display: flex;
   flex-direction: column;
   height: calc(100vh - 68px);
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
   transition: .3s linear width;
   white-space: nowrap;
 }
 
+.admin-sidebar .sidebar-section:hover::-webkit-scrollbar-thumb {
+  display: block;
+}
+
 .admin-sidebar .sidebar-section::-webkit-scrollbar {
   background: transparent;
-  border-radius: 0px;
-  height: 5px;
   width: 5px;
 }
 
 .admin-sidebar .sidebar-section::-webkit-scrollbar-track {
   border-radius: 10px;
-  height: 5px;
 }
 
 .admin-sidebar .sidebar-section::-webkit-scrollbar-thumb {
   background: #e8e8e89c;
   border-radius: 10px;
   cursor: pointer;
-  padding: 10px;
+  display: none;
 }
 
 .admin-sidebar .sidebar-section::-webkit-scrollbar-thumb:hover {

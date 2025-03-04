@@ -24,6 +24,17 @@
 
 .admin-navbar .sun-icon {
   color: var(--icon-color);
+  animation: rotate-sun .3s ease-in-out;
+}
+
+@keyframes rotate-sun {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(90deg);
+  }
 }
 
 .admin-navbar .profile-icon path {
@@ -51,10 +62,6 @@
 
 .admin-navbar .navbar-icons button:hover svg path {
   color: var(--dark-hover-color);
-}
-
-.admin-navbar .theme-toggle-btn {
-  transition: .3s ease-in-out all;
 }
 
 @media only screen and (max-width:768px) {

@@ -209,7 +209,7 @@ const EditAdvisor = () => {
         <section className="edit-advisor">
           <div className="edit-header">
             <IoMdArrowRoundBack onClick={handleBack} />
-            <h5>Edit Service Advisor</h5>
+            <h5>Edit Advisor</h5>
           </div>
           <Formik
             initialValues={initialValues}

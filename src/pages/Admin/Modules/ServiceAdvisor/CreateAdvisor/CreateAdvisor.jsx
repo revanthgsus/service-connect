@@ -209,7 +209,7 @@ const CreateAdvisor = () => {
         <section className="create-advisor">
           <div className="create-header">
             <IoMdArrowRoundBack onClick={handleBack} />
-            <h5>Create Service Advisor</h5>
+            <h5>Create Advisor</h5>
           </div>
           <Formik
             initialValues={initialValues}

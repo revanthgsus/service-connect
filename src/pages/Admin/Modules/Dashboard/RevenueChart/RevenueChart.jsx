@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import "./RevenueChart.css";
 import ReactApexChart from 'react-apexcharts';
-import { IoIosArrowDown } from "react-icons/io";
+import Box from '@mui/material/Box';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
 
 const RevenueChart = () => {
   const [selectedPeriod, setSelectedPeriod] = useState("Weekly");
@@ -24,8 +26,9 @@ const RevenueChart = () => {
     }
   };
 
-  const handleSelectChange = (event) => {
-    setSelectedPeriod(event.target.value);
+  const handleTabChange = (event, newValue) => {
+    const periodNames = ["Weekly", "Monthly", "Yearly"];
+    setSelectedPeriod(periodNames[newValue]);
   };
 
   const chartData = {
@@ -71,14 +74,15 @@ const RevenueChart = () => {
       <div id="chart" className='revenuegraph'>
         <div className="chart-header">
           <h6>Total Revenue</h6>
-          <div className="status-wrapper">
-            <select value={selectedPeriod} onChange={handleSelectChange} className="chart-select">
-              <option value="Weekly">Weekly</option>
-              <option value="Monthly">Monthly</option>
-              <option value="Yearly">Yearly</option>
-            </select>
-            <IoIosArrowDown className="arrow-icon" />
-          </div>
+          <Box className="chart-select">
+            <Tabs value={["Weekly", "Monthly", "Yearly"].indexOf(selectedPeriod)}
+              onChange={handleTabChange}
+              TabIndicatorProps={{ style: { display: "none" } }} >
+              <Tab label="Weekly" className='multi-tabs' />
+              <Tab label="Monthly" className='multi-tabs' />
+              <Tab label="Yearly" className='multi-tabs' />
+            </Tabs>
+          </Box>
         </div>
         <ReactApexChart options={chartData.options} series={chartData.series} type="area" />
       </div >

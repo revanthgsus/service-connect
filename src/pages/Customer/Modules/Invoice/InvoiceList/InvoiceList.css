@@ -145,7 +145,7 @@
 
 .invoice-list .pagination-align {
   padding: 15px 0px;
-  float: inline-end;
+  float: right;
 }
 
 .invoice-list .list-item td:first-child {

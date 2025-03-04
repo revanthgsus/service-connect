@@ -35,7 +35,7 @@ const AdminNavbar = ({ handleDrawerToggle, isOpen, menuBtnRef }) => {
                 <IoNotificationsOutline className="notification" />
               </Badge>
             </IconButton>
-            <IconButton onClick={toggleTheme} aria-label="Toggle Theme" className="theme-toggle-btn">
+            <IconButton onClick={toggleTheme} aria-label="Toggle Theme">
               {theme === 'dark' ? (
                 <IoSunny className="sun-icon" />
               ) : (
