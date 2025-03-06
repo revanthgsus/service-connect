@@ -47,7 +47,9 @@ const ForgotPassword = () => {
 
     try {
       const response = await axios.post(`${API_BASE_URL}/email/forgotPassword`, payload, {
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json'
+        },
       });
 
       if (response?.data?.status === "success") {
@@ -57,7 +59,7 @@ const ForgotPassword = () => {
           hideProgressBar: true,
           theme: "light",
         });
-        
+
         setTimeout(() => {
           navigate('/get-otp', { state: { email: email } });
         }, 1000);

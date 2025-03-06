@@ -14,7 +14,7 @@ import axios from 'axios';
 import API_BASE_URL from '../../../services/AuthService';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 
 const NewPassword = () => {
   const navigate = useNavigate();
@@ -171,6 +171,14 @@ const NewPassword = () => {
           </button>
         </Modal.Footer>
       </Modal>
+
+
+      <ToastContainer
+        position="top-center"
+        autoClose={1000}
+        hideProgressBar={true}
+        theme="light"
+      />
     </>
   );
 };

@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import "./CreateAdmin.css";
-import { useNavigate } from 'react-router-dom';
+import "./EditAdmin.css";
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Col, Row } from 'react-bootstrap';
 import { IoIosArrowDown, IoMdArrowRoundBack } from "react-icons/io";
 import { MdVisibility, MdVisibilityOff } from "react-icons/md";
@@ -9,34 +9,36 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import dayjs from 'dayjs';
 import axios from 'axios';
-import API_BASE_URL from '../../../../services/AuthService';
+import API_BASE_URL from '../../../../../services/AuthService';
 import { Formik, Form, ErrorMessage } from 'formik';
-import { AdminValidationSchema } from '../../../../utils/FormValidation';
-import PreLoader from '../../../../common/PreLoader/PreLoader';
-import CancelModal from '../../../../common/CancelModal/CancelModal';
+import { AdminValidationSchema } from '../../../../../utils/FormValidation';
+import PreLoader from '../../../../../common/PreLoader/PreLoader';
+import CancelModal from '../../../../../common/CancelModal/CancelModal';
 import { toast, ToastContainer } from 'react-toastify';
 
-const CreateAdmin = () => {
+const EditAdmin = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { adminData } = location.state || {};
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [cancelShow, setCancelShow] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [cancelShow, setCancelShow] = useState(false);
 
   const [formErrors, setFormErrors] = useState({});
   const [formTouched, setFormTouched] = useState({});
   const fieldRefs = useRef({});
 
   const initialValues = {
-    userName: '',
-    emailAddress: '',
-    mobileNumber: '',
-    role: 'Admin',
-    location: '',
-    joiningDate: null,
-    password: '',
+    adminId: adminData?.adminId || '',
+    userName: adminData?.userName || '',
+    emailAddress: adminData?.emailAddress || '',
+    mobileNumber: adminData?.mobileNumber || '',
+    role: "Admin",
+    location: adminData?.location || '',
+    joiningDate: adminData?.joiningDate ? dayjs(adminData.joiningDate, "DD/MM/YYYY") : null,
     confirmPassword: '',
-    status: '',
+    status: adminData?.status ? "Active" : "In Active",
   }
 
   const AdminInfo = [
@@ -109,7 +111,7 @@ const CreateAdmin = () => {
   }, [formErrors, formTouched]);
 
   const handleSubmit = useCallback(async (values, { setSubmitting }) => {
-    const token = localStorage.getItem('authToken');
+    const token = localStorage.getItem("authToken");
     if (!token) {
       toast.error("Session expired. Please sign in again.", {
         autoClose: 2000,
@@ -120,20 +122,17 @@ const CreateAdmin = () => {
 
     const updatedValues = {
       ...values,
-      joiningDate: values.joiningDate ? dayjs(values.joiningDate).format('DD/MM/YYYY') : '',
+      joiningDate: values.joiningDate ? dayjs(values.joiningDate).format("DD/MM/YYYY") : "",
       status: values.status === "Active",
     };
 
     try {
-      const response = await axios.post(`${API_BASE_URL}/adminMaster/addOrUpdateAdminMaster`,
-        updatedValues,
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await axios.post(`${API_BASE_URL}/adminMaster/addOrUpdateAdminMaster`, updatedValues, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+      });
 
       if (response?.data?.status === "failed") {
         toast.error(response?.data?.error || "Failed to update admin. Please try again.", {
@@ -165,16 +164,16 @@ const CreateAdmin = () => {
   const handleBack = (e) => {
     e.preventDefault();
     setCancelShow(true);
-  };
+  }
 
   return (
     <>
       {loading ? (<PreLoader />
       ) : (
-        <section className="create-admin">
-          <div className="create-header">
+        <section className="edit-admin">
+          <div className="edit-header">
             <IoMdArrowRoundBack onClick={handleBack} />
-            <h5>Create Admin</h5>
+            <h5>Edit Admin</h5>
           </div>
           <Formik
             initialValues={initialValues}
@@ -188,8 +187,8 @@ const CreateAdmin = () => {
               setFormTouched(touched);
               return (
                 <Form>
-                  <div className="create-form">
-                    <h5 className="addadmin-heading">Admin Information</h5>
+                  <div className="edit-form">
+                    <h5 className="editadmin-heading">Admin Information</h5>
                     <Row className="add-fields">
                       {AdminInfo.map((field, index) => (
                         <Col key={index} xxl={4} xl={4} lg={4} md={6} sm={6}>
@@ -295,6 +294,7 @@ const CreateAdmin = () => {
                                   className="form-control"
                                   value={values[field.name]}
                                   ref={(el) => (fieldRefs.current[field.name] = el)}
+                                  readOnly={field.readOnly}
                                   onChange={(e) => {
                                     if (field.name === 'mobileNumber') {
                                       const newValue = e.target.value.replace(/[^0-9]/g, '').slice(0, 10);
@@ -303,7 +303,6 @@ const CreateAdmin = () => {
                                       handleChange(e);
                                     }
                                   }}
-                                  readOnly={field.readOnly}
                                 />
                               )}
                               <ErrorMessage name={field.name} component="div" className="error-message" />
@@ -334,4 +333,4 @@ const CreateAdmin = () => {
   );
 };
 
-export default CreateAdmin;
+export default EditAdmin;

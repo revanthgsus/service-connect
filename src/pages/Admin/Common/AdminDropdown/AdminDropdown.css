@@ -6,7 +6,7 @@
   border-radius: 5px;
   text-align: start;
   box-shadow: var(--shadow-color);
-  z-index: 99;
+  /* z-index: 99; */
 }
 
 .admin-dropdown .dropdownfile ul {

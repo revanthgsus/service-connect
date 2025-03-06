@@ -3,10 +3,10 @@ import "./AdminDropdown.css";
 import { BsPersonCircle } from "react-icons/bs";
 import IconButton from '@mui/material/IconButton';
 import { Link } from 'react-router-dom';
-import { HiOutlineUsers } from "react-icons/hi";
 import { AiOutlineUser } from "react-icons/ai";
 import { TbLogout } from "react-icons/tb";
 import Logout from '../../../../common/Logout/Logout';
+import { Tooltip } from 'react-tooltip';
 
 const AdminDropdown = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -45,29 +45,28 @@ const AdminDropdown = () => {
   return (
     <>
       <div className='admin-dropdown'>
-        <IconButton onClick={toggleDropdown} className="profile-icon">
+        <IconButton
+          aria-label="Account"
+          data-tooltip-id="account-tooltip"
+          data-tooltip-content="Account"
+          onClick={toggleDropdown}
+          className="profile-icon">
           <BsPersonCircle />
         </IconButton>
         {isDropdownOpen && (
           <div className="dropdownfile">
             <ul>
-              {role === "Super Admin" && (
-                <li>
-                  <Link to="/admin/adminlist" onClick={() => setIsDropdownOpen(false)}>
-                    <HiOutlineUsers />
-                    <span>Admin List</span>
-                  </Link>
-                </li>
-              )}
               {role === "Admin" && (
-                <li>
-                  <Link to="/admin/profile" onClick={() => setIsDropdownOpen(false)}>
-                    <AiOutlineUser />
-                    <span>View Profile</span>
-                  </Link>
-                </li>
+                <>
+                  <li>
+                    <Link to="/admin/profile" onClick={() => setIsDropdownOpen(false)}>
+                      <AiOutlineUser />
+                      <span>View Profile</span>
+                    </Link>
+                  </li>
+                  <hr className="mt-0 mb-2" />
+                </>
               )}
-              <hr className="mt-0 mb-2" />
               <li className="logout-link" onClick={setShowModal}>
                 <Link to="#">
                   <TbLogout />
@@ -79,6 +78,7 @@ const AdminDropdown = () => {
         )}
       </div>
 
+      <Tooltip id="account-tooltip" className="custom-tooltip"/>
       <Logout show={show} handleClose={handleCloseModal} />
     </>
   );

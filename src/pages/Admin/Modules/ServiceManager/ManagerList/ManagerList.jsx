@@ -50,6 +50,7 @@ const ManagerList = () => {
 
   const fetchManagers = useCallback(async () => {
     const token = localStorage.getItem("authToken");
+
     if (!token) {
       toast.error("Session expired. Please sign in again.", {
         autoClose: 2000,
@@ -79,8 +80,7 @@ const ManagerList = () => {
       if (response?.status === 200 || response?.data?.success) {
         setManagers(response.data.managerMasterListPage || []);
         setTotalManagers(response.data.totalRecords || 0);
-      }
-      else {
+      } else {
         toast.error("An error occurred while fetching manager data.");
       }
     } catch (error) {
@@ -141,6 +141,11 @@ const ManagerList = () => {
     }, 300);
   };
 
+  const handlePageChange = (event, value) => {
+    setCurrentPage(value);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
   return (
     <>
       {isLoading && <PreLoader />}
@@ -149,8 +154,7 @@ const ManagerList = () => {
           <div className="top-alignment">
             <h5 className="manager-heading">Manager List</h5>
             <button type="button" className="add-button" onClick={handleCreate}>
-              <HiPlus />
-              Add Manager
+              <HiPlus />Add Manager
             </button>
           </div>
 
@@ -249,7 +253,7 @@ const ManagerList = () => {
               <Pagination
                 count={Math.ceil(totalManagers / itemsPerPage)}
                 page={currentPage}
-                onChange={(e, value) => setCurrentPage(value)}
+                onChange={handlePageChange}
                 sx={{
                   "& .MuiPaginationItem-root": {
                     color: "var(--text-color)",

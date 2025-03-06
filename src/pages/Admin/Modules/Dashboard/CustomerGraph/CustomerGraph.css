@@ -2,17 +2,16 @@
   box-shadow: var(--shadow-color);
   border-radius: 5px;
   background-color: var(--span-color);
-  padding: 30px 15px;
+  padding: 25px 15px;
   border: 1px solid var(--border-color);
   height: 100%;
 }
 
 .piechart .chart-select {
-  padding: 5px 10px;
+  padding: 5px 8px;
   border-radius: 5px;
   border: 1px solid var(--input-border-color);
   outline: 1px solid transparent;
-  font-family: 'Be Vietnam Pro', sans-serif;
   color: var(--text-color);
   font-size: 13px;
   appearance: none;
@@ -29,7 +28,7 @@
 
 .piechart .status-wrapper svg {
   position: absolute;
-  right: 10px;
+  right: 5px;
   top: 50%;
   transform: translateY(-50%);
   cursor: pointer;

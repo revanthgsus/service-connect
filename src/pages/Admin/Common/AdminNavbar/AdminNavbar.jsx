@@ -10,6 +10,7 @@ import IconButton from '@mui/material/IconButton';
 import { IoNotificationsOutline, IoMoonOutline, IoSunny } from "react-icons/io5";
 import ThemeContext from '../../../../contexts/ThemeContext';
 import AdminDropdown from './../AdminDropdown/AdminDropdown';
+import { Tooltip } from 'react-tooltip';
 
 const AdminNavbar = ({ handleDrawerToggle, isOpen, menuBtnRef }) => {
   const { theme, toggleTheme } = useContext(ThemeContext);
@@ -30,12 +31,12 @@ const AdminNavbar = ({ handleDrawerToggle, isOpen, menuBtnRef }) => {
             <Menubtn handleDrawerToggle={handleDrawerToggle} isOpen={isOpen} menuBtnRef={menuBtnRef} />
           </div>
           <div className="navbar-icons">
-            <IconButton>
+            <IconButton aria-label="Notifications" data-tooltip-id="notification-tooltip" data-tooltip-content="Notifications" >
               <Badge badgeContent={0} color="error">
                 <IoNotificationsOutline className="notification" />
               </Badge>
             </IconButton>
-            <IconButton onClick={toggleTheme} aria-label="Toggle Theme">
+            <IconButton aria-label="Toggle Theme" data-tooltip-id="theme-tooltip" data-tooltip-content="Switch Theme" onClick={toggleTheme}>
               {theme === 'dark' ? (
                 <IoSunny className="sun-icon" />
               ) : (
@@ -43,9 +44,12 @@ const AdminNavbar = ({ handleDrawerToggle, isOpen, menuBtnRef }) => {
               )}
             </IconButton>
             <AdminDropdown />
+
+            <Tooltip id="theme-tooltip" className="custom-tooltip" />
+            <Tooltip id="notification-tooltip" className="custom-tooltip" />
           </div>
-        </Container>
-      </Navbar>
+        </Container >
+      </Navbar >
     </>
   );
 };

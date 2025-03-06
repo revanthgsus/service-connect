@@ -2,16 +2,25 @@ import React from 'react';
 import "./AdminSidebar.css";
 import { NavLink } from 'react-router-dom';
 import { ReactComponent as DashboardIcon } from "../../../../assets/images/admin/dashboard.svg";
+import { ReactComponent as AdminIcon } from "../../../../assets/images/admin/admin.svg";
 import { ReactComponent as AdvisorIcon } from "../../../../assets/images/admin/service-advisor.svg";
 import { ReactComponent as ManagerIcon } from "../../../../assets/images/admin/service-manager.svg";
 import { ReactComponent as CustomerIcon } from "../../../../assets/images/admin/customer.svg";
 
 const AdminSidebar = ({ isOpen, handleCloseSidebar, sidebarRef }) => {
-  const sidebarItems = [
+  const userRole = localStorage.getItem('userRole');
+
+  let sidebarItems = [
     {
       title: 'Dashboard',
       icon: <DashboardIcon />,
       link: "admin/dashboard"
+    },
+    {
+      title: 'Admins',
+      icon: <AdminIcon />,
+      link: "admin/adminlist",
+      role: "Super Admin"
     },
     {
       title: 'Service Manager',
@@ -30,8 +39,12 @@ const AdminSidebar = ({ isOpen, handleCloseSidebar, sidebarRef }) => {
     },
   ];
 
+  sidebarItems = sidebarItems.filter(item =>
+    !item.role || item.role.toLowerCase() === userRole?.toLowerCase()
+  );
+
   return (
-    <div className='admin-sidebar sidebar'>
+    <div className='admin-sidebar'>
       <aside className={`sidebar-section ${isOpen ? "open" : "closed"}`} ref={sidebarRef}>
         {sidebarItems.map((item, index) => (
           <ul key={index} className='sidebar-link'>

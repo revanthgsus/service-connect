@@ -64,6 +64,11 @@
   color: var(--dark-hover-color);
 }
 
+.admin-navbar .custom-tooltip {
+  font-size: 12px;
+  padding: 5px 10px;
+}
+
 @media only screen and (max-width:768px) {
   .admin-navbar .navbar-brand {
     gap: 0px;

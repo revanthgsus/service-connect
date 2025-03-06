@@ -8,12 +8,12 @@ import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import { MdModeEditOutline } from "react-icons/md";
 import { HiOutlineTrash } from "react-icons/hi";
-import { ReactComponent as Norecords } from "../../../../assets/images/admin/no-records.svg";
-import { ReactComponent as EmptyImage } from "../../../../assets/images/admin/empty-data.svg"
-import DeleteModal from '../../../../common/DeleteModal/DeleteModal';
-import PreLoader from '../../../../common/PreLoader/PreLoader';
+import { ReactComponent as Norecords } from "../../../../../assets/images/admin/admin/no-records.svg";
+import { ReactComponent as EmptyImage } from "../../../../../assets/images/admin/empty-data.svg";
+import DeleteModal from '../../../../../common/DeleteModal/DeleteModal';
+import PreLoader from '../../../../../common/PreLoader/PreLoader';
 import axios from 'axios';
-import API_BASE_URL from '../../../../services/AuthService';
+import API_BASE_URL from '../../../../../services/AuthService';
 import { toast, ToastContainer } from 'react-toastify';
 
 const AdminList = () => {

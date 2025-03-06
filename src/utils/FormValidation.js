@@ -6,7 +6,7 @@ const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$
 // Manager validation
 const ManagerValidationSchema = Yup.object({
   userName: Yup.string()
-    .matches(/^\S*$/, "User name cannot contain spaces")
+    .matches(/^\S*$/, "Please Remove Spaces")
     .required("User name is required"),
   emailAddress: Yup.string()
     .matches(emailPattern, "Invalid email address")
@@ -25,9 +25,15 @@ const ManagerValidationSchema = Yup.object({
     .typeError("Invalid date format")
     .required("Joining date is required"),
   designation: Yup.string().required("Designation is required"),
-  branchName: Yup.string().required("Branch name is required"),
-  branchLocation: Yup.string().required("Branch location is required"),
-  department: Yup.string().required("Department is required"),
+  branchName: Yup.string()
+    .matches(/^\S*$/, "Please Remove Spaces")
+    .required("Branch name is required"),
+  branchLocation: Yup.string()
+    .matches(/^\S*$/, "Please Remove Spaces")
+    .required("Branch location is required"),
+  department: Yup.string()
+    .matches(/^\S*$/, "Please Remove Spaces")
+    .required("Department is required"),
   status: Yup.string().oneOf(["Active", "In Active"])
     .required("Status is required"),
 });
@@ -103,7 +109,7 @@ const AdminValidationSchema = Yup.object({
     .matches(/^\d{10}$/, "Mobile number must be 10 digits")
     .required("Mobile number is required"),
   role: Yup.string().required("Role is required"),
-  location: Yup.string().required("Location is required"),  
+  location: Yup.string().required("Location is required"),
   joiningDate: Yup.date()
     .nullable()
     .typeError("Invalid date format")
