@@ -44,7 +44,7 @@ const AdminList = () => {
   useEffect(() => {
     const handler = setTimeout(() => {
       setDebouncedSearch(searchInput);
-    }, 300);
+    }, 500);
     return () => clearTimeout(handler);
   }, [searchInput]);
 
@@ -70,20 +70,19 @@ const AdminList = () => {
         payload,
         {
           headers: {
-            "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
         }
       );
 
       if (response?.status === 200 || response?.data?.success) {
-        setAdmins(response.data.adminMasterListPage || []);
-        setTotalAdmins(response.data.totalRecords || 0);
+        setAdmins(response?.data?.adminMasterListPage || []);
+        setTotalAdmins(response?.data?.totalRecords || 0);
       } else {
-        toast.error("An error occurred while fetching customer data.");
+        toast.error("Failed to fetch admin data. Please try again.");
       }
     } catch (error) {
-      toast.error("An error occurred while saving the data.");
+      toast.error(error?.response?.data?.error || "An error occurred while saving the data.");
     } finally {
       setIsLoading(false);
     }
@@ -95,6 +94,8 @@ const AdminList = () => {
   }, [fetchAdmins]);
 
   const handleEdit = async (adminId) => {
+    document.querySelector(".layout-main")?.scrollTo({ top: 0, behavior: "smooth" });
+
     const token = localStorage.getItem("authToken");
     if (!token) {
       toast.error("Session expired. Please sign in again.", {
@@ -113,10 +114,10 @@ const AdminList = () => {
       if (response?.status === 200 || response?.data?.success) {
         navigate("editadmin", { state: { adminData: response.data } });
       } else {
-        toast.error("An error occurred while fetching customer data.");
+        toast.error("Failed to fetch admin data. Please try again.");
       }
     } catch (error) {
-      toast.error("An error occurred while saving the data.");
+      toast.error(error?.response?.data?.error || "An error occurred while saving the data.");
     } finally {
       setIsLoading(false);
     }
@@ -140,6 +141,11 @@ const AdminList = () => {
     }, 300);
   };
 
+  const handlePageChange = (event, value) => {
+    setCurrentPage(value);
+    document.querySelector(".layout-main")?.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <>
       {isLoading && <PreLoader />}
@@ -148,8 +154,7 @@ const AdminList = () => {
           <div className="top-alignment">
             <h5 className="admin-heading">Admin List</h5>
             <button type="button" className="add-button" onClick={handleCreate}>
-              <HiPlus />
-              Add Admin
+              <HiPlus />Add Admin
             </button>
           </div>
 
@@ -248,7 +253,7 @@ const AdminList = () => {
               <Pagination
                 count={Math.ceil(totalAdmins / itemsPerPage)}
                 page={currentPage}
-                onChange={(e, value) => setCurrentPage(value)}
+                onChange={handlePageChange}
                 sx={{
                   "& .MuiPaginationItem-root": {
                     color: "var(--text-color)",

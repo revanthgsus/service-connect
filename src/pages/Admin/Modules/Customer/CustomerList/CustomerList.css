@@ -1,5 +1,4 @@
 .customer-heading {
-  font-family: 'Be Vietnam Pro', sans-serif;
   color: var(--text-color);
   margin-bottom: 0px;
 }
@@ -8,7 +7,6 @@
   padding: 10px 15px;
   border-radius: 30px;
   border: 1px solid transparent;
-  font-family: 'Be Vietnam Pro', sans-serif;
   background: var(--main-btn-color);
   color: #ffffff;
   box-shadow: var(--shadow-color);
@@ -85,10 +83,6 @@
   background: #bfbfbf;
 }
 
-.customer-list .list-item:last-child {
-  border-bottom: none;
-}
-
 .customer-list .table-list {
   border: 1px solid var(--border-color);
   box-shadow: var(--shadow-color);
@@ -99,9 +93,12 @@
 .customer-list .table-heading {
   padding: 20px 15px;
   font-weight: 500;
-  font-family: 'Be Vietnam Pro', sans-serif;
   text-align: start;
   white-space: nowrap;
+}
+
+.customer-list .table-heading:first-child {
+  text-align: center;
 }
 
 .customer-list .table-heading:nth-last-child(2) {
@@ -110,7 +107,6 @@
 
 .customer-list .list-item td {
   padding: 15px 15px;
-  font-family: 'Be Vietnam Pro', sans-serif;
   color: var(--text-color);
   text-align: start;
   white-space: nowrap;
@@ -128,7 +124,6 @@
   padding: 8px 20px;
   border-radius: 20px;
   outline: 1px solid transparent;
-  font-family: 'Be Vietnam Pro', sans-serif;
   color: var(--text-color);
   width: 100%;
   font-size: 14px;
@@ -160,10 +155,13 @@
   border-bottom: 1px solid var(--border-color)
 }
 
+.customer-list .list-item:last-child {
+  border-bottom: none;
+}
+
 .customer-list .no-data td,
 .empty-data td {
   padding: 30px 25px;
-  font-family: 'Be Vietnam Pro', sans-serif;
   color: var(--text-color);
   text-align: center;
   font-weight: 400;
@@ -178,7 +176,7 @@
   position: relative;
   max-width: 100%;
   width: 150px;
-  margin: 20px 20px;
+  margin: 15px 15px;
   display: inline-block;
 }
 
@@ -191,7 +189,6 @@
   padding: 8px 20px;
   border-radius: 20px;
   outline: 1px solid transparent;
-  font-family: 'Be Vietnam Pro', sans-serif;
   color: var(--text-color);
   width: 100%;
   font-size: 14px;
@@ -225,12 +222,18 @@
   text-align: center;
 }
 
+.customer-list .list-item td:last-child {
+  display: flex;
+  justify-content: center;
+}
+
 .customer-list .status {
   padding: 3px 10px;
   border-radius: 100px;
-  width: 85px;
+  width: 100px;
+  margin: auto;
   text-align: center;
-  display: inline-block;
+  display: block;
 }
 
 .customer-list .status.active {
@@ -284,7 +287,6 @@
   transform: scale(1.2);
 }
 
-
 @media only screen and (max-width:575px) {
   .customer-list .list-top {
     display: block;
@@ -297,7 +299,12 @@
   }
 
   .customer-list .status-wrapper {
-    display: none;
+    display: flex;
+    width: 90%;
+  }
+
+  .customer-list .select-container {
+    width: 100%;
   }
 
   .customer-list .add-button {
@@ -360,5 +367,6 @@
 
   .customer-list .search-wrapper {
     margin: 30px 30px;
+    width: 30%;
   }
 }

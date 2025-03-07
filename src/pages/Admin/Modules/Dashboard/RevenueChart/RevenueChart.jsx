@@ -20,7 +20,7 @@ const RevenueChart = () => {
       revenue: "₹ 52,784"
     },
     Yearly: {
-      prices: [100, 200, 300, 400, 500, 600, 700, 800],
+      prices: [100, 200, 300, 400, 500, 600],
       dates: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"],
       revenue: "₹ 6,23,400"
     }
@@ -43,7 +43,38 @@ const RevenueChart = () => {
         type: 'area',
         zoom: { enabled: false },
         toolbar: { show: false },
+        height: window.innerWidth <= 1930 ? 450 :
+          window.innerWidth <= 1400 ? 350 :
+            window.innerWidth >= 968 ? 380 :
+              window.innerWidth < 768 ? 280 : 400,
       },
+      // response code
+      responsive: [
+        {
+          breakpoint: 1930,
+          options: {
+            chart: { height: 450 }
+          }
+        },
+        {
+          breakpoint: 1400,
+          options: {
+            chart: { height: 350 }
+          }
+        },
+        {
+          breakpoint: 968,
+          options: {
+            chart: { height: 380 }
+          }
+        },
+        {
+          breakpoint: 768,
+          options: {
+            chart: { height: 280 }
+          }
+        }
+      ],
       dataLabels: { enabled: false },
       stroke: { curve: 'smooth' },
       title: {
@@ -55,16 +86,26 @@ const RevenueChart = () => {
       xaxis: {
         type: 'category',
         labels: {
+          show: true,
           style: { fontFamily: 'Be Vietnam Pro', colors: 'var(--text-color)' }
-        }
+        },
+        // tickAmount: series[selectedPeriod].dates.length
       },
       yaxis: {
         labels: {
           formatter: (value) => value === 0 ? "" : `${value}k`,
           style: { fontFamily: 'Be Vietnam Pro', colors: 'var(--text-color)' }
+        },
+        tickAmount: series[selectedPeriod].dates.length
+      },
+      legend: {
+        horizontalAlign: 'left', labels: {
+          style: {
+            fontFamily: 'Be Vietnam Pro',
+            color: 'var(--text-color)'
+          }
         }
       },
-      legend: { horizontalAlign: 'left', labels: { style: { fontFamily: 'Be Vietnam Pro', color: 'var(--text-color)' } } },
       colors: ['#3498db']
     }
   };

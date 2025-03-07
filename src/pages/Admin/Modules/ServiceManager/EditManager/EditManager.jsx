@@ -123,7 +123,7 @@ const EditManager = () => {
       if (firstErrorField && fieldRefs.current[firstErrorField]) {
         setTimeout(() => {
           fieldRefs.current[firstErrorField].scrollIntoView({ behavior: "smooth", block: "center" });
-        }, 100);
+        }, 500);
       }
     }
   }, [formErrors, formTouched]);
@@ -147,25 +147,22 @@ const EditManager = () => {
     try {
       const response = await axios.post(`${API_BASE_URL}/managerMaster/addOrUpdateManagerMaster`, updatedValues, {
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
+          Authorization: `Bearer ${token}`
         },
       });
 
-      if (response?.data?.status === "failed") {
-        toast.error(response?.data?.error || "Failed to update manager. Please try again.", {
-          style: { width: "100%" }, closeButton: false
-        });
-      } else if (response?.data?.status === "success") {
+      if (response?.data?.status === "success") {
         toast.success(response?.data?.message || "Manager updated successfully.");
         setTimeout(() => {
           navigate("/admin/manager");
         }, 1000);
       } else {
-        toast.error("Unexpected response. Please try again later.");
+        toast.error(response?.data?.error || "Failed to update manager. Please try again.", {
+          style: { width: "100%" }, closeButton: false
+        });
       }
     } catch (err) {
-      toast.error("An error occurred while saving the data.");
+      toast.error(err?.response?.data?.error || "An error occurred while saving the data.");
     } finally {
       setLoading(false);
       setSubmitting(false);

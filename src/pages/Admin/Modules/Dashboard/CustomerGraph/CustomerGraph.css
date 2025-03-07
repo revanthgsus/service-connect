@@ -5,6 +5,9 @@
   padding: 25px 15px;
   border: 1px solid var(--border-color);
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .piechart .chart-select {
@@ -13,7 +16,7 @@
   border: 1px solid var(--input-border-color);
   outline: 1px solid transparent;
   color: var(--text-color);
-  font-size: 13px;
+  font-size: 12px;
   appearance: none;
   background-color: var(--input-color);
   cursor: pointer;
@@ -46,4 +49,45 @@
 .piechart .chart-header h6 {
   color: var(--text-color);
   margin-bottom: 0px;
+}
+
+.piechart .legend {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0px auto;
+}
+
+.piechart .legend .option-one p {
+  color: #39c389;
+  margin-bottom: 0px;
+  font-weight: 500;
+}
+
+.piechart .option-one span {
+  background-color: #39c389;
+  padding: 8px;
+  border-radius: 5px;
+}
+
+.piechart .legend .option-two p {
+  color: #25afb5;
+  margin-bottom: 0px;
+  font-weight: 500;
+}
+
+.piechart .option-two span {
+  background-color: #25afb5;
+  padding: 8px;
+  border-radius: 5px;
+}
+
+.piechart .option-one,
+.option-two {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 10px;
 }

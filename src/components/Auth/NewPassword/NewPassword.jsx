@@ -63,8 +63,8 @@ const NewPassword = () => {
     }
 
     const payload = {
-      newPassword: password,
-      confirmPassword: confirmPassword,
+      newPassword: password.trim(),
+      confirmPassword: confirmPassword.trim(),
       token: otp.join(""),
     };
 

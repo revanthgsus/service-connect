@@ -120,13 +120,14 @@ const CreateManager = () => {
       if (firstErrorField && fieldRefs.current[firstErrorField]) {
         setTimeout(() => {
           fieldRefs.current[firstErrorField].scrollIntoView({ behavior: "smooth", block: "center" });
-        }, 100);
+        }, 500);
       }
     }
   }, [formErrors, formTouched]);
 
   const handleSubmit = useCallback(async (values, { setSubmitting }) => {
     const token = localStorage.getItem('authToken');
+
     if (!token) {
       toast.error("Session expired. Please sign in again.", {
         autoClose: 2000,
@@ -145,26 +146,23 @@ const CreateManager = () => {
       const response = await axios.post(`${API_BASE_URL}/managerMaster/addOrUpdateManagerMaster`, updatedValues,
         {
           headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
           },
         }
       );
 
-      if (response?.data?.status === "failed") {
-        toast.error(response?.data?.error || "Failed to add manager. Please try again.", {
-          style: { width: "100%" }, closeButton: false
-        });
-      } else if (response?.data?.status === "success") {
+      if (response?.data?.status === "success") {
         toast.success(response?.data?.message || "Manager added successfully.");
         setTimeout(() => {
           navigate("/admin/manager");
         }, 1000);
       } else {
-        toast.error("Unexpected response. Please try again later.");
+        toast.error(response?.data?.error || "Failed to create manager. Please try again.", {
+          style: { width: "100%" }, closeButton: false
+        });
       }
     } catch (err) {
-      toast.error("An error occurred while saving the data.");
+      toast.error(err?.response?.data?.error || "An error occurred while saving the data.");
     } finally {
       setLoading(false);
       setSubmitting(false);

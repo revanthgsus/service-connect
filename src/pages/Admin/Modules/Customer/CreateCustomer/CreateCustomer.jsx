@@ -126,7 +126,7 @@ const CreateCustomer = () => {
       if (firstErrorField && fieldRefs.current[firstErrorField]) {
         setTimeout(() => {
           fieldRefs.current[firstErrorField].scrollIntoView({ behavior: "smooth", block: "center" });
-        }, 100);
+        }, 500);
       }
     }
   }, [formErrors, formTouched]);
@@ -152,26 +152,23 @@ const CreateCustomer = () => {
         updatedValues,
         {
           headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
           },
         }
       );
 
-      if (response?.data?.status === "failed") {
-        toast.error(response?.data?.error || "Failed to add customer. Please try again.", {
-          style: { width: "100%" }, closeButton: false
-        });
-      } else if (response?.data?.status === "success") {
+      if (response?.data?.status === "success") {
         toast.success(response?.data?.message || "Customer added successfully.");
         setTimeout(() => {
           navigate("/admin/customer");
         }, 1000);
       } else {
-        toast.error("Unexpected response. Please try again later.");
+        toast.error(response?.data?.error || "Failed to create customer. Please try again.", {
+          style: { width: "100%" }, closeButton: false
+        });
       }
     } catch (err) {
-      toast.error("An error occurred while saving the data.");
+      toast.error(err?.response?.data?.error || "An error occurred while saving the data.");
     } finally {
       setLoading(false);
       setSubmitting(false);

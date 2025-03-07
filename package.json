@@ -36,6 +36,7 @@
     "react-scripts": "^5.0.1",
     "react-select": "^5.10.0",
     "react-spinners": "^0.15.0",
+    "react-super-responsive-table": "^6.0.1",
     "react-toastify": "^11.0.3",
     "react-tooltip": "^5.28.0",
     "styled-components": "^6.1.13",

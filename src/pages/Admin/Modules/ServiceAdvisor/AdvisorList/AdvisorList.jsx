@@ -70,21 +70,19 @@ const AdvisorList = () => {
         payload,
         {
           headers: {
-            "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
         }
       );
 
       if (response?.status === 200 || response?.data?.success) {
-        setAdvisors(response.data.advisorMasterListPage || []);
-        setTotalAdvisors(response.data.totalRecords || 0);
-      }
-      else {
-        toast.error("An error occurred while fetching advisor data.");
+        setAdvisors(response?.data?.advisorMasterListPage || []);
+        setTotalAdvisors(response?.data?.totalRecords || 0);
+      } else {
+        toast.error("Failed to fetch advisor data. Please try again.");
       }
     } catch (error) {
-      toast.error("An error occurred while saving the data.");
+      toast.error(error?.response?.data?.error || "An error occurred while saving the data.");
     } finally {
       setIsLoading(false);
     }
@@ -96,6 +94,8 @@ const AdvisorList = () => {
   }, [fetchAdvisors]);
 
   const handleEdit = async (advisorId) => {
+    document.querySelector(".layout-main")?.scrollTo({ top: 0, behavior: "smooth" });
+
     const token = localStorage.getItem("authToken");
     if (!token) {
       toast.error("Session expired. Please sign in again.", {
@@ -115,10 +115,10 @@ const AdvisorList = () => {
       if (response?.status === 200 || response?.data?.success) {
         navigate("editadvisor", { state: { advisorData: response.data } });
       } else {
-        toast.error("An error occurred while fetching advisor data.");
+        toast.error("Failed to fetch advisor data. Please try again.");
       }
     } catch (error) {
-      toast.error("An error occurred while saving the data.");
+      toast.error(error?.response?.data?.error || "An error occurred while saving the data.");
     } finally {
       setIsLoading(false);
     }
@@ -140,6 +140,11 @@ const AdvisorList = () => {
     setTimeout(() => {
       navigate("createadvisor");
     }, 300);
+  };
+
+  const handlePageChange = (event, value) => {
+    setCurrentPage(value);
+    document.querySelector(".layout-main")?.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
@@ -250,7 +255,7 @@ const AdvisorList = () => {
               <Pagination
                 count={Math.ceil(totalAdvisors / itemsPerPage)}
                 page={currentPage}
-                onChange={(e, value) => setCurrentPage(value)}
+                onChange={handlePageChange}
                 sx={{
                   "& .MuiPaginationItem-root": {
                     color: "var(--text-color)",

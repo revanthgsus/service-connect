@@ -5,6 +5,8 @@
 }
 
 :root {
+  --font-family: 'Be Vietnam Pro', sans-serif;
+
   --brand-color: #007D85;
   --navbar-color: #ffffff;
   --text-color: #2b2b2b;

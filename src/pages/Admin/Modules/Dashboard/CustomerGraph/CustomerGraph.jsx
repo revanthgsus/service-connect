@@ -8,21 +8,6 @@ const CustomerGraph = () => {
     tooltip: {
       trigger: 'item',
     },
-    legend: {
-      orient: 'vertical',
-      left: 'center',
-      bottom: 0,
-      itemWidth: 20,
-      itemHeight: 20,
-      itemStyle: {
-        borderRadius: 7.5,
-      },
-      textStyle: {
-        fontFamily: 'Be Vietnam Pro, sans-serif',
-        fontSize: 16,
-        color: 'var(--text-color)',
-      },
-    },
     color: ['#57E5A9', '#28BDC4'],
     series: [
       {
@@ -37,7 +22,7 @@ const CustomerGraph = () => {
           itemStyle: {
             shadowBlur: 10,
             shadowOffsetX: 0,
-            shadowColor: 'rgba(49, 49, 49, 0.5)',
+            shadowColor: 'rgba(49, 49, 49, 0.32)',
           },
         },
         label: {
@@ -61,6 +46,17 @@ const CustomerGraph = () => {
         </div>
       </div>
       <ReactECharts option={option} />
+
+      <div className='legend'>
+        <div className='option-one'>
+          <span></span>
+          <p>New Customers</p>
+        </div>
+        <div className='option-two'>
+          <span></span>
+          <p>Previous Customers</p>
+        </div>
+      </div>
     </div >
   )
 }

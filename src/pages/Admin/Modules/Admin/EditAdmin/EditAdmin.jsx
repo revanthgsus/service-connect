@@ -105,7 +105,7 @@ const EditAdmin = () => {
       if (firstErrorField && fieldRefs.current[firstErrorField]) {
         setTimeout(() => {
           fieldRefs.current[firstErrorField].scrollIntoView({ behavior: "smooth", block: "center" });
-        }, 100);
+        }, 500);
       }
     }
   }, [formErrors, formTouched]);
@@ -129,25 +129,22 @@ const EditAdmin = () => {
     try {
       const response = await axios.post(`${API_BASE_URL}/adminMaster/addOrUpdateAdminMaster`, updatedValues, {
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
+          Authorization: `Bearer ${token}`
         },
       });
 
-      if (response?.data?.status === "failed") {
-        toast.error(response?.data?.error || "Failed to update admin. Please try again.", {
-          style: { width: "100%" }, closeButton: false
-        });
-      } else if (response?.data?.status === "success") {
-        toast.success(response?.data?.message || "Admin updated successfully.");
+      if (response?.data?.status === "success") {
+        toast.success(response?.data?.message || "Admin Updated successfully.");
         setTimeout(() => {
           navigate("/admin/adminlist");
         }, 1000);
       } else {
-        toast.error("Unexpected response. Please try again later.");
+        toast.error(response?.data?.error || "Failed to update admin. Please try again.", {
+          style: { width: "100%" }, closeButton: false
+        });
       }
     } catch (err) {
-      toast.error("An error occurred while saving the data.");
+      toast.error(err?.response?.data?.error || "An error occurred while saving the data.");
     } finally {
       setLoading(false);
       setSubmitting(false);

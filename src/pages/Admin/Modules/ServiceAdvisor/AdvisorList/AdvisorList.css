@@ -1,5 +1,4 @@
 .advisor-heading {
-  font-family: 'Be Vietnam Pro', sans-serif;
   color: var(--text-color);
   margin-bottom: 0px;
 }
@@ -8,7 +7,6 @@
   padding: 10px 15px;
   border-radius: 30px;
   border: 1px solid transparent;
-  font-family: 'Be Vietnam Pro', sans-serif;
   background: var(--main-btn-color);
   color: #ffffff;
   box-shadow: var(--shadow-color);
@@ -85,10 +83,6 @@
   background: #bfbfbf;
 }
 
-.advisor-list .list-item:last-child {
-  border-bottom: none;
-}
-
 .advisor-list .table-list {
   border: 1px solid var(--border-color);
   box-shadow: var(--shadow-color);
@@ -99,9 +93,12 @@
 .advisor-list .table-heading {
   padding: 20px 15px;
   font-weight: 500;
-  font-family: 'Be Vietnam Pro', sans-serif;
   text-align: start;
   white-space: nowrap;
+}
+
+.advisor-list .table-heading:first-child {
+  text-align: center;
 }
 
 .advisor-list .table-heading:nth-last-child(2) {
@@ -110,7 +107,6 @@
 
 .advisor-list .list-item td {
   padding: 15px 15px;
-  font-family: 'Be Vietnam Pro', sans-serif;
   color: var(--text-color);
   text-align: start;
   white-space: nowrap;
@@ -128,7 +124,6 @@
   padding: 8px 20px;
   border-radius: 20px;
   outline: 1px solid transparent;
-  font-family: 'Be Vietnam Pro', sans-serif;
   color: var(--text-color);
   width: 100%;
   font-size: 14px;
@@ -160,10 +155,13 @@
   border-bottom: 1px solid var(--border-color)
 }
 
+.advisor-list .list-item:last-child {
+  border-bottom: none;
+}
+
 .advisor-list .no-data td,
 .empty-data td {
   padding: 30px 25px;
-  font-family: 'Be Vietnam Pro', sans-serif;
   color: var(--text-color);
   text-align: center;
   font-weight: 400;
@@ -178,7 +176,7 @@
   position: relative;
   max-width: 100%;
   width: 150px;
-  margin: 20px 20px;
+  margin: 15px 15px;
   display: inline-block;
 }
 
@@ -191,7 +189,6 @@
   padding: 8px 20px;
   border-radius: 20px;
   outline: 1px solid transparent;
-  font-family: 'Be Vietnam Pro', sans-serif;
   color: var(--text-color);
   width: 100%;
   font-size: 14px;
@@ -225,12 +222,18 @@
   text-align: center;
 }
 
+.advisor-list .list-item td:last-child {
+  display: flex;
+  justify-content: center;
+}
+
 .advisor-list .status {
-  padding: 3px 10px;
+  padding: 3px 15px;
   border-radius: 100px;
-  width: 85px;
+  width: 100px;
+  margin: auto;
   text-align: center;
-  display: inline-block;
+  display: block;
 }
 
 .advisor-list .status.active {
@@ -284,7 +287,6 @@
   transform: scale(1.2);
 }
 
-
 @media only screen and (max-width:575px) {
   .advisor-list .list-top {
     display: block;
@@ -297,13 +299,17 @@
   }
 
   .advisor-list .status-wrapper {
-    display: none;
+    display: flex;
+    width: 90%;
+  }
+
+  .advisor-list .select-container {
+    width: 100%;
   }
 
   .advisor-list .add-button {
     margin-top: 10px;
   }
-
 }
 
 @media only screen and (min-width: 576px) and (max-width: 768px) {
@@ -360,5 +366,6 @@
 
   .advisor-list .search-wrapper {
     margin: 30px 30px;
+    width: 30%;
   }
 }

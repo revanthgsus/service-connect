@@ -44,7 +44,7 @@ const CustomerList = () => {
   useEffect(() => {
     const handler = setTimeout(() => {
       setDebouncedSearch(searchInput);
-    }, 300);
+    }, 500);
     return () => clearTimeout(handler);
   }, [searchInput]);
 
@@ -70,32 +70,31 @@ const CustomerList = () => {
         payload,
         {
           headers: {
-            "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
         }
       );
 
       if (response?.status === 200 || response?.data?.success) {
-        setCustomers(response.data.customerMasterListPage || []);
-        setTotalCustomers(response.data.totalRecords || 0);
-      }
-      else {
-        toast.error("An error occurred while fetching customer data.");
+        setCustomers(response?.data?.customerMasterListPage || []);
+        setTotalCustomers(response?.data?.totalRecords || 0);
+      } else {
+        toast.error("Failed to fetch customer data. Please try again.");
       }
     } catch (error) {
-      toast.error("An error occurred while saving the data.");
+      toast.error(error?.response?.data?.error || "An error occurred while saving the data.");
     } finally {
       setIsLoading(false);
     }
   }, [currentPage, status, debouncedSearch, navigate]);
-
 
   useEffect(() => {
     fetchCustomers();
   }, [fetchCustomers]);
 
   const handleEdit = async (customerId) => {
+    document.querySelector(".layout-main")?.scrollTo({ top: 0, behavior: "smooth" });
+
     const token = localStorage.getItem("authToken");
     if (!token) {
       toast.error("Session expired. Please sign in again.", {
@@ -114,10 +113,10 @@ const CustomerList = () => {
       if (response?.status === 200 || response?.data?.success) {
         navigate("editcustomer", { state: { customerData: response.data } });
       } else {
-        toast.error("An error occurred while fetching customer data.");
+        toast.error("Failed to fetch customer data. Please try again.");
       }
     } catch (error) {
-      toast.error("An error occurred while saving the data.");
+      toast.error(error?.response?.data?.error || "An error occurred while saving the data.");
     } finally {
       setIsLoading(false);
     }
@@ -139,6 +138,11 @@ const CustomerList = () => {
     setTimeout(() => {
       navigate("createcustomer");
     }, 300);
+  };
+
+  const handlePageChange = (event, value) => {
+    setCurrentPage(value);
+    document.querySelector(".layout-main")?.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
@@ -249,7 +253,7 @@ const CustomerList = () => {
               <Pagination
                 count={Math.ceil(totalCustomers / itemsPerPage)}
                 page={currentPage}
-                onChange={(e, value) => setCurrentPage(value)}
+                onChange={handlePageChange}
                 sx={{
                   "& .MuiPaginationItem-root": {
                     color: "var(--text-color)",

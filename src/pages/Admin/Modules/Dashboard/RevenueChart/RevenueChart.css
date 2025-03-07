@@ -34,7 +34,7 @@
 }
 
 .revenuegraph .multi-tabs {
-  font-family: 'Be Vietnam Pro', sans-serif;
+  font-family: var(--font-family);
   padding: 8px 5px;
   color: var(--sub-text-color);
   text-transform: capitalize;
@@ -50,8 +50,36 @@
   border-radius: 5px;
 }
 
-/* @media only screen and (max-width:575px) {
+@media only screen and (max-width:575px) {
   .revenuegraph {
-    margin-bottom: 30px;
+    margin-bottom: 20px;
   }
-} */
+
+  .revenuegraph .chart-header {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 15px;
+  }
+
+  .revenuegraph .chart-header h6 {
+    margin-bottom: 10px;
+  }
+}
+
+@media only screen and (min-width:576px) and (max-width:768px) {
+  .revenuegraph {
+    margin-bottom: 20px;
+  }
+}
+
+@media only screen and (min-width:769px) and (max-width:1200px) {
+  .revenuegraph {
+    margin-bottom: 20px;
+  }
+}
+
+@media only screen and (min-width:1400px) {
+  .revenuegraph {
+    padding: 30px 30px;
+  }
+}

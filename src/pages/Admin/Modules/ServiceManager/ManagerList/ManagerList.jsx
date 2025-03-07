@@ -71,20 +71,19 @@ const ManagerList = () => {
         payload,
         {
           headers: {
-            "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
         }
       );
 
       if (response?.status === 200 || response?.data?.success) {
-        setManagers(response.data.managerMasterListPage || []);
-        setTotalManagers(response.data.totalRecords || 0);
+        setManagers(response?.data?.managerMasterListPage || []);
+        setTotalManagers(response?.data?.totalRecords || 0);
       } else {
-        toast.error("An error occurred while fetching manager data.");
+        toast.error("Failed to fetch manager data. Please try again.");
       }
     } catch (error) {
-      toast.error("An error occurred while saving the data.");
+      toast.error(error?.response?.data?.error || "An error occurred while saving the data.");
     } finally {
       setIsLoading(false);
     }
@@ -95,7 +94,10 @@ const ManagerList = () => {
   }, [fetchManagers]);
 
   const handleEdit = async (managerId) => {
+    document.querySelector(".layout-main")?.scrollTo({ top: 0, behavior: "smooth" });
+
     const token = localStorage.getItem("authToken");
+
     if (!token) {
       toast.error("Session expired. Please sign in again.", {
         autoClose: 2000,
@@ -112,12 +114,12 @@ const ManagerList = () => {
       });
 
       if (response?.status === 200 || response?.data?.success) {
-        navigate("editmanager", { state: { managerData: response.data } });
+        navigate("editmanager", { state: { managerData: response?.data } });
       } else {
-        toast.error("An error occurred while fetching manager data.");
+        toast.error("Failed to fetch manager data. Please try again.");
       }
     } catch (error) {
-      toast.error("An error occurred while saving the data.");
+      toast.error(error?.response?.data?.error || "An error occurred while fetch the data.");
     } finally {
       setIsLoading(false);
     }
@@ -143,8 +145,8 @@ const ManagerList = () => {
 
   const handlePageChange = (event, value) => {
     setCurrentPage(value);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
+    document.querySelector(".layout-main")?.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   return (
     <>
