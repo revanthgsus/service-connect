@@ -12,14 +12,16 @@ import ThemeContext from '../../../../contexts/ThemeContext';
 import AdvisorDropdown from './../AdvisorDropdown/AdvisorDropdown';
 import { MdMailOutline } from "react-icons/md";
 import AdvisorNotification from '../AdvisorNotification/AdvisorNotification';
+import { Tooltip } from 'react-tooltip';
 
-const AdvisorNavbar = ({ handleDrawerToggle, isOpen }) => {
+const AdvisorNavbar = ({ handleDrawerToggle, isOpen, menuBtnRef }) => {
   const { theme, toggleTheme } = useContext(ThemeContext);
 
   return (
     <>
       <Navbar expand={false} className="advisor-navbar fixed-top" >
         <Container fluid className="px-4">
+
           <div className="navbar-brand">
             <Navbar.Brand className="p-0">
               <div className="custom-logo">
@@ -29,23 +31,30 @@ const AdvisorNavbar = ({ handleDrawerToggle, isOpen }) => {
                 <MobileLogo />
               </div>
             </Navbar.Brand>
-            <Menubtn handleDrawerToggle={handleDrawerToggle} isOpen={isOpen} />
+
+            <Menubtn handleDrawerToggle={handleDrawerToggle} isOpen={isOpen} menuBtnRef={menuBtnRef} />
           </div>
           <div className="navbar-icons">
             <AdvisorNotification />
-            <IconButton>
+
+            <IconButton aria-label="messages" data-tooltip-id="messages-tooltip" data-tooltip-content="Messages" >
               <Badge badgeContent={1} color="error">
-                <MdMailOutline className="notification" />
+                <MdMailOutline className="messages" />
               </Badge>
             </IconButton>
-            <IconButton onClick={toggleTheme} aria-label="Toggle Theme" className="theme-toggle-btn">
+
+            <IconButton aria-label="Toggle Theme" data-tooltip-id="theme-tooltip" data-tooltip-content="Switch Theme" onClick={toggleTheme}>
               {theme === 'dark' ? (
                 <IoSunny className="sun-icon" />
               ) : (
                 <IoMoonOutline className="moon-icon" />
               )}
             </IconButton>
+
             <AdvisorDropdown />
+
+            <Tooltip id="messages-tooltip" className="custom-tooltip" />
+            <Tooltip id="theme-tooltip" className="custom-tooltip" />
           </div>
         </Container>
       </Navbar>

@@ -6,6 +6,7 @@ import { Badge } from '@mui/material';
 import { IoNotificationsOutline } from 'react-icons/io5';
 import { HiOutlineBellAlert } from "react-icons/hi2";
 import ProfIcon from '../../../../assets/images/dummy.svg'
+import { Tooltip } from 'react-tooltip';
 
 const AdvisorNotification = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -16,7 +17,7 @@ const AdvisorNotification = () => {
   };
 
   const closeDropdown = (e) => {
-    if (!e.target.closest('.customer-dropdown')) {
+    if (!e.target.closest('.advisor-dropdown')) {
       setIsDropdownOpen(false);
     }
   };
@@ -32,7 +33,11 @@ const AdvisorNotification = () => {
   return (
     <>
       <div className='customer-dropdown'>
-        <IconButton>
+        <Tooltip id="notification-tooltip" className="custom-tooltip" />
+
+        <IconButton aria-label="notification"
+          data-tooltip-id="notification-tooltip"
+          data-tooltip-content="Notifications" onClick={toggleDropdown}>
           <Badge badgeContent={7} color="error" onClick={toggleDropdown}>
             <IoNotificationsOutline className="notification" />
           </Badge>

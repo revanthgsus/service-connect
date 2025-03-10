@@ -78,7 +78,7 @@ const AdminDropdown = () => {
         )}
       </div>
 
-      <Tooltip id="account-tooltip" className="custom-tooltip"/>
+      <Tooltip id="account-tooltip" className="custom-tooltip" />
       <Logout show={show} handleClose={handleCloseModal} />
     </>
   );

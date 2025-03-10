@@ -75,7 +75,7 @@ const AdminList = () => {
         }
       );
 
-      if (response?.status === 200 || response?.data?.success) {
+      if (response?.status === 200) {
         setAdmins(response?.data?.adminMasterListPage || []);
         setTotalAdmins(response?.data?.totalRecords || 0);
       } else {
@@ -111,7 +111,7 @@ const AdminList = () => {
         },
       });
 
-      if (response?.status === 200 || response?.data?.success) {
+      if (response?.status === 200) {
         navigate("editadmin", { state: { adminData: response.data } });
       } else {
         toast.error("Failed to fetch admin data. Please try again.");

@@ -3,35 +3,30 @@
   width: 100%;
 }
 
-.banner-image-container {
-  width: 100%;
-}
-
 .banner-image {
-  display: block;
   box-shadow: var(--shadow-color);
   border-radius: 5px;
   background-color: #ffffff;
+  width: 100%;
 }
 
 .banner-content {
   position: absolute;
   top: 50%;
-  left: 30%;
+  left: 31%;
   transform: translate(-50%, -50%);
   color: white;
 }
 
 .banner-content h5 {
   color: #ffffff;
-  font-family: 'Be Vietnam Pro', sans-serif;
   font-weight: 600;
   margin-bottom: 10px;
+  font-size: 20px;
 }
 
 .banner-content p {
   color: #fcfcfc;
-  font-family: 'Be Vietnam Pro', sans-serif;
   font-size: 12px;
   line-height: 22px;
   margin-bottom: 0px;
@@ -39,11 +34,12 @@
 
 @media only screen and (max-width: 575px) {}
 
-@media only screen and (min-width: 1200px) and (max-width: 1399px) {}
+@media only screen and (min-width: 576px) and (max-width: 768px) {}
 
+@media only screen and (min-width: 1200px) and (max-width: 1399px) {}
 
 @media only screen and (min-width: 1400px) {
   .banner-content {
-    left: 200px;
+    left: 20%;
   }
 }

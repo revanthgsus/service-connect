@@ -35,8 +35,7 @@ const Kpi = () => {
       try {
         const response = await axios.get(`${API_BASE_URL}/userMaster/getAdminDashboardCounts`, {
           headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
           },
         });
 

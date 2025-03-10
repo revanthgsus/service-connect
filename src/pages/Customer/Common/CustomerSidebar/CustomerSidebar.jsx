@@ -8,8 +8,7 @@ import { ReactComponent as ActivityIcon } from "../../../../assets/images/custom
 import { ReactComponent as InvoiceIcon } from "../../../../assets/images/customer/sidebar/invoice.svg";
 import { ReactComponent as TransactionIcon } from "../../../../assets/images/customer/sidebar/transaction.svg";
 
-
-const CustomerSidebar = ({ isOpen, handleCloseSidebar }) => {
+const CustomerSidebar = ({ isOpen, handleCloseSidebar, sidebarRef }) => {
   const sidebarItems = [
     {
       title: 'Dashboard',
@@ -45,7 +44,7 @@ const CustomerSidebar = ({ isOpen, handleCloseSidebar }) => {
 
   return (
     <div className='customer-sidebar sidebar'>
-      <aside className={`sidebar-section ${isOpen ? "open" : "closed"}`}>
+      <aside className={`sidebar-section ${isOpen ? "open" : "closed"}`} ref={sidebarRef}>
         {sidebarItems.map((item, index) => (
           <ul key={index} className='sidebar-link'>
             <li>

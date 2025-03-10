@@ -18,8 +18,27 @@
   color: var(--icon-color);
 }
 
+.customer-navbar .messages path {
+  color: var(--icon-color);
+}
+
 .customer-navbar .moon-icon path {
   color: var(--icon-color);
+}
+
+.customer-navbar .sun-icon {
+  color: var(--icon-color);
+  animation: rotate-sun .3s ease-in-out;
+}
+
+@keyframes rotate-sun {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(90deg);
+  }
 }
 
 .customer-navbar .profile-icon path {
@@ -49,8 +68,9 @@
   color: var(--dark-hover-color);
 }
 
-.customer-navbar .sun-icon {
-  color: var(--icon-color);
+.customer-navbar .custom-tooltip {
+  font-size: 12px;
+  padding: 5px 10px;
 }
 
 @media only screen and (max-width:768px) {

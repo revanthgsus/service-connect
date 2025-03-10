@@ -17,16 +17,37 @@
   flex-direction: column;
   height: calc(100vh - 68px);
   overflow-y: auto;
-  transition: 0.3s linear width;
+  overflow-x: hidden;
+  transition: .3s linear width;
   white-space: nowrap;
 }
 
+.customer-sidebar .sidebar-section:hover::-webkit-scrollbar-thumb {
+  display: block;
+}
+
 .customer-sidebar .sidebar-section::-webkit-scrollbar {
+  background: transparent;
+  width: 5px;
+}
+
+.customer-sidebar .sidebar-section::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+.customer-sidebar .sidebar-section::-webkit-scrollbar-thumb {
+  background: #e8e8e89c;
+  border-radius: 10px;
+  cursor: pointer;
   display: none;
 }
 
+.customer-sidebar .sidebar-section::-webkit-scrollbar-thumb:hover {
+  background: #dfdfdfd0;
+}
+
 .customer-sidebar .sidebar-section.open {
-  width: 85px;
+  width: 90px;
   transition: .3s linear width;
 }
 
@@ -76,7 +97,6 @@
 
 .customer-sidebar .sidebar-content {
   font-weight: 600;
-  font-family: 'Be Vietnam Pro', sans-serif;
 }
 
 .customer-sidebar .sidebar-link .active-link::before {
@@ -94,15 +114,17 @@
 
 @media only screen and (Max-width:767px) {
   .customer-sidebar .sidebar-section {
-    display: none;
-    width: 100%;
     position: fixed;
     left: 0;
+    transform: translateX(-100%);
+    transition: .3s linear all;
+    width: 0%;
   }
 
   .customer-sidebar .sidebar-section.open {
-    display: block;
-    width: 270px;
+    transform: translateX(0);
+    transition: .3s ease-out all;
+    width: 260px;
   }
 
   .customer-sidebar .sidebar-section.open .sidebar-content {

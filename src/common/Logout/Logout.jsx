@@ -10,9 +10,6 @@ const Logout = ({ show, handleClose }) => {
   const { logout } = useContext(AuthContext);
 
   const handleLogout = () => {
-    if (localStorage.getItem('theme')) {
-      localStorage.removeItem('theme', 'light');
-    }
     logout();
     handleClose();
     navigate('/')

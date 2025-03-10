@@ -43,13 +43,20 @@ const RevenueChart = () => {
         type: 'area',
         zoom: { enabled: false },
         toolbar: { show: false },
-        height: window.innerWidth <= 1930 ? 450 :
-          window.innerWidth <= 1400 ? 350 :
-            window.innerWidth >= 968 ? 380 :
-              window.innerWidth < 768 ? 280 : 400,
+        height: window.innerWidth > 4000 ? 600 :
+          window.innerWidth <= 1930 ? 450 :
+            window.innerWidth <= 1400 ? 350 :
+              window.innerWidth >= 968 ? 380 :
+                window.innerWidth < 768 ? 280 : 400,
       },
       // response code
       responsive: [
+        {
+          breakpoint: 4000,
+          options: {
+            chart: { height: 600 }
+          }
+        },
         {
           breakpoint: 1930,
           options: {

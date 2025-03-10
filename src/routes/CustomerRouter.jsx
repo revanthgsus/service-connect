@@ -6,6 +6,7 @@ import ProtectedRoute from './ProtectedRoute';
 import NotFound from '../common/NotFound/NotFound';
 
 const CustomerDashboard = lazy(() => import('../pages/Customer/Modules/Dashboard/CustomerDashboard/CustomerDashboard'));
+const CustomerNotification = lazy(() => import('./../pages/Customer/Common/CustomerNotfication/CustomerNotification'));
 
 const AppointmentList = lazy(() => import("../pages/Customer/Modules/Appointment/AppointmentList/AppointmentList"));
 const RequestAppointment = lazy(() => import("../pages/Customer/Modules/Appointment/RequestAppointment/RequestAppointment"));
@@ -60,6 +61,8 @@ const CustomerRouter = () => {
               <Route path='transaction' >
                 <Route index element={<TransactionList />} />
               </Route>
+
+              <Route path='notifications' element={<CustomerNotification />} />
 
               <Route path="profile" element={<CustomerProfile />} />
             </Route>

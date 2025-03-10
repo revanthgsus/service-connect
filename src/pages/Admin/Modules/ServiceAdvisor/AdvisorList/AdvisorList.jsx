@@ -75,7 +75,7 @@ const AdvisorList = () => {
         }
       );
 
-      if (response?.status === 200 || response?.data?.success) {
+      if (response?.status === 200) {
         setAdvisors(response?.data?.advisorMasterListPage || []);
         setTotalAdvisors(response?.data?.totalRecords || 0);
       } else {
@@ -112,7 +112,7 @@ const AdvisorList = () => {
         },
       });
 
-      if (response?.status === 200 || response?.data?.success) {
+      if (response?.status === 200) {
         navigate("editadvisor", { state: { advisorData: response.data } });
       } else {
         toast.error("Failed to fetch advisor data. Please try again.");

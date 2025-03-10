@@ -19,6 +19,7 @@ const AdminNavbar = ({ handleDrawerToggle, isOpen, menuBtnRef }) => {
     <>
       <Navbar expand={false} className="admin-navbar fixed-top" >
         <Container fluid className="px-4">
+
           <div className="navbar-brand">
             <Navbar.Brand className="p-0">
               <div className="custom-logo">
@@ -30,12 +31,14 @@ const AdminNavbar = ({ handleDrawerToggle, isOpen, menuBtnRef }) => {
             </Navbar.Brand>
             <Menubtn handleDrawerToggle={handleDrawerToggle} isOpen={isOpen} menuBtnRef={menuBtnRef} />
           </div>
+
           <div className="navbar-icons">
             <IconButton aria-label="Notifications" data-tooltip-id="notification-tooltip" data-tooltip-content="Notifications" >
               <Badge badgeContent={0} color="error">
                 <IoNotificationsOutline className="notification" />
               </Badge>
             </IconButton>
+
             <IconButton aria-label="Toggle Theme" data-tooltip-id="theme-tooltip" data-tooltip-content="Switch Theme" onClick={toggleTheme}>
               {theme === 'dark' ? (
                 <IoSunny className="sun-icon" />
@@ -43,6 +46,7 @@ const AdminNavbar = ({ handleDrawerToggle, isOpen, menuBtnRef }) => {
                 <IoMoonOutline className="moon-icon" />
               )}
             </IconButton>
+
             <AdminDropdown />
 
             <Tooltip id="theme-tooltip" className="custom-tooltip" />

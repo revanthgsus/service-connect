@@ -33,11 +33,19 @@ const InvoiceModal = ({ show, onHide }) => {
     });
   };
 
+  const RAZORPAY_KEY = process.env.REACT_APP_RAZORPAY_KEY_ID;
+  // const RAZORPAY_SECRET_KEY = process.env.REACT_APP_RAZORPAY_SECRET_KEY;
+
   // handleevent for integration
   const handlePayment = async () => {
     const res = await loadRazorpay();
     if (!res) {
       alert("Failed to load payment. Please try again.");
+      return;
+    }
+
+    if (!window.Razorpay) {
+      alert("Razorpay SDK failed to load. Are you online?");
       return;
     }
 
@@ -49,8 +57,8 @@ const InvoiceModal = ({ show, onHide }) => {
 
     // loadRazorpay();
     const options = {
-      key: "rzp_test_pXd22jxI88iJ4g",
-      key_secret: "eTacN88F1EW2ebMo5zm2ozgR",
+      key: RAZORPAY_KEY,
+      // key_secret: RAZORPAY_SECRET_KEY,
       amount: numericAmount * 100,
       currency: "INR",
       name: "Service Connect",

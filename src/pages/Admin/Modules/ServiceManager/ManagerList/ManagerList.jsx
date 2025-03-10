@@ -76,7 +76,7 @@ const ManagerList = () => {
         }
       );
 
-      if (response?.status === 200 || response?.data?.success) {
+      if (response?.status === 200) {
         setManagers(response?.data?.managerMasterListPage || []);
         setTotalManagers(response?.data?.totalRecords || 0);
       } else {
@@ -113,7 +113,7 @@ const ManagerList = () => {
         },
       });
 
-      if (response?.status === 200 || response?.data?.success) {
+      if (response?.status === 200) {
         navigate("editmanager", { state: { managerData: response?.data } });
       } else {
         toast.error("Failed to fetch manager data. Please try again.");

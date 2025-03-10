@@ -1,0 +1,177 @@
+.customer-notification .notification-container {
+  position: absolute;
+  top: 100%;
+  right: 150px;
+  background-color: var(--navbar-color);
+  border-radius: 5px;
+  text-align: start;
+  box-shadow: var(--shadow-color);
+  z-index: 99;
+  width: 370px;
+}
+
+.customer-notification .notify-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 15px 10px 15px;
+}
+
+.customer-notification .notify-heading h6 {
+  margin-bottom: 0px;
+  color: var(--sub-text-color);
+}
+
+.customer-notification .notify-heading a {
+  color: var(--hamburger-color);
+  text-decoration: none;
+  font-size: 12px;
+  transition: .2s ease-out all;
+  padding: 5px 10px;
+}
+
+.customer-notification .notify-heading a:hover {
+  background-color: #a8a8a81a;
+  border-radius: 3px;
+  transition: .2s linear all;
+}
+
+.customer-notification .break-line {
+  color: #919191c2;
+  margin: 0px 0px;
+}
+
+.customer-notification .notification-content h6 {
+  color: var(--text-color);
+  margin-bottom: 5px;
+}
+
+.customer-notification .notification-content p {
+  color: var(--sub-text-color);
+  margin-bottom: 0px;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.customer-notification .notification-content {
+  width: 60%;
+}
+
+.customer-notification .notification-time {
+  color: var(--sub-text-color);
+  font-size: 12px;
+}
+
+.customer-notification .notification-icon {
+  background-color: #2F7FDB;
+  padding: 8px;
+  border-radius: 50%;
+  display: inline-flex;
+  color: #ffffff;
+}
+
+.customer-notification .notification-icon.appointment {
+  background-color: #2F7FDB;
+}
+
+.customer-notification .notification-icon.quotation {
+  background-color: #A154D4;
+}
+
+.customer-notification .notification-icon.request {
+  background-color: #30CA7E;
+}
+
+.customer-notification .notification-icon.invoice {
+  background-color: #E4A842;
+}
+
+.customer-notification .notification-icon svg {
+  font-size: 16px;
+}
+
+.customer-notification .notification-item {
+  padding: 13px 15px;
+  cursor: pointer;
+  transition: .3s ease-out all;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-bottom: 1px solid #9a9a9a1c;
+}
+
+.customer-notification .notification-item:last-child {
+  border-bottom: none;
+}
+
+.customer-notification .notification-item:hover {
+  background: #9c9c9c14;
+  transition: .3s linear all;
+}
+
+.customer-notification .notification-container::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  right: 35px;
+  width: 20px;
+  height: 20px;
+  background-color: var(--navbar-color);
+  transform: rotate(45deg);
+  border-left: 1px solid var(--border-color);
+  border-top: 1px solid var(--border-color);
+}
+
+.customer-notification .notifications-list {
+  height: 240px;
+  overflow: auto;
+}
+
+/* scrollbar in notification */
+
+.customer-notification .notifications-list::-webkit-scrollbar {
+  background: transparent;
+  width: 5px;
+}
+
+.customer-notification .notifications-list::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+.customer-notification .notifications-list::-webkit-scrollbar-thumb {
+  background: #b7b7b77b;
+  border-radius: 10px;
+  cursor: pointer;
+  display: none;
+}
+
+.customer-notification .notifications-list::-webkit-scrollbar-thumb:hover {
+  background: #b7b7b7ca;
+}
+
+.customer-notification .notifications-list:hover::-webkit-scrollbar-thumb {
+  display: block;
+}
+
+@media only screen and (max-width:575px) {
+  .customer-notification .notification-container {
+    right: 10px;
+    width: 95%;
+  }
+
+  .customer-notification .notification-container::before {
+    display: none;
+  }
+}
+
+@media only screen and (min-width:1200px) and (max-width:1399px) {
+  .customer-notification .notification-content h6 {
+    font-size: 14px;
+  }
+}
+
+@media only screen and (min-width:1400px) {
+  .customer-notification .notification-container {
+    width: 400px;
+  }
+}

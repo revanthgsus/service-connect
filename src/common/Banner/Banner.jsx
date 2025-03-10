@@ -6,9 +6,8 @@ const Banner = () => {
   return (
     <>
       <div className='banner-container'>
-        <div className='banner-image-container'>
-          <img src={DashboardBanner} className='img-fluid banner-image' alt='banner-img' />
-        </div>
+        <img src={DashboardBanner} className='img-fluid banner-image' alt='banner-img' />
+
         <div className='banner-content'>
           <h5>Welcome to Service Connect !</h5>
           <p>Your One Stop Service Management <br /> Solution on One Platform</p>

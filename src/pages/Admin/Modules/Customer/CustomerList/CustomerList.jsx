@@ -75,7 +75,7 @@ const CustomerList = () => {
         }
       );
 
-      if (response?.status === 200 || response?.data?.success) {
+      if (response?.status === 200) {
         setCustomers(response?.data?.customerMasterListPage || []);
         setTotalCustomers(response?.data?.totalRecords || 0);
       } else {
@@ -110,7 +110,7 @@ const CustomerList = () => {
         },
       });
 
-      if (response?.status === 200 || response?.data?.success) {
+      if (response?.status === 200) {
         navigate("editcustomer", { state: { customerData: response.data } });
       } else {
         toast.error("Failed to fetch customer data. Please try again.");

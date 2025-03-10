@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { AiOutlineUser } from "react-icons/ai";
 import { TbLogout } from "react-icons/tb";
 import Logout from '../../../../common/Logout/Logout';
+import { Tooltip } from 'react-tooltip';
 
 const CustomerDropdown = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -46,7 +47,11 @@ const CustomerDropdown = () => {
   return (
     <>
       <div className='customer-dropdown'>
-        <IconButton onClick={toggleDropdown} className="profile-icon">
+        <IconButton aria-label="Account"
+          data-tooltip-id="account-tooltip"
+          data-tooltip-content="Account"
+          onClick={toggleDropdown}
+          className="profile-icon">
           <BsPersonCircle />
         </IconButton>
         {isDropdownOpen && (
@@ -70,6 +75,7 @@ const CustomerDropdown = () => {
         )}
       </div>
 
+      <Tooltip id="account-tooltip" className="custom-tooltip" />
       <Logout show={show} handleClose={handleCloseModal} />
     </>
   );

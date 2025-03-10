@@ -2,14 +2,16 @@ import React, { useEffect, useState } from 'react';
 import "./AdvisorDropdown.css";
 import { BsPersonCircle } from "react-icons/bs";
 import IconButton from '@mui/material/IconButton';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AiOutlineUser } from "react-icons/ai";
 import { TbLogout } from "react-icons/tb";
 import Logout from '../../../../common/Logout/Logout';
+import { Tooltip } from 'react-tooltip';
 
 const AdvisorDropdown = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [show, setShow] = useState(false);
+  const navigate = useNavigate();
 
   const setShowModal = () => {
     setShow(true)
@@ -18,7 +20,8 @@ const AdvisorDropdown = () => {
     setShow(false);
   };
 
-  const toggleDropdown = () => {
+  const toggleDropdown = (e) => {
+    e.stopPropagation();
     setIsDropdownOpen(!isDropdownOpen);
   };
 
@@ -35,20 +38,30 @@ const AdvisorDropdown = () => {
     };
   }, []);
 
+  const handleView = (e) => {
+    e.preventDefault();
+    navigate("/advisor/profile");
+    setIsDropdownOpen(false);
+  }
+
   return (
     <>
       <div className='advisor-dropdown'>
-        <IconButton onClick={toggleDropdown} className="profile-icon">
+        <IconButton aria-label="Account"
+          data-tooltip-id="account-tooltip"
+          data-tooltip-content="Account"
+          onClick={toggleDropdown}
+          className="profile-icon">
           <BsPersonCircle />
         </IconButton>
         {isDropdownOpen && (
           <div className="dropdownfile">
             <ul>
-              <li>
-                <Link to="/advisor/profile" onClick={() => setIsDropdownOpen(false)}>
+              <li onClick={handleView}>
+                <div>
                   <AiOutlineUser />
                   <span>View Profile</span>
-                </Link>
+                </div>
               </li>
               <hr className="mt-0 mb-2" />
               <li className="logout-link" onClick={setShowModal}>
@@ -62,6 +75,7 @@ const AdvisorDropdown = () => {
         )}
       </div>
 
+      <Tooltip id="account-tooltip" className="custom-tooltip" />
       <Logout show={show} handleClose={handleCloseModal} />
     </>
   );

@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { ReactComponent as DashboardIcon } from "../../../../assets/images/manager/dashboard.svg";
 import { ReactComponent as ListIcon } from "../../../../assets/images/manager/list-icon.svg";
 
-const ManagerSidebar = ({ isOpen, handleCloseSidebar }) => {
+const ManagerSidebar = ({ isOpen, handleCloseSidebar, sidebarRef }) => {
   const sidebarItems = [
     {
       title: 'Dashboard',
@@ -20,7 +20,7 @@ const ManagerSidebar = ({ isOpen, handleCloseSidebar }) => {
 
   return (
     <div className='manager-sidebar sidebar'>
-      <aside className={`sidebar-section ${isOpen ? "open" : "closed"}`}>
+      <aside className={`sidebar-section ${isOpen ? "open" : "closed"}`} ref={sidebarRef}>
         {sidebarItems.map((item, index) => (
           <ul key={index} className='sidebar-link'>
             <li>
