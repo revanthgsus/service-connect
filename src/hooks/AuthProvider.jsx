@@ -1,36 +1,42 @@
 import React, { useState, useEffect } from 'react';
 import { AuthContext } from '../contexts/AuthContext';
+import TokenModal from './../common/TokenModal/TokenModal';
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [showTokenModal, setShowTokenModal] = useState(false);
 
   useEffect(() => {
-    const token = localStorage.getItem('authToken');
-    const role = localStorage.getItem('userRole');
-    const userId = localStorage.getItem('userId');
+    const token = sessionStorage.getItem('authToken');
+    const role = sessionStorage.getItem('userRole');
+    const userId = sessionStorage.getItem('userId');
+
     if (token && role && userId) {
       setUser({ token, role, userId });
     }
   }, []);
 
   const login = (token, role, userId) => {
-    localStorage.setItem('authToken', token);
-    localStorage.setItem('userRole', role);
-    localStorage.setItem('userId', userId);
+    sessionStorage.setItem('authToken', token);
+    sessionStorage.setItem('userRole', role);
+    sessionStorage.setItem('userId', userId);
     setUser({ token, role, userId });
+    setShowTokenModal(false);
   };
 
   const logout = () => {
-    localStorage.removeItem('authToken');
-    localStorage.removeItem('userRole');
-    localStorage.removeItem('userId');
-    localStorage.removeItem('theme');
+    sessionStorage.clear();
     setUser(null);
   };
 
+  const handleClose = () => {
+    setShowTokenModal(false);
+  }
+
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ user, login, logout, setShowTokenModal }}>
       {children}
+      <TokenModal showTokenModal={showTokenModal} handleClose={handleClose} />
     </AuthContext.Provider>
   );
 };

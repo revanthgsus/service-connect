@@ -97,7 +97,6 @@ const QuoteList = () => {
   );
 
   const handleView = (e) => {
-    setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false)
       navigate("quotesummary");

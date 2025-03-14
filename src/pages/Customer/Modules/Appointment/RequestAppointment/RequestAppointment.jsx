@@ -5,12 +5,13 @@ import { useNavigate } from 'react-router-dom';
 import { IoMdArrowRoundBack } from 'react-icons/io';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
-import { ReactComponent as Locationicon } from "../../../../../assets/images/customer/appointment/location-icon.svg";
+import { GrLocation } from "react-icons/gr";
 import ProviderList from '../ProviderListShow/ProviderList';
 import SelectedProvider from '../SelectedProvider/SelectedProvider';
 import ComplaintDetails from '../ComplaintDetails/ComplaintDetails';
 import PreferenceDetails from '../PreferenceDetails/PreferenceDetails';
 import CancelModal from '../../../../../common/CancelModal/CancelModal';
+import LocationModal from './LocationModal';
 
 const RequestAppointment = () => {
   const navigate = useNavigate();
@@ -18,6 +19,8 @@ const RequestAppointment = () => {
   const [providerShow, setProviderShow] = useState(false);
   const [selectedAdvisor, setSelectedAdvisor] = useState(null);
   const [cancelShow, setCancelShow] = useState(false);
+  const [locationModalShow, setLocationModalShow] = useState(false);
+  const [selectedLocation, setSelectedLocation] = useState('');
 
   const ServiceTypes = [
     'Oil Change',
@@ -28,14 +31,15 @@ const RequestAppointment = () => {
     'Engine Diagnostics',
   ];
 
-  const LocationData = [
-    {
-      label: 'Preferred Location',
-      name: 'location',
-      placeholder: 'Enter preferred location',
-      type: 'text',
-    },
-  ];
+  const handleLocationClick = (e) => {
+    e.preventDefault();
+    setLocationModalShow(true);
+  }
+
+  const handleSelectLocation = (location) => {
+    setSelectedLocation(location);
+    setLocationModalShow(false);
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -138,25 +142,27 @@ const RequestAppointment = () => {
                 </div>
               </Col>
 
-              {LocationData.map((field, index) => (
-                <Col key={index} xxl={4} xl={4} lg={4} md={6} sm={6}>
-                  <div className="input-wrapper">
-                    <div className="form-group location-input">
-                      <label htmlFor={field.name}>{field.label}</label>
+              <Col xxl={4} xl={4} lg={4} md={6} sm={6}>
+                <div className="input-wrapper">
+                  <div className="form-group">
+                    <label htmlFor='location'>Preferred Location</label>
+                    <div onClick={handleLocationClick}>
                       <input
-                        id={field.name}
-                        type={field.type}
-                        name={field.name}
-                        placeholder={field.placeholder}
-                        className="form-control"
+                        id='location'
+                        type='text'
+                        name='location'
+                        placeholder='Enter preferred location'
+                        value={selectedLocation}
+                        className="form-control location-input"
+                        readOnly
                       />
-                      <span className='input-icon'>
-                        <Locationicon />
+                      <span className='location-icon'>
+                        <GrLocation />
                       </span>
                     </div>
                   </div>
-                </Col>
-              ))}
+                </div>
+              </Col>
 
               <Col className='provider-container'>
                 <button type="submit" className="provider-btn" onClick={handleView}>View Provider</button>
@@ -179,6 +185,8 @@ const RequestAppointment = () => {
         )}
       </section>
       <CancelModal cancelShow={cancelShow} handleCancelClose={handleCancelClose} />
+
+      <LocationModal show={locationModalShow} handleClose={() => setLocationModalShow(false)} onselectLocation={handleSelectLocation} />
     </>
   );
 };

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './NotifyDropdown.css';
+import './AdvisorNotify.css';
 import IconButton from '@mui/material/IconButton';
 import { useNavigate } from 'react-router-dom';
 import { Badge } from '@mui/material';
@@ -8,11 +8,13 @@ import { Tooltip } from 'react-tooltip';
 import { Link } from 'react-router-dom';
 import { IoMdTime } from "react-icons/io";
 import { BiCalendarCheck } from "react-icons/bi";
-import { TbFileInvoice } from "react-icons/tb";
+import { MdPayment } from "react-icons/md";
 import { PiChatTeardropText } from "react-icons/pi";
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import { IoCheckmarkDoneOutline } from "react-icons/io5";
+import { ReactComponent as NoAppImage } from '../../../../assets/images/comman/no-appointment.svg'
 
-const NotifyDropdown = () => {
+const AdvisorNotify = () => {
   const [isNotifyOpen, setIsNotifyOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -44,15 +46,18 @@ const NotifyDropdown = () => {
     },
     {
       id: 4,
-      type: 'invoice',
-      title: 'Invoice',
-      message: 'New invoice are highlight in the invoice page view and accept',
+      type: 'payment',
+      title: 'Payment',
+      message: 'New payment are highlight in the transaction page view and accept',
       time: '2 days ago',
-      icon: <TbFileInvoice />
+      icon: <MdPayment />
     },
-
   ]
-  const handleNavigate = () => {
+
+  const [notifications, setNotifications] = useState(notificationsData);
+
+  const handleNavigate = (e) => {
+    e.stopPropagation();
     setIsNotifyOpen(false);
     navigate('notifications');
   }
@@ -61,6 +66,19 @@ const NotifyDropdown = () => {
   const toggleNotification = (e) => {
     e.stopPropagation();
     setIsNotifyOpen((prev) => !prev);
+  };
+
+  const handleMarkAsRead = (id, e) => {
+    e.stopPropagation();
+
+    // Add exit class for smooth removal
+    const element = document.getElementById(`notification-${id}`);
+    if (element) {
+      element.classList.add('fade-out');
+      setTimeout(() => {
+        setNotifications((prev) => prev.filter((notification) => notification.id !== id));
+      }, 300);
+    }
   };
 
   useEffect(() => {
@@ -77,46 +95,61 @@ const NotifyDropdown = () => {
 
   return (
     <>
-      <div className='customer-notification'>
+      <div className='advisor-notification'>
         <Tooltip id="notification-tooltip" className="custom-tooltip" />
         <IconButton
           aria-label="notification"
           data-tooltip-id="notification-tooltip"
           data-tooltip-content="Notifications"
           onClick={toggleNotification}>
-          <Badge badgeContent={7} color="error" onClick={toggleNotification}>
+          <Badge badgeContent={7} color="error">
             <IoNotificationsOutline className="notification" />
           </Badge>
         </IconButton>
 
-        {isNotifyOpen && (
-          <div className='notification-container'>
-            <div className='notify-heading'>
-              <h6>Notifications</h6>
-              <Link to='notifications' onClick={() => setIsNotifyOpen(false)}>View All</Link>
-            </div>
-            <hr className='break-line' />
+        <div className={`notification-container ${isNotifyOpen ? 'show' : ''}`}>
+          <div className='notify-heading'>
+            <h6>Notifications</h6>
+            <Link to='notifications' onClick={() => setIsNotifyOpen(false)}>View All</Link>
+          </div>
+          <hr className='break-line' />
 
-            {/* appointment notification */}
+          {/* appointment notification */}
+          {notifications.length > 0 ? (
             <div className='notifications-list'>
-              {notificationsData.map((notification, index) => (
-                <div key={index} className="notification-item" onClick={handleNavigate}>
+              {notifications.map((notification) => (
+                <div id={`notification-${notification.id}`} key={notification.id} className="notification-item" onClick={handleNavigate}>
                   <div className={`notification-icon ${notification.type}`}>{notification.icon}</div>
                   <div className="notification-content">
                     <h6>{notification.title}</h6>
                     <p>{notification.message}</p>
                   </div>
                   <div className="notification-time">
-                    <IoMdTime /> {notification.time}
+                    <span> <IoMdTime /> {notification.time}</span>
+
+                    <span className='mark-icon'
+                      onClick={(e) => handleMarkAsRead(notification.id, e)}
+                      data-tooltip-id={`mark-read-tooltip-${notification.id}`}
+                      data-tooltip-content="Mark as read"
+                      aria-label="Mark as read">
+                      <IoCheckmarkDoneOutline />
+                    </span>
+                    <Tooltip id={`mark-read-tooltip-${notification.id}`} className="custom-tooltip" />
+
                   </div>
                 </div>
               ))}
             </div>
-          </div>
-        )}
+          ) : (
+            <div className='no-appointment'>
+              <NoAppImage />
+              <p>No notifications found</p>
+            </div>
+          )}
+        </div>
       </div>
     </>
   )
 }
 
-export default NotifyDropdown;
+export default AdvisorNotify;

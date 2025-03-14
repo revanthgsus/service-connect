@@ -5,14 +5,13 @@ import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import CustomLogo from '../../../../common/MainLogo/CustomLogo';
 import MobileLogo from '../../../../common/MainLogo/MobileLogo';
-import Badge from '@mui/material/Badge';
 import IconButton from '@mui/material/IconButton';
 import { IoMoonOutline, IoSunny } from "react-icons/io5";
 import ThemeContext from '../../../../contexts/ThemeContext';
 import AdvisorDropdown from './../AdvisorDropdown/AdvisorDropdown';
-import { MdMailOutline } from "react-icons/md";
-import AdvisorNotification from '../AdvisorNotification/AdvisorNotification';
 import { Tooltip } from 'react-tooltip';
+import AdvisorNotify from '../AdvisorNotify/AdvisorNotify';
+import MessageNotify from './../MessageNotify/MessageNotify';
 
 const AdvisorNavbar = ({ handleDrawerToggle, isOpen, menuBtnRef }) => {
   const { theme, toggleTheme } = useContext(ThemeContext);
@@ -35,13 +34,8 @@ const AdvisorNavbar = ({ handleDrawerToggle, isOpen, menuBtnRef }) => {
             <Menubtn handleDrawerToggle={handleDrawerToggle} isOpen={isOpen} menuBtnRef={menuBtnRef} />
           </div>
           <div className="navbar-icons">
-            <AdvisorNotification />
-
-            <IconButton aria-label="messages" data-tooltip-id="messages-tooltip" data-tooltip-content="Messages" >
-              <Badge badgeContent={1} color="error">
-                <MdMailOutline className="messages" />
-              </Badge>
-            </IconButton>
+            <AdvisorNotify />
+            <MessageNotify />
 
             <IconButton aria-label="Toggle Theme" data-tooltip-id="theme-tooltip" data-tooltip-content="Switch Theme" onClick={toggleTheme}>
               {theme === 'dark' ? (

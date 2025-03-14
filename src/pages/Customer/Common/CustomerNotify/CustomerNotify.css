@@ -8,6 +8,17 @@
   box-shadow: var(--shadow-color);
   z-index: 99;
   width: 370px;
+
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: 0.2s ease-in-out all;
+  visibility: hidden;
+}
+
+.customer-notification .notification-container.show {
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
 }
 
 .customer-notification .notify-heading {
@@ -25,7 +36,7 @@
 .customer-notification .notify-heading a {
   color: var(--hamburger-color);
   text-decoration: none;
-  font-size: 12px;
+  font-size: 13px;
   transition: .2s ease-out all;
   padding: 5px 10px;
 }
@@ -60,6 +71,30 @@
 .customer-notification .notification-time {
   color: var(--sub-text-color);
   font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  gap: 15px;
+}
+
+.customer-notification .notification-time .mark-icon {
+  color: var(--text-color);
+  padding: 10px 10px;
+  opacity: 0;
+  display: inline-flex;
+  transition: all 0.2s ease-in-out;
+  border-radius: 3px;
+  transform: scale(0.5);
+}
+
+.customer-notification .notification-item:hover .mark-icon {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.customer-notification .mark-icon:hover {
+  background-color: #d1d1d142;
+  transition: .1s ease-in-out all;
 }
 
 .customer-notification .notification-icon {
@@ -93,11 +128,16 @@
 .customer-notification .notification-item {
   padding: 13px 15px;
   cursor: pointer;
-  transition: .3s ease-out all;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   border-bottom: 1px solid #9a9a9a1c;
+  transition: .3s ease-in-out all;
+}
+
+.customer-notification .notification-item.fade-out {
+  opacity: 0;
+  transform: scale(0.8);
 }
 
 .customer-notification .notification-item:last-child {
@@ -105,7 +145,7 @@
 }
 
 .customer-notification .notification-item:hover {
-  background: #9c9c9c14;
+  background: #007c850b;
   transition: .3s linear all;
 }
 
@@ -151,6 +191,11 @@
 
 .customer-notification .notifications-list:hover::-webkit-scrollbar-thumb {
   display: block;
+}
+
+.customer-notification .no-appointment {
+  text-align: center;
+  margin-bottom: 40px;
 }
 
 @media only screen and (max-width:575px) {

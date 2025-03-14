@@ -69,7 +69,7 @@
 }
 
 .admin-list .list-alignment::-webkit-scrollbar-track {
-  background: #ffffff;
+  background: transparent;
   border-radius: 10px;
 }
 

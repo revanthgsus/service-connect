@@ -10,8 +10,10 @@ import { useNavigate } from 'react-router-dom';
 import API_BASE_URL from '../../../../../services/AuthService';
 import PreLoader from '../../../../../common/PreLoader/PreLoader';
 import { toast } from 'react-toastify';
+import { useAuth } from '../../../../../contexts/AuthContext';
 
 const Kpi = () => {
+  const { setShowTokenModal } = useAuth();
   const [kpiCards, setKpiCards] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
@@ -24,10 +26,9 @@ const Kpi = () => {
   ], []);
 
   useEffect(() => {
-    const token = localStorage.getItem('authToken');
+    const token = sessionStorage.getItem('authToken');
     if (!token) {
-      alert('Session expired. Please sign in to continue.');
-      navigate('/');
+      setShowTokenModal(true);
       return;
     }
 
@@ -55,7 +56,7 @@ const Kpi = () => {
     };
 
     fetchKpiData();
-  }, [navigate, kpiData]);
+  }, [navigate, kpiData, setShowTokenModal]);
 
   return (
     <>

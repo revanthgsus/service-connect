@@ -7,6 +7,17 @@
   text-align: start;
   box-shadow: var(--shadow-color);
   z-index: 99;
+
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: 0.2s ease-in-out all;
+  visibility: hidden;
+}
+
+.customer-dropdown .dropdownfile.show {
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
 }
 
 .customer-dropdown .dropdownfile ul {

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import "./CustomerNavbar.css";
 import Menubtn from './../../../../common/Menubtn/Menubtn';
 import Container from 'react-bootstrap/Container';
@@ -10,11 +10,21 @@ import ThemeContext from '../../../../contexts/ThemeContext';
 import CustomLogo from './../../../../common/MainLogo/CustomLogo';
 import CustomerDropdown from './../CustomerDropdown/CustomerDropdown';
 import { Tooltip } from 'react-tooltip';
-import NotifyDropdown from '../NotifyDropdown/NotifyDropdown';
 import MessageDropdown from './../MessageDropdown/MessageDropdown';
+import CustomerNotify from '../CustomerNotify/CustomerNotify';
 
 const CustomerNavbar = ({ handleDrawerToggle, isOpen, menuBtnRef }) => {
   const { theme, toggleTheme } = useContext(ThemeContext);
+  const [isNotifyOpen, setIsNotifyOpen] = useState(false);
+  const [isMessageOpen, setIsMessageOpen] = useState(false);
+
+  const handleNotifyToggle = () => {
+    setIsNotifyOpen((prev) => !prev);
+  };
+
+  const handleMessageToggle = () => {
+    setIsMessageOpen((prev) => !prev);
+  };
 
   return (
     <>
@@ -34,8 +44,8 @@ const CustomerNavbar = ({ handleDrawerToggle, isOpen, menuBtnRef }) => {
           </div>
 
           <div className="navbar-icons">
-            <NotifyDropdown />
-            <MessageDropdown />
+            <CustomerNotify isOpen={isNotifyOpen} toggleNotify={handleNotifyToggle} />
+            <MessageDropdown isOpen={isMessageOpen} toggleMessage={handleMessageToggle} />
 
             <IconButton aria-label="Toggle Theme" data-tooltip-id="theme-tooltip" data-tooltip-content="Switch Theme" onClick={toggleTheme}>
               {theme === 'dark' ? (

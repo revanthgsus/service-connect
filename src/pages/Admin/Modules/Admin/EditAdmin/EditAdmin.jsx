@@ -15,10 +15,12 @@ import { AdminValidationSchema } from '../../../../../utils/FormValidation';
 import PreLoader from '../../../../../common/PreLoader/PreLoader';
 import CancelModal from '../../../../../common/CancelModal/CancelModal';
 import { toast, ToastContainer } from 'react-toastify';
+import { useAuth } from '../../../../../contexts/AuthContext';
 
 const EditAdmin = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const { setShowTokenModal } = useAuth();
   const { adminData } = location.state || {};
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -37,6 +39,7 @@ const EditAdmin = () => {
     role: "Admin",
     location: adminData?.location || '',
     joiningDate: adminData?.joiningDate ? dayjs(adminData.joiningDate, "DD/MM/YYYY") : null,
+    password: '',
     confirmPassword: '',
     status: adminData?.status ? "Active" : "In Active",
   }
@@ -111,12 +114,9 @@ const EditAdmin = () => {
   }, [formErrors, formTouched]);
 
   const handleSubmit = useCallback(async (values, { setSubmitting }) => {
-    const token = localStorage.getItem("authToken");
+    const token = sessionStorage.getItem("authToken");
     if (!token) {
-      toast.error("Session expired. Please sign in again.", {
-        autoClose: 2000,
-      });
-      setTimeout(() => navigate("/"), 2000);
+      setShowTokenModal(true);
       return;
     }
 
@@ -149,7 +149,7 @@ const EditAdmin = () => {
       setLoading(false);
       setSubmitting(false);
     }
-  }, [navigate])
+  }, [navigate, setShowTokenModal])
 
   const handleCancel = (e) => {
     e.preventDefault();

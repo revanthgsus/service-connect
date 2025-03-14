@@ -54,25 +54,24 @@ const CustomerDropdown = () => {
           className="profile-icon">
           <BsPersonCircle />
         </IconButton>
-        {isDropdownOpen && (
-          <div className="dropdownfile">
-            <ul>
-              <li onClick={handleView}>
-                <div>
-                  <AiOutlineUser />
-                  <span>View Profile</span>
-                </div>
-              </li>
-              <hr className="mt-0 mb-2" />
-              <li className="logout-link" onClick={setShowModal}>
-                <Link to='#'>
-                  <TbLogout />
-                  <span>Logout</span>
-                </Link>
-              </li>
-            </ul>
-          </div>
-        )}
+
+        <div className={`dropdownfile ${isDropdownOpen ? 'show' : ''}`}>
+          <ul>
+            <li onClick={handleView}>
+              <div>
+                <AiOutlineUser />
+                <span>View Profile</span>
+              </div>
+            </li>
+            <hr className="mt-0 mb-2" />
+            <li className="logout-link" onClick={setShowModal}>
+              <Link to='#'>
+                <TbLogout />
+                <span>Logout</span>
+              </Link>
+            </li>
+          </ul>
+        </div>
       </div>
 
       <Tooltip id="account-tooltip" className="custom-tooltip" />

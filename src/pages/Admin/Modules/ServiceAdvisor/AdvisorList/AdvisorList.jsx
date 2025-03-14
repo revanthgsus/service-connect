@@ -15,9 +15,11 @@ import PreLoader from './../../../../../common/PreLoader/PreLoader';
 import axios from 'axios';
 import API_BASE_URL from '../../../../../services/AuthService';
 import { toast, ToastContainer } from 'react-toastify';
+import { useAuth } from '../../../../../contexts/AuthContext';
 
 const AdvisorList = () => {
   const navigate = useNavigate();
+  const { setShowTokenModal } = useAuth();
   const [advisors, setAdvisors] = useState([]);
   const [searchInput, setSearchInput] = useState('');
   const [status, setStatus] = useState('');
@@ -49,12 +51,9 @@ const AdvisorList = () => {
   }, [searchInput]);
 
   const fetchAdvisors = useCallback(async () => {
-    const token = localStorage.getItem("authToken");
+    const token = sessionStorage.getItem("authToken");
     if (!token) {
-      toast.error("Session expired. Please sign in again.", {
-        autoClose: 2000,
-      });
-      setTimeout(() => navigate("/"), 2000);
+      setShowTokenModal(true);
       return;
     }
 
@@ -86,7 +85,7 @@ const AdvisorList = () => {
     } finally {
       setIsLoading(false);
     }
-  }, [currentPage, status, debouncedSearch, navigate]);
+  }, [currentPage, status, debouncedSearch, setShowTokenModal]);
 
 
   useEffect(() => {
@@ -96,12 +95,9 @@ const AdvisorList = () => {
   const handleEdit = async (advisorId) => {
     document.querySelector(".layout-main")?.scrollTo({ top: 0, behavior: "smooth" });
 
-    const token = localStorage.getItem("authToken");
+    const token = sessionStorage.getItem("authToken");
     if (!token) {
-      toast.error("Session expired. Please sign in again.", {
-        autoClose: 2000,
-      });
-      setTimeout(() => navigate("/"), 2000);
+      setShowTokenModal(true);
       return;
     }
 

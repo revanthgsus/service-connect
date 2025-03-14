@@ -8,7 +8,7 @@ import { ReactComponent as ManagerIcon } from "../../../../assets/images/admin/s
 import { ReactComponent as CustomerIcon } from "../../../../assets/images/admin/customer.svg";
 
 const AdminSidebar = ({ isOpen, handleCloseSidebar, sidebarRef }) => {
-  const userRole = localStorage.getItem('userRole');
+  const userRole = sessionStorage.getItem('userRole');
 
   let sidebarItems = [
     {

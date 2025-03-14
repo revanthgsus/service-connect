@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './MessageDropdown.css';
+import './MessageNotify.css';
 import IconButton from '@mui/material/IconButton';
 import { useNavigate } from 'react-router-dom';
 import { Badge } from '@mui/material';
@@ -9,7 +9,7 @@ import { BsPersonCircle } from "react-icons/bs";
 import { ReactComponent as NoMessageImage } from '../../../../assets/images/comman/no-message.svg';
 import { MdMailOutline } from "react-icons/md";
 
-const NotifyDropdown = () => {
+const MessageNotify = () => {
   const [isMessageOpen, setIsMessageOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -67,7 +67,7 @@ const NotifyDropdown = () => {
 
   return (
     <>
-      <div className='customer-messages'>
+      <div className='advisor-messages'>
         <Tooltip id="messages-tooltip" className="custom-tooltip" />
         <IconButton
           aria-label="messages"
@@ -114,4 +114,4 @@ const NotifyDropdown = () => {
   )
 }
 
-export default NotifyDropdown;
+export default MessageNotify;

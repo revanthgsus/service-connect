@@ -4,10 +4,10 @@ import { ReactComponent as Deleteicon } from "../../assets/images/comman/delete-
 import { Modal } from 'react-bootstrap';
 import axios from 'axios';
 import API_BASE_URL from '../../services/AuthService';
-import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../contexts/AuthContext';
 
 const DeleteModal = ({ show, handleClose, entityId, entityType, deleteEndpoint, onDeleteSuccess }) => {
-  const navigate = useNavigate();
+  const { setShowTokenModal } = useAuth();
   const [isDeleting, setIsDeleting] = useState(false);
   const [error, setError] = useState(null);
 
@@ -16,18 +16,16 @@ const DeleteModal = ({ show, handleClose, entityId, entityType, deleteEndpoint, 
     setIsDeleting(true);
     setError(null);
 
-    const token = localStorage.getItem('authToken');
+    const token = sessionStorage.getItem('authToken');
     if (!token) {
-      alert("Session expired. Please sign in to continue.");
-      navigate('/')
+      setShowTokenModal(true);
       return;
     }
 
     try {
       const response = await axios.delete(`${API_BASE_URL}${deleteEndpoint}/${entityId}`, {
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
         },
       });
 

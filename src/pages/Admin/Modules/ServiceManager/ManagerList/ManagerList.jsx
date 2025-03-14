@@ -15,9 +15,11 @@ import PreLoader from './../../../../../common/PreLoader/PreLoader';
 import axios from 'axios';
 import API_BASE_URL from '../../../../../services/AuthService';
 import { toast, ToastContainer } from 'react-toastify';
+import { useAuth } from '../../../../../contexts/AuthContext';
 
 const ManagerList = () => {
   const navigate = useNavigate();
+  const { setShowTokenModal } = useAuth();
   const [managers, setManagers] = useState([]);
   const [searchInput, setSearchInput] = useState('');
   const [status, setStatus] = useState('');
@@ -49,13 +51,9 @@ const ManagerList = () => {
   }, [searchInput]);
 
   const fetchManagers = useCallback(async () => {
-    const token = localStorage.getItem("authToken");
-
+    const token = sessionStorage.getItem("authToken");
     if (!token) {
-      toast.error("Session expired. Please sign in again.", {
-        autoClose: 2000,
-      });
-      setTimeout(() => navigate("/"), 2000);
+      setShowTokenModal(true);
       return;
     }
 
@@ -87,7 +85,7 @@ const ManagerList = () => {
     } finally {
       setIsLoading(false);
     }
-  }, [currentPage, status, debouncedSearch, navigate]);
+  }, [currentPage, status, debouncedSearch, setShowTokenModal]);
 
   useEffect(() => {
     fetchManagers();
@@ -96,13 +94,9 @@ const ManagerList = () => {
   const handleEdit = async (managerId) => {
     document.querySelector(".layout-main")?.scrollTo({ top: 0, behavior: "smooth" });
 
-    const token = localStorage.getItem("authToken");
-
+    const token = sessionStorage.getItem("authToken");
     if (!token) {
-      toast.error("Session expired. Please sign in again.", {
-        autoClose: 2000,
-      });
-      setTimeout(() => navigate("/"), 2000);
+      setShowTokenModal(true);
       return;
     }
 

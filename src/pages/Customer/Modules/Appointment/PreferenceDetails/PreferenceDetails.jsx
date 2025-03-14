@@ -41,7 +41,7 @@ const PreferenceDetails = ({ selectedAdvisor }) => {
       type: 'text',
     },
   ];
-  const UrgencyOptions = ['Standard', 'Urgent', 'Scheduled'];
+  const PriorityOptions = ['Standard', 'Urgent', 'Scheduled'];
 
   return (
     <>
@@ -162,9 +162,9 @@ const PreferenceDetails = ({ selectedAdvisor }) => {
             <Col xxl={8} xl={8} lg={8} md={8} sm={7}>
               <div className="urgency-options input-wrapper">
                 <div className='form-group'>
-                  <label>Urgency Level</label>
+                  <label>Priority Level</label>
                   <div className="radio-group">
-                    {UrgencyOptions.map((option, index) => (
+                    {PriorityOptions.map((option, index) => (
                       <div key={index} className="form-check">
                         <input
                           className="form-check-input"

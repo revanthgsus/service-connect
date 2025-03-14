@@ -15,9 +15,11 @@ import { CustomerValidationSchema } from '../../../../../utils/FormValidation';
 import PreLoader from '../../../../../common/PreLoader/PreLoader';
 import CancelModal from '../../../../../common/CancelModal/CancelModal';
 import { toast, ToastContainer } from 'react-toastify';
+import { useAuth } from '../../../../../contexts/AuthContext';
 
 const CreateCustomer = () => {
   const navigate = useNavigate();
+  const { setShowTokenModal } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [cancelShow, setCancelShow] = useState(false);
@@ -132,12 +134,9 @@ const CreateCustomer = () => {
   }, [formErrors, formTouched]);
 
   const handleSubmit = useCallback(async (values, { setSubmitting }) => {
-    const token = localStorage.getItem('authToken');
+    const token = sessionStorage.getItem('authToken');
     if (!token) {
-      toast.error("Session expired. Please sign in again.", {
-        autoClose: 2000,
-      });
-      setTimeout(() => navigate("/"), 2000);
+      setShowTokenModal(true);
       return;
     }
 
@@ -173,7 +172,7 @@ const CreateCustomer = () => {
       setLoading(false);
       setSubmitting(false);
     }
-  }, [navigate])
+  }, [navigate, setShowTokenModal])
 
   const handleCancel = (e) => {
     e.preventDefault();

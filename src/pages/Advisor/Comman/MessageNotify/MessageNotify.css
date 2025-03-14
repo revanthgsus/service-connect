@@ -1,4 +1,4 @@
-.customer-messages .messages-container {
+.advisor-messages .messages-container {
   position: absolute;
   top: 100%;
   right: 100px;
@@ -15,43 +15,43 @@
   visibility: hidden;
 }
 
-.customer-messages .messages-container.show {
+.advisor-messages .messages-container.show {
   opacity: 1;
   transform: translateY(0);
   visibility: visible;
 }
 
-.customer-messages .messages-heading {
+.advisor-messages .messages-heading {
   padding: 15px 15px 10px 15px;
 }
 
-.customer-messages .messages-heading h6 {
+.advisor-messages .messages-heading h6 {
   margin-bottom: 0px;
   color: var(--sub-text-color);
 }
 
-.customer-messages .break-line {
+.advisor-messages .break-line {
   color: #919191c2;
   margin: 0px 0px;
 }
 
-.customer-messages .messages-content h6 {
+.advisor-messages .messages-content h6 {
   color: var(--text-color);
   margin-bottom: 5px;
 }
 
-.customer-messages .messages-content p {
+.advisor-messages .messages-content p {
   color: var(--sub-text-color);
   margin-bottom: 0px;
   font-size: 12px;
   font-weight: 400;
 }
 
-.customer-messages .messages-content {
+.advisor-messages .messages-content {
   width: 60%;
 }
 
-.customer-messages .messages-time {
+.advisor-messages .messages-time {
   color: var(--sub-text-color);
   font-size: 12px;
   display: flex;
@@ -60,12 +60,12 @@
   gap: 15px;
 }
 
-.customer-messages .messages-icon svg {
+.advisor-messages .messages-icon svg {
   font-size: 22px;
   color: var(--sub-text-color);
 }
 
-.customer-messages .messages-item {
+.advisor-messages .messages-item {
   padding: 13px 20px;
   cursor: pointer;
   display: flex;
@@ -75,16 +75,16 @@
   transition: .3s ease-in-out all;
 }
 
-.customer-messages .messages-item:last-child {
+.advisor-messages .messages-item:last-child {
   border-bottom: none;
 }
 
-.customer-messages .messages-item:hover {
+.advisor-messages .messages-item:hover {
   background: #007c850b;
   transition: .3s linear all;
 }
 
-.customer-messages .messages-container::before {
+.advisor-messages .messages-container::before {
   content: "";
   position: absolute;
   top: -10px;
@@ -97,61 +97,61 @@
   border-top: 1px solid var(--border-color);
 }
 
-.customer-messages .messages-list {
+.advisor-messages .messages-list {
   height: 240px;
   overflow: auto;
 }
 
 /* scrollbar in messages */
 
-.customer-messages .messages-list::-webkit-scrollbar {
+.advisor-messages .messages-list::-webkit-scrollbar {
   background: transparent;
   width: 5px;
 }
 
-.customer-messages .messages-list::-webkit-scrollbar-track {
+.advisor-messages .messages-list::-webkit-scrollbar-track {
   border-radius: 10px;
 }
 
-.customer-messages .messages-list::-webkit-scrollbar-thumb {
+.advisor-messages .messages-list::-webkit-scrollbar-thumb {
   background: #b7b7b77b;
   border-radius: 10px;
   cursor: pointer;
   display: none;
 }
 
-.customer-messages .messages-list::-webkit-scrollbar-thumb:hover {
+.advisor-messages .messages-list::-webkit-scrollbar-thumb:hover {
   background: #b7b7b7ca;
 }
 
-.customer-messages .messages-list:hover::-webkit-scrollbar-thumb {
+.advisor-messages .messages-list:hover::-webkit-scrollbar-thumb {
   display: block;
 }
 
-.customer-messages .no-appointment {
+.advisor-messages .no-appointment {
   text-align: center;
   margin-bottom: 40px;
 }
 
 @media only screen and (max-width:575px) {
-  .customer-messages .messages-container {
+  .advisor-messages .messages-container {
     right: 10px;
     width: 95%;
   }
 
-  .customer-messages .messages-container::before {
+  .advisor-messages .messages-container::before {
     display: none;
   }
 }
 
 @media only screen and (min-width:1200px) and (max-width:1399px) {
-  .customer-messages .messages-content h6 {
+  .advisor-messages .messages-content h6 {
     font-size: 14px;
   }
 }
 
 @media only screen and (min-width:1400px) {
-  .customer-messages .messages-container {
+  .advisor-messages .messages-container {
     width: 400px;
   }
 }

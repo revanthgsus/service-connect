@@ -15,9 +15,11 @@ import PreLoader from './../../../../../common/PreLoader/PreLoader';
 import axios from 'axios';
 import API_BASE_URL from '../../../../../services/AuthService';
 import { toast, ToastContainer } from 'react-toastify';
+import { useAuth } from '../../../../../contexts/AuthContext';
 
 const CustomerList = () => {
   const navigate = useNavigate();
+  const { setShowTokenModal } = useAuth();
   const [customers, setCustomers] = useState([]);
   const [searchInput, setSearchInput] = useState('');
   const [status, setStatus] = useState('');
@@ -49,12 +51,9 @@ const CustomerList = () => {
   }, [searchInput]);
 
   const fetchCustomers = useCallback(async () => {
-    const token = localStorage.getItem("authToken");
+    const token = sessionStorage.getItem("authToken");
     if (!token) {
-      toast.error("Session expired. Please sign in again.", {
-        autoClose: 2000,
-      });
-      setTimeout(() => navigate("/"), 2000);
+      setShowTokenModal(true);
       return;
     }
 
@@ -86,7 +85,7 @@ const CustomerList = () => {
     } finally {
       setIsLoading(false);
     }
-  }, [currentPage, status, debouncedSearch, navigate]);
+  }, [currentPage, status, debouncedSearch, setShowTokenModal]);
 
   useEffect(() => {
     fetchCustomers();
@@ -95,14 +94,12 @@ const CustomerList = () => {
   const handleEdit = async (customerId) => {
     document.querySelector(".layout-main")?.scrollTo({ top: 0, behavior: "smooth" });
 
-    const token = localStorage.getItem("authToken");
+    const token = sessionStorage.getItem("authToken");
     if (!token) {
-      toast.error("Session expired. Please sign in again.", {
-        autoClose: 2000,
-      });
-      setTimeout(() => navigate("/"), 2000);
+      setShowTokenModal(true);
       return;
     }
+
     try {
       const response = await axios.get(`${API_BASE_URL}/customerMaster/viewCustomerById/${customerId}`, {
         headers: {

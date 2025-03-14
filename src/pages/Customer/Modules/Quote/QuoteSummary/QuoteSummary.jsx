@@ -10,7 +10,6 @@ import ChatBox from '../../../../../common/ChatBox/ChatBox';
 const QuotesSummary = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
 
   const QuotesHeading = [
     { title: "S.No" },
@@ -127,7 +126,7 @@ const QuotesSummary = () => {
             <button type='submit' className='accept-button' onClick={handleSubmit}>Accept</button>
           </div>
 
-          <ChatBox isOpen={isOpen} setIsOpen={setIsOpen} />
+          <ChatBox />
         </section >
       )}
     </>

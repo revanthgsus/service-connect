@@ -10,7 +10,7 @@ const useCustomerProfile = (userId, setCustomer) => {
   const [error, setError] = useState(null);
   const hasFetched = useRef(false);
 
-  const token = localStorage.getItem("authToken");
+  const token = sessionStorage.getItem("authToken");
 
   const handleSessionExpiration = useCallback(() => {
     toast.error('Session expired. Please sign in again.', { autoClose: 2000 });

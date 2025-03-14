@@ -1,0 +1,156 @@
+.location-popup .modal-dialog {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.location-popup .modal-header {
+  padding: 30px 20px 20px 30px;
+}
+
+.location-popup .modal-body {
+  padding: 0px 30px 10px 30px;
+}
+
+.location-popup .modal-footer {
+  display: flex;
+  justify-content: center;
+  padding: 20px 30px 30px 30px;
+}
+
+.location-popup .modal-header .btn-close {
+  font-size: 12px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.confirm-action-btn .confirm-btn {
+  padding: 7px 50px;
+  border-radius: 30px;
+  border: 1px solid transparent;
+  background: #007D85;
+  color: white;
+  width: 100%;
+  outline: none;
+}
+
+.location-popup .confirm-btn:hover {
+  background: #007281;
+}
+
+@keyframes zoominpopup {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.location-popup .modal-dialog {
+  animation: zoominpopup 0.3s ease-out;
+}
+
+/* search design */
+.location-popup .search-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.location-popup .search-field {
+  position: relative;
+  width: 100%;
+}
+
+.location-popup .search-input {
+  border: 1px solid #8080808f;
+  padding: 8px 20px 8px 32px;
+  border-radius: 20px;
+  outline: 1px solid transparent;
+  color: #2b2b2b;
+  width: 100%;
+  background-color: #fbfbfb;
+}
+
+.location-popup .search-field svg {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #606060;
+}
+
+.location-popup .find-icon {
+  background-color: #006ce0;
+  padding: 12px;
+  border-radius: 30px;
+  display: inline-flex;
+  color: #ffffff;
+  cursor: pointer;
+  outline: 1px solid transparent;
+}
+
+.location-popup .find-icon:hover {
+  background-color: #0062ca;
+  transition: .2s ease-in-out all;
+}
+
+@media only screen and (Max-width:575px) {
+  .location-popup .modal-footer {
+    padding: 0px 20px 30px 20px;
+  }
+
+  .location-popup .modal-header h5 {
+    font-size: 15px;
+  }
+}
+
+@media only screen and (min-width:576px) and (max-width:767px) {
+  .location-popup .modal-dialog {
+    width: 450px;
+  }
+
+  .location-popup .modal-header h5 {
+    font-size: 15px;
+  }
+}
+
+@media only screen and (min-width:768px) and (max-width:1119px) {
+  .location-popup .modal-dialog {
+    width: 500px;
+  }
+
+  .location-popup .modal-header h5 {
+    font-size: 16px;
+  }
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1399px) {
+  .location-popup .modal-dialog {
+    width: 500px;
+    max-width: 100%;
+  }
+
+  .location-popup .modal-header h5 {
+    font-size: 16px;
+  }
+
+  .location-popup.modal-header {
+    padding: 30px 30px 10px 30px;
+  }
+
+  .location-popup .modal-footer {
+    padding: 20px 30px 30px 30px;
+  }
+
+  .location-popup .search-input {
+    font-size: 14px;
+  }
+}

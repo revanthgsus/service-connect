@@ -10,7 +10,6 @@
 }
 
 .schedule-appointment .preference-heading {
-  font-family: 'Be Vietnam Pro', sans-serif;
   color: #ffffff;
   background: var(--main-btn-color);
   margin-bottom: 0px;
@@ -33,7 +32,6 @@
 .schedule-appointment .header h5 {
   margin-bottom: 0px;
   color: var(--text-color);
-  font-family: 'Be Vietnam Pro', sans-serif;
 }
 
 .schedule-appointment .add-fields {
@@ -44,7 +42,7 @@
   border: unset;
   outline: unset;
   padding: 0px !important;
-  font-family: 'Be Vietnam Pro', sans-serif;
+  font-family: var(--font-family);
   letter-spacing: normal;
 }
 
@@ -59,7 +57,6 @@
   width: 100%;
   border: 1px solid #b1b1b1bd;
   border-radius: 5px;
-  font-family: 'Be Vietnam Pro', sans-serif;
   background-color: var(--navbar-color);
   color: var(--text-color);
   padding: 7px 10px;
@@ -106,13 +103,12 @@ input[type="number"]::-webkit-outer-spin-button {
   padding: 8px 25px;
   border-radius: 30px;
   border: 1px solid transparent;
-  font-family: 'Be Vietnam Pro', sans-serif;
   background: var(--main-btn-color);
   color: #ffffff;
   box-shadow: var(--shadow-color);
   font-weight: 500;
   font-size: 14px;
-  float: inline-end;
+  float: right;
   font-weight: 500;
   position: relative;
   overflow: hidden;
@@ -146,7 +142,6 @@ input[type="number"]::-webkit-outer-spin-button {
   padding: 8px 30px;
   border-radius: 30px;
   border: 1px solid transparent;
-  font-family: 'Be Vietnam Pro', sans-serif;
   background: var(--main-btn-color);
   color: #ffffff;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
@@ -156,8 +151,6 @@ input[type="number"]::-webkit-outer-spin-button {
 .schedule-appointment .cancel-button {
   padding: 8px 30px;
   border-radius: 30px;
-  border: 1px solid #ff9c9c;
-  font-family: 'Be Vietnam Pro', sans-serif;
   border: 1px solid transparent;
   background-color: #EEEEEE;
   color: #131313;
@@ -177,9 +170,20 @@ input[type="number"]::-webkit-outer-spin-button {
   margin-bottom: 15px;
 }
 
-.schedule-appointment .location-input .input-icon {
+.schedule-appointment .location-icon {
   position: absolute;
-  top: 75%;
+  top: 70%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.schedule-appointment .location-icon svg {
+  color: var(--text-color);
+}
+
+.schedule-appointment .location-input {
+  cursor: pointer;
 }
 
 @media only screen and (max-width:575px) {
