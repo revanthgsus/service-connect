@@ -1,16 +1,7 @@
 .activity-heading {
-  font-family: 'Be Vietnam Pro', sans-serif;
   color: var(--text-color);
   margin-bottom: 15px;
   line-height: 38px;
-}
-
-.activity-list .list-alignment {
-  overflow-x: auto;
-}
-
-.activity-list .list-alignment::-webkit-scrollbar {
-  display: none;
 }
 
 .activity-list .activity-table {
@@ -22,20 +13,47 @@
   color: #ffffff;
 }
 
+.activity-list .list-alignment {
+  overflow-x: auto;
+}
+
+.activity-list .list-alignment::-webkit-scrollbar {
+  background: inherit;
+  border-radius: 0px;
+  height: 7px;
+}
+
+.activity-list .list-alignment::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 10px;
+}
+
+.activity-list .list-alignment::-webkit-scrollbar-thumb {
+  background: #d6d6d6;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.activity-list .list-alignment::-webkit-scrollbar-thumb:hover {
+  background: #bfbfbf;
+}
+
 .activity-list .table-list {
   border: 1px solid var(--border-color);
   box-shadow: var(--shadow-color);
   border-radius: 5px;
   background-color: var(--navbar-color);
-  overflow-x: auto;
 }
 
 .activity-list .table-heading {
   padding: 20px 15px;
   font-weight: 500;
-  font-family: 'Be Vietnam Pro', sans-serif;
   text-align: start;
   white-space: nowrap;
+}
+
+.activity-list .table-heading:first-child {
+  text-align: center;
 }
 
 .activity-list .table-heading:nth-last-child(2) {
@@ -44,7 +62,6 @@
 
 .activity-list .list-item td {
   padding: 15px 15px;
-  font-family: 'Be Vietnam Pro', sans-serif;
   color: var(--text-color);
   text-align: start;
   white-space: nowrap;
@@ -55,7 +72,6 @@
   padding: 8px 20px;
   border-radius: 20px;
   outline: 1px solid transparent;
-  font-family: 'Be Vietnam Pro', sans-serif;
   color: var(--text-color);
   width: 100%;
   font-size: 14px;
@@ -87,11 +103,16 @@
   border-bottom: 1px solid var(--border-color)
 }
 
-.activity-list .no-data td {
+.activity-list .list-item:last-child {
+  border-bottom: none;
+}
+
+.activity-list .no-data td,
+.activity-list .empty-data td {
   padding: 30px 25px;
-  font-family: 'Be Vietnam Pro', sans-serif;
   color: var(--text-color);
   text-align: center;
+  font-weight: 400;
 }
 
 .activity-list .no-data h5 {
@@ -102,7 +123,7 @@
   position: relative;
   max-width: 100%;
   width: 150px;
-  margin: 20px 20px;
+  margin: 15px 15px;
   display: inline-block;
 }
 
@@ -115,7 +136,6 @@
   padding: 8px 20px;
   border-radius: 20px;
   outline: 1px solid transparent;
-  font-family: 'Be Vietnam Pro', sans-serif;
   color: var(--text-color);
   width: 100%;
   font-size: 14px;
@@ -142,19 +162,25 @@
 
 .activity-list .pagination-align {
   padding: 15px 0px;
-  float: inline-end;
+  float: right;
 }
 
 .activity-list .list-item td:first-child {
   text-align: center;
 }
 
+.activity-list .list-item td:last-child {
+  display: flex;
+  justify-content: center;
+}
+
 .activity-list .status {
   padding: 3px 10px;
   border-radius: 100px;
-  width: 100%;
+  width: 120px;
+  margin: auto;
   text-align: center;
-  display: inline-block;
+  display: block;
 }
 
 .activity-list .status.completed {
@@ -174,6 +200,7 @@
   transition: 0.3s ease-out all;
   display: inline-block;
   color: var(--actions-icon-color);
+  cursor: pointer;
 }
 
 .activity-list .view-icon:hover {
@@ -184,16 +211,6 @@
 
 .activity-list .view-icon:hover svg {
   transform: scale(1.2)
-}
-
-.css-1l5xwdx-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected {
-  background-color: #02858D !important;
-  font-family: 'Be Vietnam Pro', sans-serif;
-  color: #ffffff;
-}
-
-.css-8uzxat-MuiSvgIcon-root-MuiPaginationItem-icon {
-  color: var(--text-color);
 }
 
 @media only screen and (max-width:575px) {
@@ -208,7 +225,13 @@
   }
 
   .activity-list .status-wrapper {
-    display: none;
+    display: flex;
+    width: 90%;
+    margin: 15px auto;
+  }
+
+  .activity-list .select-container {
+    width: 100%;
   }
 
   .activity-heading {
@@ -266,6 +289,7 @@
 
   .activity-list .search-wrapper {
     margin: 30px 30px;
+    width: 30%;
   }
 
   .activity-heading {

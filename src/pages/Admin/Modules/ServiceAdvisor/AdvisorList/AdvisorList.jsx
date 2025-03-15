@@ -8,8 +8,8 @@ import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import { MdModeEditOutline } from "react-icons/md";
 import { HiOutlineTrash } from "react-icons/hi";
-import { ReactComponent as Norecords } from "../../../../../assets/images/admin/advisor/no-records.svg";
-import { ReactComponent as EmptyImage } from "../../../../../assets/images/admin/advisor/empty-data.svg"
+import { ReactComponent as Norecords } from "../../../../../assets/images/admin/no-records.svg";
+import { ReactComponent as EmptyImage } from "../../../../../assets/images/admin/empty/advisor.svg"
 import DeleteModal from '../../../../../common/DeleteModal/DeleteModal';
 import PreLoader from './../../../../../common/PreLoader/PreLoader';
 import axios from 'axios';
@@ -75,8 +75,8 @@ const AdvisorList = () => {
       );
 
       if (response?.status === 200) {
-        setAdvisors(response?.data?.advisorMasterListPage || []);
-        setTotalAdvisors(response?.data?.totalRecords || 0);
+        setAdvisors(response?.data?.getAdvisorMasterListPage || []);
+        setTotalAdvisors(response?.data?.count || 0);
       } else {
         toast.error("Failed to fetch advisor data. Please try again.");
       }
@@ -201,18 +201,18 @@ const AdvisorList = () => {
                 <tbody>
                   {advisors.length === 0 ? (
                     totalAdvisors === 0 ? (
-                      <tr className="empty-data">
-                        <td colSpan={tableHeadings.length}>
-                          <EmptyImage />
-                          <p className='pt-3'>Add your first advisor to guide and support your customers</p>
-                        </td>
-                      </tr>
-                    ) : (
                       <tr className="no-data">
                         <td colSpan={tableHeadings.length}>
                           <Norecords />
                           <h5>No Advisors Found!</h5>
                           <p>Once records are added, they’ll appear on this page.</p>
+                        </td>
+                      </tr>
+                    ) : (
+                      <tr className="empty-data">
+                        <td colSpan={tableHeadings.length}>
+                          <EmptyImage />
+                          <p className='pt-3'>Add your first advisor to guide and support your customers</p>
                         </td>
                       </tr>
                     )

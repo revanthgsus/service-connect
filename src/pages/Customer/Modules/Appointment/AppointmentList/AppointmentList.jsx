@@ -8,7 +8,7 @@ import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import { FaRegEye } from "react-icons/fa6";
 import { ReactComponent as Norecords } from "../../../../../assets/images/customer/no-records.svg";
-import { ReactComponent as EmptyImage } from "../../../../../assets/images/customer/appoint.svg";
+import { ReactComponent as EmptyImage } from "../../../../../assets/images/customer/empty/appoint.svg";
 import axios from 'axios';
 import API_BASE_URL from '../../../../../services/AuthService';
 import PreLoader from './../../../../../common/PreLoader/PreLoader';
@@ -25,10 +25,11 @@ const AppointmentList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [totalAppointment, setTotalAppointment] = useState(0);
-  const [showRejectModal, setShowRejectModal] = useState(false);
   const [debouncedSearch, setDebouncedSearch] = useState('');
+  const customerId = sessionStorage.getItem("userId");
 
   const [rejectReason, setRejectReason] = useState("");
+  const [showRejectModal, setShowRejectModal] = useState(false);
 
   const itemsPerPage = 10;
 
@@ -37,7 +38,7 @@ const AppointmentList = () => {
     { title: "Service Type" },
     { title: "Appointment Date" },
     { title: "Serial Number" },
-    { title: "Urgency Level" },
+    { title: "Priority Level" },
     { title: "Status" },
     { title: "" },
   ];
@@ -50,15 +51,17 @@ const AppointmentList = () => {
   }, [searchInput]);
 
   const fetchAppointments = useCallback(async () => {
+
     const token = sessionStorage.getItem("authToken");
-    if (!token) {
-      setShowTokenModal(true);
-      return;
-    }
+    // if (!token) {
+    //   setShowTokenModal(true);
+    //   return;
+    // }
 
     const payload = {
       pageNo: currentPage,
       noOfDatas: itemsPerPage,
+      customerId,
       ...(status && { status }),
       ...(debouncedSearch && { input: debouncedSearch }),
     };
@@ -75,18 +78,18 @@ const AppointmentList = () => {
 
       console.log(response);
 
-      if (response.status === 200 && response.data.status === "success") {
-        setAppointments(response.data.customerAppointmentListPage || []);
-        setTotalAppointment(response.data.totalRecords || 0);
+      if (response?.status === 200 && response.status === "success") {
+        setAppointments(response?.data?.customerAppointmentListPage || []);
+        setTotalAppointment(response?.data?.count || 0);
       } else {
-        toast.error(response.data.error || "Failed to fetch appointment data. Please try again.");
+        toast.error(response?.data?.error || "Failed to fetch appointment data. Please try again.");
       }
     } catch (error) {
-      toast.error(error?.response?.data?.error || "An error occurred while saving the data.");
+      toast.error(error.response?.data?.error || "An error occurred while saving the data.");
     } finally {
       setIsLoading(false);
     }
-  }, [currentPage, status, debouncedSearch, setShowTokenModal]);
+  }, [currentPage, status, debouncedSearch, customerId]);
 
   useEffect(() => {
     fetchAppointments();
@@ -101,23 +104,19 @@ const AppointmentList = () => {
       { id: 2, serviceType: "Battery Testing", appointmentDate: "13/02/2025", productSerialNo: "EX12345BAT2023", urgencyLevel: "Standard", status: "Accepted" },
       { id: 3, serviceType: "Oil and filter change", appointmentDate: "14/02/2025", productSerialNo: "EX12345BAT2023", urgencyLevel: "Urgent", status: "Pending" },
       { id: 4, serviceType: "Car Routine Maintenance", appointmentDate: "12/02/2025", productSerialNo: "EX12345BAT2023", urgencyLevel: "Urgent", status: "Accepted" },
-      { id: 5, serviceType: "Car Routine Maintenance", appointmentDate: "16/02/2025", productSerialNo: "EX12345BAT2023", urgencyLevel: "Urgent", status: "Accepted" },
+
     ]);
-    setTotalAppointment(5);
+    setTotalAppointment(4);
   }, []);
 
-
-  // const handleView = (appointment) => {
-  //   if (appointment.status === "Rejected" && appointment.rejectReason) {
-  //     setRejectReason(appointment.rejectReason);
-  //     setShowRejectModal(true);
-  //   } else {
-  //     navigate("view");
-  //   }
-  // };
-
-  const handleView = async (appointmentId) => {
+  const handleView = async (appointment) => {
     document.querySelector(".layout-main")?.scrollTo({ top: 0, behavior: "smooth" });
+
+    if (appointment.status === "Rejected" && appointment.rejectReason) {
+      setRejectReason(appointment.rejectReason);
+      setShowRejectModal(true);
+      return;
+    }
 
     const token = sessionStorage.getItem("authToken");
     if (!token) {
@@ -126,14 +125,14 @@ const AppointmentList = () => {
     }
 
     try {
-      const response = await axios.get(`${API_BASE_URL}/customerMaster/viewAppointmentById/${appointmentId}`, {
+      const response = await axios.get(`${API_BASE_URL}/customerMaster/viewAppointmentById/${appointment.Id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
 
       if (response?.status === 200) {
-        navigate("view", { state: { appointmentData: response?.data } });
+        navigate("view", { state: { appointmentData: response.data } });
       } else {
         toast.error("Failed to fetch appointment data. Please try again.");
       }
@@ -192,8 +191,7 @@ const AppointmentList = () => {
                     id="status-select"
                     className="status-select"
                     value={status}
-                    onChange={handleStatusChange}
-                  >
+                    onChange={handleStatusChange}>
                     <option value="">Status</option>
                     <option value="accepted">Accepted</option>
                     <option value="pending">Pending</option>
@@ -243,14 +241,15 @@ const AppointmentList = () => {
                         <td>{appointment.urgencyLevel}</td>
                         <td>
                           <span
-                            className={`status ${appointment.status === "accepted" ? "accepted"
-                              : appointment.status === "rejected" ? "rejected" : "pending"}`}
-                          >
-                            {appointment.status === "accepted" ? "Accepted" : appointment.status === "rejected" ? "Rejected" : "Pending"}
+                            className={`status ${appointment.status.toLowerCase() === "accepted"
+                              ? "accepted"
+                              : appointment.status.toLowerCase() === "rejected"
+                                ? "rejected" : "pending"}`}>
+                            {appointment.status.charAt(0).toUpperCase() + appointment.status.slice(1)}
                           </span>
                         </td>
                         <td>
-                          <span className='view-icon' onClick={() => handleView(appointment.appointmentId)}>
+                          <span className='view-icon' onClick={() => handleView(appointment)}>
                             <FaRegEye />
                           </span>
                         </td>

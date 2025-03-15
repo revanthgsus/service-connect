@@ -8,8 +8,8 @@ import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import { MdModeEditOutline } from "react-icons/md";
 import { HiOutlineTrash } from "react-icons/hi";
-import { ReactComponent as Norecords } from "../../../../../assets/images/admin/customer/no-records.svg";
-import { ReactComponent as EmptyImage } from "../../../../../assets/images/admin/customer/empty-data.svg";
+import { ReactComponent as Norecords } from "../../../../../assets/images/admin/no-records.svg";
+import { ReactComponent as EmptyImage } from "../../../../../assets/images/admin/empty/customer.svg";
 import DeleteModal from '../../../../../common/DeleteModal/DeleteModal';
 import PreLoader from './../../../../../common/PreLoader/PreLoader';
 import axios from 'axios';
@@ -76,7 +76,7 @@ const CustomerList = () => {
 
       if (response?.status === 200) {
         setCustomers(response?.data?.customerMasterListPage || []);
-        setTotalCustomers(response?.data?.totalRecords || 0);
+        setTotalCustomers(response?.data?.count || 0);
       } else {
         toast.error("Failed to fetch customer data. Please try again.");
       }
@@ -200,18 +200,18 @@ const CustomerList = () => {
                 <tbody>
                   {customers.length === 0 ? (
                     totalCustomers === 0 ? (
-                      <tr className="empty-data">
-                        <td colSpan={tableHeadings.length}>
-                          <EmptyImage />
-                          <p className='pt-3'>Add your first customer to begin</p>
-                        </td>
-                      </tr>
-                    ) : (
                       <tr className="no-data">
                         <td colSpan={tableHeadings.length}>
                           <Norecords />
                           <h5>No Customers Found!</h5>
                           <p>Once records are added, they’ll appear on this page.</p>
+                        </td>
+                      </tr>
+                    ) : (
+                      <tr className="empty-data">
+                        <td colSpan={tableHeadings.length}>
+                          <EmptyImage />
+                          <p className='pt-3'>Add your first customer to begin</p>
                         </td>
                       </tr>
                     )

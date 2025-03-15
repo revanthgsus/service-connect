@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './ServiceRecords.css';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
-import EmptyImage from '../../../../../assets/images/customer/empty-data.svg';
+import EmptyImage from '../../../../../assets/images/customer/empty/appoint.svg';
 
 const ServiceRecords = () => {
   const [currentPage, setCurrentPage] = useState(1);

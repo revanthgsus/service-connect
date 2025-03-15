@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import "./QuoteList.css";
 import { IoSearch } from "react-icons/io5";
 import { useNavigate } from 'react-router-dom';
@@ -6,101 +6,140 @@ import { IoIosArrowDown } from "react-icons/io";
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import { FaRegEye } from "react-icons/fa6";
-import { ReactComponent as Norecords } from "../../../../../assets/images/customer/no-records.svg"
+import { ReactComponent as Norecords } from "../../../../../assets/images/customer/no-records.svg";
+import { ReactComponent as EmptyImage } from "../../../../../assets/images/customer/empty/quote.svg";
+import axios from 'axios';
+import API_BASE_URL from '../../../../../services/AuthService';
 import PreLoader from './../../../../../common/PreLoader/PreLoader';
+import { toast, ToastContainer } from 'react-toastify';
+import { useAuth } from '../../../../../contexts/AuthContext';
 
 const QuoteList = () => {
   const navigate = useNavigate();
-  const [searchTerm, setSearchTerm] = useState('');
-  const [statusFilter, setStatusFilter] = useState('');
+  const { setShowTokenModal } = useAuth();
+  const [quotes, setQuotes] = useState([]);
+  const [searchInput, setSearchInput] = useState('');
+  const [status, setStatus] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
-
   const [isLoading, setIsLoading] = useState(false);
+  const [totalQuotes, setTotalQuotes] = useState(0);
+  const [debouncedSearch, setDebouncedSearch] = useState('');
+  const customerId = sessionStorage.getItem("userId");
+
+  const itemsPerPage = 10;
 
   const tableHeadings = [
     { title: "S.No" },
     { title: "Service ID" },
     { title: "Service Type" },
     { title: "Appointment Date" },
-    { title: "Urgency Level" },
+    { title: "Priority Level" },
     { title: "Status" },
     { title: "" },
   ];
 
-  const QuotesData = [
-    {
-      id: 1,
-      serviceID: "SR-12345",
-      serviceType: "Car Routine Maintenance",
-      appointmentDate: "12/02/2025",
-      urgencyLevel: "Urgent",
-      status: "Accepted",
-    },
-    {
-      id: 2,
-      serviceID: "SR-12346",
-      serviceType: "Battery Testing",
-      appointmentDate: "13/02/2025",
-      urgencyLevel: "Standard",
-      status: "Accepted",
-    },
-    {
-      id: 3,
-      serviceID: "SR-12347",
-      serviceType: "Oil and filter change",
-      appointmentDate: "14/02/2025",
-      urgencyLevel: "Urgent",
-      status: "In Progress",
-    },
-    {
-      id: 4,
-      serviceID: "SR-12348",
-      serviceType: "Tire replacement",
-      appointmentDate: "14/02/2025",
-      urgencyLevel: "Urgent",
-      status: "In Progress",
-    },
-    {
-      id: 5,
-      serviceID: "SR-12345",
-      serviceType: "Car Routine Maintenance",
-      appointmentDate: "16/02/2025",
-      urgencyLevel: "Urgent",
-      status: "Accepted",
-    },
-  ];
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedSearch(searchInput);
+    }, 500);
+    return () => clearTimeout(handler);
+  }, [searchInput]);
 
-  const filteredServiceID = QuotesData.filter((quote) => {
-    const matchesSearch =
-      quote.serviceID.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesStatus =
-      statusFilter === '' || quote.status.toLowerCase() === statusFilter.toLowerCase();
-    return matchesSearch && matchesStatus;
-  });
 
-  const handleSearchChange = (e) => {
-    setSearchTerm(e.target.value);
-  };
+  const fetchQuotes = useCallback(async () => {
 
-  const handleStatusChange = (e) => {
-    setStatusFilter(e.target.value);
-  };
+    const token = sessionStorage.getItem("authToken");
+    // if (!token) {
+    //   setShowTokenModal(true);
+    //   return;
+    // }
 
-  const handlePageChange = (event, page) => {
-    setCurrentPage(page);
-  };
+    const payload = {
+      pageNo: currentPage,
+      noOfDatas: itemsPerPage,
+      customerId,
+      ...(status && { status }),
+      ...(debouncedSearch && { input: debouncedSearch }),
+    };
 
-  const displayedQuotes = filteredServiceID.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
-  );
+    try {
+      const response = await axios.post(`${API_BASE_URL}/customerMaster/getAppointmentsListPage`,
+        payload,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
-  const handleView = (e) => {
-    setTimeout(() => {
-      setIsLoading(false)
-      navigate("quotesummary");
-    }, 1000)
+      console.log(response);
+
+      if (response?.status === 200 && response.status === "success") {
+        setQuotes(response?.data?.customerQuotesListPage || []);
+        setTotalQuotes(response?.data?.count || 0);
+      } else {
+        toast.error(response?.data?.error || "Failed to fetch quotes data. Please try again.");
+      }
+    } catch (error) {
+      toast.error(error.response?.data?.error || "An error occurred while saving the data.");
+    } finally {
+      setIsLoading(false);
+    }
+  }, [currentPage, status, debouncedSearch, customerId]);
+
+  useEffect(() => {
+    fetchQuotes();
+  }, [fetchQuotes]);
+
+  useEffect(() => {
+    setQuotes([
+      { id: 1, serviceId: "SR-12345", serviceType: "Car Routine Maintenance", appointmentDate: "12/02/2025", urgencyLevel: "Urgent", status: "Accepted", },
+      {
+        id: 2, serviceId: "SR-12346", serviceType: "Battery Testing", appointmentDate: "13/02/2025", urgencyLevel: "Standard", status: "Accepted",
+      },
+      {
+        id: 3, serviceId: "SR-12347", serviceType: "Oil and filter change", appointmentDate: "14/02/2025",
+        urgencyLevel: "Urgent", status: "In Progress",
+      },
+    ]);
+
+    setTotalQuotes(3);
+  }, []);
+
+  const handleView = async (appointmentId) => {
+    document.querySelector(".layout-main")?.scrollTo({ top: 0, behavior: "smooth" });
+
+    const token = sessionStorage.getItem("authToken");
+    if (!token) {
+      setShowTokenModal(true);
+      return;
+    }
+
+    try {
+      const response = await axios.get(`${API_BASE_URL}/advisorMaster/viewComplaintsByAppointmentId/${appointmentId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (response?.status === 200) {
+        navigate("quotesummary", { state: { complaintData: response.data } });
+      } else {
+        toast.error("Failed to fetch quotes data. Please try again.");
+      }
+    } catch (error) {
+      toast.error(error?.response?.data?.error || "An error occurred while fetch the data.");
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  const handleSearchChange = (e) => setSearchInput(e.target.value);
+  const handleStatusChange = (e) => setStatus(e.target.value);
+
+  const handlePageChange = (event, value) => {
+    setCurrentPage(value);
+    document.querySelector(".layout-main")?.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
@@ -117,7 +156,7 @@ const QuoteList = () => {
                   type="search"
                   className="search-input"
                   placeholder="Search by Service ID"
-                  value={searchTerm}
+                  value={searchInput}
                   onChange={handleSearchChange}
                 />
                 <IoSearch className="search-icon" />
@@ -129,9 +168,8 @@ const QuoteList = () => {
                     name="status"
                     id="status-select"
                     className="status-select"
-                    value={statusFilter}
-                    onChange={handleStatusChange}
-                  >
+                    value={status}
+                    onChange={handleStatusChange}>
                     <option value="">Status</option>
                     <option value="accepted">Accepted</option>
                     <option value="inprogress">In Progress</option>
@@ -153,25 +191,34 @@ const QuoteList = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {displayedQuotes.length === 0 ? (
-                    <tr className="no-data">
-                      <td colSpan={tableHeadings.length}>
-                        <Norecords />
-                        <h5>No Quotes Found!</h5>
-                        <p>Once records are added, they’ll appear on this page.</p>
-                      </td>
-                    </tr>
+                  {quotes.length === 0 ? (
+                    totalQuotes === 0 ? (
+                      <tr className="empty-data">
+                        <td colSpan={tableHeadings.length}>
+                          <EmptyImage />
+                          <p className='pt-3'>Start your first Quotes today!</p>
+                        </td>
+                      </tr>
+                    ) : (
+                      <tr className="no-data">
+                        <td colSpan={tableHeadings.length}>
+                          <Norecords />
+                          <h5>No Service ID Found!</h5>
+                          <p>Once records are added, they’ll appear on this page.</p>
+                        </td>
+                      </tr>
+                    )
                   ) : (
-                    displayedQuotes.map((quote, index) => (
-                      <tr key={quote.id} className="list-item">
+                    quotes.map((quotes, index) => (
+                      <tr key={quotes.id} className="list-item">
                         <td>{(currentPage - 1) * itemsPerPage + index + 1}</td>
-                        <td>{quote.serviceID}</td>
-                        <td>{quote.serviceType}</td>
-                        <td>{quote.appointmentDate}</td>
-                        <td>{quote.urgencyLevel}</td>
+                        <td>{quotes.serviceId}</td>
+                        <td>{quotes.serviceType}</td>
+                        <td>{quotes.appointmentDate}</td>
+                        <td>{quotes.urgencyLevel}</td>
                         <td>
-                          <span className={`status ${quote.status.toLowerCase().replace(" ", "")}`}>
-                            {quote.status}
+                          <span className={`status ${quotes.status.toLowerCase() === 'accepted' ? 'accepted' : 'inprogress'}`}>
+                            {quotes.status}
                           </span>
                         </td>
                         <td>
@@ -190,14 +237,33 @@ const QuoteList = () => {
           <div className="pagination-align">
             <Stack spacing={2}>
               <Pagination
-                count={Math.ceil(filteredServiceID.length / itemsPerPage)}
+                count={Math.ceil(totalQuotes / itemsPerPage)}
                 page={currentPage}
                 onChange={handlePageChange}
+                sx={{
+                  "& .MuiPaginationItem-root": {
+                    color: "var(--text-color)",
+                  },
+                  "& .Mui-selected": {
+                    backgroundColor: "#01848D !important",
+                    color: "#ffffff",
+                  },
+                  "& .Mui-selected:hover": {
+                    backgroundColor: "#028d96 !important",
+                  },
+                }}
               />
             </Stack>
           </div>
         </section>
       )}
+
+      <ToastContainer
+        position="top-center"
+        autoClose={1000}
+        hideProgressBar={true}
+        theme="light"
+      />
     </>
   );
 };

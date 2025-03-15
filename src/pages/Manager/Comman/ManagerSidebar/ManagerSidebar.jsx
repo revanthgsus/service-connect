@@ -1,8 +1,8 @@
 import React from 'react';
 import "./ManagerSidebar.css";
 import { NavLink } from 'react-router-dom';
-import { ReactComponent as DashboardIcon } from "../../../../assets/images/manager/dashboard.svg";
-import { ReactComponent as ListIcon } from "../../../../assets/images/manager/list-icon.svg";
+import { ReactComponent as DashboardIcon } from "../../../../assets/images/manager/sidebar/dashboard.svg";
+import { ReactComponent as ListIcon } from "../../../../assets/images/manager/sidebar/list-icon.svg";
 
 const ManagerSidebar = ({ isOpen, handleCloseSidebar, sidebarRef }) => {
   const sidebarItems = [

@@ -5,7 +5,7 @@
 }
 
 .location-popup .modal-header {
-  padding: 30px 20px 20px 30px;
+  padding: 30px 35px 10px 30px;
 }
 
 .location-popup .modal-body {
@@ -61,6 +61,8 @@
   justify-content: center;
   align-items: center;
   gap: 10px;
+  z-index: 1;
+  padding: 10px 0px;
 }
 
 .location-popup .search-field {
@@ -75,7 +77,8 @@
   outline: 1px solid transparent;
   color: #2b2b2b;
   width: 100%;
-  background-color: #fbfbfb;
+  background-color: #ffffff;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 
 .location-popup .search-field svg {
@@ -114,7 +117,7 @@
 
 @media only screen and (min-width:576px) and (max-width:767px) {
   .location-popup .modal-dialog {
-    width: 450px;
+    width: 500px;
   }
 
   .location-popup .modal-header h5 {
@@ -124,7 +127,7 @@
 
 @media only screen and (min-width:768px) and (max-width:1119px) {
   .location-popup .modal-dialog {
-    width: 500px;
+    width: 620px;
   }
 
   .location-popup .modal-header h5 {
@@ -134,7 +137,7 @@
 
 @media only screen and (min-width: 1200px) and (max-width: 1399px) {
   .location-popup .modal-dialog {
-    width: 500px;
+    width: 650px;
     max-width: 100%;
   }
 
@@ -152,5 +155,11 @@
 
   .location-popup .search-input {
     font-size: 14px;
+  }
+}
+
+@media only screen and (min-width:1400px) {
+  .location-popup .modal-dialog {
+    max-width: 700px;
   }
 }

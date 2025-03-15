@@ -8,8 +8,8 @@ import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import { MdModeEditOutline } from "react-icons/md";
 import { HiOutlineTrash } from "react-icons/hi";
-import { ReactComponent as Norecords } from "../../../../../assets/images/admin/admin/no-records.svg";
-import { ReactComponent as EmptyImage } from "../../../../../assets/images/admin/empty-data.svg";
+import { ReactComponent as Norecords } from "../../../../../assets/images/admin/no-records.svg";
+import { ReactComponent as EmptyImage } from "../../../../../assets/images/admin/empty/admin.svg";
 import DeleteModal from '../../../../../common/DeleteModal/DeleteModal';
 import PreLoader from '../../../../../common/PreLoader/PreLoader';
 import axios from 'axios';
@@ -76,7 +76,7 @@ const AdminList = () => {
 
       if (response?.status === 200) {
         setAdmins(response?.data?.adminMasterListPage || []);
-        setTotalAdmins(response?.data?.totalRecords || 0);
+        setTotalAdmins(response?.data?.count || 0);
       } else {
         toast.error("Failed to fetch admin data. Please try again.");
       }
@@ -86,7 +86,6 @@ const AdminList = () => {
       setIsLoading(false);
     }
   }, [currentPage, status, debouncedSearch, setShowTokenModal]);
-
 
   useEffect(() => {
     fetchAdmins();
@@ -175,8 +174,7 @@ const AdminList = () => {
                     id="status-select"
                     className="status-select"
                     value={status}
-                    onChange={handleStatusChange}
-                  >
+                    onChange={handleStatusChange}>
                     <option value="">Status</option>
                     <option value="active">Active</option>
                     <option value="inactive">In Active</option>
@@ -200,18 +198,18 @@ const AdminList = () => {
                 <tbody>
                   {admins.length === 0 ? (
                     totalAdmins === 0 ? (
-                      <tr className="empty-data">
-                        <td colSpan={tableHeadings.length}>
-                          <EmptyImage />
-                          <p className='pt-3'>Add an admin to manage and oversee operations</p>
-                        </td>
-                      </tr>
-                    ) : (
                       <tr className="no-data">
                         <td colSpan={tableHeadings.length}>
                           <Norecords />
                           <h5>No Admins Found!</h5>
                           <p>Once records are added, they’ll appear on this page.</p>
+                        </td>
+                      </tr>
+                    ) : (
+                      <tr className="empty-data">
+                        <td colSpan={tableHeadings.length}>
+                          <EmptyImage />
+                          <p className='pt-3'>Add an admin to manage and oversee operations.</p>
                         </td>
                       </tr>
                     )

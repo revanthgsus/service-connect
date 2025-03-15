@@ -1,9 +1,9 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import './Kpi.css';
-import { ReactComponent as ManagerIcon } from '../../../../../assets/images/admin/service-manager.svg';
-import { ReactComponent as AdvisorIcon } from '../../../../../assets/images/admin/service-advisor.svg';
-import { ReactComponent as CustomerIcon } from '../../../../../assets/images/admin/customer.svg';
-import { ReactComponent as AdminIcon } from '../../../../../assets/images/admin/admin.svg';
+import { ReactComponent as ManagerIcon } from '../../../../../assets/images/admin/sidebar/manager.svg';
+import { ReactComponent as AdvisorIcon } from '../../../../../assets/images/admin/sidebar/advisor.svg';
+import { ReactComponent as CustomerIcon } from '../../../../../assets/images/admin/sidebar/customer.svg';
+import { ReactComponent as AdminIcon } from '../../../../../assets/images/admin/sidebar/admin.svg';
 import { Row, Col } from 'react-bootstrap';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';

@@ -1,11 +1,11 @@
 import React from 'react';
 import "./AdminSidebar.css";
 import { NavLink } from 'react-router-dom';
-import { ReactComponent as DashboardIcon } from "../../../../assets/images/admin/dashboard.svg";
-import { ReactComponent as AdminIcon } from "../../../../assets/images/admin/admin.svg";
-import { ReactComponent as AdvisorIcon } from "../../../../assets/images/admin/service-advisor.svg";
-import { ReactComponent as ManagerIcon } from "../../../../assets/images/admin/service-manager.svg";
-import { ReactComponent as CustomerIcon } from "../../../../assets/images/admin/customer.svg";
+import { ReactComponent as DashboardIcon } from "../../../../assets/images/admin/sidebar/dashboard.svg";
+import { ReactComponent as AdminIcon } from "../../../../assets/images/admin/sidebar/admin.svg";
+import { ReactComponent as AdvisorIcon } from "../../../../assets/images/admin/sidebar/advisor.svg";
+import { ReactComponent as ManagerIcon } from "../../../../assets/images/admin/sidebar/manager.svg";
+import { ReactComponent as CustomerIcon } from "../../../../assets/images/admin/sidebar/customer.svg";
 
 const AdminSidebar = ({ isOpen, handleCloseSidebar, sidebarRef }) => {
   const userRole = sessionStorage.getItem('userRole');

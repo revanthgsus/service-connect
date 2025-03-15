@@ -4,14 +4,6 @@
   line-height: 38px;
 }
 
-.quote-list .list-alignment {
-  overflow-x: auto;
-}
-
-.quote-list .list-alignment::-webkit-scrollbar {
-  display: none;
-}
-
 .quote-list .quote-table {
   width: 100%;
 }
@@ -21,12 +13,36 @@
   color: #ffffff;
 }
 
+.quote-list .list-alignment {
+  overflow-x: auto;
+}
+
+.quote-list .list-alignment::-webkit-scrollbar {
+  background: inherit;
+  border-radius: 0px;
+  height: 7px;
+}
+
+.quote-list .list-alignment::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 10px;
+}
+
+.quote-list .list-alignment::-webkit-scrollbar-thumb {
+  background: #d6d6d6;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.quote-list .list-alignment::-webkit-scrollbar-thumb:hover {
+  background: #bfbfbf;
+}
+
 .quote-list .table-list {
   border: 1px solid var(--border-color);
   box-shadow: var(--shadow-color);
   border-radius: 5px;
   background-color: var(--navbar-color);
-  overflow-x: auto;
 }
 
 .quote-list .table-heading {
@@ -34,6 +50,10 @@
   font-weight: 500;
   text-align: start;
   white-space: nowrap;
+}
+
+.quote-list .table-heading:first-child {
+  text-align: center;
 }
 
 .quote-list .table-heading:nth-last-child(2) {
@@ -83,10 +103,16 @@
   border-bottom: 1px solid var(--border-color)
 }
 
-.quote-list .no-data td {
+.quote-list .list-item:last-child {
+  border-bottom: none;
+}
+
+.quote-list .no-data td,
+.quote-list .empty-data td {
   padding: 30px 25px;
   color: var(--text-color);
   text-align: center;
+  font-weight: 400;
 }
 
 .quote-list .no-data h5 {
@@ -97,7 +123,7 @@
   position: relative;
   max-width: 100%;
   width: 150px;
-  margin: 20px 20px;
+  margin: 15px 15px;
   display: inline-block;
 }
 
@@ -136,19 +162,25 @@
 
 .quote-list .pagination-align {
   padding: 15px 0px;
-  float: inline-end;
+  float: right;
 }
 
 .quote-list .list-item td:first-child {
   text-align: center;
 }
 
+.quote-list .list-item td:last-child {
+  display: flex;
+  justify-content: center;
+}
+
 .quote-list .status {
   padding: 3px 10px;
   border-radius: 100px;
-  width: 120px;
+  width: 100px;
+  margin: auto;
   text-align: center;
-  display: inline-block;
+  display: block;
 }
 
 .quote-list .status.accepted {
@@ -168,6 +200,7 @@
   transition: 0.3s ease-out all;
   display: inline-block;
   color: var(--actions-icon-color);
+  cursor: pointer;
 }
 
 .quote-list .view-icon:hover {
@@ -178,16 +211,6 @@
 
 .quote-list .view-icon:hover svg {
   transform: scale(1.2)
-}
-
-.css-1l5xwdx-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected {
-  background-color: #02858D !important;
-  font-family: 'Be Vietnam Pro', sans-serif;
-  color: #ffffff;
-}
-
-.css-8uzxat-MuiSvgIcon-root-MuiPaginationItem-icon {
-  color: var(--text-color);
 }
 
 @media only screen and (max-width:575px) {
@@ -202,7 +225,13 @@
   }
 
   .quote-list .status-wrapper {
-    display: none;
+    display: flex;
+    width: 90%;
+    margin: 15px auto;
+  }
+
+  .quote-list .select-container {
+    width: 100%;
   }
 
   .quote-heading {
@@ -260,6 +289,7 @@
 
   .quote-list .search-wrapper {
     margin: 30px 30px;
+    width: 30%;
   }
 
   .quote-heading {

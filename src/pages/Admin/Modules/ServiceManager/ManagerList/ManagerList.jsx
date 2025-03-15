@@ -8,8 +8,8 @@ import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import { MdModeEditOutline } from "react-icons/md";
 import { HiOutlineTrash } from "react-icons/hi";
-import { ReactComponent as Norecords } from "../../../../../assets/images/admin/manager/no-records.svg";
-import { ReactComponent as EmptyImage } from "../../../../../assets/images/admin/manager/empty-data.svg"
+import { ReactComponent as Norecords } from "../../../../../assets/images/admin/no-records.svg";
+import { ReactComponent as EmptyImage } from "../../../../../assets/images/admin/empty/manager.svg"
 import DeleteModal from '../../../../../common/DeleteModal/DeleteModal';
 import PreLoader from './../../../../../common/PreLoader/PreLoader';
 import axios from 'axios';
@@ -76,7 +76,7 @@ const ManagerList = () => {
 
       if (response?.status === 200) {
         setManagers(response?.data?.managerMasterListPage || []);
-        setTotalManagers(response?.data?.totalRecords || 0);
+        setTotalManagers(response?.data?.count || 0);
       } else {
         toast.error("Failed to fetch manager data. Please try again.");
       }
@@ -199,18 +199,18 @@ const ManagerList = () => {
                 <tbody>
                   {managers.length === 0 ? (
                     totalManagers === 0 ? (
-                      <tr className="empty-data">
-                        <td colSpan={tableHeadings.length}>
-                          <EmptyImage />
-                          <p className='pt-3'>Start your team—add your first Service Manager today!</p>
-                        </td>
-                      </tr>
-                    ) : (
                       <tr className="no-data">
                         <td colSpan={tableHeadings.length}>
                           <Norecords />
                           <h5>No Managers Found!</h5>
                           <p>Once records are added, they’ll appear on this page.</p>
+                        </td>
+                      </tr>
+                    ) : (
+                      <tr className="empty-data">
+                        <td colSpan={tableHeadings.length}>
+                          <EmptyImage />
+                          <p className='pt-3'>Start your team—add your first Service Manager today!</p>
                         </td>
                       </tr>
                     )

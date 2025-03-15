@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { AuthContext } from '../contexts/AuthContext';
-import TokenModal from './../common/TokenModal/TokenModal';
+// import TokenModal from './../common/TokenModal/TokenModal';
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [showTokenModal, setShowTokenModal] = useState(false);
+  // const [showTokenModal, setShowTokenModal] = useState(false);
 
   useEffect(() => {
     const token = sessionStorage.getItem('authToken');
@@ -21,7 +21,7 @@ export const AuthProvider = ({ children }) => {
     sessionStorage.setItem('userRole', role);
     sessionStorage.setItem('userId', userId);
     setUser({ token, role, userId });
-    setShowTokenModal(false);
+    // setShowTokenModal(false);
   };
 
   const logout = () => {
@@ -29,14 +29,14 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
   };
 
-  const handleClose = () => {
-    setShowTokenModal(false);
-  }
+  // const handleClose = () => {
+  //   setShowTokenModal(false);
+  // }
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, setShowTokenModal }}>
+    <AuthContext.Provider value={{ user, login, logout }}>
       {children}
-      <TokenModal showTokenModal={showTokenModal} handleClose={handleClose} />
+      {/* <TokenModal showTokenModal={showTokenModal} handleClose={handleClose} /> */}
     </AuthContext.Provider>
   );
 };

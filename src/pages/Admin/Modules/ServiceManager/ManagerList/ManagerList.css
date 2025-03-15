@@ -160,15 +160,14 @@
 }
 
 .manager-list .no-data td,
-.empty-data td {
+.manager-list .empty-data td {
   padding: 30px 25px;
   color: var(--text-color);
   text-align: center;
   font-weight: 400;
 }
 
-.manager-list .no-data h5,
-.empty-data h5 {
+.manager-list .no-data h5 {
   padding: 15px 0px 5px 0px;
 }
 
