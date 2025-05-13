@@ -1,5 +1,5 @@
 import React from 'react'
-import { MdOutlineFileDownload } from "react-icons/md";
+import { FaRegEye } from "react-icons/fa6";
 import InvoiceList from '../../../../../components/InvoiceList/InvoiceList';
 
 const CustomerInvoice = () => {
@@ -18,7 +18,7 @@ const CustomerInvoice = () => {
     { title: "" },
   ]
 
-  const renderRow = (invoice, index, currentPage, itemsPerPage, handleDownload, handlePay) => (
+  const renderRow = (invoice, index, currentPage, itemsPerPage, handleView, handlePay) => (
     <tr key={invoice.id} className="list-item">
       <td>{(currentPage - 1) * itemsPerPage + index + 1}</td>
       <td>{invoice.serviceId}</td>
@@ -44,9 +44,10 @@ const CustomerInvoice = () => {
           </span>
         )}
       </td>
+
       <td>
-        <span className='download-icon' onClick={() => handleDownload(invoice)}>
-          <MdOutlineFileDownload />
+        <span className='download-icon' onClick={() => handleView(invoice)}>
+          <FaRegEye />
         </span>
       </td>
     </tr>

@@ -38,7 +38,7 @@ const AdvisorInvoice = () => {
         </span>
       </td>
       <td>
-        <span className='download-icon' onClick={handleView}>
+        <span className='download-icon' onClick={() => handleView(invoice)}>
           <FaRegEye />
         </span>
       </td>

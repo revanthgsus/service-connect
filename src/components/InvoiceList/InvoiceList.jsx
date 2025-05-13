@@ -23,11 +23,12 @@ const InvoiceList = ({ userId, apiUrl, tableHeadings, filters, showCreateButton,
   const [paymentStatus, setPaymentStatus] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
-  
+
   const [totalInvoice, setTotalInvoice] = useState(0);
   const [debouncedSearch, setDebouncedSearch] = useState('');
   const [invoiceShow, setInvoiceShow] = useState(false);
   const [selectedInvoice, setSelectedInvoice] = useState(null);
+  const userRole = sessionStorage.getItem("userRole");
 
   const itemsPerPage = 10;
 
@@ -90,7 +91,6 @@ const InvoiceList = ({ userId, apiUrl, tableHeadings, filters, showCreateButton,
     fetchInvoice();
   }, [fetchInvoice]);
 
-
   const handlePay = async (invoice) => {
     const token = sessionStorage.getItem("authToken");
     if (!token) {
@@ -128,16 +128,13 @@ const InvoiceList = ({ userId, apiUrl, tableHeadings, filters, showCreateButton,
     document.querySelector(".layout-main")?.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const handleView = (e) => {
-    e.preventDefault();
-    navigate('/advisor/invoice/viewinvoice');
+  const handleView = (invoice) => {
+    navigate(`/${userRole.toLowerCase()}/invoice/viewinvoice`, {
+      state: { invoiceDetails: invoice }
+    });
   }
 
   const handleCloseModal = () => setInvoiceShow(false);
-  const handleDownload = (e) => {
-    e.preventDefault()
-  };
-
   const handleCreate = (e) => {
     e.preventDefault();
     navigate('generate');
@@ -223,7 +220,7 @@ const InvoiceList = ({ userId, apiUrl, tableHeadings, filters, showCreateButton,
                     </tr>
                   ) : (
                     invoice.map((invoice, index) =>
-                      renderRow(invoice, index, currentPage, itemsPerPage, handleDownload, handlePay, handleView)
+                      renderRow(invoice, index, currentPage, itemsPerPage, handleView, handlePay)
                     ))
                   }
                 </tbody>

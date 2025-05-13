@@ -263,7 +263,7 @@ const GenerateInvoice = () => {
         navigate('/advisor/invoice/viewinvoice',
           { state: { invoiceDetails: response?.data } });
       } else {
-        toast.error("Failed to generate invoice.");
+        toast.error(response?.data?.message || "Failed to generate invoice.");
       }
     } catch (error) {
       toast.error("Something went wrong while generating the invoice.");

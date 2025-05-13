@@ -11,8 +11,8 @@ import { toast, ToastContainer } from 'react-toastify';
 import { useAuth } from '../../contexts/AuthContext';
 import axios from 'axios';
 import API_BASE_URL from '../../services/AuthService';
-// import jsPDF from 'jspdf';
-// import autoTable from 'jspdf-autotable';
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
 
 const TransactionList = ({ userId, apiUrl, tableHeadings, filters, renderRow }) => {
   const { setShowTokenModal } = useAuth();
@@ -64,9 +64,6 @@ const TransactionList = ({ userId, apiUrl, tableHeadings, filters, renderRow }) 
           },
         });
 
-
-      console.log(response);
-
       if (response.status === 200) {
         setTransactions(response.data?.transactionsListPage || []);
         setTotalTransactions(response.data?.count || 0);
@@ -79,6 +76,7 @@ const TransactionList = ({ userId, apiUrl, tableHeadings, filters, renderRow }) 
       setIsLoading(false);
     }
   }, [apiUrl, currentPage, debouncedSearch, statusFilter, userId, setShowTokenModal, filters]);
+
 
   useEffect(() => {
     fetchTransactions();
@@ -97,40 +95,64 @@ const TransactionList = ({ userId, apiUrl, tableHeadings, filters, renderRow }) 
   };
 
 
-  // const handleDownload = (transactionData) => {
-  //   try {
-  //     const doc = new jsPDF();
-  //     doc.setFontSize(16);
-  //     doc.text('Transaction Receipt', 14, 20);
+  const handleDownload = async (transaction) => {
+    const token = sessionStorage.getItem('authToken');
+    if (!token) {
+      setShowTokenModal(true);
+      return;
+    }
 
-  //     console.log(transactionData)
+    try {
+      const transactionId = transaction.transactionId;
+      const response = await axios.get(
+        `${API_BASE_URL}/paymentMaster/viewTransactionById/${transactionId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
-  //     const tableData = [
-  //       ['Invoice ID', transactionData.invoiceId],
-  //       ['Service ID', transactionData.serviceId],
-  //       ['Transaction ID', transactionData.transactionId],
-  //       ['Customer Name', transactionData.customerName],
-  //       ['Sub Total', `₹${transactionData.subTotal}`],
-  //       ['Discount', `₹${transactionData.discount}`],
-  //       ['CGST', `₹${transactionData.cgst}`],
-  //       ['SGST', `₹${transactionData.sgst}`],
-  //       ['Advance Amount', `₹${transactionData.advanceAmount}`],
-  //       // ['Date', new Date(transactionData.date).toLocaleDateString()],
-  //       ['Total Amount', transactionData.totalAmount],
-  //     ];
 
-  //     autoTable(doc, {
-  //       startY: 30,
-  //       head: [['Field', 'Value']],
-  //       body: tableData,
-  //       theme: 'grid',
-  //     });
+      console.log(response);
 
-  //     doc.save(`Transaction-${transactionData.transactionId}.pdf`);
-  //   } catch (err) {
-  //     toast.error('Failed to generate PDF.');
-  //   }
-  // };
+      const transactionData = response.data?.data;
+      if (!transactionData) {
+        toast.error('Transaction data not found.');
+        return;
+      }
+
+      const doc = new jsPDF();
+      doc.setFontSize(16);
+      doc.text('Transaction Receipt', 14, 20);
+
+      const tableData = [
+        ['Invoice ID', transactionData.invoiceId],
+        ['Service ID', transactionData.serviceId],
+        ['Transaction ID', transactionData.transactionId],
+        ['Customer Name', transactionData.customerName],
+        ['Sub Total', `INR  ${parseFloat(transactionData.subTotal || 0).toFixed(2)}`],
+        ['Discount', `INR  ${parseFloat(transactionData.discountAmount || 0).toFixed(2)}`],
+        ['CGST', `INR ${parseFloat(transactionData.cgst || 0).toFixed(2)}`],
+        ['SGST', `INR ${parseFloat(transactionData.sgst || 0).toFixed(2)}`],
+        ['Advance Amount', `INR  ${parseFloat(transactionData.advanceAmount || 0).toFixed(2)}`],
+        ['Total Amount', `INR  ${parseFloat(transactionData.totalAmount || 0).toFixed(2)}`],
+      ];
+
+      autoTable(doc, {
+        startY: 30,
+        head: [['Field', 'Value']],
+        body: tableData,
+        theme: 'grid',
+      });
+
+      doc.save(`Transaction-${transactionId}.pdf`);
+    } catch (err) {
+      toast.error('Failed to generate PDF.');
+      console.error(err);
+    }
+  };
+
 
   const isNoRecords = (debouncedSearch || statusFilter) && transactions.length === 0;
   const isEmptyState = !debouncedSearch && !statusFilter && transactions.length === 0;
@@ -208,7 +230,7 @@ const TransactionList = ({ userId, apiUrl, tableHeadings, filters, renderRow }) 
                   ) : (
                     transactions.map((transaction, index) =>
                       renderRow(transaction, index, currentPage, itemsPerPage,
-                        //  () => handleDownload(transaction)
+                        () => handleDownload(transaction)
                       )
                     )
                   )}

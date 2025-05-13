@@ -21,6 +21,7 @@ const ViewInvoice = () => {
 
   const companyName = sessionStorage.getItem("companyName");
   const companyLocation = sessionStorage.getItem("companyLocation");
+  const userRole = sessionStorage.getItem("userRole");
 
   useEffect(() => {
     const fetchInvoiceDetails = async () => {
@@ -30,7 +31,7 @@ const ViewInvoice = () => {
         return;
       }
 
-      if (!invoiceDetails?.id) {
+      if (!invoiceDetails?.invoiceId) {
         toast.error("Invoice details not available.");
         setIsLoading(false);
         return;
@@ -38,7 +39,7 @@ const ViewInvoice = () => {
 
       try {
         const response = await axios.get(
-          `${API_BASE_URL}/paymentMaster/getInvoiceMasterByInvoiceId/${invoiceDetails.id}`,
+          `${API_BASE_URL}/paymentMaster/getInvoiceMasterByInvoiceId/${invoiceDetails.invoiceId}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -79,7 +80,6 @@ const ViewInvoice = () => {
     return (
       <>
         <ToastContainer position="top-center" autoClose={1000} hideProgressBar={true} theme="light" />
-        <div className="error-message">Invoice data not found.</div>
       </>
     );
   }
@@ -126,6 +126,12 @@ const ViewInvoice = () => {
     dueAmount: invoiceData?.data?.dueAmount || "0",
   };
 
+  const handleDownload = (e) => {
+    e.preventDefault();
+    window.print();
+  };
+
+
   return (
     <>
       <section className="invoice-container">
@@ -134,7 +140,12 @@ const ViewInvoice = () => {
             <IoMdArrowRoundBack onClick={handleBack} />
             <h5>Invoice</h5>
           </div>
-          <button type="button" className="add-button" onClick={handleSend}>Send</button>
+
+          {userRole === "Customer" ? (
+            <button type="button" className="add-button" onClick={handleDownload}>Download</button>
+          ) : (
+            <button type="button" className="add-button" onClick={handleSend}>Send</button>
+          )}
         </div>
 
         <div className="invoice-pdf">

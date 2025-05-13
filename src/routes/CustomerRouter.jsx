@@ -23,7 +23,7 @@ const ActivityList = lazy(() => import("../pages/Customer/Modules/Activity/Custo
 const DailyActivity = lazy(() => import("../components/ActivityStepper/ActivityStepper"));
 
 const InvoiceList = lazy(() => import("../pages/Customer/Modules/Invoice/CustomerInvoice/CustomerInvoice"));
-const ViewInvoice = lazy(() => import("../pages/Customer/Modules/Invoice/ViewInvoice/ViewInvoice"));
+const ViewInvoice = lazy(() => import("../pages/Advisor/Modules/Invoice/ViewInvoice/ViewInvoice"));
 
 const TransactionList = lazy(() => import("../pages/Customer/Modules/CustomerTransaction/CustomerTransaction"));
 const UserProfile = lazy(() => import("../components/UserProfile/UserProfile"));

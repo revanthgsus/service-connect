@@ -30,7 +30,7 @@
 
 .invoice-container .invoice-details {
   justify-content: space-between;
-  align-items: center;
+  align-items: baseline;
   padding: 30px 0px 20px 0px;
 }
 
