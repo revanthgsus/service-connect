@@ -1,0 +1,85 @@
+.revenuegraph {
+  box-shadow: var(--shadow-color);
+  border-radius: 5px;
+  padding: 25px 15px 15px 15px;
+  border: 1px solid var(--border-color);
+  background: var(--graph-color)
+}
+
+.revenuegraph .apexcharts-title-text {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.revenuegraph .chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 10px;
+}
+
+.revenuegraph .chart-select {
+  border-radius: 5px;
+  outline: 1px solid transparent;
+  box-shadow: rgba(149, 157, 165, 0.15) 0px 5px 20px;
+  color: var(--text-color);
+  background-color: var(--input-color);
+  cursor: pointer;
+  height: 41px;
+}
+
+.revenuegraph .chart-header h6 {
+  color: var(--text-color);
+  margin-bottom: 0px;
+}
+
+.revenuegraph .multi-tabs {
+  font-family: var(--font-family);
+  padding: 8px 5px;
+  color: var(--sub-text-color);
+  text-transform: capitalize;
+  min-height: 30px;
+  min-width: 65px;
+  margin: 5px 5px;
+  font-size: 12px;
+}
+
+.revenuegraph .Mui-selected {
+  color: #006268 !important;
+  background: #e8f3f4;
+  border-radius: 5px;
+}
+
+@media only screen and (max-width:575px) {
+  .revenuegraph {
+    margin-bottom: 20px;
+  }
+
+  .revenuegraph .chart-header {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 15px;
+  }
+
+  .revenuegraph .chart-header h6 {
+    margin-bottom: 10px;
+  }
+}
+
+@media only screen and (min-width:576px) and (max-width:768px) {
+  .revenuegraph {
+    margin-bottom: 20px;
+  }
+}
+
+@media only screen and (min-width:769px) and (max-width:1200px) {
+  .revenuegraph {
+    margin-bottom: 20px;
+  }
+}
+
+@media only screen and (min-width:1400px) {
+  .revenuegraph {
+    padding: 30px 30px;
+  }
+}

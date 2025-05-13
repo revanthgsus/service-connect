@@ -1,0 +1,128 @@
+.service-records .table-list {
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-color);
+  border-radius: 5px;
+  background-color: var(--navbar-color);
+}
+
+.service-records .list-top {
+  color: var(--text-color);
+  margin: 20px 20px;
+}
+
+.manager-heading {
+  color: var(--text-color);
+  margin-bottom: 0px;
+}
+
+.service-records .records-table {
+  width: 100%;
+}
+
+.service-records .table-align {
+  background: var(--main-btn-color);
+  color: #ffffff;
+}
+
+.service-records .list-alignment {
+  overflow-x: auto;
+}
+
+.service-records .list-alignment::-webkit-scrollbar {
+  background: inherit;
+  border-radius: 0px;
+  height: 7px;
+}
+
+.service-records .list-alignment::-webkit-scrollbar-track {
+  background: #ffffff;
+  border-radius: 10px;
+}
+
+.service-records .list-alignment::-webkit-scrollbar-thumb {
+  background: #d6d6d6;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.service-records .list-alignment::-webkit-scrollbar-thumb:hover {
+  background: #bfbfbf;
+}
+
+.service-records .table-heading {
+  padding: 20px 15px;
+  font-weight: 500;
+  text-align: start;
+  white-space: nowrap;
+}
+
+.service-records .list-item td {
+  padding: 15px 15px;
+  color: var(--text-color);
+  text-align: start;
+  white-space: nowrap;
+}
+
+.service-records .list-item {
+  border-bottom: 1px solid var(--border-color)
+}
+
+.service-records .list-item:last-child {
+  border-bottom: none;
+}
+
+.service-records .no-data td,
+.empty-data td {
+  padding: 30px 25px;
+  color: var(--text-color);
+  text-align: center;
+  font-weight: 400;
+}
+
+.service-records .no-data h6 {
+  padding: 15px 0px 5px 0px;
+}
+
+.service-records .pagination-align {
+  padding: 15px 0px;
+  float: right;
+}
+
+.service-records .list-item td:first-child {
+  text-align: center;
+}
+
+.service-records .status {
+  padding: 3px 10px;
+  border-radius: 100px;
+  width: 85px;
+  text-align: center;
+  display: inline-block;
+}
+
+.service-records .status.active {
+  background-color: #d7f6e4;
+  color: #00A956;
+}
+
+.service-records .status.inactive {
+  background-color: #FFE3E0;
+  color: #FF4426;
+}
+
+@media only screen and (max-width:575px) {}
+
+@media only screen and (min-width: 576px) and (max-width: 768px) {}
+
+@media only screen and (min-width:1200px) and (max-width:1399px) {
+  .service-records .table-heading {
+    font-size: 14px;
+  }
+
+  .service-records .list-item td {
+    font-size: 13px;
+    padding: 10px 15px;
+  }
+}
+
+@media only screen and (min-width:1400px) {}

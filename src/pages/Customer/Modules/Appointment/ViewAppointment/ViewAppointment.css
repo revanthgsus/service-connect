@@ -1,0 +1,121 @@
+.appointment-summary .appointment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 15px;
+}
+
+.appointment-summary .header {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.appointment-summary .header svg {
+  font-size: 20px;
+  color: var(--text-color);
+  cursor: pointer;
+}
+
+.appointment-summary .header svg:hover {
+  transform: scale(1.1);
+  transition: .3s linear all;
+}
+
+.appointment-summary .header h5 {
+  margin-bottom: 0px;
+  color: var(--text-color);
+}
+
+.appointment-summary .appointment-data {
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-color);
+  border-radius: 5px;
+  background-color: var(--navbar-color);
+}
+
+.appointment-summary .app-heading {
+  color: #ffffff;
+  background: var(--main-btn-color);
+  margin-bottom: 0px;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  padding: 20px 35px;
+}
+
+.appointment-summary .view-fields {
+  padding: 20px 25px;
+}
+
+.appointment-summary .input-wrapper {
+  margin-bottom: 20px;
+}
+
+.appointment-summary .input-field h6 {
+  color: var(--text-color);
+  padding: 5px 0px;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.appointment-summary .input-field p {
+  margin-bottom: 0px;
+  color: var(--sub-text-color);
+  font-size: 14px;
+}
+
+.appointment-summary .complaint-details {
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-color);
+  border-radius: 5px;
+  background-color: var(--navbar-color);
+}
+
+.appointment-summary .complaint-item {
+  padding: 20px 25px;
+}
+
+.appointment-summary .complaint-item p {
+  color: var(--text-color);
+  margin-bottom: 0px;
+}
+
+.appointment-summary .remind-btn {
+  padding: 7px 20px;
+  border-radius: 30px;
+  border: 1px solid transparent;
+  background: #007d85e0;
+  color: #ffffff;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  font-size: 14px;
+}
+
+.appointment-summary .remind-btn:hover {
+  background: #007d85;
+  transition: .3s ease-in-out all;
+}
+
+.appointment-summary .remind-btn:disabled {
+  cursor: not-allowed;
+  background: #dedede;
+  color: #8d8d8d;
+  box-shadow: none;
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1399px) {
+  .appointment-summary .header h5 {
+    font-size: 16px;
+  }
+
+  .appointment-summary .app-heading {
+    padding: 15px 25px;
+    font-size: 16px;
+  }
+}
+
+@media only screen and (min-width:1400px) {
+  .appointment-summary .input-wrapper {
+    margin-bottom: 30px;
+  }
+}

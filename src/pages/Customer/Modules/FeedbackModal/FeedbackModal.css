@@ -1,0 +1,114 @@
+.feedback-popup .modal-body {
+  text-align: center;
+  padding: 0px 50px 20px 50px;
+}
+
+.feedback-popup .modal-footer {
+  display: flex;
+  justify-content: center;
+  padding: 20px 50px 40px 50px;
+}
+
+.feedback-popup .modal-header .btn-close {
+  font-size: 12px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  margin-right: 5px;
+}
+
+@keyframes zoomIn {
+  0% {
+    transform: scale(0.2);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.feedback-popup .modal-dialog {
+  animation: zoomIn 0.3s ease-in-out;
+}
+
+.feedback-popup .feedback-btn {
+  background-color: #007d85;
+  border: 1px solid #0000;
+  border-radius: 30px;
+  color: #fff;
+  padding: 8px;
+  width: 100%;
+  cursor: pointer;
+  margin: 0px;
+  transition: all .2s ease-in-out;
+}
+
+.feedback-popup .feedback-btn:hover {
+  background-color: #007078;
+  transition: all .3s ease-in-out;
+}
+
+.feedback-popup .feedback-btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.feedback-popup .text-area {
+  padding: 15px 20px;
+  resize: none;
+  border: 1px solid #b9b9b9;
+  margin-top: 20px;
+}
+
+.feedback-popup .text-area::placeholder {
+  color: #888888;
+  opacity: 1;
+}
+
+.feedback-popup .text-area:hover {
+  border: 1px solid #01848d;
+  transition: all .2s ease-in-out;
+}
+
+.feedback-popup .text-area:focus-visible {
+  box-shadow: none;
+  outline: 1px solid #01848d;
+}
+
+@media only screen and (Max-width:575px) {
+  .feedback-popup .modal-body {
+    padding: 0px 20px 10px 20px;
+  }
+
+  .feedback-popup .modal-footer {
+    padding: 20px 20px 40px 20px;
+  }
+}
+
+@media only screen and (min-width:576px) and (max-width:767px) {
+  .feedback-popup .modal-dialog {
+    width: 450px;
+  }
+}
+
+@media only screen and (min-width:768px) and (max-width:1119px) {
+  .feedback-popup .modal-dialog {
+    width: 450px;
+  }
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1399px) {
+  .feedback-popup .modal-body p {
+    font-size: 14px;
+  }
+
+  .feedback-popup .text-area {
+    font-size: 14px;
+  }
+
+  .feedback-popup .modal-dialog {
+    width: 460px;
+  }
+}

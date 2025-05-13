@@ -1,0 +1,31 @@
+.service-data {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* border: 1px solid var(--border-color); */
+  box-shadow: var(--shadow-color);
+  border-radius: 5px;
+  padding: 10px 20px;
+  height: 100%;
+  background: var(--navbar-color);
+}
+
+.completed-data {
+  display: flex;
+  justify-content: space-between;
+}
+
+.completed-icon {
+  background-color: #7DB300;
+  border-radius: 50%;
+  display: block;
+  padding: 5px;
+}
+
+.data-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  color: var(--text-color);
+}

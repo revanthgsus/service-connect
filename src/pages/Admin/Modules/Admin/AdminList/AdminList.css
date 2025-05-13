@@ -1,0 +1,375 @@
+.admin-heading {
+  color: var(--text-color);
+  margin-bottom: 0px;
+}
+
+.admin-list .add-button {
+  padding: 10px 15px;
+  border-radius: 30px;
+  border: 1px solid transparent;
+  background: var(--main-btn-color);
+  color: #ffffff;
+  box-shadow: var(--shadow-color);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.admin-list .add-button::after {
+  background: #fff;
+  content: "";
+  height: 100px;
+  opacity: 0;
+  position: absolute;
+  top: -35px;
+  transform: rotate(35deg);
+  transition: all 2s cubic-bezier(0.22, 1, 0.22, 1);
+  width: 30px;
+  left: 0%;
+}
+
+.admin-list .add-button:hover::after {
+  left: 120%;
+  opacity: 0.5;
+}
+
+.admin-list .add-button:hover {
+  background-color: #028d96;
+  transform: scale(1.02);
+  transition: .2s linear all;
+}
+
+.admin-list .top-alignment {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  flex-wrap: wrap;
+}
+
+.admin-list .admin-table {
+  width: 100%;
+}
+
+.admin-list .table-align {
+  background: var(--main-btn-color);
+  color: #ffffff;
+}
+
+.admin-list .list-alignment {
+  overflow-x: auto;
+}
+
+.admin-list .list-alignment::-webkit-scrollbar {
+  background: inherit;
+  border-radius: 0px;
+  height: 7px;
+}
+
+.admin-list .list-alignment::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 10px;
+}
+
+.admin-list .list-alignment::-webkit-scrollbar-thumb {
+  background: #d6d6d6;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.admin-list .list-alignment::-webkit-scrollbar-thumb:hover {
+  background: #bfbfbf;
+}
+
+.admin-list .table-list {
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-color);
+  border-radius: 5px;
+  background-color: var(--navbar-color);
+}
+
+.admin-list .table-heading {
+  padding: 20px 15px;
+  font-weight: 500;
+  text-align: start;
+  white-space: nowrap;
+}
+
+.admin-list .table-heading:first-child {
+  text-align: center;
+}
+
+.admin-list .table-heading:nth-last-child(2) {
+  text-align: center;
+}
+
+.admin-list .list-item td {
+  padding: 15px 15px;
+  color: var(--text-color);
+  text-align: start;
+  white-space: nowrap;
+}
+
+.admin-list .add-button svg {
+  color: #ffffff;
+  font-size: 18px;
+  margin-right: 5px;
+  vertical-align: text-bottom;
+}
+
+.admin-list .search-input {
+  border: 1px solid var(--input-border-color);
+  padding: 8px 35px 8px 20px;
+  border-radius: 20px;
+  outline: 1px solid transparent;
+  color: var(--text-color);
+  width: 100%;
+  font-size: 14px;
+  background-color: var(--input-color);
+}
+
+.admin-list .search-input::placeholder {
+  color: var(--placeholder-color);
+  font-weight: 400;
+}
+
+.admin-list .search-wrapper {
+  position: relative;
+  max-width: 100%;
+  width: 40%;
+  margin: 20px 20px;
+}
+
+.admin-list .search-icon {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: var(--input-icon-color);
+}
+
+.admin-list .list-item {
+  border-bottom: 1px solid var(--border-color)
+}
+
+.admin-list .list-item:last-child {
+  border-bottom: none;
+}
+
+.admin-list .no-data td,
+.admin-list .empty-data td {
+  padding: 30px 25px;
+  color: var(--text-color);
+  text-align: center;
+  font-weight: 400;
+}
+
+.admin-list .no-data h5 {
+  padding: 15px 0px 5px 0px;
+}
+
+.admin-list .no-data p,
+.admin-list .empty-data p {
+  color: var(--sub-text-color);
+}
+
+.admin-list .status-wrapper {
+  position: relative;
+  max-width: 100%;
+  width: 150px;
+  margin: 15px 15px;
+  display: inline-block;
+}
+
+.admin-list .select-container {
+  position: relative;
+}
+
+.admin-list .status-select {
+  border: 1px solid var(--input-border-color);
+  padding: 8px 20px;
+  border-radius: 20px;
+  outline: 1px solid transparent;
+  color: var(--text-color);
+  width: 100%;
+  font-size: 14px;
+  appearance: none;
+  background-color: var(--input-color);
+  cursor: pointer;
+}
+
+.admin-list .arrow-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  pointer-events: none;
+  color: var(--input-icon-color);
+}
+
+.admin-list .list-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.admin-list .pagination-align {
+  padding: 15px 0px;
+  float: right;
+}
+
+.admin-list .list-item td:first-child {
+  text-align: center;
+}
+
+.admin-list .list-item td:last-child {
+  display: flex;
+  justify-content: center;
+}
+
+.admin-list .status {
+  padding: 3px 10px;
+  border-radius: 100px;
+  width: 100px;
+  margin: auto;
+  text-align: center;
+  display: block;
+}
+
+.admin-list .status.active {
+  background-color: #d7f6e4;
+  color: #00A956;
+}
+
+.admin-list .status.inactive {
+  background-color: #FFE3E0;
+  color: #FF4426;
+}
+
+.admin-list .edit-icon {
+  background-color: var(--actions-color);
+  padding: 7px 10px;
+  border-radius: 3px;
+  display: inline-block;
+  color: var(--actions-icon-color);
+  cursor: pointer;
+}
+
+.admin-list .edit-icon:hover {
+  background-color: #048088;
+  color: white;
+  transition: 0.3s ease-in-out all;
+}
+
+.admin-list .edit-icon:hover svg {
+  transform: scale(1.2)
+}
+
+.admin-list .delete-icon {
+  background-color: var(--actions-color);
+  padding: 7px 10px;
+  border-radius: 3px;
+  display: inline-block;
+  margin: 0px 15px;
+  color: var(--actions-icon-color);
+  cursor: pointer;
+}
+
+.admin-list .delete-icon:hover {
+  background-color: #fb5454;
+  color: white;
+  transition: 0.3s ease-in-out all;
+}
+
+.admin-list .delete-icon:hover svg {
+  transform: scale(1.2);
+}
+
+@media only screen and (max-width:575px) {
+  .admin-list .list-top {
+    display: block;
+  }
+
+  .admin-list .search-wrapper,
+  .admin-list .search-wrapper {
+    margin: 15px auto;
+    width: 90%;
+  }
+
+  .admin-list .status-wrapper {
+    display: flex;
+    width: 90%;
+    margin: 15px auto;
+  }
+
+  .admin-list .select-container {
+    width: 100%;
+  }
+
+  .admin-list .add-button {
+    margin-top: 10px;
+  }
+
+}
+
+@media only screen and (min-width: 576px) and (max-width: 768px) {
+  .admin-list .add-button {
+    font-size: 12px;
+    padding: 8px 12px;
+  }
+
+  .admin-list .search-wrapper {
+    margin: 20px 15px;
+    width: 90%;
+  }
+
+  .admin-list .status-wrapper {
+    margin: 20px 15px;
+  }
+
+  .admin-list .list-top {
+    display: flex;
+  }
+}
+
+@media only screen and (min-width:1200px) and (max-width:1399px) {
+  .admin-list .table-heading {
+    font-size: 14px;
+  }
+
+  .admin-list .list-item td {
+    font-size: 13px;
+    padding: 10px 15px;
+  }
+
+  .admin-list .add-button {
+    padding: 8px 15px;
+  }
+}
+
+@media only screen and (min-width:1400px) {
+  .admin-list .search-input {
+    font-size: 14px;
+  }
+
+  .admin-list .status-select {
+    font-size: 12px;
+  }
+
+  .admin-list .top-alignment {
+    margin-bottom: 20px;
+  }
+
+  .admin-list .status-wrapper {
+    margin: 30px 30px;
+  }
+
+  .admin-list .search-wrapper {
+    margin: 30px 30px;
+    width: 30%;
+  }
+}

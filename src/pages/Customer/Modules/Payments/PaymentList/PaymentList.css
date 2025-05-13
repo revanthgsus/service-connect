@@ -1,0 +1,274 @@
+.payment-heading {
+  font-family: 'Be Vietnam Pro', sans-serif;
+  color: var(--text-color);
+  margin-bottom: 15px;
+  line-height: 38px;
+}
+
+.payment-list .list-alignment {
+  overflow-x: auto;
+}
+
+.payment-list .list-alignment::-webkit-scrollbar {
+  display: none;
+}
+
+.payment-list .payment-table {
+  width: 100%;
+}
+
+.payment-list .table-align {
+  background: var(--main-btn-color);
+  color: #ffffff;
+}
+
+.payment-list .table-list {
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-color);
+  border-radius: 5px;
+  background-color: var(--navbar-color);
+  overflow-x: auto;
+}
+
+.payment-list .table-heading {
+  padding: 20px 15px;
+  font-weight: 500;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  text-align: start;
+  white-space: nowrap;
+}
+
+.payment-list .table-heading:nth-last-child(3) {
+  text-align: center;
+}
+
+.payment-list .list-item td {
+  padding: 15px 15px;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  color: var(--text-color);
+  text-align: start;
+  white-space: nowrap;
+}
+
+.payment-list .search-input {
+  border: 1px solid var(--input-border-color);
+  padding: 8px 20px;
+  border-radius: 20px;
+  outline: 1px solid transparent;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  color: var(--text-color);
+  width: 100%;
+  font-size: 14px;
+  background-color: var(--input-color);
+}
+
+.payment-list .search-input::placeholder {
+  color: var(--placeholder-color);
+  font-weight: 400;
+}
+
+.payment-list .search-wrapper {
+  position: relative;
+  max-width: 100%;
+  width: 40%;
+  margin: 20px 20px;
+}
+
+.payment-list .search-icon {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: var(--input-icon-color);
+}
+
+.payment-list .list-item {
+  border-bottom: 1px solid var(--border-color)
+}
+
+.payment-list .no-data td {
+  padding: 30px 25px;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  color: var(--text-color);
+  text-align: center;
+}
+
+.payment-list .no-data h5 {
+  padding: 15px 0px 5px 0px;
+}
+
+.payment-list .status-wrapper {
+  position: relative;
+  max-width: 100%;
+  width: 150px;
+  margin: 20px 20px;
+  display: inline-block;
+}
+
+.payment-list .select-container {
+  position: relative;
+}
+
+.payment-list .status-select {
+  border: 1px solid var(--input-border-color);
+  padding: 8px 20px;
+  border-radius: 20px;
+  outline: 1px solid transparent;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  color: var(--text-color);
+  width: 100%;
+  font-size: 14px;
+  appearance: none;
+  background-color: var(--input-color);
+  cursor: pointer;
+}
+
+.payment-list .arrow-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  pointer-events: none;
+  color: var(--input-icon-color);
+}
+
+.payment-list .list-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.payment-list .pagination-align {
+  padding: 15px 0px;
+  float: right;
+}
+
+.payment-list .list-item td:first-child {
+  text-align: center;
+}
+
+.payment-list .status {
+  padding: 3px 10px;
+  border-radius: 100px;
+  width: 100%;
+  text-align: center;
+  display: inline-block;
+}
+
+.payment-list .status.paid {
+  background-color: #d7f6e4;
+  color: #00A956;
+}
+
+.payment-list .status.unpaid {
+  background-color: #FFE3E0;
+  color: #FF4426;
+}
+
+.payment-list .view-icon {
+  background-color: var(--actions-color);
+  padding: 7px 10px;
+  border-radius: 3px;
+  transition: 0.3s ease-out all;
+  display: inline-block;
+  color: var(--actions-icon-color);
+}
+
+.payment-list .view-icon:hover {
+  background-color: #048088;
+  color: white;
+  transition: 0.3s linear all;
+}
+
+.payment-list .view-icon:hover svg {
+  transform: scale(1.2)
+}
+
+.css-1l5xwdx-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected {
+  background-color: #02858D !important;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  color: #ffffff;
+}
+
+.css-8uzxat-MuiSvgIcon-root-MuiPaginationItem-icon {
+  color: var(--text-color);
+}
+
+@media only screen and (max-width:575px) {
+  .payment-list .list-top {
+    display: block;
+  }
+
+  .payment-list .search-wrapper,
+  .payment-list .search-wrapper {
+    margin: 15px auto;
+    width: 90%;
+  }
+
+  .payment-list .status-wrapper {
+    display: none;
+  }
+
+  .payment-heading {
+    line-height: 52px;
+  }
+
+}
+
+@media only screen and (min-width: 576px) and (max-width: 768px) {
+  .payment-list .search-wrapper {
+    margin: 20px 15px;
+    width: 90%;
+  }
+
+  .payment-list .status-wrapper {
+    margin: 20px 15px;
+  }
+
+  .payment-list .list-top {
+    display: flex;
+  }
+
+  .payment-heading {
+    line-height: 37px;
+  }
+}
+
+@media only screen and (min-width:1200px) and (max-width:1399px) {
+  .payment-list .table-heading {
+    font-size: 14px;
+  }
+
+  .payment-list .list-item td {
+    font-size: 13px;
+    padding: 10px 15px;
+  }
+
+  .payment-heading {
+    line-height: 40px;
+  }
+}
+
+@media only screen and (min-width:1400px) {
+  .payment-list .search-input {
+    font-size: 14px;
+  }
+
+  .payment-list .status-select {
+    font-size: 12px;
+  }
+
+  .payment-list .status-wrapper {
+    margin: 30px 30px;
+  }
+
+  .payment-list .search-wrapper {
+    margin: 30px 30px;
+  }
+
+  .payment-heading {
+    line-height: 47px;
+  }
+}

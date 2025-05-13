@@ -1,0 +1,213 @@
+.additional-container .heading-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.additional-container .additional-header {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.additional-container .additional-header svg {
+  font-size: 20px;
+  color: var(--text-color);
+  cursor: pointer;
+}
+
+.additional-container .additional-header h5 {
+  margin-bottom: 0px;
+  color: var(--text-color);
+}
+
+.additional-container .add-more-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  cursor: pointer;
+  background: #fdfdfd;
+  border-radius: 30px;
+  padding: 10px 15px;
+  border: 1px solid #979797;
+}
+
+.additional-container .add-more-btn h5 {
+  color: #2b2b2b;
+  font-size: 14px;
+  margin-bottom: 0px;
+}
+
+.additional-container .add-more-btn:hover {
+  background: #f2f2f2;
+}
+
+.additional-container .image-container {
+  border: 1.5px solid #8a8a8a;
+  border-style: dashed;
+  display: flex;
+  justify-content: center;
+  border-radius: 5px;
+  padding: 80px 30px;
+  cursor: pointer;
+  background: #ffffff17;
+  text-align: center;
+  overflow: hidden;
+  height: 350px;
+}
+
+.additional-container .image-section {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.additional-container .default-icon {
+  font-size: 25px;
+  color: #007d85;
+  margin: auto;
+  display: block;
+}
+
+.additional-container .uploaded-image {
+  width: 300px;
+  height: 250px;
+  border-radius: 5px;
+  object-fit: contain;
+  overflow: hidden;
+}
+
+.additional-container input[type="file"] {
+  display: none;
+}
+
+.additional-container .file-size-info {
+  font-size: 14px;
+  color: var(--text-color);
+  margin-top: 10px;
+  text-align: center;
+  margin-bottom: 0px;
+}
+
+.additional-container .file-info-btn {
+  font-size: 14px;
+  margin-top: 10px;
+  border: 1px solid #0000;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  padding: 7px 15px;
+  background: #009ba5;
+}
+
+.additional-container .file-info-btn:hover {
+  background: #007d85;
+  transition: .3s linear all;
+}
+
+.additional-container .additional-image .close-icon {
+  font-size: 25px;
+  color: #ff4c4c;
+}
+
+.additional-container .close-icon:hover {
+  color: red;
+}
+
+.additional-container .uploaded-image-container {
+  position: relative;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
+.additional-container .form-control {
+  background-color: var(--navbar-color);
+  border: 1px solid #858585;
+  border-radius: 5px;
+  color: var(--text-color);
+  padding: 8px 15px;
+  width: 100%;
+}
+
+.additional-container .form-control::placeholder {
+  color: var(--placeholder-color);
+}
+
+.additional-container .form-control:hover {
+  border: 1px solid #01848d;
+  transition: all .2s linear;
+}
+
+.additional-container .form-control:focus-visible {
+  box-shadow: none;
+  outline: 1px solid #01848d;
+}
+
+.additional-container .fees-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.additional-container .fee-input {
+  width: 100%;
+}
+
+.additional-container .form-group .text-area {
+  resize: none;
+}
+
+.additional-container .form-group {
+  margin-bottom: 10px;
+}
+
+.additional-container .send-btn {
+  background: #00919b;
+  border: 1px solid #0000;
+  border-radius: 30px;
+  color: #fff;
+  cursor: pointer;
+  padding: 6px 20px;
+  margin: 15px 0px;
+  display: flex;
+  justify-content: end;
+  margin-left: auto;
+}
+
+.additional-container .send-btn:hover {
+  background: #007d85;
+  transition: .2s linear all;
+}
+
+@media only screen and (max-width:575px) {
+  .additional-container .fees-container {
+    display: block;
+  }
+
+  .additional-container .fee-input {
+    margin-bottom: 10px;
+  }
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1399px) {
+  .additional-container .additional-header h5 {
+    font-size: 16px;
+  }
+
+  .additional-container .form-control {
+    font-size: 14px;
+    padding: 8px 10px;
+  }
+
+  .additional-container .form-group {
+    font-size: 14px;
+  }
+}

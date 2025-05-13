@@ -1,0 +1,150 @@
+.Logout-popup .modal-dialog {
+  font-family: 'Be Vietnam Pro', sans-serif;
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logout-popup-icon {
+  margin: auto;
+  height: fit-content;
+  margin-bottom: 15px;
+}
+
+.Logout-popup .modal-header {
+  padding: 40px 30px 10px 30px;
+}
+
+.Logout-popup .modal-body {
+  text-align: center;
+  padding: 20px 30px 20px 30px;
+}
+
+.Logout-popup .modal-footer {
+  display: flex;
+  justify-content: center;
+  padding: 0px 30px 40px 30px;
+}
+
+.logout-actions-btn {
+  width: 100%;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.logout-actions-btn .cancel-btn {
+  padding: 10px 10px;
+  border-radius: 30px;
+  border: 1px solid transparent;
+  background-color: #EEEEEE;
+  color: #131313;
+  width: 100%;
+}
+
+.logout-actions-btn .logout-btn {
+  padding: 10px 10px;
+  border-radius: 30px;
+  border: 1px solid transparent;
+  background: linear-gradient(90deg,
+      rgba(1, 127, 135, 1) 0%,
+      rgba(0, 134, 143, 1) 25%,
+      rgba(1, 134, 143, 1) 50%,
+      rgba(2, 146, 154, 1) 75%,
+      rgba(3, 131, 139, 1) 100%);
+  color: white;
+  width: 100%;
+}
+
+.Logout-popup .cancel-btn:hover {
+  background-color: #d5d5d5;
+  transition: .3s linear all;
+}
+
+.Logout-popup .logout-btn:hover {
+  background-color: #007D85;
+  transition: .3s linear all;
+}
+
+@keyframes zoomIn {
+  0% {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.Logout-popup .modal-dialog {
+  animation: zoomIn 0.3s ease-out;
+}
+
+.Logout-popup .modal-header .btn-close {
+  font-size: 12px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+@media only screen and (Max-width:575px) {
+  .Logout-popup .modal-body {
+    padding: 0px 20px 10px 20px;
+  }
+
+  .Logout-popup .modal-footer {
+    padding: 0px 20px 40px 20px;
+  }
+}
+
+
+@media only screen and (min-width:576px) and (max-width:767px) {
+  .Logout-popup .modal-dialog {
+    width: 410px;
+  }
+
+}
+
+@media only screen and (min-width:768px) and (max-width:1119px) {
+  .Logout-popup .modal-dialog {
+    width: 410px;
+  }
+
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1399px) {
+  .Logout-popup .modal-dialog {
+    width: 420px;
+    max-width: 100%;
+  }
+
+  .Logout-popup .modal-body h5 {
+    font-size: 16px;
+  }
+
+  .Logout-popup .modal-body p {
+    font-size: 14px;
+  }
+
+  .Logout-popup .modal-body {
+    padding: 0px 30px 10px 30px;
+  }
+
+  .Logout-popup .modal-header {
+    padding: 30px 30px 10px 30px;
+  }
+
+  .Logout-popup .modal-footer {
+    padding: 0px 30px 30px 30px;
+  }
+
+  .logout-actions-btn .cancel-btn,
+  .logout-actions-btn .logout-btn {
+    padding: 8px 10px;
+    font-size: 14px;
+  }
+
+}

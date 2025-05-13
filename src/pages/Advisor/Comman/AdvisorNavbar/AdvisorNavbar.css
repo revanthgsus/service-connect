@@ -1,0 +1,103 @@
+.advisor-navbar {
+  padding: 0px;
+  box-shadow: var(--shadow-color);
+  background-color: var(--navbar-color);
+}
+
+.advisor-navbar .custom-logo {
+  width: 100px;
+  height: auto;
+  display: block;
+}
+
+.advisor-navbar .mobile-logo {
+  display: none;
+}
+
+.advisor-navbar .notification path {
+  color: var(--icon-color);
+}
+
+.advisor-navbar .messages path {
+  color: var(--icon-color);
+}
+
+.advisor-navbar .moon-icon path {
+  color: var(--icon-color);
+}
+
+.advisor-navbar .sun-icon {
+  color: var(--icon-color);
+  animation: rotate-sun .3s ease-in-out;
+}
+
+@keyframes rotate-sun {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(90deg);
+  }
+}
+
+.advisor-navbar .profile-icon path {
+  color: var(--icon-color);
+}
+
+.advisor-navbar .navbar-brand {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 65px;
+}
+
+.advisor-navbar .navbar-icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.advisor-navbar .navbar-icons button:hover {
+  background-color: var(--hover-color);
+  transition: .3s linear all;
+}
+
+.advisor-navbar .navbar-icons button:hover svg path {
+  color: var(--dark-hover-color);
+}
+
+.advisor-navbar .custom-tooltip {
+  font-size: 12px;
+  padding: 5px 10px;
+}
+
+@media only screen and (max-width:768px) {
+  .advisor-navbar .navbar-brand {
+    gap: 0px;
+    padding: 15px 0px;
+    margin-right: 0px;
+  }
+
+  .advisor-navbar .custom-logo {
+    display: none;
+  }
+
+  .advisor-navbar .mobile-logo {
+    display: block;
+    width: 35px;
+  }
+}
+
+@media only screen and (min-width:769px) and (max-width: 992px) {
+  .advisor-navbar .navbar-brand {
+    gap: unset;
+  }
+}
+
+@media screen and (min-width:1400px) {
+  .advisor-navbar .navbar-brand {
+    gap: 100px;
+  }
+}

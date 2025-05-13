@@ -1,0 +1,126 @@
+.reject-popup .modal-dialog {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 450px;
+}
+
+.reject-popup .modal-body {
+  text-align: center;
+  padding: 0px 30px 20px 30px;
+}
+
+.reject-popup .modal-footer {
+  display: flex;
+  justify-content: center;
+  padding: 20px 30px 40px 30px;
+}
+
+.reject-popup .modal-header .btn-close {
+  font-size: 12px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  margin-right: 5px;
+}
+
+.reject-popup .cancel-btn:hover {
+  background-color: #d5d5d5;
+  transition: .3s ease-in-out all;
+}
+
+@keyframes zoomIn {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.reject-popup .modal-dialog {
+  animation: zoomIn 0.3s ease-out;
+}
+
+.reject-popup .reject-btn {
+  background-color: #007d85;
+  border: 1px solid #0000;
+  border-radius: 30px;
+  color: #fff;
+  padding: 10px;
+  width: 100%;
+  cursor: pointer;
+}
+
+.reject-popup .reject-btn:hover {
+  background-color: #007078;
+  transition: all .3s ease-in-out;
+}
+
+.reject-popup .reject-btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.reject-popup .text-area {
+  padding: 15px 20px;
+  resize: none;
+  border: 1px solid #9f9f9f;
+}
+
+.reject-popup .text-area:hover {
+  border: 1px solid #01848d;
+  transition: all .2s ease-in-out;
+}
+
+.reject-popup .text-area[readonly] {
+  border: 1px solid #9f9f9f;
+  background-color: #f8f9fa;
+}
+
+.reject-popup .text-area[readonly]:hover,
+.reject-popup .text-area[readonly]:focus {
+  border: 1px solid #dadada;
+  background-color: #f8f9fa;
+  outline: none;
+}
+
+.reject-popup .text-area:focus-visible {
+  box-shadow: none;
+  outline: 1px solid #01848d;
+}
+
+@media only screen and (Max-width:575px) {
+  .reject-popup .modal-body {
+    padding: 0px 20px 10px 20px;
+  }
+
+  .reject-popup .modal-footer {
+    padding: 0px 20px 40px 20px;
+  }
+}
+
+@media only screen and (min-width:576px) and (max-width:767px) {
+  .reject-popup .modal-dialog {
+    width: 450px;
+  }
+}
+
+@media only screen and (min-width:768px) and (max-width:1119px) {
+  .reject-popup .modal-dialog {
+    width: 450px;
+  }
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1399px) {
+  .reject-popup .modal-body p {
+    font-size: 14px;
+  }
+
+  .reject-popup .modal-footer {
+    padding: 10px 30px 30px 30px;
+  }
+}

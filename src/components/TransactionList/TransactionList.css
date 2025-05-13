@@ -1,0 +1,287 @@
+.transaction-heading {
+  color: var(--text-color);
+  margin-bottom: 15px;
+  line-height: 38px;
+}
+
+.transaction-list .transaction-table {
+  width: 100%;
+}
+
+.transaction-list .table-align {
+  background: var(--main-btn-color);
+  color: #ffffff;
+}
+
+.transaction-list .list-alignment {
+  overflow-x: auto;
+}
+
+.transaction-list .list-alignment::-webkit-scrollbar {
+  background: inherit;
+  border-radius: 0px;
+  height: 7px;
+}
+
+.transaction-list .list-alignment::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 10px;
+}
+
+.transaction-list .list-alignment::-webkit-scrollbar-thumb {
+  background: #d6d6d6;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.transaction-list .list-alignment::-webkit-scrollbar-thumb:hover {
+  background: #bfbfbf;
+}
+
+.transaction-list .table-list {
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-color);
+  border-radius: 5px;
+  background-color: var(--navbar-color);
+}
+
+.transaction-list .table-heading {
+  padding: 20px 15px;
+  font-weight: 500;
+  text-align: start;
+  white-space: nowrap;
+}
+
+.transaction-list .table-heading:first-child {
+  text-align: center;
+}
+
+.transaction-list .table-heading:nth-last-child(2) {
+  text-align: center;
+}
+
+.transaction-list .list-item td {
+  padding: 15px 15px;
+  color: var(--text-color);
+  text-align: start;
+  white-space: nowrap;
+}
+
+.transaction-list .search-input {
+  border: 1px solid var(--input-border-color);
+  padding: 8px 30px 8px 20px;
+  border-radius: 20px;
+  outline: 1px solid transparent;
+  color: var(--text-color);
+  width: 100%;
+  font-size: 14px;
+  background-color: var(--input-color);
+}
+
+.transaction-list .search-input::placeholder {
+  color: var(--placeholder-color);
+  font-weight: 400;
+}
+
+.transaction-list .search-wrapper {
+  position: relative;
+  max-width: 100%;
+  width: 40%;
+  margin: 20px 20px;
+}
+
+.transaction-list .search-icon {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: var(--input-icon-color);
+}
+
+.transaction-list .list-item {
+  border-bottom: 1px solid var(--border-color)
+}
+
+.transaction-list .list-item:last-child {
+  border-bottom: none;
+}
+
+.transaction-list .no-data td,
+.transaction-list .empty-data td {
+  padding: 30px 25px;
+  color: var(--text-color);
+  text-align: center;
+  font-weight: 400;
+}
+
+.transaction-list .no-data h5 {
+  padding: 15px 0px 5px 0px;
+}
+
+.transaction-list .status-wrapper {
+  position: relative;
+  max-width: 100%;
+  width: 150px;
+  margin: 15px 15px;
+  display: inline-block;
+}
+
+.transaction-list .no-data p,
+.transaction-list .empty-data p {
+  color: var(--sub-text-color);
+}
+
+.transaction-list .select-container {
+  position: relative;
+}
+
+.transaction-list .status-select {
+  border: 1px solid var(--input-border-color);
+  padding: 8px 20px;
+  border-radius: 20px;
+  outline: 1px solid transparent;
+  color: var(--text-color);
+  width: 100%;
+  font-size: 14px;
+  appearance: none;
+  background-color: var(--input-color);
+  cursor: pointer;
+}
+
+.transaction-list .arrow-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  pointer-events: none;
+  color: var(--input-icon-color);
+}
+
+.transaction-list .list-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.transaction-list .pagination-align {
+  padding: 15px 0px;
+  float: right;
+}
+
+.transaction-list .list-item td:first-child {
+  text-align: center;
+}
+
+.transaction-list .list-item td:nth-last-child(2) {
+  text-align: center;
+}
+
+.transaction-list .download-icon {
+  background-color: var(--actions-color);
+  padding: 6px 8px;
+  border-radius: 3px;
+  transition: 0.3s ease-in-out all;
+  color: var(--actions-icon-color);
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.transaction-list .download-icon:hover {
+  background-color: #00737b;
+  transition: .3s ease-in-out all;
+  color: rgb(255, 255, 255);
+}
+
+.transaction-list .download-icon:hover svg {
+  transform: scale(1.2)
+}
+
+@media only screen and (max-width:575px) {
+  .transaction-list .list-top {
+    display: block;
+  }
+
+  .transaction-list .search-wrapper,
+  .transaction-list .search-wrapper {
+    margin: 15px auto;
+    width: 90%;
+  }
+
+  .transaction-list .status-wrapper {
+    display: flex;
+    width: 90%;
+    margin: 15px auto;
+  }
+
+  .transaction-list .select-container {
+    width: 100%;
+  }
+
+  .transaction-heading {
+    line-height: 52px;
+  }
+
+}
+
+@media only screen and (min-width: 576px) and (max-width: 768px) {
+  .transaction-list .search-wrapper {
+    margin: 20px 15px;
+    width: 90%;
+  }
+
+  .transaction-list .status-wrapper {
+    margin: 20px 15px;
+  }
+
+  .transaction-list .list-top {
+    display: flex;
+  }
+
+  .transaction-heading {
+    line-height: 37px;
+  }
+}
+
+@media only screen and (min-width:1200px) and (max-width:1399px) {
+  .transaction-list .table-heading {
+    font-size: 14px;
+  }
+
+  .transaction-list .list-item td {
+    font-size: 13px;
+    padding: 12px 15px;
+  }
+
+  .transaction-heading {
+    line-height: 40px;
+  }
+
+  .transaction-list .add-button {
+    padding: 8px 15px;
+  }
+}
+
+@media only screen and (min-width:1400px) {
+  .transaction-list .search-input {
+    font-size: 14px;
+  }
+
+  .transaction-list .status-select {
+    font-size: 12px;
+  }
+
+  .transaction-list .status-wrapper {
+    margin: 30px 30px;
+  }
+
+  .transaction-list .search-wrapper {
+    margin: 30px 30px;
+    width: 30%;
+  }
+
+  .transaction-heading {
+    line-height: 47px;
+  }
+}

@@ -1,0 +1,149 @@
+.warranty-popup .modal-header {
+  padding: 40px 30px 30px 30px;
+}
+
+.warranty-popup .modal-body {
+  text-align: center;
+  padding: 10px 50px 10px 50px;
+}
+
+.warranty-popup .modal-footer {
+  display: flex;
+  justify-content: center;
+  padding: 0px 30px 40px 30px;
+}
+
+.warranty-popup .modal-header h5 {
+  font-size: 16px;
+  color: #2e2e2e;
+  margin-bottom: 0px;
+}
+
+.warranty-popup .modal-header {
+  margin: auto;
+}
+
+.warranty-popup .btn-close {
+  position: absolute;
+  right: 30px;
+}
+
+.warranty-actions-btn {
+  width: 100%;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+/* send request btn */
+.warranty-actions-btn .request-btn {
+  padding: 8px 35px;
+  border-radius: 30px;
+  border: 1px solid transparent;
+  background-color: #007d85f0;
+  width: auto;
+  color: #ffffff;
+  font-size: 14px;
+}
+
+.warranty-actions-btn .request-btn:hover {
+  background-color: #007281;
+  transition: .3s ease-in-out all;
+}
+
+/* claim btn */
+.warranty-actions-btn .claim-btn {
+  padding: 8px 35px;
+  border-radius: 30px;
+  border: 1px solid transparent;
+  background-color: #007d85de;
+  color: #ffffff;
+  font-size: 14px;
+}
+
+.warranty-actions-btn .claim-btn:hover {
+  background-color: #007281;
+  transition: .3s ease-in-out all;
+}
+
+/* decline btn */
+.warranty-actions-btn .decline-btn {
+  padding: 8px 35px;
+  border-radius: 30px;
+  border: 1px solid #f93827;
+  background-color: #f9392700;
+  color: #f93827;
+  width: 140px;
+  font-size: 14px;
+}
+
+.warranty-actions-btn .decline-btn:hover {
+  background-color: #d713010f;
+  transition: .3s ease-in-out all;
+}
+
+.warranty-popup .modal-dialog {
+  animation: zoomIn 0.3s ease-out;
+}
+
+@keyframes zoomIn {
+  0% {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.warranty-popup .modal-header .btn-close {
+  font-size: 12px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.warranty-popup .warranty-data {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+}
+
+.warranty-popup .warranty-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  margin-bottom: 20px;
+}
+
+.warranty-popup .warranty-info h6 {
+  color: #5b5b5b;
+  margin-bottom: 0px;
+  font-weight: 400;
+}
+
+.warranty-popup .warranty-info p {
+  color: #333333;
+  margin-bottom: 0px;
+  font-weight: 500;
+}
+
+@media only screen and (Max-width:575px) {
+  .warranty-popup .modal-body {
+    padding: 0px 20px 10px 20px;
+  }
+
+  .warranty-popup .modal-footer {
+    padding: 0px 20px 40px 20px;
+  }
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1399px) {
+  .warranty-popup .modal-footer {
+    padding: 0px 30px 30px 30px;
+  }
+}

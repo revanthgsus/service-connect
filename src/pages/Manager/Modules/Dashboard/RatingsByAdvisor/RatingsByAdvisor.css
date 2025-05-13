@@ -1,0 +1,218 @@
+.ratings-list .ratings-table {
+  width: 100%;
+}
+
+.ratings-list .header {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 20px;
+}
+
+.ratings-list .header h5 {
+  margin-bottom: 0px;
+  color: var(--text-color);
+  line-height: 40px;
+}
+
+.ratings-list .header svg {
+  font-size: 22px;
+  color: var(--text-color);
+  cursor: pointer;
+}
+
+.ratings-list .table-align {
+  background: var(--main-btn-color);
+  color: #ffffff;
+}
+
+.ratings-list .list-alignment {
+  overflow-x: auto;
+}
+
+.ratings-list .list-alignment::-webkit-scrollbar {
+  background: inherit;
+  border-radius: 0px;
+  height: 7px;
+}
+
+.ratings-list .list-alignment::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 10px;
+}
+
+.ratings-list .list-alignment::-webkit-scrollbar-thumb {
+  background: #d6d6d6;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.ratings-list .list-alignment::-webkit-scrollbar-thumb:hover {
+  background: #bfbfbf;
+}
+
+.ratings-list .table-list {
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-color);
+  border-radius: 5px;
+  background-color: var(--navbar-color);
+}
+
+.ratings-list .table-heading {
+  padding: 20px 15px;
+  font-weight: 500;
+  text-align: start;
+  white-space: nowrap;
+}
+
+.ratings-list .table-heading:first-child {
+  text-align: center;
+}
+
+.ratings-list .list-item td {
+  padding: 15px 15px;
+  color: var(--text-color);
+  text-align: start;
+  white-space: nowrap;
+}
+
+.ratings-list .search-input {
+  border: 1px solid var(--input-border-color);
+  padding: 8px 35px 8px 20px;
+  border-radius: 20px;
+  outline: 1px solid transparent;
+  color: var(--text-color);
+  width: 100%;
+  font-size: 14px;
+  background-color: var(--input-color);
+}
+
+.ratings-list .search-input::placeholder {
+  color: var(--placeholder-color);
+  font-weight: 400;
+}
+
+.ratings-list .search-wrapper {
+  position: relative;
+  max-width: 100%;
+  width: 40%;
+  margin: 20px 20px;
+}
+
+.ratings-list .search-icon {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: var(--input-icon-color);
+}
+
+.ratings-list .list-item {
+  border-bottom: 1px solid var(--border-color)
+}
+
+.ratings-list .list-item:last-child {
+  border-bottom: none;
+}
+
+.ratings-list .no-data td,
+.ratings-list .empty-data td {
+  padding: 30px 25px;
+  color: var(--text-color);
+  text-align: center;
+  font-weight: 400;
+}
+
+.ratings-list .no-data h5 {
+  padding: 15px 0px 5px 0px;
+}
+
+.ratings-list .no-data p {
+  color: var(--sub-text-color);
+}
+
+.ratings-list .pagination-align {
+  padding: 15px 0px;
+  float: right;
+}
+
+.ratings-list .list-item td:first-child {
+  text-align: center;
+}
+
+.ratings-list .list-item td:nth-last-child(2) {
+  text-align: center;
+}
+
+.ratings-list .list-item td:last-child {
+  display: flex;
+  justify-content: center;
+}
+
+.ratings-list .table-heading:nth-last-child(2) {
+  text-align: center;
+}
+
+.ratings-list .details-icon {
+  background-color: var(--actions-color);
+  padding: 7px 7px;
+  border-radius: 3px;
+  color: var(--actions-icon-color);
+  cursor: pointer;
+  display: inline-block;
+}
+
+.ratings-list .details-icon svg {
+  font-size: 16px;
+}
+
+.ratings-list .details-icon:hover {
+  background-color: #00737b;
+  transition: .3s ease-in-out all;
+  color: rgb(255, 255, 255);
+}
+
+.ratings-list .details-icon:hover svg {
+  transform: scale(1.1)
+}
+
+@media only screen and (max-width:575px) {
+  .ratings-list .search-wrapper {
+    margin: 15px auto;
+    width: 90%;
+  }
+}
+
+@media only screen and (min-width: 576px) and (max-width: 768px) {
+  .ratings-list .search-wrapper {
+    margin: 20px 15px;
+    width: 90%;
+  }
+}
+
+@media only screen and (min-width:1200px) and (max-width:1399px) {
+  .ratings-list .table-heading {
+    font-size: 14px;
+  }
+
+  .ratings-list .header h5 {
+    font-size: 18px;
+  }
+
+  .ratings-list .list-item td {
+    font-size: 13px;
+    padding: 10px 15px;
+  }
+}
+
+@media only screen and (min-width:1400px) {
+  .ratings-list .search-input {
+    font-size: 14px;
+  }
+
+  .ratings-list .search-wrapper {
+    margin: 30px 30px;
+    width: 30%;
+  }
+}

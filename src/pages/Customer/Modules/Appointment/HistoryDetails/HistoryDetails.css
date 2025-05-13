@@ -1,0 +1,79 @@
+.history-details .history-header {
+  margin-bottom: 20px;
+}
+
+.history-details .header {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.history-details .header svg {
+  font-size: 20px;
+  color: var(--text-color);
+  cursor: pointer;
+}
+
+.history-details .header svg:hover {
+  transform: scale(1.1);
+  transition: .3s linear all;
+}
+
+.history-details .header h5 {
+  margin-bottom: 0px;
+  color: var(--text-color);
+}
+
+.history-details .history-data {
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-color);
+  border-radius: 5px;
+  background-color: var(--navbar-color);
+}
+
+.history-details .app-heading {
+  color: #ffffff;
+  background: var(--main-btn-color);
+  margin-bottom: 0px;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  padding: 20px 35px;
+}
+
+.history-details .view-fields {
+  padding: 20px 25px;
+}
+
+.history-details .input-wrapper {
+  margin-bottom: 20px;
+}
+
+.history-details .input-field h6 {
+  color: var(--text-color);
+  padding: 5px 0px;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.history-details .input-field p {
+  margin-bottom: 0px;
+  color: var(--sub-text-color);
+  font-size: 14px;
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1399px) {
+  .history-details .header h5 {
+    font-size: 16px;
+  }
+
+  .history-details .app-heading {
+    padding: 15px 25px;
+    font-size: 16px;
+  }
+}
+
+@media only screen and (min-width:1400px) {
+  .history-details .input-wrapper {
+    margin-bottom: 30px;
+  }
+}

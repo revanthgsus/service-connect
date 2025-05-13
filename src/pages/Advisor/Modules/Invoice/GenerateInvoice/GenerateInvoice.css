@@ -1,0 +1,274 @@
+.generate-invoice .generate-header {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 20px;
+}
+
+.generate-invoice .generate-header svg {
+  color: var(--text-color);
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.generate-invoice .generate-header svg:hover {
+  transform: scale(1.1);
+  transition: .3s ease-in-out all;
+}
+
+.generate-invoice .generate-header h5 {
+  color: var(--text-color);
+  margin-bottom: 0;
+}
+
+.generate-invoice .generate-form {
+  background-color: var(--navbar-color);
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  box-shadow: var(--shadow-color);
+}
+
+.generate-invoice .addinvoice-heading {
+  background: var(--main-btn-color);
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  color: #fff;
+  margin-bottom: 0;
+  padding: 20px 35px;
+}
+
+.generate-invoice .add-fields {
+  padding: 20px 25px;
+}
+
+.generate-invoice .input-wrapper {
+  margin-bottom: 20px;
+}
+
+.generate-invoice .form-control {
+  background-color: var(--navbar-color);
+  border: 1px solid #858585;
+  border-radius: 5px;
+  color: var(--text-color);
+  font-family: var(--font-family);
+  padding: 8px 15px;
+  width: 100%;
+}
+
+.generate-invoice .form-control:hover {
+  border: 1px solid #01848d;
+  transition: all .2s linear;
+}
+
+.generate-invoice .form-control:focus-visible {
+  box-shadow: none;
+  outline: 1px solid #01848d;
+}
+
+.generate-invoice .date-picker input {
+  border: 0px solid transparent;
+  padding: 0px;
+  color: var(--text-color);
+  font-size: 14px;
+  font-family: var(--font-family);
+}
+
+.generate-invoice .date-picker input::placeholder {
+  color: var(--text-color);
+}
+
+.generate-invoice .form-control::placeholder {
+  color: var(--placeholder-color);
+}
+
+.generate-invoice .cancel-button,
+.generate-invoice .generate-button {
+  border: 1px solid #0000;
+  border-radius: 30px;
+  font-weight: 500;
+  padding: 8px 0;
+  width: 140px;
+}
+
+.generate-invoice .generate-button {
+  background: var(--main-btn-color);
+  box-shadow: 0 1px 4px #00000029;
+  color: #fff;
+}
+
+.generate-invoice .generate-button:hover {
+  background: #007281;
+}
+
+.generate-invoice .cancel-button {
+  background-color: #eee;
+  color: #131313;
+}
+
+.generate-invoice .cancel-button:hover {
+  background-color: #d5d5d5;
+  transition: all .3s linear;
+}
+
+.generate-invoice .form-submit-button {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: end;
+  margin-top: 30px;
+}
+
+.generate-invoice .table-list {
+  border-radius: 5px;
+  overflow-x: auto;
+  background: var(--navbar-color);
+  box-shadow: var(--shadow-color);
+}
+
+/* .generate-invoice .table-list::-webkit-scrollbar {
+
+
+} */
+
+.generate-invoice .table-list::-webkit-scrollbar {
+  background: inherit;
+  border-radius: 0px;
+  height: 8px;
+}
+
+.generate-invoice .table-list::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 10px;
+}
+
+.generate-invoice .table-list::-webkit-scrollbar-thumb {
+  background: #d6d6d6;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.generate-invoice .table-list::-webkit-scrollbar-thumb:hover {
+  background: #bfbfbf;
+}
+
+.generate-invoice .quote-table {
+  width: 100%;
+}
+
+.generate-invoice .table-align {
+  background: var(--main-btn-color);
+  color: #fff;
+}
+
+.generate-invoice .table-heading {
+  font-weight: 500;
+  padding: 15px 15px;
+  text-align: start;
+  white-space: nowrap;
+}
+
+.generate-invoice.list-item td:first-child {
+  text-align: center;
+}
+
+.generate-invoice .list-item td {
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
+  padding: 15px 15px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.generate-invoice .list-item td:first-child {
+  text-align: center;
+}
+
+.generate-invoice .list-item td:nth-child(2) {
+  text-align: start;
+}
+
+.generate-invoice .list-item td:nth-child(3) {
+  white-space: nowrap;
+  text-align: start;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
+.generate-invoice .quantity-input {
+  width: 60px;
+  padding: 4px !important;
+  text-align: center;
+  border-radius: 5px;
+  background-color: #74747417;
+}
+
+.generate-invoice .tablebottom {
+  padding: 20px 30px;
+}
+
+.generate-invoice .summary-container {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  gap: 10px;
+  padding: 8px;
+  white-space: nowrap;
+}
+
+.generate-invoice .summary-container h6 {
+  color: var(--text-color);
+  margin-bottom: 0px;
+}
+
+.generate-invoice .summary-container span {
+  color: var(--text-color);
+  font-weight: 500;
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1399px) {
+  .generate-invoice .generate-header h5 {
+    font-size: 16px;
+  }
+
+  .generate-invoice .addinvoice-heading {
+    font-size: 16px;
+    padding: 15px 25px;
+  }
+
+  .generate-invoice .input-wrapper {
+    margin-bottom: 15px;
+  }
+
+  .generate-invoice .form-group label {
+    font-size: 14px;
+  }
+
+  .generate-invoice .form-control {
+    font-size: 14px;
+    padding: 7px 10px;
+  }
+
+  .generate-invoice .cancel-button,
+  .generate-invoice .generate-button {
+    font-size: 14px;
+  }
+
+  .generate-invoice .table-heading {
+    font-size: 14px;
+  }
+
+  .generate-invoice .list-item td {
+    font-size: 14px;
+  }
+
+  .generate-invoice .summary-container h6 {
+    font-size: 14px;
+  }
+
+  .generate-invoice .summary-container span {
+    font-size: 14px;
+  }
+}

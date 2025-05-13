@@ -1,0 +1,99 @@
+.admin-navbar {
+  padding: 0px;
+  box-shadow: var(--shadow-color);
+  background-color: var(--navbar-color);
+}
+
+.admin-navbar .custom-logo {
+  width: 100px;
+  height: auto;
+  display: block;
+}
+
+.admin-navbar .mobile-logo {
+  display: none;
+}
+
+.admin-navbar .notification path {
+  color: var(--icon-color);
+}
+
+.admin-navbar .moon-icon path {
+  color: var(--icon-color);
+}
+
+.admin-navbar .sun-icon {
+  color: var(--icon-color);
+  animation: rotate-sun .3s ease-in-out;
+}
+
+@keyframes rotate-sun {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(90deg);
+  }
+}
+
+.admin-navbar .profile-icon path {
+  color: var(--icon-color);
+}
+
+.admin-navbar .navbar-brand {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 65px;
+}
+
+.admin-navbar .navbar-icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.admin-navbar .navbar-icons button:hover {
+  background-color: var(--hover-color);
+  transition: .3s linear all;
+}
+
+.admin-navbar .navbar-icons button:hover svg path {
+  color: var(--dark-hover-color);
+}
+
+.admin-navbar .custom-tooltip {
+  font-size: 12px;
+  padding: 5px 10px;
+}
+
+@media only screen and (max-width:768px) {
+  .admin-navbar .navbar-brand {
+    gap: 0px;
+    padding: 15px 0px;
+    margin-right: 0px;
+  }
+
+  .admin-navbar .custom-logo {
+    display: none;
+  }
+
+  .admin-navbar .mobile-logo {
+    display: block;
+    width: 35px;
+  }
+}
+
+@media only screen and (min-width:769px) and (max-width: 992px) {
+  .admin-navbar .navbar-brand {
+    gap: unset;
+  }
+}
+
+@media screen and (min-width:1400px) {
+  .admin-navbar .navbar-brand {
+    gap: 100px;
+  }
+}

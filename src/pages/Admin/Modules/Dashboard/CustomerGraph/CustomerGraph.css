@@ -1,0 +1,93 @@
+.piechart {
+  box-shadow: var(--shadow-color);
+  border-radius: 5px;
+  background-color: var(--span-color);
+  padding: 25px 15px;
+  border: 1px solid var(--border-color);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.piechart .chart-select {
+  padding: 5px 8px;
+  border-radius: 5px;
+  border: 1px solid var(--input-border-color);
+  outline: 1px solid transparent;
+  color: var(--text-color);
+  font-size: 12px;
+  appearance: none;
+  background-color: var(--input-color);
+  cursor: pointer;
+  width: 100%;
+}
+
+.piechart .status-wrapper {
+  position: relative;
+  width: 90px;
+  display: inline-block;
+}
+
+.piechart .status-wrapper svg {
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  pointer-events: none;
+  color: var(--input-icon-color);
+}
+
+.piechart .chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 10px;
+}
+
+.piechart .chart-header h6 {
+  color: var(--text-color);
+  margin-bottom: 0px;
+}
+
+.piechart .legend {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0px auto;
+}
+
+.piechart .legend .option-one p {
+  color: #39c389;
+  margin-bottom: 0px;
+  font-weight: 500;
+}
+
+.piechart .option-one span {
+  background-color: #39c389;
+  padding: 8px;
+  border-radius: 5px;
+}
+
+.piechart .legend .option-two p {
+  color: #25afb5;
+  margin-bottom: 0px;
+  font-weight: 500;
+}
+
+.piechart .option-two span {
+  background-color: #25afb5;
+  padding: 8px;
+  border-radius: 5px;
+}
+
+.piechart .option-one,
+.option-two {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}

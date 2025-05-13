@@ -1,0 +1,111 @@
+.service-kpi {
+  margin: 20px 0px;
+}
+
+.service-kpi .service-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: var(--shadow-color);
+  border-radius: 5px;
+  padding: 20px 20px;
+}
+
+.service-kpi .service-value h6 {
+  color: var(--text-color);
+  line-height: 22px;
+}
+
+.service-kpi .service-value h3 {
+  color: var(--text-color);
+  margin-bottom: 0px;
+}
+
+.service-kpi .service-icon {
+  background: red;
+  padding: 12px;
+  border-radius: 50%;
+  display: inline-flex;
+}
+
+.service-kpi .service-icon svg {
+  color: #ffffff;
+  width: 25px;
+  height: 25px;
+}
+
+.service-kpi .service-value {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.service-kpi .completed .service-icon {
+  background: #CCEEDD;
+}
+
+.service-kpi .inprogress .service-icon {
+  background: #FFECCD;
+}
+
+.service-kpi .total .service-icon {
+  background: #d4f7ff;
+}
+
+.service-kpi .completed {
+  background: var(--complete-color)
+}
+
+.service-kpi .inprogress {
+  background: var(--progress-color);
+}
+
+.service-kpi .total {
+  background: var(--total-color);
+}
+
+.service-kpi .custom-align {
+  width: 70%;
+}
+
+@media only screen and (max-width: 575px) {
+  .service-kpi {
+    margin-top: 0px;
+  }
+
+  .service-kpi .service-container {
+    padding: 30px 20px;
+  }
+}
+
+@media only screen and (min-width:1200px) and (max-width: 1399px) {
+  .service-kpi .service-value h6 {
+    font-size: 14px;
+  }
+}
+
+@media only screen and (min-width:1400px) and (max-width: 1599px) {
+  .service-kpi .service-container {
+    padding: 30px 20px;
+  }
+
+  .service-kpi .service-value {
+    gap: 10px;
+  }
+}
+
+@media only screen and (min-width:1600px) {
+  .service-kpi .service-container {
+    padding: 30px 30px;
+  }
+
+  .service-kpi .service-value {
+    gap: 10px;
+  }
+
+  .service-kpi .service-value h6 {
+    font-size: 18px;
+    line-height: unset;
+  }
+}

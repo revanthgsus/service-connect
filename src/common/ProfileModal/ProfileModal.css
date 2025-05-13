@@ -1,0 +1,102 @@
+.profile-modal .preview-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background-color: #f3f3f38f;
+  overflow: hidden;
+  border: 1px solid #d1d1d1;
+}
+
+.profile-modal .preview-container:hover {
+  background: #e6e6e6;
+  transition: .2s linear all;
+}
+
+.profile-modal .preview-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.profile-modal .file-input {
+  width: 100%;
+  padding: 5px;
+  display: none;
+}
+
+.profile-modal .file-label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.profile-modal .default-icon {
+  font-size: 25px;
+  color: #a1a1a1;
+}
+
+.profile-modal .btn-close {
+  font-size: 12px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.profile-modal .modal-title {
+  font-size: 18px;
+  color: #2b2b2b;
+}
+
+.profile-modal .cancel-btn {
+  padding: 10px 10px;
+  border-radius: 30px;
+  border: 1px solid transparent;
+  background-color: #EEEEEE;
+  color: #131313;
+  width: 30%;
+}
+
+.profile-modal .upload-btn {
+  padding: 10px 10px;
+  border-radius: 30px;
+  border: 1px solid transparent;
+  background: #007d85;
+  color: #ffffff;
+  width: 30%;
+}
+
+@media only screen and (max-width:575px) {
+  .profile-modal .upload-btn {
+    padding: 6px 10px;
+  }
+
+  .profile-modal .cancel-btn {
+    padding: 6px 10px;
+  }
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1399px) {
+  .profile-modal .modal-header {
+    padding: 20px 30px 10px 30px;
+  }
+
+  .profile-modal .modal-dialog {
+    width: 460px;
+    max-width: 100%;
+  }
+
+  .profile-modal .cancel-btn {
+    padding: 8px 10px;
+    font-size: 14px;
+  }
+
+  .profile-modal .upload-btn {
+    padding: 8px 10px;
+    font-size: 14px;
+  }
+}

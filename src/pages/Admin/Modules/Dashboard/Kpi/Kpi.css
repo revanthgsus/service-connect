@@ -1,0 +1,121 @@
+.dashboard-heading {
+  color: var(--text-color);
+  padding-bottom: 20px;
+  margin-bottom: 0px;
+}
+
+.kpi-item {
+  box-shadow: var(--shadow-color);
+  border-radius: 5px;
+  padding: 25px 15px 20px 15px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  background-color: var(--span-color);
+  overflow: hidden;
+}
+
+.kpi-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 8px;
+  background: linear-gradient(90deg,
+      rgba(1, 127, 135, 1) 0%,
+      rgba(0, 134, 143, 1) 25%,
+      rgba(1, 134, 143, 1) 50%,
+      rgba(2, 146, 154, 1) 75%,
+      rgba(3, 131, 139, 1) 100%);
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.kpi-item::after {
+  background: linear-gradient(90deg, rgb(233 233 233) 0%, rgba(217, 217, 217, 1) 100%);
+  content: "";
+  height: 200%;
+  opacity: 0;
+  position: absolute;
+  transform: rotate(25deg);
+  transition: all 1s ease-out;
+  width: 50px;
+  left: 0;
+  animation: slideIn 2s ease-out forwards;
+  animation-delay: 0.5s;
+}
+
+@keyframes slideIn {
+  0% {
+    left: 0;
+    opacity: 0;
+  }
+
+  100% {
+    left: 120%;
+    opacity: 0.2;
+  }
+}
+
+.kpi-icon {
+  background-color: #00949e;
+  color: #dbdbdb;
+  border-radius: 50%;
+  padding: 14px;
+}
+
+.kpi-icon svg {
+  width: 25px;
+  height: 25px;
+  display: block;
+}
+
+.kpi-value h6 {
+  color: var(--text-color);
+}
+
+.kpi-value h3 {
+  color: #02848D;
+  font-weight: bold;
+  margin-bottom: 0px;
+  margin-left: 5px;
+}
+
+@media only screen and (max-width:575px) {
+  .dashboard-heading {
+    padding-bottom: 10px;
+  }
+
+  .kpi-item {
+    padding: 35px 15px 25px 15px;
+  }
+}
+
+@media only screen and (min-width:1200px) and (max-width:1399px) {
+  .kpi-value h6 {
+    font-size: 14px;
+  }
+
+  .dashboard-heading {
+    padding-bottom: 15px;
+  }
+}
+
+@media only screen and (min-width:1400px) {
+  .kpi-item {
+    gap: 20px;
+    padding: 35px 20px 25px 25px;
+  }
+
+  .kpi-icon svg {
+    width: 30px;
+    height: 30px;
+  }
+
+  .kpi-icon {
+    padding: 20px;
+  }
+}

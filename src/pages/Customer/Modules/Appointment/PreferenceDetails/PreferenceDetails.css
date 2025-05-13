@@ -1,0 +1,106 @@
+.preference-form .appointment-field {
+  padding: 15px 25px;
+}
+
+.preference-form h5 {
+  color: #ffffff;
+  background: var(--main-btn-color);
+  margin-bottom: 0px;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  padding: 20px 35px;
+}
+
+.preference-form {
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-color);
+  border-radius: 5px;
+  background-color: var(--navbar-color);
+}
+
+.preference-form input[type="date"] {
+  color: var(--text-color);
+}
+
+.preference-form .date-picker input {
+  border: 0px solid transparent;
+  padding: 0px;
+  color: var(--text-color);
+  font-size: 14px;
+  font-family: var(--font-family);
+}
+
+.preference-form .time-picker input {
+  border: 0px solid transparent;
+  padding: 0px;
+  color: var(--text-color);
+  font-size: 14px;
+  font-family: var(--font-family);
+}
+
+.preference-form .form-control {
+  width: 100%;
+  border: 1px solid #b1b1b1bd;
+  border-radius: 5px;
+  padding: 7px 10px;
+  background-color: var(--navbar-color);
+  color: var(--text-color);
+}
+
+.preference-form .form-control:hover {
+  border: 1px solid #01848d;
+  transition: .2s linear all;
+}
+
+.preference-form .form-control:focus-visible {
+  outline: 1px solid #01848d;
+  box-shadow: none;
+}
+
+.preference-form .form-check-input {
+  cursor: pointer;
+  background-color: transparent;
+}
+
+.preference-form .form-check-input:checked {
+  background-color: #01848d;
+  border-color: #01848d;
+  box-shadow: 0 0 0 3px #02899126;
+}
+
+.preference-form .form-check-label {
+  cursor: pointer;
+  margin-bottom: 0px
+}
+
+.preference-form .radio-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.preference-form .form-check {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+}
+
+@media only screen and (max-width:575px) {
+  .preference-form h5 {
+    padding: 15px 25px;
+  }
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1399px) {
+  .preference-form h5 {
+    padding: 15px 25px;
+    font-size: 16px;
+  }
+}
+
+@media only screen and (min-width: 1400px) {
+  .preference-form .form-control {
+    padding: 10px 15px;
+  }
+}

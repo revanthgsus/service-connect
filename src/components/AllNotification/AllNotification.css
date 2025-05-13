@@ -1,0 +1,170 @@
+.notification-section .header {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 20px;
+}
+
+.notification-section .header svg {
+  font-size: 20px;
+  color: var(--text-color);
+  cursor: pointer;
+}
+
+.notification-section .header svg:hover {
+  transform: scale(1.1);
+  transition: .3s ease-in-out all;
+}
+
+.notification-section .header h5 {
+  margin-bottom: 0px;
+  color: var(--text-color);
+}
+
+.notification-section .tab-container {
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-color);
+  border-radius: 5px;
+  background-color: var(--navbar-color);
+}
+
+.notification-section .multiple-tabs {
+  font-family: var(--font-family);
+  padding: 8px 20px;
+  color: var(--sub-text-color);
+  text-transform: capitalize;
+  margin: 10px 20px 8px 20px;
+  font-size: 14px;
+  min-height: 30px;
+  border-radius: 3px;
+}
+
+.notification-section .multiple-tabs:first-child {
+  margin-left: 15px !important;
+}
+
+.notification-section .multiple-tabs:last-child {
+  margin-right: 15px !important;
+}
+
+.notification-section .tab-header {
+  border-bottom: 1px solid #d9d9d9;
+}
+
+.tab-container .Mui-selected {
+  color: #007d85 !important;
+  font-weight: 600;
+}
+
+.notification-section .notification-content h6 {
+  color: var(--text-color);
+  margin-bottom: 8px;
+}
+
+.notification-section .notification-content p {
+  color: var(--sub-text-color);
+  margin-bottom: 0px;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.notification-section .notification-content {
+  margin-right: auto;
+}
+
+.notification-section .notification-time {
+  color: var(--text-color);
+  font-size: 12px;
+}
+
+.notification-section .no-appointment {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.notification-section .time-container {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.notification-section .notification-icon {
+  background-color: #00b1bc;
+  padding: 10px;
+  border-radius: 50%;
+  display: inline-flex;
+  color: #ffffff;
+}
+
+.notification-section .notification-icon.Appointment {
+  background-color: #2F7FDB;
+}
+
+.notification-section .notification-icon.Quotation {
+  background-color: #A154D4;
+}
+
+.notification-section .notification-icon.Activity {
+  background-color: #1dc773;
+}
+
+.notification-section .notification-icon.Invoice {
+  background-color: #E4A842;
+}
+
+.notification-section .notification-icon svg {
+  font-size: 18px;
+}
+
+.notification-section .notification-item {
+  padding: 15px 15px;
+  margin: 10px 0px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 15px;
+  border-radius: 5px;
+  border: 1px solid var(--border-color);
+}
+
+.notification-section .notification-item:hover {
+  background: #007c850b;
+  transition: .3s ease-in-out all;
+}
+
+.notification-section .tab-data {
+  overflow: auto;
+  height: 70vh;
+}
+
+.notification-section .tab-data::-webkit-scrollbar {
+  display: none;
+}
+
+.notification-section .notification-item:first-child {
+  margin-top: 0px;
+}
+
+.notification-section .notification-item:last-child {
+  margin-bottom: 0px;
+}
+
+
+@media only screen and (max-width:575px) {
+  .notification-section .multiple-tabs {
+    margin: 10px 0px;
+  }
+}
+
+@media only screen and (min-width:576px) and (max-width:768px) {
+  .notification-section .multiple-tabs {
+    margin: 10px 5px;
+  }
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1399px) {
+  .notification-section .header h5 {
+    font-size: 16px;
+  }
+}

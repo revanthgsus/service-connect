@@ -1,0 +1,124 @@
+.invoice-popup .modal-title {
+  font-size: 18px;
+  color: #2b2b2b;
+}
+
+.invoice-popup .btn-close {
+  font-size: 12px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.invoice-popup .amount-details {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.invoice-popup .invoice-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.invoice-popup .amount-heading {
+  font-size: 16px;
+}
+
+.invoice-popup .amount-value {
+  font-size: 14px;
+}
+
+.invoice-popup .payment-btn {
+  padding: 10px 20px;
+  border-radius: 30px;
+  border: 1px solid transparent;
+  background: #007d85;
+  color: #ffffff;
+  width: 50%;
+  margin: auto;
+}
+
+.invoice-popup .enter-input {
+  width: 50%;
+  border: 1px solid #858585;
+  border-radius: 5px;
+  padding: 8px 15px;
+  background-color: #ffffff;
+  color: #2b2b2b;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+}
+
+.invoice-popup .input-error {
+  border: 1px solid #ff0000;
+}
+
+.invoice-popup .input-error:focus-visible {
+  outline: 1px solid #ff0000;
+}
+
+.invoice-popup .input-error:hover {
+  border: 1px solid #ff0000 !important;
+}
+
+.invoice-popup .error-text {
+  color: #ff0000;
+  font-size: 12px;
+  margin-top: 5px;
+  margin-bottom: 0px;
+  text-align: center;
+}
+
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
+.invoice-popup .enter-input:hover {
+  border: 1px solid #01848d;
+  transition: .2s ease-in-out all;
+}
+
+.invoice-popup .modal-body {
+  padding: 40px 30px 40px 30px;
+}
+
+.invoice-popup .modal-footer {
+  padding: 10px 30px 30px 30px;
+}
+
+
+@media screen and (max-width:575px) {
+  .invoice-popup .invoice-container {
+    display: block;
+  }
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1399px) {
+  .invoice-popup .modal-header {
+    padding: 20px 30px 10px 30px;
+  }
+
+  .invoice-popup .modal-body {
+    padding: 40px 30px 40px 30px;
+  }
+
+  .invoice-popup .modal-footer {
+    padding: 10px 30px 30px 30px;
+  }
+
+  .invoice-popup .payment-btn {
+    padding: 8px 10px;
+    font-size: 14px;
+  }
+
+  .invoice-popup .enter-input {
+    font-size: 14px;
+    padding: 7px 10px;
+  }
+}

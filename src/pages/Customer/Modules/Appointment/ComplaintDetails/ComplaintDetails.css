@@ -1,0 +1,87 @@
+.complaint-section {
+  background-color: var(--navbar-color);
+  border-radius: 5px;
+  box-shadow: var(--shadow-color);
+  white-space: nowrap;
+  width: 100%;
+}
+
+.complaint-section .complaint-heading {
+  color: #ffffff;
+  background: var(--main-btn-color);
+  margin-bottom: 0px;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  padding: 20px 35px;
+}
+
+.complaint-table tr td textarea {
+  width: 100%;
+  border: 1px solid #b1b1b1bd;
+  border-radius: 5px;
+  padding: 6px 10px;
+  background-color: var(--navbar-color);
+  color: var(--text-color);
+  resize: none;
+}
+
+.complaint-table tr td textarea:hover {
+  border: 1px solid #01848d;
+  transition: .2s linear all;
+}
+
+.complaint-table tr td textarea:focus-visible {
+  outline: 1px solid #01848d;
+  box-shadow: none;
+  border: 1px solid #01848d;
+}
+
+.complaint-section .complaint-item {
+  padding: 20px 25px;
+  position: relative;
+}
+
+.complaint-section .speech-icon {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  background-color: #e3e3e3;
+  padding: 8px 8px;
+  border-radius: 50px;
+  margin: 10px 10px;
+  width: fit-content;
+  margin-left: auto;
+  position: absolute;
+  bottom: 18px;
+  right: 25px;
+  cursor: pointer;
+}
+
+.complaint-section .speech-icon svg {
+  font-size: 20px;
+  color: #484848;
+  display: block;
+}
+
+.complaint-section .speech-icon:hover {
+  background-color: #e1e1e1;
+  transition: .3s ease-in-out all;
+}
+
+.complaint-section .speech-icon:hover svg path {
+  color: #fd2222;
+}
+
+
+@media only screen and (min-width: 1200px) and (max-width: 1399px) {
+  .complaint-section .complaint-heading {
+    padding: 15px 25px;
+    font-size: 16px;
+  }
+}
+
+@media only screen and (min-width: 1400px) {
+  .complaint-table tr td textarea {
+    padding: 10px 15px;
+  }
+}

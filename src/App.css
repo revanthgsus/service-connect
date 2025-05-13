@@ -1,38 +1,97 @@
-.App {
-  text-align: center;
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Be Vietnam Pro', sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+:root {
+  --font-family: 'Be Vietnam Pro', sans-serif;
+
+  --brand-color: #007D85;
+  --navbar-color: #ffffff;
+  --text-color: #2b2b2b;
+  --shadow-color: rgba(0, 0, 0, 0.15) 0px 5px 10px 0px;
+  --icon-color: #555b6d;
+  --hover-color: #dedede;
+  --dark-hover-color: #4e4e4e;
+  --hamburger-color: #007D85;
+  --main-bg-color: #ffffff;
+  --span-color: #ffffff;
+  --logout-color: #ff000014;
+  --dropdown-color: #2c2c2c;
+  --border-color: #e5e5e5;
+  --main-btn-color: #007d85;
+  --input-color: #ffffff;
+  --input-border-color: #8080803b;
+  --placeholder-color: #6c6c6cb6;
+  --input-icon-color: #707070;
+  --actions-color: #EEEEEE;
+  --actions-icon-color: #5a5a5a;
+  --error-msg-color: #ff0000;
+  --sub-text-color: #525252;
+  --graph-color: linear-gradient(135deg, #C5F4FF 0%, #e5faff 15%, #ffffff 50%, #ffffff 75%, #ffffff 100%);
+  --complete-color: linear-gradient(180deg, #c8ffe3 0%, #f3fff8 15%, #ffffff 50%, #ffffff 75%, #ffffff 100%);
+  --progress-color: linear-gradient(180deg, #ffeccd 0%, #fffaf1 15%, #ffffff 50%, #ffffff 75%, #ffffff 100%);
+  --cancel-color: linear-gradient(180deg, #ffdad4 0%, #fff4f2 15%, #ffffff 50%, #ffffff 75%, #ffffff 100%);
+  --total-color: linear-gradient(135deg, #C5F4FF 0%, #e5faff 15%, #ffffff 50%, #ffffff 75%, #ffffff 100%);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+[data-theme="light"] {
+  --brand-color: #007D85;
+  --navbar-color: #ffffff;
+  --text-color: #2b2b2b;
+  --shadow-color: rgba(0, 0, 0, 0.15) 0px 5px 10px 0px;
+  --icon-color: #555b6d;
+  --hover-color: #dedede;
+  --dark-hover-color: #4e4e4e;
+  --hamburger-color: #007D85;
+  --main-bg-color: #ffffff;
+  --span-color: #ffffff;
+  --logout-color: #ff000014;
+  --dropdown-color: #2c2c2c;
+  --border-color: #e5e5e5;
+  --main-btn-color: #007d85;
+  --input-color: #ffffff;
+  --input-border-color: #8080803b;
+  --placeholder-color: #6c6c6cb6;
+  --input-icon-color: #707070;
+  --actions-color: #EEEEEE;
+  --actions-icon-color: #5a5a5a;
+  --error-msg-color: #ff0000;
+  --sub-text-color: #525252;
+  --graph-color: linear-gradient(135deg, #C5F4FF 0%, #e5faff 15%, #ffffff 50%, #ffffff 75%, #ffffff 100%);
+  --complete-color: linear-gradient(180deg, #c8ffe3 0%, #f3fff8 15%, #ffffff 50%, #ffffff 75%, #ffffff 100%);
+  --progress-color: linear-gradient(180deg, #ffeccd 0%, #fffaf1 15%, #ffffff 50%, #ffffff 75%, #ffffff 100%);
+  --cancel-color: linear-gradient(180deg, #ffdad4 0%, #fff4f2 15%, #ffffff 50%, #ffffff 75%, #ffffff 100%);
+  --total-color: linear-gradient(135deg, #C5F4FF 0%, #e5faff 15%, #ffffff 50%, #ffffff 75%, #ffffff 100%);
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+[data-theme="dark"] {
+  --brand-color: #2F3742;
+  --navbar-color: #2F3742;
+  --text-color: #ececec;
+  --shadow-color: rgba(97, 97, 97, 0.15) 0px 2px 10px 0px;
+  --icon-color: #fcfcfc;
+  --hover-color: #d2d2d2;
+  --dark-hover-color: #2f3742;
+  --hamburger-color: #ececec;
+  --main-bg-color: #151e29;
+  --span-color: #2f3742;
+  --logout-color: #ffffffd4;
+  --dropdown-color: #2c2c2c;
+  --border-color: #43474c;
+  --main-btn-color: #007d85;
+  --input-color: #29313d;
+  --input-border-color: #848484;
+  --placeholder-color: #a4a4a4;
+  --input-icon-color: #dcdcdc;
+  --actions-color: #485463;
+  --actions-icon-color: #ececec;
+  --error-msg-color: #fd4545;
+  --sub-text-color: #c5c5c5;
+  --graph-color: #2f3742;
+  --complete-color: #2f3742;
+  --progress-color: #2f3742;
+  --cancel-color: #2f3742;
+  --total-color: #2f3742;
 }

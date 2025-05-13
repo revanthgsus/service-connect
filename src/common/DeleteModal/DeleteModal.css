@@ -1,0 +1,141 @@
+.Delete-popup .modal-dialog {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.delete-popup-icon {
+  margin: auto;
+  width: 70px;
+  height: fit-content;
+  margin-bottom: 15px;
+}
+
+.Delete-popup .modal-header {
+  padding: 40px 30px 10px 30px;
+}
+
+.Delete-popup .modal-body {
+  text-align: center;
+  padding: 20px 30px 20px 30px;
+}
+
+.Delete-popup .modal-footer {
+  display: flex;
+  justify-content: center;
+  padding: 0px 30px 40px 30px;
+}
+
+.delete-actions-btn {
+  width: 100%;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.delete-actions-btn .cancel-btn {
+  padding: 10px 10px;
+  border-radius: 30px;
+  border: 1px solid transparent;
+  background-color: #EEEEEE;
+  color: #131313;
+  width: 100%;
+}
+
+.delete-actions-btn .dlt-confirm-btn {
+  padding: 10px 10px;
+  border-radius: 30px;
+  border: 1px solid transparent;
+  background-color: #f93827;
+  color: white;
+  width: 100%;
+}
+
+.Delete-popup .cancel-btn:hover {
+  background-color: #d5d5d5;
+  transition: .3s linear all;
+}
+
+.Delete-popup .dlt-confirm-btn:hover {
+  background-color: #d71301;
+  transition: .3s linear all;
+}
+
+@keyframes zoomIn {
+  0% {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.Delete-popup .modal-dialog {
+  animation: zoomIn 0.3s ease-out;
+}
+
+.Delete-popup .modal-header .btn-close {
+  font-size: 12px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+@media only screen and (Max-width:575px) {
+  .Delete-popup .modal-body {
+    padding: 0px 20px 10px 20px;
+  }
+
+  .Delete-popup .modal-footer {
+    padding: 0px 20px 40px 20px;
+  }
+}
+
+@media only screen and (min-width:576px) and (max-width:767px) {
+  .Delete-popup .modal-dialog {
+    width: 410px;
+  }
+}
+
+@media only screen and (min-width:768px) and (max-width:1119px) {
+  .Delete-popup .modal-dialog {
+    width: 410px;
+  }
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1399px) {
+  .Delete-popup .modal-dialog {
+    width: 420px;
+    max-width: 100%;
+  }
+
+  .Delete-popup .modal-body h5 {
+    font-size: 16px;
+  }
+
+  .Delete-popup .modal-body p {
+    font-size: 14px;
+  }
+
+  .Delete-popup .modal-body {
+    padding: 0px 30px 10px 30px;
+  }
+
+  .Delete-popup .modal-header {
+    padding: 30px 30px 10px 30px;
+  }
+
+  .Delete-popup .modal-footer {
+    padding: 0px 30px 30px 30px;
+  }
+
+  .delete-actions-btn .cancel-btn,
+  .delete-actions-btn .dlt-confirm-btn {
+    padding: 8px 10px;
+    font-size: 14px;
+  }
+
+}

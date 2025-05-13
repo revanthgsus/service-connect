@@ -1,0 +1,290 @@
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import './AdvisorNotify.css';
+import IconButton from '@mui/material/IconButton';
+import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { Badge } from '@mui/material';
+import { IoNotificationsOutline } from 'react-icons/io5';
+import { Tooltip } from 'react-tooltip';
+import { IoMdTime } from "react-icons/io";
+import { BiCalendarCheck } from "react-icons/bi";
+import { TbFileInvoice } from "react-icons/tb";
+import { PiChatTeardropText } from "react-icons/pi";
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import { ReactComponent as NoAppImage } from '../../../../assets/images/comman/no-notification.svg'
+import { MdPayment } from "react-icons/md";
+import { IoCheckmarkDoneOutline } from "react-icons/io5";
+import { useAuth } from '../../../../contexts/AuthContext';
+import axios from 'axios';
+import API_BASE_URL from '../../../../services/AuthService';
+import { toast } from 'react-toastify';
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+
+const AdvisorNotify = ({ isOpen, toggleNotify }) => {
+  const navigate = useNavigate();
+  const { setShowTokenModal } = useAuth();
+  const notifyRef = useRef(null);
+  const referenceId = sessionStorage.getItem("userId");
+
+  const [notifications, setNotifications] = useState([]);
+  const [loading, setLoading] = useState(true);
+  // const prevCountRef = useRef(0);
+
+  const [snackbarOpen, setSnackbarOpen] = useState(true);
+  const [snackbarMessage, setSnackbarMessage] = useState('');
+
+  // icon mapping for notification types
+  const getIconByType = (type) => {
+    switch (type) {
+      case 'Appointment':
+        return <BiCalendarCheck />;
+      case 'Quotation':
+        return <PiChatTeardropText />;
+      case 'Request':
+        return <CheckCircleOutlineIcon />;
+      case 'Invoice':
+        return <TbFileInvoice />;
+      case 'Payment':
+        return <MdPayment />;
+      default:
+        return <IoNotificationsOutline />;
+    }
+  };
+
+  const fetchNotifications = useCallback(async () => {
+    const token = sessionStorage.getItem("authToken");
+    if (!token) {
+      setShowTokenModal(true);
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      const response = await axios.get(`${API_BASE_URL}/customerMaster/viewNotificationsByReferenceId/${referenceId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (response?.data?.status === "success") {
+        const notificationsData = response.data.data || [];
+
+        if (notificationsData.length === 0) {
+          setNotifications([]);
+          // prevCountRef.current = 0;
+          return;
+        }
+
+        const transformed = notificationsData
+          .filter(item => !item.viewed)
+          .map((item, index) => ({
+            id: item.notificationId || index,
+            type: item.notificationType,
+            title: item.notificationName,
+            message: item.notificationContent,
+            time: item.modifiedAt,
+            icon: getIconByType(item.notificationType),
+            viewed: item.viewed || false,
+          }));
+
+        // Reverse to show latest first
+        const newNotifications = transformed.reverse();
+        setNotifications(newNotifications);
+
+        // Check for new items
+        // if (newNotifications.length > prevCountRef.current) {
+        //   toggleNotify(true);
+        // }
+        // // Update previous count
+        // prevCountRef.current = newNotifications.length;
+      } else {
+        toast.error("Unable to fetch notifications data");
+      }
+    } catch (error) {
+      toast.error(error.response?.data?.error || "An error occurred while fetching the data.");
+    } finally {
+      setLoading(false);
+    }
+  }, [referenceId, setShowTokenModal]);
+
+  useEffect(() => {
+    fetchNotifications();
+    const interval = setInterval(() => {
+      fetchNotifications();
+    }, 100000);
+    return () => clearInterval(interval);
+  }, [fetchNotifications]);
+
+
+  const handleNavigate = (e) => {
+    e.stopPropagation();
+    toggleNotify(false);
+    navigate('notifications');
+  }
+
+  const handleMarkAsRead = async (id, e) => {
+    e.stopPropagation();
+    // Add exit class for smooth removal
+    const element = document.getElementById(`notification-${id}`);
+    if (element) {
+      element.classList.add('fade-out');
+      setTimeout(() => {
+        setNotifications((prev) => prev.filter((notification) => notification.id !== id));
+      }, 300);
+    }
+
+    const token = sessionStorage.getItem("authToken");
+    if (!token) {
+      setShowTokenModal(true);
+      return;
+    }
+
+    try {
+      const response = await axios.put(`${API_BASE_URL}/customerMaster/updateViewStatus/${id}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+      if (response?.data?.status === "success") {
+        setSnackbarMessage("Notification marked as read");
+        setSnackbarOpen(true);
+      } else {
+        toast.error("Failed to mark as read");
+      }
+    } catch {
+      toast.error("Something went wrong. Please try again.");
+    }
+  };
+
+  const handleSnackbarClose = () => {
+    setSnackbarOpen(false);
+  };
+
+  // click outside to close notification
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (notifyRef.current && !notifyRef.current.contains(event.target)) {
+        toggleNotify(false);
+      }
+    };
+    if (isOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isOpen, toggleNotify]);
+
+  // convert timestamp to time ago format
+  const formatTimeAgo = (timestamp) => {
+    const [year, month, day, hour, minute, second] = timestamp;
+
+    const utcDate = new Date(Date.UTC(year, month - 1, day, hour, minute, second));
+    const istDate = new Date(utcDate.toLocaleString("en-US", { timeZone: "Asia/Kolkata" }));
+
+    const now = new Date(new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" }));
+    const diff = now - istDate;
+
+    const seconds = Math.floor(diff / 1000);
+    const minutes = Math.floor(seconds / 60);
+    const hours = Math.floor(minutes / 60);
+    const days = Math.floor(hours / 24);
+
+    if (days > 0) {
+      if (days === 1) return "Yesterday";
+      return `${days} days ago`;
+    } else if (hours > 0) {
+      return `${hours} hour${hours > 1 ? 's' : ''} ago`;
+    } else if (minutes > 0) {
+      return `${minutes} min${minutes > 1 ? 's' : ''} ago`;
+    } else {
+      return `${seconds} second${seconds > 1 ? 's' : ''} ago`;
+    }
+  };
+
+  return (
+    <>
+      <div className='advisor-notification' ref={notifyRef}>
+        <Tooltip id="notification-tooltip" className="custom-tooltip" />
+        <IconButton
+          aria-label="notification"
+          data-tooltip-id="notification-tooltip"
+          data-tooltip-content="Notifications"
+          onClick={toggleNotify}>
+          <Badge badgeContent={notifications.length} color="error">
+            <IoNotificationsOutline className="notification" />
+          </Badge>
+        </IconButton>
+
+        <div className={`notification-container ${isOpen ? 'show' : ''}`}>
+          <div className='notify-heading'>
+            <h6>Notifications</h6>
+            <Link to='notifications' onClick={() => toggleNotify(false)}>View All</Link>
+          </div>
+          <hr className='break-line' />
+
+          {loading ? (
+            <Box className="loading-container">
+              <CircularProgress size={24} />
+            </Box>
+          ) : (
+            notifications.length > 0 ? (
+              <div className='notifications-list'>
+                {notifications.map((data) => (
+                  <div id={`notification-${data.id}`} key={data.id}
+                    className="notification-item" onClick={handleNavigate}>
+                    <div
+                      className={`notification-icon ${data.type}`}>
+                      {data.icon}
+                    </div>
+                    <div className="notification-content">
+                      <h6>{data.title}</h6>
+                      <p>{data.message}</p>
+                    </div>
+
+                    <div className="notification-time">
+                      <span className='time-container'><IoMdTime />{formatTimeAgo(data.time)}</span>
+                      <span className='mark-icon'
+                        onClick={(e) => handleMarkAsRead(data.id, e)}
+                        data-tooltip-id={`mark-read-tooltip-${data.id}`}
+                        data-tooltip-content="Mark as read"
+                        aria-label="Mark as read">
+                        <IoCheckmarkDoneOutline />
+                      </span>
+                      <Tooltip id={`mark-read-tooltip-${data.id}`} className="custom-tooltip" />
+
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className='no-appointment'>
+                <NoAppImage />
+                <p>No notifications found</p>
+              </div>
+            )
+          )}
+        </div>
+      </div>
+
+      <Snackbar
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+        open={snackbarOpen && snackbarMessage !== ''}
+        autoHideDuration={2000}
+        onClose={handleSnackbarClose}>
+        <MuiAlert onClose={handleSnackbarClose} severity="info" variant="filled">
+          {snackbarMessage}
+        </MuiAlert>
+      </Snackbar>
+    </>
+  )
+}
+
+export default AdvisorNotify;

@@ -1,0 +1,90 @@
+.admin-dropdown .dropdownfile {
+  position: absolute;
+  top: 100%;
+  right: 15px;
+  background-color: var(--navbar-color);
+  border-radius: 5px;
+  text-align: start;
+  box-shadow: var(--shadow-color);
+  z-index: 99;
+
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: 0.2s ease-in-out all;
+  visibility: hidden;
+}
+
+.admin-dropdown .dropdownfile.show {
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+}
+
+.admin-dropdown .dropdownfile ul {
+  list-style-type: none;
+  padding: 15px 15px;
+  margin-bottom: 0px;
+}
+
+.admin-dropdown .dropdownfile ul li {
+  padding: 10px 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.admin-dropdown .dropdownfile ul li:hover {
+  background-color: #f5f5f5;
+  transition: 0.3s linear all;
+}
+
+.admin-dropdown .dropdownfile::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  right: 23px;
+  width: 20px;
+  height: 20px;
+  background-color: var(--navbar-color);
+  transform: rotate(45deg);
+  border-left: 1px solid var(--border-color);
+  border-top: 1px solid var(--border-color);
+}
+
+.admin-dropdown .dropdownfile ul li a {
+  text-decoration: none;
+  color: var(--text-color);
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 5px;
+}
+
+.admin-dropdown .dropdownfile ul li:hover a {
+  color: var(--dropdown-color);
+}
+
+.admin-dropdown .logout-link a {
+  color: #F54F36 !important;
+}
+
+.admin-dropdown .logout-link {
+  background-color: #fff4f4ee;
+}
+
+.admin-dropdown .logout-link:hover {
+  background-color: var(--logout-color) !important;
+}
+
+.admin-dropdown .dropdownfile ul li a svg {
+  font-size: 20px;
+}
+
+.admin-dropdown .profile-image {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1.5px solid #bbbbbb;
+  padding: 2px
+}

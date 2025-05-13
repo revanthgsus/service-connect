@@ -1,0 +1,23 @@
+.main-layout {
+  height: 100vh;
+}
+
+.main-layout .layout-main {
+  flex: 1;
+  overflow-y: auto;
+  width: 100%;
+  height: calc(100vh - 68px);
+  padding: 40px 20px;
+  background-color: var(--main-bg-color);
+}
+
+.layout-container {
+  padding-top: 68px;
+  height: 100%;
+}
+
+@media only screen and (max-width:768px) {
+  .main-layout .layout-main {
+    padding: 25px 15px;
+  }
+}

@@ -1,0 +1,157 @@
+.advisor-messages .messages-container {
+  position: absolute;
+  top: 100%;
+  right: 100px;
+  background-color: var(--navbar-color);
+  border-radius: 5px;
+  text-align: start;
+  box-shadow: var(--shadow-color);
+  z-index: 99;
+  width: 370px;
+
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: 0.2s ease-in-out all;
+  visibility: hidden;
+}
+
+.advisor-messages .messages-container.show {
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+}
+
+.advisor-messages .messages-heading {
+  padding: 15px 15px 10px 15px;
+}
+
+.advisor-messages .messages-heading h6 {
+  margin-bottom: 0px;
+  color: var(--sub-text-color);
+}
+
+.advisor-messages .break-line {
+  color: #919191c2;
+  margin: 0px 0px;
+}
+
+.advisor-messages .messages-content h6 {
+  color: var(--text-color);
+  margin-bottom: 5px;
+}
+
+.advisor-messages .messages-content p {
+  color: var(--sub-text-color);
+  margin-bottom: 0px;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.advisor-messages .messages-content {
+  width: 60%;
+}
+
+.advisor-messages .messages-time {
+  color: var(--sub-text-color);
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  gap: 15px;
+}
+
+.advisor-messages .messages-icon svg {
+  font-size: 22px;
+  color: var(--sub-text-color);
+}
+
+.advisor-messages .messages-item {
+  padding: 13px 20px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-bottom: 1px solid #9a9a9a1c;
+  transition: .3s ease-in-out all;
+}
+
+.advisor-messages .messages-item:last-child {
+  border-bottom: none;
+}
+
+.advisor-messages .messages-item:hover {
+  background: #007c850b;
+  transition: .3s linear all;
+}
+
+.advisor-messages .messages-container::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  right: 35px;
+  width: 20px;
+  height: 20px;
+  background-color: var(--navbar-color);
+  transform: rotate(45deg);
+  border-left: 1px solid var(--border-color);
+  border-top: 1px solid var(--border-color);
+}
+
+.advisor-messages .messages-list {
+  max-height: 370px;
+  overflow: auto;
+}
+
+/* scrollbar in messages */
+
+.advisor-messages .messages-list::-webkit-scrollbar {
+  background: transparent;
+  width: 5px;
+}
+
+.advisor-messages .messages-list::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+.advisor-messages .messages-list::-webkit-scrollbar-thumb {
+  background: #b7b7b77b;
+  border-radius: 10px;
+  cursor: pointer;
+  display: none;
+}
+
+.advisor-messages .messages-list::-webkit-scrollbar-thumb:hover {
+  background: #b7b7b7ca;
+}
+
+.advisor-messages .messages-list:hover::-webkit-scrollbar-thumb {
+  display: block;
+}
+
+.advisor-messages .no-appointment {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+@media only screen and (max-width:575px) {
+  .advisor-messages .messages-container {
+    right: 10px;
+    width: 95%;
+  }
+
+  .advisor-messages .messages-container::before {
+    display: none;
+  }
+}
+
+@media only screen and (min-width:1200px) and (max-width:1399px) {
+  .advisor-messages .messages-content h6 {
+    font-size: 14px;
+  }
+}
+
+@media only screen and (min-width:1400px) {
+  .advisor-messages .messages-container {
+    width: 400px;
+  }
+}

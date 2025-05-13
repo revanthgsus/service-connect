@@ -1,0 +1,254 @@
+.activity-container .heading-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.activity-container .activity-header {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.activity-container .activity-header svg {
+  font-size: 20px;
+  color: var(--text-color);
+  cursor: pointer;
+}
+
+.activity-container .activity-header svg:hover {
+  transform: scale(1.1);
+  transition: .3s ease-in-out all;
+}
+
+.activity-container .activity-header h5 {
+  margin-bottom: 0px;
+  color: var(--text-color);
+}
+
+.activity-container .add-quote-header h5 {
+  color: #2b2b2b;
+  font-size: 14px;
+  margin-bottom: 0;
+}
+
+.activity-container .add-quote-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #e6e6e6;
+  border-radius: 30px;
+  cursor: pointer;
+  gap: 5px;
+  padding: 10px 20px;
+}
+
+.activity-container .add-quote-header:hover {
+  background: #d8d8d8;
+  transition: 0.3s ease-in-out all;
+}
+
+.activity-container .activity-top {
+  color: #ffffff;
+  background: var(--main-btn-color);
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  padding: 15px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.activity-container .activity-top p {
+  margin: 0px;
+  color: #ffffff;
+}
+
+.activity-container .activity-status {
+  box-shadow: var(--shadow-color);
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  background-color: var(--navbar-color);
+  padding: 20px 25px;
+}
+
+.activity-container .activity-status .MuiStepLabel-root {
+  padding: 5px 0px;
+}
+
+.activity-container .activity-status .MuiStepIcon-root {
+  height: 20px;
+  width: 20px;
+  font-size: 12px;
+}
+
+.activity-container .activity-status .MuiStepLabel-label {
+  color: var(--text-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.activity-container .activity-status .MuiCollapse-wrapperInner {
+  line-height: 24px;
+  color: var(--sub-text-color);
+}
+
+.activity-container .activity-status .Mui-completed svg {
+  color: #029099;
+}
+
+.activity-container .activity-status .Mui-active svg {
+  color: #029099;
+}
+
+/* label style */
+.activity-container .activity-status .status {
+  border-radius: 100px;
+  padding: 2px 15px;
+  text-align: center;
+}
+
+.activity-container .activity-status .completed {
+  background-color: #d7f6e4;
+  color: #00A956;
+}
+
+.activity-container .activity-status .inprogress {
+  background-color: #FEE5C9;
+  color: #FFA206;
+}
+
+/* textarea styles */
+.activity-container .description-textarea {
+  background-color: var(--navbar-color);
+  border: 1px solid #b1b1b1bd;
+  border-radius: 5px;
+  color: var(--text-color);
+  padding: 7px 10px;
+  width: 100%;
+  resize: none;
+  margin: 5px 0px;
+}
+
+.activity-container .description-textarea:hover {
+  border: 1px solid #01848d;
+  transition: all .2s ease-in-out;
+}
+
+.activity-container .description-textarea:focus-visible {
+  border: 1px solid #01848d;
+  box-shadow: none;
+  outline: 1px solid #01848d;
+}
+
+.activity-container .status-wrapper {
+  float: right;
+  width: 120px;
+}
+
+.activity-container .select-container {
+  position: relative;
+}
+
+.activity-container .status-select {
+  appearance: none;
+  background-color: var(--input-color);
+  border-radius: 5px;
+  color: var(--text-color);
+  cursor: pointer;
+  font-size: 14px;
+  outline: 1px solid #0000;
+  padding: 5px 10px;
+  width: 100%;
+}
+
+.activity-container .arrow-icon {
+  color: var(--input-icon-color) !important;
+  cursor: pointer;
+  pointer-events: none;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.activity-container .update-btn {
+  background: #00919b;
+  border: 1px solid #0000;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 5px 20px;
+}
+
+.activity-container .update-btn:hover {
+  background: #007d85;
+  transition: .2s ease-in-out all;
+}
+
+.activity-container .status-alignment {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.activity-container .step-label {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  line-height: 25px;
+}
+
+.activity-container .step-label .date-label {
+  font-size: 13px;
+  color: var(--sub-text-color);
+}
+
+.activity-container .delivery-button {
+  background: #c0c0c0;
+  border: 1px solid #0000;
+  border-radius: 30px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 7px 25px;
+}
+
+.activity-container .delivery-button:hover {
+  background: #00919b;
+  transition: .2s ease-in-out all;
+}
+
+.activity-container .delivery-btn-container {
+  text-align: left;
+  margin-top: 30px;
+}
+
+.activity-container .delivery-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+  color: #666;
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1399px) {
+  .activity-container .activity-header h5 {
+    font-size: 16px;
+  }
+
+  .activity-container .activity-top {
+    padding: 13px 25px;
+  }
+
+  .activity-container .activity-top p {
+    font-size: 14px;
+  }
+
+  .activity-container .activity-status .MuiCollapse-wrapperInner {
+    font-size: 14px;
+  }
+}

@@ -1,0 +1,31 @@
+.not-found {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.not-found .home-btn {
+  text-decoration: none;
+}
+
+.not-found h5,
+p {
+  color: #535353;
+}
+
+.not-found .home-btn button {
+  padding: 7px 25px;
+  border-radius: 30px;
+  border: 1px solid transparent;
+  background: #0098a3;
+  color: #ffffff;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.not-found .home-btn:hover button {
+  background: #007d85;
+  transition: .3s linear all;
+}
