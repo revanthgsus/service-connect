@@ -89,8 +89,9 @@ const RatingsByAdvisor = () => {
   }, [fetchRatings]);
 
   const handleView = (advisorId) => {
-    navigate('/manager/dashboard/viewratings');
-  }
+    navigate('/manager/dashboard/viewratings',
+      { state: { advisorId: advisorId } });
+  };
 
   const handleSearchChange = (e) => setSearchInput(e.target.value);
   const handlePageChange = (event, value) => {
@@ -158,7 +159,8 @@ const RatingsByAdvisor = () => {
                         <td>{rating.advisor.mobileNumber}</td>
                         <td>{rating.averageRating}</td>
                         <td>
-                          <span className='details-icon' onClick={handleView}>
+                          <span className='details-icon'
+                            onClick={() => handleView(rating.advisor.advisorId)}>
                             <OpenInNewOutlinedIcon />
                           </span>
                         </td>

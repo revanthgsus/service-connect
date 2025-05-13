@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import './Reviews.css';
 import { Box, Rating, Typography, SvgIcon, useTheme } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import PreLoader from '../../../../common/PreLoader/PreLoader';
 import { toast, ToastContainer } from 'react-toastify';
 import { IoMdArrowRoundBack } from 'react-icons/io';
@@ -26,6 +26,7 @@ const RoundedStar = (props) => (
 
 const Reviews = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { setShowTokenModal } = useAuth();
   const theme = useTheme();
 
@@ -34,7 +35,7 @@ const Reviews = () => {
   const [reviews, setReviews] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const userId = sessionStorage.getItem("userId");
+  const advisorId = location.state?.advisorId || sessionStorage.getItem("userId");
 
   const fetchRatings = useCallback(async () => {
     const token = sessionStorage.getItem("authToken");
@@ -44,7 +45,7 @@ const Reviews = () => {
     }
 
     try {
-      const response = await axios.get(`${API_BASE_URL}/managerMaster/viewReviewsAndRatings/${userId}`,
+      const response = await axios.get(`${API_BASE_URL}/managerMaster/viewReviewsAndRatings/${advisorId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -64,7 +65,7 @@ const Reviews = () => {
     } finally {
       setIsLoading(false);
     }
-  }, [setShowTokenModal, userId]);
+  }, [setShowTokenModal, advisorId]);
 
   useEffect(() => {
     fetchRatings();
