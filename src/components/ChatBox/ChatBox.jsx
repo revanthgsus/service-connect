@@ -81,37 +81,37 @@ const ChatBox = () => {
   }, [isOpen, fetchChatHistory]);
 
 
-  // const fetchMessageCount = useCallback(async () => {
-  //   const token = sessionStorage.getItem("authToken");
-  //   if (!token) {
-  //     setShowTokenModal(true);
-  //     return;
-  //   }
+  const fetchMessageCount = useCallback(async () => {
+    const token = sessionStorage.getItem("authToken");
+    if (!token) {
+      setShowTokenModal(true);
+      return;
+    }
 
-  //   if (!referenceId) return;
+    if (!referenceId) return;
 
-  //   try {
-  //     const response = await axios.get(`${API_BASE_URL}/customerMaster/viewMessagesByReferenceId/${referenceId}`, {
-  //       headers: {
-  //         Authorization: `Bearer ${token}`
-  //       }
-  //     });
+    try {
+      const response = await axios.get(`${API_BASE_URL}/customerMaster/viewMessagesByReferenceId/${referenceId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
 
-  //     if (response.status === 200 && Array.isArray(response.data)) {
-  //       setMessageCount(response.data.length);
-  //     } else {
-  //       setMessageCount(0);
-  //     }
-  //   } catch (error) {
-  //     toast.error("Failed to fetch message count:", error);
-  //     setMessageCount(0);
-  //   }
-  // }, [referenceId, setShowTokenModal]);
+      if (response.status === 200 && Array.isArray(response.data)) {
+        setMessageCount(response.data.length);
+      } else {
+        setMessageCount(0);
+      }
+    } catch (error) {
+      toast.error("Failed to fetch message count:", error);
+      setMessageCount(0);
+    }
+  }, [referenceId, setShowTokenModal]);
 
 
-  // useEffect(() => {
-  //   fetchMessageCount();
-  // }, [fetchMessageCount]);
+  useEffect(() => {
+    fetchMessageCount();
+  }, [fetchMessageCount]);
 
 
   // send message and bot api call

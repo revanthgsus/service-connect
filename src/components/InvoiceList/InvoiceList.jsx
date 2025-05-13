@@ -133,6 +133,9 @@ const InvoiceList = ({ userId, apiUrl, tableHeadings, filters, showCreateButton,
   }
 
   const handleCloseModal = () => setInvoiceShow(false);
+  const handleDownload = (e) => {
+    e.preventDefault()
+  };
 
   const handleCreate = (e) => {
     e.preventDefault();
@@ -219,7 +222,7 @@ const InvoiceList = ({ userId, apiUrl, tableHeadings, filters, showCreateButton,
                     </tr>
                   ) : (
                     invoice.map((invoice, index) =>
-                      renderRow(invoice, index, currentPage, itemsPerPage, handlePay, handleView)
+                      renderRow(invoice, index, currentPage, itemsPerPage, handleDownload, handlePay, handleView)
                     ))
                   }
                 </tbody>

@@ -52,8 +52,8 @@ const NotifyDropdown = ({ isOpen, toggleMessage }) => {
           .filter(msg => !msg.viewed)
           .map((msg, index) => ({
             id: msg.messageId || index,
-            title: msg.messageName,
-            message: msg.messageContent,
+            title: msg.referenceId,
+            message: msg.message,
             time: msg.modifiedAt,
             viewed: msg.viewed || false,
           }));

@@ -158,6 +158,7 @@ const GenerateInvoice = () => {
   };
 
 
+
   // calculate the table bottom data
   const labourTaxTotal = quotesItems.reduce(
     (acc, item) => acc + (parseFloat(item.labourTaxableAmount) || 0), 0);
@@ -172,6 +173,7 @@ const GenerateInvoice = () => {
     const rowTotal = parseFloat(item.totalAmount) || 0;
     return acc + rowTotal;
   }, 0);
+
 
   // calculate discount amount
   const handleDiscountChange = (e) => {
