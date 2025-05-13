@@ -23,14 +23,13 @@ const InvoiceList = ({ userId, apiUrl, tableHeadings, filters, showCreateButton,
   const [paymentStatus, setPaymentStatus] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
+  
   const [totalInvoice, setTotalInvoice] = useState(0);
   const [debouncedSearch, setDebouncedSearch] = useState('');
   const [invoiceShow, setInvoiceShow] = useState(false);
   const [selectedInvoice, setSelectedInvoice] = useState(null);
 
   const itemsPerPage = 10;
-
-  
 
   useEffect(() => {
     const handler = setTimeout(() => {
