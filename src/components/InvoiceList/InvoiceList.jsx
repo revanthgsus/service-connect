@@ -30,6 +30,8 @@ const InvoiceList = ({ userId, apiUrl, tableHeadings, filters, showCreateButton,
 
   const itemsPerPage = 10;
 
+  
+
   useEffect(() => {
     const handler = setTimeout(() => {
       setCurrentPage(1);
