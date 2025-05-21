@@ -1,32 +1,32 @@
-.customer-navbar {
+.app-navbar {
   padding: 0px;
   box-shadow: var(--shadow-color);
   background-color: var(--navbar-color);
 }
 
-.customer-navbar .custom-logo {
+.app-navbar .custom-logo {
   width: 100px;
   height: auto;
   display: block;
 }
 
-.customer-navbar .mobile-logo {
+.app-navbar .mobile-logo {
   display: none;
 }
 
-.customer-navbar .notification path {
+.app-navbar .notification path {
   color: var(--icon-color);
 }
 
-.customer-navbar .messages path {
+.app-navbar .messages path {
   color: var(--icon-color);
 }
 
-.customer-navbar .moon-icon path {
+.app-navbar .moon-icon path {
   color: var(--icon-color);
 }
 
-.customer-navbar .sun-icon {
+.app-navbar .sun-icon {
   color: var(--icon-color);
   animation: rotate-sun .3s ease-in-out;
 }
@@ -41,63 +41,63 @@
   }
 }
 
-.customer-navbar .profile-icon path {
+.app-navbar .profile-icon path {
   color: var(--icon-color);
 }
 
-.customer-navbar .navbar-brand {
+.app-navbar .navbar-brand {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 65px;
 }
 
-.customer-navbar .navbar-icons {
+.app-navbar .navbar-icons {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 10px;
 }
 
-.customer-navbar .navbar-icons button:hover {
+.app-navbar .navbar-icons button:hover {
   background-color: var(--hover-color);
-  transition: .3s ease-in-out all;
+  transition: .3s linear all;
 }
 
-.customer-navbar .navbar-icons button:hover svg path {
+.app-navbar .navbar-icons button:hover svg path {
   color: var(--dark-hover-color);
 }
 
-.customer-navbar .custom-tooltip {
+.app-navbar .custom-tooltip {
   font-size: 12px;
   padding: 5px 10px;
 }
 
 @media only screen and (max-width:768px) {
-  .customer-navbar .navbar-brand {
+  .app-navbar .navbar-brand {
     gap: 0px;
     padding: 15px 0px;
     margin-right: 0px;
   }
 
-  .customer-navbar .custom-logo {
+  .app-navbar .custom-logo {
     display: none;
   }
 
-  .customer-navbar .mobile-logo {
+  .app-navbar .mobile-logo {
     display: block;
     width: 35px;
   }
 }
 
 @media only screen and (min-width:769px) and (max-width: 992px) {
-  .customer-navbar .navbar-brand {
+  .app-navbar .navbar-brand {
     gap: unset;
   }
 }
 
 @media screen and (min-width:1400px) {
-  .customer-navbar .navbar-brand {
+  .app-navbar .navbar-brand {
     gap: 100px;
   }
 }

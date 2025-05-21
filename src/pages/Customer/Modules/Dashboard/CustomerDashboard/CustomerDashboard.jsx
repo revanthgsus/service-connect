@@ -2,7 +2,7 @@ import React from 'react';
 import './CustomerDashboard.css';
 import Banner from '../../../../../common/Banner/Banner';
 import ServiceKpi from '../ServiceKpi/ServiceKpi';
-import ServiceRecords from '../ServiceRecords/ServiceRecords';
+// import ServiceRecords from '../ServiceRecords/ServiceRecords';
 import { Row, Col } from 'react-bootstrap';
 
 const CustomerDashboard = () => {
@@ -16,7 +16,7 @@ const CustomerDashboard = () => {
           <ServiceKpi />
         </Col>
       </Row >
-      <ServiceRecords />
+      {/* <ServiceRecords /> */}
     </>
   )
 }

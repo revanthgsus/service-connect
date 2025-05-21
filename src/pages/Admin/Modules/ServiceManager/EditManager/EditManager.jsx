@@ -154,14 +154,12 @@ const EditManager = () => {
 
       if (response?.data?.status === "success") {
         toast.success(response?.data?.message || "Manager updated successfully.");
-        setTimeout(() => {
-          navigate("/admin/manager");
-        }, 1000);
+        setTimeout(() => { navigate("/admin/manager") }, 1000);
       } else {
         toast.error(response?.data?.error || "Failed to update manager. Please try again.");
       }
-    } catch (err) {
-      toast.error(err?.response?.data?.error || "An error occurred while saving the data.");
+    } catch (error) {
+      toast.error(error?.response?.data?.error || "Something went wrong. Please try again later.");
     } finally {
       setLoading(false);
       setSubmitting(false);

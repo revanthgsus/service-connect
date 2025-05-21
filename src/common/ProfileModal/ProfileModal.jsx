@@ -1,59 +1,73 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import './ProfileModal.css';
 import { Modal } from 'react-bootstrap';
-import { TbUserCircle } from "react-icons/tb";
+import { FaUserCircle } from "react-icons/fa";
 import { toast } from 'react-toastify';
+import Cropper from 'react-easy-crop';
+import getCroppedImg from './CropImage';
 
-const ProfileModal = ({ showPopup, setShowPopup, setSelectedImage, selectedImage, uploadMediaFile }) => {
-  const [file, setFile] = useState(null);
+const ProfileModal = ({ showPopup, setShowPopup, setSelectedImage, selectedImage, uploadMediaFile, tempImageUrl }) => {
+  const [imageSrc, setImageSrc] = useState(null);
+  const [crop, setCrop] = useState({ x: 0, y: 0 });
+  const [zoom, setZoom] = useState(1);
+  const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
   const [isUpdating, setIsUpdating] = useState(false);
-  const [previewImage, setPreviewImage] = useState(selectedImage);
 
   useEffect(() => {
-    return () => {
-      if (previewImage?.startsWith('blob:')) {
-        URL.revokeObjectURL(previewImage);
-      }
-    };
-  }, [previewImage]);
-
-  // Upload image format
-  const handleFileChange = (event) => {
-    const selectedFile = event.target.files[0];
-    if (selectedFile) {
-      const imageUrl = URL.createObjectURL(selectedFile);
-      setPreviewImage(imageUrl);
-      setFile(selectedFile);
+    if (tempImageUrl) {
+      setImageSrc(tempImageUrl);
     }
-  };
+  }, [tempImageUrl]);
+
+
+  const onCropComplete = useCallback((_, croppedPixels) => {
+    setCroppedAreaPixels(croppedPixels);
+  }, []);
+
 
   // upload image if else condition
   const handleUpdateClick = async () => {
-    if (!file) {
+    if (!imageSrc) {
       toast.error("Please select an image.");
       return;
     }
 
+    const userId = sessionStorage.getItem("userId");
+    if (!userId) {
+      toast.error("User ID not found. Please login again.");
+      setIsUpdating(false);
+      return;
+    }
+
     setIsUpdating(true);
+
     try {
-      const imageUrl = await uploadMediaFile(file);
-      setSelectedImage(imageUrl);
-      setShowPopup(false);
+      const { blob } = await getCroppedImg(imageSrc, croppedAreaPixels);
+      const extension = blob.type.split("/")[1];
+      const newFileName = `profile_${userId}.${extension}`;
+      const croppedFile = new File([blob], newFileName, { type: blob.type });
+
+      const imageUrl = await uploadMediaFile(croppedFile);
+      if (imageUrl) {
+        setSelectedImage(imageUrl);
+        setShowPopup(false);
+      }
     } catch (error) {
-      toast.error("Something went wrong, please try again.");
+      toast.error("Something went wrong. please try again later.");
     } finally {
       setIsUpdating(false);
     }
   };
 
+
   const handleCancel = () => {
-    if (previewImage?.startsWith('blob:')) {
-      URL.revokeObjectURL(previewImage);
+    if (imageSrc?.startsWith('blob:')) {
+      URL.revokeObjectURL(imageSrc);
     }
-    setFile(null);
     setShowPopup(false);
-    setPreviewImage(selectedImage);
+    setImageSrc(selectedImage || null);
   };
+
 
   return (
     <Modal show={showPopup} onHide={() => setShowPopup(false)} centered className='profile-modal'>
@@ -61,26 +75,34 @@ const ProfileModal = ({ showPopup, setShowPopup, setSelectedImage, selectedImage
         <Modal.Title>Update Profile Picture</Modal.Title>
       </Modal.Header>
       <Modal.Body className='d-flex justify-content-center'>
-        <label htmlFor="fileInput" className="file-label">
-          <div className="preview-container">
-            {previewImage ? (
+        <div className="preview-container">
+          {imageSrc ? (
+            <div className="crop-container">
+              <Cropper
+                className='cropper'
+                image={imageSrc}
+                crop={crop}
+                zoom={zoom}
+                aspect={1}
+                cropShape='round'
+                showGrid={false}
+                onCropChange={setCrop}
+                onZoomChange={setZoom}
+                onCropComplete={onCropComplete}
+              />
+            </div>
+          ) : (
+            selectedImage ? (
               <img
-                src={previewImage}
-                alt="Profile"
-                className="preview-image"
-                onError={() => { setPreviewImage(null) }} />
+                key={selectedImage}
+                src={selectedImage}
+                alt="Current"
+                className="preview-image" />
             ) : (
-              <TbUserCircle className="default-icon" />
-            )}
-          </div>
-        </label>
-        <input
-          type="file"
-          id="fileInput"
-          accept="image/png, image/jpeg, image/svg+xml, image/heif, image/webp"
-          onChange={handleFileChange}
-          className="file-input"
-        />
+              <FaUserCircle className="default-icon" />
+            )
+          )}
+        </div>
       </Modal.Body>
       <Modal.Footer >
         <button className='cancel-btn' onClick={handleCancel}>Cancel</button>

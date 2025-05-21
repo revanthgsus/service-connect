@@ -1,13 +1,17 @@
-.admin-notification .notification-container {
+.user-notification {
+  position: relative;
+}
+
+.user-notification .notification-container {
   position: absolute;
-  top: 100%;
-  right: 100px;
+  top: 53px;
+  right: -25px;
   background-color: var(--navbar-color);
   border-radius: 5px;
   text-align: start;
   box-shadow: var(--shadow-color);
   z-index: 99;
-  width: 370px;
+  width: 430px;
 
   opacity: 0;
   transform: translateY(-10px);
@@ -15,25 +19,26 @@
   visibility: hidden;
 }
 
-.admin-notification .notification-container.show {
+.user-notification .notification-container.show {
   opacity: 1;
   transform: translateY(0);
   visibility: visible;
 }
 
-.admin-notification .notify-heading {
+.user-notification .notify-heading {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 15px 15px 10px 15px;
 }
 
-.admin-notification .notify-heading h6 {
+.user-notification .notify-heading h6 {
   margin-bottom: 0px;
   color: var(--sub-text-color);
+  line-height: 30px;
 }
 
-.admin-notification .notify-heading a {
+.user-notification .notify-heading a {
   color: var(--hamburger-color);
   text-decoration: none;
   font-size: 13px;
@@ -41,34 +46,36 @@
   padding: 5px 10px;
 }
 
-.admin-notification .notify-heading a:hover {
+.user-notification .notify-heading a:hover {
   background-color: #a8a8a81a;
   border-radius: 3px;
-  transition: .2s linear all;
+  transition: .2s ease-in-out all;
 }
 
-.admin-notification .break-line {
+.user-notification .break-line {
   color: #919191c2;
   margin: 0px 0px;
 }
 
-.admin-notification .notification-content h6 {
+.user-notification .notification-content h6 {
   color: var(--text-color);
   margin-bottom: 5px;
+  line-height: 20px;
 }
 
-.admin-notification .notification-content p {
+.user-notification .notification-content p {
   color: var(--sub-text-color);
   margin-bottom: 0px;
   font-size: 12px;
   font-weight: 400;
 }
 
-.admin-notification .notification-content {
+.user-notification .notification-content {
   width: 60%;
+  margin-right: auto;
 }
 
-.admin-notification .notification-time {
+.user-notification .notification-time {
   color: var(--sub-text-color);
   font-size: 12px;
   display: flex;
@@ -77,7 +84,7 @@
   gap: 15px;
 }
 
-.admin-notification .notification-time .mark-icon {
+.user-notification .notification-time .mark-icon {
   color: var(--text-color);
   padding: 10px 10px;
   opacity: 0;
@@ -87,69 +94,78 @@
   transform: scale(0.5);
 }
 
-.admin-notification .notification-item:hover .mark-icon {
+.user-notification .notification-item:hover .mark-icon {
   opacity: 1;
   transform: scale(1);
 }
 
-.admin-notification .mark-icon:hover {
+.user-notification .mark-icon:hover {
   background-color: #d1d1d142;
   transition: .1s ease-in-out all;
 }
 
-.admin-notification .notification-icon {
-  background-color: #2F7FDB;
+.user-notification .notification-icon {
+  background-color: #00b1bc;
   padding: 8px;
   border-radius: 50%;
   display: inline-flex;
   color: #ffffff;
 }
 
-/* .admin-notification .notification-icon.appointment {
+.user-notification .notification-icon.Appointment {
   background-color: #2F7FDB;
 }
 
-.admin-notification .notification-icon.quotation {
+.user-notification .notification-icon.Quotation {
   background-color: #A154D4;
 }
 
-.admin-notification .notification-icon.request {
+.user-notification .notification-icon.Activity {
+  background-color: #1dc773;
+}
+
+.user-notification .notification-icon.Invoice {
+  background-color: #E4A842;
+}
+
+.user-notification .notification-icon.Payment {
+  background-color: #E4A842;
+}
+
+.user-notification .notification-icon.Escalate {
   background-color: #30CA7E;
 }
 
-.admin-notification .notification-icon.invoice {
-  background-color: #E4A842;
-} */
-
-.admin-notification .notification-icon svg {
+.user-notification .notification-icon svg {
   font-size: 16px;
 }
 
-.admin-notification .notification-item {
+.user-notification .notification-item {
   padding: 13px 15px;
   cursor: pointer;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  gap: 15px;
   border-bottom: 1px solid #9a9a9a1c;
   transition: .3s ease-in-out all;
 }
 
-.admin-notification .notification-item.fade-out {
+.user-notification .notification-item.fade-out {
   opacity: 0;
   transform: scale(0.8);
 }
 
-.admin-notification .notification-item:last-child {
+.user-notification .notification-item:last-child {
   border-bottom: none;
 }
 
-.admin-notification .notification-item:hover {
+.user-notification .notification-item:hover {
   background: #007c850b;
-  transition: .3s linear all;
+  transition: .3s ease-in-out all;
 }
 
-.admin-notification .notification-container::before {
+.user-notification .notification-container::before {
   content: "";
   position: absolute;
   top: -10px;
@@ -162,61 +178,75 @@
   border-top: 1px solid var(--border-color);
 }
 
-.admin-notification .notifications-list {
+.user-notification .notifications-list {
   max-height: 370px;
   overflow: auto;
 }
 
 /* scrollbar in notification */
 
-.admin-notification .notifications-list::-webkit-scrollbar {
+.user-notification .notifications-list::-webkit-scrollbar {
   background: transparent;
   width: 5px;
 }
 
-.admin-notification .notifications-list::-webkit-scrollbar-track {
+.user-notification .notifications-list::-webkit-scrollbar-track {
   border-radius: 10px;
 }
 
-.admin-notification .notifications-list::-webkit-scrollbar-thumb {
+.user-notification .notifications-list::-webkit-scrollbar-thumb {
   background: #b7b7b77b;
   border-radius: 10px;
   cursor: pointer;
   display: none;
 }
 
-.admin-notification .notifications-list::-webkit-scrollbar-thumb:hover {
+.user-notification .notifications-list::-webkit-scrollbar-thumb:hover {
   background: #b7b7b7ca;
 }
 
-.admin-notification .notifications-list:hover::-webkit-scrollbar-thumb {
+.user-notification .notifications-list:hover::-webkit-scrollbar-thumb {
   display: block;
 }
 
-.admin-notification .no-appointment {
+.user-notification .no-appointment {
   text-align: center;
   margin-bottom: 40px;
 }
 
+.user-notification .time-container {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.user-notification .loading-container {
+  margin: 150px 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
 @media only screen and (max-width:575px) {
-  .admin-notification .notification-container {
+  .user-notification .notification-container {
     right: 10px;
     width: 95%;
   }
 
-  .admin-notification .notification-container::before {
+  .user-notification .notification-container::before {
     display: none;
   }
 }
 
 @media only screen and (min-width:1200px) and (max-width:1399px) {
-  .admin-notification .notification-content h6 {
+  .user-notification .notification-content h6 {
     font-size: 14px;
   }
 }
 
 @media only screen and (min-width:1400px) {
-  .admin-notification .notification-container {
+  .user-notification .notification-container {
     width: 400px;
   }
 }

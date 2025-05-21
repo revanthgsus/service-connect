@@ -11,8 +11,8 @@ const CustomerInvoice = () => {
     { title: "Invoice ID" },
     { title: "Due Date" },
     { title: "Total Amount" },
-    { title: "Paid " },
-    { title: "Due " },
+    { title: "Paid" },
+    { title: "Due" },
     { title: "Status" },
     { title: "" },
     { title: "" },
@@ -46,7 +46,7 @@ const CustomerInvoice = () => {
       </td>
 
       <td>
-        <span className='download-icon' onClick={() => handleView(invoice)}>
+        <span className='view-icon' onClick={() => handleView(invoice)}>
           <FaRegEye />
         </span>
       </td>
@@ -60,7 +60,7 @@ const CustomerInvoice = () => {
         apiUrl="customerMaster/getCustomerInvoicesListPage"
         tableHeadings={tableHeadings}
         filters={{
-          searchKey: "invoiceId",
+          searchKey: "id",
           searchPlaceholder: "Search by Invoice ID or Service ID",
           statusOptions: ["Paid", "Unpaid", "Partial Paid"]
         }}

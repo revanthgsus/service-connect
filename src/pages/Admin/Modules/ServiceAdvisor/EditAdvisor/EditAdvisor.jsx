@@ -172,14 +172,12 @@ const EditAdvisor = () => {
 
       if (response?.data?.status === "success") {
         toast.success(response?.data?.message || "Advisor Updated successfully.");
-        setTimeout(() => {
-          navigate("/admin/advisor");
-        }, 1000);
+        setTimeout(() => { navigate("/admin/advisor") }, 1000);
       } else {
         toast.error(response?.data?.error || "Failed to update advisor. Please try again.");
       }
-    } catch (err) {
-      toast.error(err?.response?.data?.error || "An error occurred while saving the data.");
+    } catch (error) {
+      toast.error(error?.response?.data?.error || "Something went wrong. Please try again later.");
     } finally {
       setLoading(false);
       setSubmitting(false);

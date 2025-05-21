@@ -37,6 +37,7 @@ const NewPassword = () => {
     }
   };
 
+  // new-password - handle submit api call
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -80,7 +81,7 @@ const NewPassword = () => {
         setLoading(false);
       }
     } catch (err) {
-      setError(err.response?.data?.message || 'Something went wrong. Please try again.');
+      setError(err.response?.data?.error || 'Something went wrong. Please try again.');
     } finally {
       setLoading(false);
     }

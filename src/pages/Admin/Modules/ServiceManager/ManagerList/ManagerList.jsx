@@ -54,9 +54,10 @@ const ManagerList = () => {
     return () => clearTimeout(handler);
   }, [searchInput]);
 
+  // fetch manager data from get all api
   const fetchManagers = useCallback(async () => {
-    const token = sessionStorage.getItem("authToken");
     const userRole = sessionStorage.getItem("userRole");
+    const token = sessionStorage.getItem("authToken");
     if (!token) {
       setShowTokenModal(true);
       return;
@@ -88,7 +89,7 @@ const ManagerList = () => {
         toast.error("Failed to fetch manager data. Please try again.");
       }
     } catch (error) {
-      toast.error(error?.response?.data?.error || "An error occurred while fetch the data.");
+      toast.error(error?.response?.data?.error || "Something went wrong. Please try again later.");
     } finally {
       setIsLoading(false);
     }
@@ -98,6 +99,7 @@ const ManagerList = () => {
     fetchManagers();
   }, [fetchManagers]);
 
+  // when click edit icon call this api
   const handleEdit = async (managerId) => {
     document.querySelector(".layout-main")?.scrollTo({ top: 0, behavior: "smooth" });
 
@@ -120,9 +122,7 @@ const ManagerList = () => {
         toast.error("Failed to fetch manager data. Please try again.");
       }
     } catch (error) {
-      toast.error(error?.response?.data?.error || "An error occurred while fetch the data.");
-    } finally {
-      setIsLoading(false);
+      toast.error(error?.response?.data?.error || "Something went wrong. Please try again later.");
     }
   }
 

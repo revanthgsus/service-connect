@@ -1,5 +1,4 @@
 .Logout-popup .modal-dialog {
-  font-family: 'Be Vietnam Pro', sans-serif;
   height: 80vh;
   display: flex;
   justify-content: center;
@@ -59,12 +58,12 @@
 
 .Logout-popup .cancel-btn:hover {
   background-color: #d5d5d5;
-  transition: .3s linear all;
+  transition: .3s ease-in-out all;
 }
 
 .Logout-popup .logout-btn:hover {
   background-color: #007D85;
-  transition: .3s linear all;
+  transition: .3s ease-in-out all;
 }
 
 @keyframes zoomIn {

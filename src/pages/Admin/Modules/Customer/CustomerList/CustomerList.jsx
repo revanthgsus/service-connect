@@ -54,9 +54,10 @@ const CustomerList = () => {
     return () => clearTimeout(handler);
   }, [searchInput]);
 
+  // fetch customer data from get all api
   const fetchCustomers = useCallback(async () => {
-    const token = sessionStorage.getItem("authToken");
     const userRole = sessionStorage.getItem("userRole");
+    const token = sessionStorage.getItem("authToken");
     if (!token) {
       setShowTokenModal(true);
       return;
@@ -88,7 +89,7 @@ const CustomerList = () => {
         toast.error("Failed to fetch customer data. Please try again.");
       }
     } catch (error) {
-      toast.error(error?.response?.data?.error || "An error occurred while fetch the data.");
+      toast.error(error?.response?.data?.error || "Something went wrong. Please try again later.");
     } finally {
       setIsLoading(false);
     }
@@ -98,6 +99,7 @@ const CustomerList = () => {
     fetchCustomers();
   }, [fetchCustomers]);
 
+  // when click edit icon call this api
   const handleEdit = async (customerId) => {
     document.querySelector(".layout-main")?.scrollTo({ top: 0, behavior: "smooth" });
 
@@ -120,14 +122,11 @@ const CustomerList = () => {
         toast.error("Failed to fetch customer data. Please try again.");
       }
     } catch (error) {
-      toast.error(error?.response?.data?.error || "An error occurred while fetch the data.");
-    } finally {
-      setIsLoading(false);
+      toast.error(error?.response?.data?.error || "Something went wrong. Please try again later.");
     }
   };
 
   const handleSearchChange = (e) => setSearchInput(e.target.value);
-
   const handleStatusChange = (e) => {
     setStatus(e.target.value);
     setCurrentPage(1);

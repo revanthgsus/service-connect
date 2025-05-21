@@ -12,10 +12,9 @@ const AdvisorInvoice = () => {
     { title: "Billing Name" },
     { title: "Due Date" },
     { title: "Total Amount" },
-    { title: "Paid " },
-    { title: "Due " },
+    { title: "Paid" },
+    { title: "Due" },
     { title: "Status" },
-    { title: "" },
     { title: "" },
   ]
 
@@ -38,7 +37,7 @@ const AdvisorInvoice = () => {
         </span>
       </td>
       <td>
-        <span className='download-icon' onClick={() => handleView(invoice)}>
+        <span className='view-icon' onClick={() => handleView(invoice)}>
           <FaRegEye />
         </span>
       </td>
@@ -52,7 +51,7 @@ const AdvisorInvoice = () => {
         apiUrl="advisorMaster/getAdvisorInvoicesListPage"
         tableHeadings={tableHeadings}
         filters={{
-          searchKey: "invoiceId",
+          searchKey: "id",
           searchPlaceholder: "Search by Invoice ID or Service ID",
           statusOptions: ["Paid", "Unpaid", "Partial Paid"]
         }}

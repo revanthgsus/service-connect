@@ -12,8 +12,9 @@ const useUserProfile = (userId, setUser, setSelectedImage) => {
 
   // API Call: Fetch User Profile Details
   const fetchUserProfile = useCallback(async () => {
-    const token = sessionStorage.getItem("authToken");
+    setIsLoading(true);
 
+    const token = sessionStorage.getItem("authToken");
     if (!token || !userId) {
       setShowTokenModal(true);
       return;
@@ -28,24 +29,25 @@ const useUserProfile = (userId, setUser, setSelectedImage) => {
         });
 
       if (response?.data?.status === "success") {
-        setUser(response.data.data);
+        setUser(response?.data?.data);
 
-        const imageId = response.data.imageId;
+        const imageId = response?.data?.imageId;
         if (imageId) {
           const imageUrl = `${UPLOAD_FILE_API}/v1/view/${imageId}`;
           setUser((prev) => ({ ...prev, profileImageUrl: imageUrl }));
           setSelectedImage(imageUrl);
         }
-
       } else {
-        toast.error(response.data.error || 'No profile details found.');
+        toast.error(response?.data?.error || 'No profile details found.');
       }
     } catch (error) {
-      toast.error(error?.response?.data?.error || "Something went wrong. Please try again.");
+      toast.error(error?.response?.data?.error || "Something went wrong. Please try again later.");
     } finally {
       setIsLoading(false);
     }
+
   }, [userId, setUser, setShowTokenModal, setSelectedImage]);
+
 
   useEffect(() => {
     if (!hasFetched.current) {
@@ -53,6 +55,7 @@ const useUserProfile = (userId, setUser, setSelectedImage) => {
       hasFetched.current = true;
     }
   }, [fetchUserProfile]);
+
 
   return { isLoading };
 };

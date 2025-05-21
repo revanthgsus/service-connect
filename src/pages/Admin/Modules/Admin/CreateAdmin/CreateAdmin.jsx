@@ -108,6 +108,7 @@ const CreateAdmin = () => {
     },
   ];
 
+
   useEffect(() => {
     if (Object.keys(formErrors).length > 0) {
       const firstErrorField = Object.keys(formErrors).find(field => formTouched[field]);
@@ -118,6 +119,7 @@ const CreateAdmin = () => {
       }
     }
   }, [formErrors, formTouched]);
+
 
   const handleSubmit = useCallback(async (values, { setSubmitting }) => {
     const token = sessionStorage.getItem('authToken');
@@ -148,13 +150,14 @@ const CreateAdmin = () => {
       } else {
         toast.error(response?.data?.error || "Failed to create admin. Please try again.");
       }
-    } catch (err) {
-      toast.error(err?.response?.data?.error || "An error occurred while saving the data.");
+    } catch (error) {
+      toast.error(error?.response?.data?.error || "Something went wrong. Please try again later.");
     } finally {
       setLoading(false);
       setSubmitting(false);
     }
-  }, [setShowTokenModal, navigate])
+  }, [setShowTokenModal, navigate]);
+
 
   const handleCancel = () => { setCancelShow(true) };
   const handleCancelClose = () => { setCancelShow(false) };

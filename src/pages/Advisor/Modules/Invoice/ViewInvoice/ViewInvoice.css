@@ -2,7 +2,6 @@
   align-items: center;
   display: flex;
   gap: 5px;
-  margin-bottom: 20px;
 }
 
 .invoice-container .invoice-header svg {

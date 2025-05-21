@@ -39,7 +39,6 @@
   align-items: center;
   justify-content: center;
   position: relative;
-  cursor: pointer;
   border: 1px solid #d5d5d5;
   border-radius: 50%;
   width: 130px;
@@ -51,14 +50,9 @@
   justify-content: center;
 }
 
-.user-profile .profile-image:hover {
-  background: #8b8b8b14;
-  transition: .2s ease-in-out all;
-}
-
 .user-profile .default-icon {
   font-size: 25px;
-  color: #a1a1a1;
+  color: #cccccc;
 }
 
 .user-profile .uploaded-image {
@@ -68,21 +62,59 @@
   object-fit: cover;
 }
 
-.user-profile .profile-image span {
+.user-profile .edit-dropdown {
   position: absolute;
   bottom: 5px;
   right: 5px;
-  background: #f4f4f4;
+  background: #f6f6f6;
   border-radius: 50%;
-  padding: 5px;
   cursor: pointer;
   display: inline-flex;
   border: 1px solid grey;
+  outline: none;
 }
 
-.user-profile .profile-image span:hover {
+.user-profile .edit-dropdown:hover {
   background: #e0e0e0;
   transition: .2s ease-in-out all;
+}
+
+.user-profile .edit-dropdown .edit-icon {
+  padding: 6px;
+  font-size: 30px;
+}
+
+.user-profile .edit-toggle {
+  display: flex;
+  color: #3c3c3c;
+}
+
+.user-profile .edit-toggle:focus-visible {
+  box-shadow: none;
+}
+
+.user-profile .custom-dropdown {
+  padding: 8px 20px;
+  color: #303030;
+  font-size: 14px;
+}
+
+.user-profile .custom-dropdown:active {
+  background-color: #f8f9fa;
+}
+
+.user-profile .delete-dropdown:active {
+  background-color: rgba(249, 199, 199, 0.194);
+}
+
+.user-profile .delete-dropdown {
+  padding: 8px 20px;
+  font-size: 14px;
+  color: red;
+}
+
+.user-profile .delete-dropdown:hover {
+  background-color: #fff6f6;
 }
 
 .user-profile .profile-title {
@@ -129,7 +161,7 @@
   color: var(--text-color);
 }
 
-.user-profile .edit-icon {
+.user-profile .password-header .edit-icon {
   background: #f1f1f1;
   border-radius: 3px;
   padding: 7px 6px;
@@ -138,7 +170,7 @@
   border: 1px solid #cecece;
 }
 
-.user-profile .edit-icon:hover {
+.user-profile .password-header .edit-icon:hover {
   background: #ececec;
   transition: .2s ease-in-out all;
 }
@@ -240,38 +272,11 @@
   gap: 20px;
 }
 
-.user-profile .loading-icon {
-  position: relative;
-  top: 15%;
-  left: 15%;
-}
-
-.user-profile .loading-icon span {
-  background: transparent;
-  border: none;
-}
-
-.user-profile .loading-icon span:hover {
-  background: transparent;
-}
-
 @media only screen and (max-width:575px) {
   .user-profile .profile-content {
     margin-top: 20px;
   }
 }
-
-/* @media only screen and (min-width:576px)and (max-width:767px) {
-  .user-profile .profile-content {
-    margin-top: 20px;
-  }
-} */
-
-/* @media only screen and (min-width:768px)and (max-width:992px) {
-  .user-profile .profile-content {
-    margin-top: 20px;
-  }
-} */
 
 @media only screen and (min-width: 1200px) and (max-width: 1399px) {
   .user-profile .profile-header h5 {

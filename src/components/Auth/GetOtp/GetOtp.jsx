@@ -40,6 +40,7 @@ const GetOtp = () => {
     }
   };
 
+  // get-otp - handle submit api call
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -77,7 +78,7 @@ const GetOtp = () => {
         setLoading(false);
       }
     } catch (error) {
-      setError(error.response?.data?.message || 'Something went wrong. Please try again.');
+      setError(error.response?.data?.error || 'Something went wrong. Please try again.');
     } finally {
       setLoading(false);
     }

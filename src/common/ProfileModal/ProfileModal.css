@@ -5,14 +5,14 @@
   width: 200px;
   height: 200px;
   border-radius: 50%;
-  background-color: #f3f3f38f;
+  background-color: #f3f3f35e;
   overflow: hidden;
   border: 1px solid #d1d1d1;
 }
 
 .profile-modal .preview-container:hover {
-  background: #e6e6e6;
-  transition: .2s linear all;
+  background: #f4f4f4;
+  transition: .2s ease-in-out all;
 }
 
 .profile-modal .preview-image {
@@ -22,22 +22,9 @@
   border-radius: 50%;
 }
 
-.profile-modal .file-input {
-  width: 100%;
-  padding: 5px;
-  display: none;
-}
-
-.profile-modal .file-label {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-}
-
 .profile-modal .default-icon {
   font-size: 25px;
-  color: #a1a1a1;
+  color: #cccccc;
 }
 
 .profile-modal .btn-close {

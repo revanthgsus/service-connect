@@ -2,9 +2,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import './UserProfile.css';
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { Container, Col, Row } from 'react-bootstrap';
-import { TbUserCircle } from "react-icons/tb";
+import { FaUserCircle } from "react-icons/fa";
 import { CiEdit } from "react-icons/ci";
-import ProfileModal from '../../common/ProfileModal/ProfileModal';
 import PasswordIcon from '../../assets/images/comman/empty-password.svg';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
@@ -15,12 +14,18 @@ import { PasswordValidation } from '../../utils/passwordValidation';
 import { useNavigate } from 'react-router-dom';
 import useUserProfile from '../../hooks/useUserProfile';
 import useMediaUpload from '../../hooks/useMediaUpload';
-import usePasswordUpdate from '../../hooks/usePasswordUpdate';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
+import ProfileModal from '../../common/ProfileModal/ProfileModal';
+import { useAuth } from '../../contexts/AuthContext';
+import axios from 'axios';
+import API_BASE_URL from '../../services/AuthService';
+import { Dropdown } from 'react-bootstrap';
+import UPLOAD_FILE_API from '../../services/UploadFile';
 
 const UserProfile = () => {
   const navigate = useNavigate();
+  const { setShowTokenModal } = useAuth();
   const userId = sessionStorage.getItem("userId");
   const userRole = sessionStorage.getItem("userRole");
 
@@ -28,7 +33,6 @@ const UserProfile = () => {
   const [selectedImage, setSelectedImage] = useState(null);
   const { isLoading } = useUserProfile(userId, setUser, setSelectedImage);
   const { uploadMediaFile } = useMediaUpload(userId, setUser, setSelectedImage);
-  const { updatePassword } = usePasswordUpdate(userId);
   const [imageLoading, setImageLoading] = useState(false);
 
   const [showPopup, setShowPopup] = useState(false);
@@ -40,6 +44,9 @@ const UserProfile = () => {
   const [formErrors, setFormErrors] = useState({});
   const [formTouched, setFormTouched] = useState({});
   const fieldRefs = useRef({});
+
+  const [tempImageUrl, setTempImageUrl] = useState(null);
+  const fileInputRef = useRef(null);
 
   const profileDetails = [
     { title: "User Id", value: userId || "-" },
@@ -65,7 +72,15 @@ const UserProfile = () => {
     }
   }, [formErrors, formTouched]);
 
-  const handlePasswordUpdate = async (values, { setSubmitting, resetForm }) => {
+
+  // handle password change api call
+  const handlePasswordUpdate = async (values, { setSubmitting }) => {
+    const token = sessionStorage.getItem("authToken");
+    if (!token || !userId) {
+      setShowTokenModal(true);
+      return;
+    }
+
     const { currentPassword, newPassword, confirmPassword } = values;
 
     if (newPassword !== confirmPassword) {
@@ -73,27 +88,112 @@ const UserProfile = () => {
       return;
     }
 
+    const payload = {
+      userId: userId,
+      currentPassword,
+      newPassword,
+      confirmPassword,
+    };
+
     try {
-      await updatePassword(currentPassword, newPassword);
-      toast.success("Password updated successfully!");
-      resetForm();
-      setShowPasswordFields(false);
+      const response = await axios.post(`${API_BASE_URL}/email/viewProfileChangePassword`,
+        payload,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          },
+        });
+
+      if (response?.data?.status === "success") {
+        toast.success("Password updated successfully.");
+        setShowPasswordFields(false);
+      } else {
+        toast.error(response?.data?.message || "Failed to update password.");
+      }
     } catch (error) {
-      toast.error("Failed to update password. Try again.");
+      toast.error(error?.response?.data?.error || "Something went wrong. Please try again later.");
     } finally {
       setSubmitting(false);
     }
   };
 
+
   const handleImageError = () => {
     setImageLoading(true);
-
     setTimeout(() => {
       setUser((prev) => ({ ...prev, profileImageUrl: null }));
       setSelectedImage(null);
       setImageLoading(false);
     }, 0);
   };
+
+
+  const handleUploadClick = () => { fileInputRef.current?.click() };
+
+  const handleFileSelected = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    // Validate size < 1MB
+    if (file.size > 1 * 1024 * 1024) {
+      toast.error('File size exceeds 1MB. Please choose a smaller image.');
+      e.target.value = null;
+      return;
+    }
+
+    // Validate type
+    const validTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/svg+xml', 'image/heif'];
+    if (!validTypes.includes(file.type)) {
+      toast.error('Unsupported image type.');
+      e.target.value = null;
+      return;
+    }
+
+    // Create temporary URL for cropping modal
+    const imageUrl = URL.createObjectURL(file);
+    setTempImageUrl(imageUrl);
+    setShowPopup(true);
+    e.target.value = null;
+  };
+
+
+  console.log(user);
+
+  // delete image api call
+  const handleDeleteImage = async () => {
+    const token = sessionStorage.getItem("authToken");
+    if (!token) {
+      setShowTokenModal(true);
+      return;
+    }
+
+    // if (!user?.imageId) {
+    //   toast.error("No image to delete.");
+    //   return;
+    // }
+
+
+    try {
+      const response = await axios.delete(`${UPLOAD_FILE_API}/v1/delete/profile_MNGR_00004.png`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          },
+        });
+
+
+      if (response?.data?.status === "success") {
+        toast.success("Profile image deleted successfully.");
+        setUser(prev => ({ ...prev, profileImageUrl: null }));
+        setSelectedImage(null);
+      } else {
+        toast.error(response?.data?.message || "Failed to delete profile image.");
+      }
+    } catch (error) {
+      toast.error(error?.response?.data?.error || "Something went wrong. Please try again later.");
+    }
+  };
+
 
   return (
     <>
@@ -111,30 +211,54 @@ const UserProfile = () => {
                   <h6 className='heading'>Personal Information</h6>
                   <hr className='horizontal-line' />
                   <div className='profile-container'>
-                    <div className="profile-image" onClick={() => setShowPopup(true)}>
-                      {imageLoading ? (
-                        <Box className="loading-icon">
-                          <CircularProgress size={32} />
+                    <div className="profile-image">
+                      {user?.profileImageUrl && !imageLoading && (
+                        <Box>
+                          <CircularProgress size={20} />
                         </Box>
-                      ) : user?.profileImageUrl ? (
+                      )}
+                      {user?.profileImageUrl ? (
                         <img
                           src={user?.profileImageUrl}
                           alt=""
                           className="uploaded-image"
-                          onError={handleImageError} loading='lazy'
+                          style={{ display: imageLoading ? 'block' : 'none' }}
+                          onLoad={() => setImageLoading(true)}
+                          onError={handleImageError}
                         />
                       ) : (
-                        <TbUserCircle className="default-icon" />
+                        <FaUserCircle className="default-icon" />
                       )}
-                      <span><CiEdit /></span>
+
+                      <Dropdown className="edit-dropdown" >
+                        <Dropdown.Toggle variant="link" className="edit-toggle" bsPrefix="p-0">
+                          <CiEdit className="edit-icon" />
+                        </Dropdown.Toggle>
+
+                        <Dropdown.Menu>
+                          <Dropdown.Item
+                            className="custom-dropdown"
+                            onClick={handleUploadClick}>Upload Image</Dropdown.Item>
+                          <Dropdown.Item className="delete-dropdown"
+                            onClick={handleDeleteImage}>Delete</Dropdown.Item>
+                        </Dropdown.Menu>
+                      </Dropdown>
+
+                      <input
+                        type="file"
+                        id="fileInput"
+                        accept="image/png, image/jpeg, image/svg+xml, image/heif, image/webp"
+                        style={{ display: 'none' }}
+                        ref={fileInputRef}
+                        onChange={handleFileSelected}
+                      />
                     </div>
                   </div>
 
                   <div className='profile-title'>
                     <h6>{user?.userName || "Username"}</h6>
-                    <p>
-                      {(userRole === "Admin" || userRole === "Chief Admin") &&
-                        (user?.location || "Location")}
+                    <p>{(userRole === "Admin" || userRole === "Chief Admin") &&
+                      (user?.location || "Location")}
                       {userRole === "Customer" && (user?.city || "Location")}
                       {userRole === "Advisor" && (user?.companyAddress || "Location")}
                       {userRole === "Manager" && (user?.companyLocation || "Company Address")}
@@ -192,8 +316,8 @@ const UserProfile = () => {
                                       type={showPassword ? 'text' : 'password'}
                                       name="currentPassword"
                                       placeholder="Enter password"
-                                      onChange={handleChange}
                                       className='input-control'
+                                      onChange={handleChange}
                                     />
                                     <span className="password-icon" onClick={() => handlePasswordToggle("current")}  >
                                       {showPassword ? <Visibility /> : <VisibilityOff />}
@@ -251,7 +375,8 @@ const UserProfile = () => {
                                 {isSubmitting ? "Saving..." : "Save"}
                               </button>
                             </div>
-                          </Form>)
+                          </Form>
+                        )
                       }}
                     </Formik>
                   )}
@@ -263,15 +388,17 @@ const UserProfile = () => {
           <ProfileModal
             showPopup={showPopup}
             setShowPopup={setShowPopup}
-            setSelectedImage={setSelectedImage}
             selectedImage={selectedImage}
-            uploadMediaFile={uploadMediaFile} />
+            setSelectedImage={setSelectedImage}
+            uploadMediaFile={uploadMediaFile}
+            tempImageUrl={tempImageUrl}
+          />
         </section>
       )}
 
       <ToastContainer
         position="top-center"
-        autoClose={1000}
+        autoClose={3000}
         hideProgressBar={true}
         theme="light" />
     </>

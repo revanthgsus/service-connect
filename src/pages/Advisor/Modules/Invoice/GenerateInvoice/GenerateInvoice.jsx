@@ -3,13 +3,13 @@ import "./GenerateInvoice.css";
 import { useNavigate } from 'react-router-dom';
 import { Col, Row } from 'react-bootstrap';
 import { IoMdArrowRoundBack } from "react-icons/io";
-import CancelModal from '../../../../../common/CancelModal/CancelModal';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import dayjs from 'dayjs';
 import axios from 'axios';
 import PreLoader from '../../../../../common/PreLoader/PreLoader';
+import CancelModal from '../../../../../common/CancelModal/CancelModal';
 import { useAuth } from '../../../../../contexts/AuthContext';
 import API_BASE_URL from '../../../../../services/AuthService';
 import { toast, ToastContainer } from 'react-toastify';
@@ -19,21 +19,10 @@ const GenerateInvoice = () => {
   const { setShowTokenModal } = useAuth();
   const [cancelShow, setCancelShow] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [invoiceDetails, setInvoiceDetails] = useState({});
-  const [quotesItems, setQuotesItems] = useState([]);
-  const [formValues, setFormValues] = useState({
-    serviceId: '',
-    advanceAmount: '',
-    customerId: '',
-    customerName: '',
-    mobileNumber: '',
-    emailAddress: '',
-    addressLine1: '',
-    addressLine2: '',
-    city: '',
-    pincode: '',
-    state: '',
-  });
+
+  const [quotesItems, setQuotesItems] = useState([]); // setquotesitems data fetched when api call
+  const [formValues, setFormValues] = useState({});
+  const [serviceIdInput, setServiceIdInput] = useState('');
 
   const InvoiceData = [
     { label: "Service ID", name: "serviceId", placeholder: "Enter service Id", type: "text" },
@@ -60,12 +49,12 @@ const GenerateInvoice = () => {
     { title: "Row Total" },
   ];
 
+
   const handleChange = (e) => {
     setFormValues({ ...formValues, [e.target.name]: e.target.value });
   };
 
-
-  // fetch complaint details when enter service ID
+  // fetch invoice details when enter service ID
   const fetchInvoiceDetails = useCallback(async (serviceId) => {
     if (!serviceId?.trim()) return;
 
@@ -84,45 +73,46 @@ const GenerateInvoice = () => {
         });
 
       if (response.status === 200 && response.data) {
-        setInvoiceDetails(response.data);
-        setQuotesItems(response.data.complaints?.map(item => ({ ...item, quantity: 1 })) || []);
-        setFormValues(prev => ({
-          ...prev,
-          serviceId: response.data.serviceId || prev.serviceId,
-          customerId: response.data.customerId || '',
-          customerName: response.data.customerName || '',
-          mobileNumber: response.data.mobileNumber || '',
-          emailAddress: response.data.emailAddress || '',
-          addressLine1: response.data.addressLine1 || '',
-          addressLine2: response.data.addressLine2 || '',
-          advanceAmount: response.data.advanceAmount || '',
-          city: response.data.city || '',
-          state: response.data.state || '',
-          pincode: response.data.pincode || '',
-        }));
+        setQuotesItems(response?.data?.complaints?.map(item => ({ ...item, quantity: 1 })) || []);
+        setFormValues(response?.data || {});
       } else {
         toast.error("Failed to fetch service details");
       }
-    } catch {
-      toast.error("Something went wrong. Please try again");
+    } catch (error) {
+      toast.error(error?.response?.data?.error || "Something went wrong. Please try again later.");
     } finally {
       setLoading(false);
     }
   }, [setShowTokenModal]);
 
+
   useEffect(() => {
     const handler = setTimeout(() => {
-      if (formValues.serviceId?.trim()) {
-        fetchInvoiceDetails(formValues.serviceId);
+      if (serviceIdInput.trim()) {
+        fetchInvoiceDetails(serviceIdInput);
       } else {
-        setInvoiceDetails({});
         setQuotesItems([]);
         setFormValues('');
       }
     }, 500);
-
     return () => clearTimeout(handler);
-  }, [formValues.serviceId, fetchInvoiceDetails]);
+  }, [serviceIdInput, fetchInvoiceDetails]);
+
+
+  // calculate discount amount
+  const handleDiscountChange = (e) => {
+    let validDiscount = e.target.value.replace(/[^0-9]/g, '');
+    if (parseFloat(validDiscount) > 100) { validDiscount = '100' };
+
+    const discountPercentage = parseFloat(validDiscount);
+
+    setFormValues((prev) => ({
+      ...prev,
+      discount: validDiscount,
+      discountAmount: !isNaN(discountPercentage) ?
+        ((calculateSubTotal * discountPercentage) / 100).toFixed(2) : '0.00',
+    }));
+  };
 
 
   // handle change quantity functionality
@@ -157,6 +147,16 @@ const GenerateInvoice = () => {
     setQuotesItems(updatedQuotes);
   };
 
+  const calculateSubTotal = quotesItems.reduce((acc, item) => {
+    const itemFee = parseFloat(item.itemFee || 0);
+    const itemTaxableAmount = parseFloat(item.itemTaxableAmount || 0);
+    const labourFee = parseFloat(item.labourFee || 0);
+    const labourTaxableAmount = parseFloat(item.labourTaxableAmount || 0);
+
+    const rowTotal = itemFee + itemTaxableAmount + labourFee + labourTaxableAmount;
+    return acc + rowTotal;
+  }, 0);
+
 
 
   // calculate the table bottom data
@@ -169,39 +169,17 @@ const GenerateInvoice = () => {
   const cgstAmount = totalTax / 2;
   const sgstAmount = totalTax / 2;
 
-  const calculateSubTotal = quotesItems.reduce((acc, item) => {
-    const rowTotal = parseFloat(item.totalAmount) || 0;
-    return acc + rowTotal;
-  }, 0);
-
-
-  // calculate discount amount
-  const handleDiscountChange = (e) => {
-    let validDiscount = e.target.value.replace(/[^0-9]/g, '');
-
-    if (parseFloat(validDiscount) > 100) {
-      validDiscount = '100';
-    }
-
-    const discountPercentage = parseFloat(validDiscount);
-
-    setFormValues((prev) => ({
-      ...prev,
-      discount: validDiscount,
-      discountAmount: !isNaN(discountPercentage)
-        ? ((calculateSubTotal * discountPercentage) / 100).toFixed(2)
-        : '0.00',
-    }));
-  };
-
   const discountedSubTotal = calculateSubTotal - (parseFloat(formValues.discountAmount) || 0);
-
   const advanceAmount = parseFloat(formValues.advanceAmount) || 0;
-  const balanceDue = discountedSubTotal - advanceAmount;
-  // end of calculation
+  const balanceDueAmount = discountedSubTotal - advanceAmount;
 
+
+  // generate invoice api call
   const handleGenerate = async () => {
+
     const userId = sessionStorage.getItem('userId');
+    const companyName = sessionStorage.getItem('companyName');
+    const companyLocation = sessionStorage.getItem('companyLocation');
     const token = sessionStorage.getItem('authToken');
     if (!token) {
       setShowTokenModal(true);
@@ -209,7 +187,6 @@ const GenerateInvoice = () => {
     }
 
     const payload = {
-      ...formValues,
       serviceId: formValues.serviceId,
       customerId: formValues.customerId,
       customerName: formValues.customerName,
@@ -220,8 +197,9 @@ const GenerateInvoice = () => {
       city: formValues.city,
       pincode: formValues.pincode,
       state: formValues.state,
-      companyLocation: formValues.companyLocation,
-      companyName: formValues.companyName,
+      companyLocation: companyLocation,
+      companyName: companyName,
+      productSerialNo: formValues.productSerialNo,
       advanceAmount: parseFloat(formValues.advanceAmount) || 0,
       discountPercentage: parseFloat(formValues.discount) || 0,
       discountAmount: parseFloat(formValues.discountAmount) || 0,
@@ -242,11 +220,11 @@ const GenerateInvoice = () => {
       cgst: cgstAmount.toFixed(2),
       sgst: sgstAmount.toFixed(2),
       totalTax: totalTax.toFixed(2),
-      labourTaxTotal: labourTaxTotal.toFixed(2),
-      itemTaxTotal: itemTaxTotal.toFixed(2),
+      labourTax: labourTaxTotal.toFixed(2),
+      itemTax: itemTaxTotal.toFixed(2),
       subTotal: calculateSubTotal.toFixed(2),
       totalAmount: discountedSubTotal.toFixed(2),
-      dueAmount: balanceDue.toFixed(2),
+      dueAmount: balanceDueAmount.toFixed(2),
     };
 
     try {
@@ -256,21 +234,32 @@ const GenerateInvoice = () => {
           headers: {
             Authorization: `Bearer ${token}`,
           },
+          responseType: 'blob'
         });
 
       if (response?.data?.status === "success") {
+        const file = new Blob([response.data], { type: 'application/pdf' });
+        const fileURL = URL.createObjectURL(file);
+
         toast.success("Invoice generated successfully!");
-        navigate('/advisor/invoice/viewinvoice',
-          { state: { invoiceDetails: response?.data } });
+        setTimeout(() => {
+          navigate('/advisor/invoice/viewinvoice', {
+            state: {
+              pdfUrl: fileURL,
+              invoiceDetails: response.data
+            }
+          });
+        }, 1000);
       } else {
         toast.error(response?.data?.message || "Failed to generate invoice.");
       }
     } catch (error) {
-      toast.error("Something went wrong while generating the invoice.");
+      toast.error(error?.response?.data?.error || "Something went wrong. Please try again later.");
     } finally {
       setLoading(false);
     }
   };
+
 
   const handleCancel = () => { setCancelShow(true) };
   const handleCancelClose = () => { setCancelShow(false) };
@@ -337,8 +326,17 @@ const GenerateInvoice = () => {
                             name={field.name}
                             placeholder={field.placeholder}
                             className="form-control"
-                            value={formValues[field.name] || ''}
-                            onChange={field.name === 'discount' ? handleDiscountChange : handleChange}
+                            value={field.name === 'serviceId' ? serviceIdInput : (formValues[field.name] || '')}
+                            onChange={(e) => {
+                              const value = e.target.value;
+                              if (field.name === 'serviceId') {
+                                setServiceIdInput(value);
+                              } else if (field.name === 'discount') {
+                                handleDiscountChange(e);
+                              } else {
+                                handleChange();
+                              }
+                            }}
                           />
                         )}
                       </div>
@@ -382,6 +380,7 @@ const GenerateInvoice = () => {
                           <td>{`₹ ${quote.itemFee}`}</td>
                           <td>{`${quote.itemTax}%`}</td>
                           <td>{`₹ ${quote.itemTaxableAmount?.toFixed(2)}`}</td>
+
                           <td>{`₹ ${(quote.itemFee + quote.itemTaxableAmount + quote.labourFee + quote.labourTaxableAmount).toFixed(2)}`}</td>
                         </tr>
                       ))}
@@ -425,32 +424,37 @@ const GenerateInvoice = () => {
                   </Col>
 
                   <Col xxl={4} xl={4} lg={4} md={6} sm={6}>
-                    <div className="tax-container">
+                    <div className="tax-container total-amount-container">
                       <div className="summary-container">
-                        <h6>Sub Total:</h6>
-                        <span>{`₹ ${calculateSubTotal.toFixed(2)}`}</span>
+                        <h6>Sub Total :
+                          <span>{`₹ ${calculateSubTotal.toFixed(2)}`}</span>
+                        </h6>
                       </div>
 
                       <div className="summary-container">
-                        <h6>Discount ({formValues.discount}%):</h6>
-                        <span>{`₹ ${formValues.discountAmount || '0.00'}`}</span>
+                        <h6>Discount ({formValues.discount}%) :
+                          <span>{`₹ ${formValues.discountAmount || '0.00'}`}</span>
+                        </h6>
                       </div>
 
                       <div className="summary-container">
-                        <h6>Total Amount:</h6>
-                        <span>{`₹ ${discountedSubTotal.toFixed(2)}`}</span>
+                        <h6>Total Amount :
+                          <span>{`₹ ${discountedSubTotal.toFixed(2)}`}</span>
+                        </h6>
                       </div>
 
                       {parseFloat(formValues.advanceAmount) > 0 && (
                         <div className="summary-container">
-                          <h6>Advance Paid:</h6>
-                          <span>{`₹ ${formValues.advanceAmount || '0'}`}</span>
+                          <h6>Advance Paid :
+                            <span>{`₹ ${formValues.advanceAmount || '0'}`}</span>
+                          </h6>
                         </div>
                       )}
 
-                      <div className="summary-container">
-                        <h6>Balance Due Amout:</h6>
-                        <span>{`₹ ${balanceDue.toFixed(2)}`}</span>
+                      <div className="summary-container balace-dueamount">
+                        <h6>Balance Due Amout :
+                          <span>{`₹ ${balanceDueAmount.toFixed(2)}`}</span>
+                        </h6>
                       </div>
                     </div>
                   </Col>
@@ -471,7 +475,7 @@ const GenerateInvoice = () => {
         handleCancelClose={handleCancelClose} />
       <ToastContainer
         position="top-center"
-        autoClose={1000}
+        autoClose={2000}
         hideProgressBar={true}
         theme="light"
       />

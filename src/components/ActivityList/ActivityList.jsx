@@ -54,6 +54,7 @@ const QuotesList = ({ userId, apiUrl, tableHeadings, filters, renderRow }) => {
       ...userIdentifier,
       ...(serviceStatus && { serviceStatus }),
       ...(debouncedSearch && filters?.searchKey && { [filters.searchKey]: debouncedSearch }),
+      ...(((!debouncedSearch || !filters?.searchKey) || (!serviceStatus)) ? { page: "Service" } : {}),
     };
 
     try {
@@ -66,15 +67,14 @@ const QuotesList = ({ userId, apiUrl, tableHeadings, filters, renderRow }) => {
       );
 
       if (response?.status === 200) {
-        const allActivity = response?.data?.appointmentsListPage || [];
-        let validActivity = allActivity.filter(q => q.serviceStatus !== "-");
+        let servicesList = response?.data?.servicesListPage || [];
 
         if (userRole === "Customer") {
-          validActivity = validActivity.filter(q => q.serviceStatus.toLowerCase() !== "yet to start");
+          servicesList = servicesList.filter(q => q.serviceStatus.toLowerCase() !== "yet to start");
         }
 
-        setActivity(validActivity);
-        setTotalActivity(response?.data?.serviceCount || 0);
+        setActivity(servicesList);
+        setTotalActivity(response?.data?.servicesCount || 0);
       } else {
         toast.error("Unable to fetch activity data. Please try again.");
       }

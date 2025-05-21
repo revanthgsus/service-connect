@@ -8,7 +8,7 @@
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  margin-bottom: 17px;
+  margin-bottom: 15px;
 }
 
 .invoice-list .invoice-table {
@@ -24,6 +24,7 @@
   overflow-x: auto;
 }
 
+/* webkit scrollbar styles */
 .invoice-list .list-alignment::-webkit-scrollbar {
   background: inherit;
   border-radius: 0px;
@@ -63,11 +64,7 @@
   text-align: center;
 }
 
-.invoice-list .table-heading:nth-last-child(4) {
-  text-align: center;
-}
-
-.invoice-list .table-heading:nth-last-child(5) {
+.invoice-list .table-heading:nth-last-child(2) {
   text-align: center;
 }
 
@@ -80,10 +77,6 @@
   color: var(--text-color);
   text-align: start;
   white-space: nowrap;
-}
-
-.invoice-list .list-item td:nth-last-child(2) {
-  text-align: center;
 }
 
 .invoice-list .search-input {
@@ -189,16 +182,17 @@
   float: right;
 }
 
+/* invoice td styles */
 .invoice-list .list-item td:first-child {
   text-align: center;
 }
 
-.invoice-list .list-item td:nth-last-child(5) {
+.invoice-list .list-item td:nth-last-child(2) {
   text-align: center;
 }
 
-.invoice-list .list-item td:nth-last-child(6) {
-  text-align: center;
+.invoice-list .list-item td:last-child {
+  padding-left: 0px;
 }
 
 .invoice-list .status {
@@ -239,30 +233,24 @@
 }
 
 .invoice-list .paynow-btn.disabled {
-  pointer-events: none;
   cursor: not-allowed;
   background-color: #ccc;
   color: #7f7f7f;
 }
 
-.invoice-list .download-icon {
+.invoice-list .view-icon {
   background-color: var(--actions-color);
-  padding: 5px 8px;
+  padding: 6px 8px;
   border-radius: 3px;
-  transition: 0.3s ease-in-out all;
   color: var(--actions-icon-color);
   cursor: pointer;
   font-size: 16px;
 }
 
-.invoice-list .download-icon:hover {
+.invoice-list .view-icon:hover {
   background-color: #00737b;
   transition: .3s ease-in-out all;
   color: rgb(255, 255, 255);
-}
-
-.invoice-list .list-item td:last-child {
-  padding-left: 0px;
 }
 
 .invoice-list .add-button {
@@ -315,7 +303,6 @@
     display: block;
   }
 
-  .invoice-list .search-wrapper,
   .invoice-list .search-wrapper {
     margin: 15px auto;
     width: 90%;

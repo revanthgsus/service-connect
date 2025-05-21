@@ -1,3 +1,8 @@
+.navbar-toggle {
+  padding-top: 18px;
+  padding-bottom: 18px;
+}
+
 .hamburger-menu {
   cursor: pointer;
   display: flex;

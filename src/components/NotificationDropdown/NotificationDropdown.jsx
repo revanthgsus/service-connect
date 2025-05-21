@@ -1,56 +1,62 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import './CustomerNotify.css';
+import './NotificationDropdown.css';
 import IconButton from '@mui/material/IconButton';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { Badge } from '@mui/material';
 import { IoNotificationsOutline } from 'react-icons/io5';
 import { Tooltip } from 'react-tooltip';
+// notification icon import
 import { IoMdTime } from "react-icons/io";
 import { BiCalendarCheck } from "react-icons/bi";
-import { TbFileInvoice } from "react-icons/tb";
 import { PiChatTeardropText } from "react-icons/pi";
-import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import { TbFileInvoice } from "react-icons/tb";
 import { IoCheckmarkDoneOutline } from "react-icons/io5";
-import { ReactComponent as NoAppImage } from '../../../../assets/images/comman/no-notification.svg'
-import { useAuth } from '../../../../contexts/AuthContext';
+import { MdPayment } from "react-icons/md";
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import { ReactComponent as EscalateIcon } from "../../assets/images/manager/escalate.svg";
+
+import { ReactComponent as NoAppImage } from '../../assets/images/comman/no-notification.svg';
+import { useAuth } from '../../contexts/AuthContext';
 import axios from 'axios';
-import API_BASE_URL from '../../../../services/AuthService';
+import API_BASE_URL from '../../services/AuthService';
 import { toast } from 'react-toastify';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 
-const CustomerNotify = ({ isOpen, toggleNotify }) => {
+const NotificationDropdown = ({ isOpen, toggleNotify }) => {
   const navigate = useNavigate();
   const { setShowTokenModal } = useAuth();
   const notifyRef = useRef(null);
-  const referenceId = sessionStorage.getItem("userId");
 
   const [notifications, setNotifications] = useState([]);
   const [loading, setLoading] = useState(true);
-  // const prevCountRef = useRef(0);
-
   const [snackbarOpen, setSnackbarOpen] = useState(true);
   const [snackbarMessage, setSnackbarMessage] = useState('');
+
+  const userId = sessionStorage.getItem("userId");
+  const userRole = sessionStorage.getItem("userRole");
+  const companyName = sessionStorage.getItem("companyName");
+  const companyLocation = sessionStorage.getItem("companyLocation");
+
 
   // icon mapping for notification types
   const getIconByType = (type) => {
     switch (type) {
-      case 'Appointment':
-        return <BiCalendarCheck />;
-      case 'Quotation':
-        return <PiChatTeardropText />;
-      case 'Activity':
-        return <CheckCircleOutlineIcon />;
-      case 'Invoice':
-        return <TbFileInvoice />;
-      default:
-        return <IoNotificationsOutline />;
+      case 'Appointment': return <BiCalendarCheck />;
+      case 'Quotation': return <PiChatTeardropText />;
+      case 'Activity': return <CheckCircleOutlineIcon />;
+      case 'Invoice': return <TbFileInvoice />;
+      case 'Payment': return <MdPayment />;
+      case 'Escalate': return <EscalateIcon />;
+      default: return <IoNotificationsOutline />;
     }
   };
 
+
+  // view all notifications api call
   const fetchNotifications = useCallback(async () => {
     const token = sessionStorage.getItem("authToken");
     if (!token) {
@@ -58,21 +64,31 @@ const CustomerNotify = ({ isOpen, toggleNotify }) => {
       return;
     }
 
+    let apiurl = '';
+
+    if (userRole === 'Manager') {
+      apiurl = `${API_BASE_URL}/managerMaster/viewNotificationsByCompanyNameAndLocation/${companyName}/${companyLocation}`;
+    } else {
+      apiurl = `${API_BASE_URL}/customerMaster/viewNotificationsByReferenceId/${userId}`;
+    }
+
     setLoading(true);
 
     try {
-      const response = await axios.get(`${API_BASE_URL}/customerMaster/viewNotificationsByReferenceId/${referenceId}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await axios.get(apiurl,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+      console.log(response);
 
       if (response?.data?.status === "success") {
         const notificationsData = response.data.data || [];
 
         if (notificationsData.length === 0) {
           setNotifications([]);
-          // prevCountRef.current = 0;
           return;
         }
 
@@ -83,6 +99,7 @@ const CustomerNotify = ({ isOpen, toggleNotify }) => {
             type: item.notificationType,
             title: item.notificationName,
             message: item.notificationContent,
+            appointmentId: item.appointmentId,
             time: item.modifiedAt,
             icon: getIconByType(item.notificationType),
             viewed: item.viewed || false,
@@ -91,67 +108,65 @@ const CustomerNotify = ({ isOpen, toggleNotify }) => {
         // Reverse to show latest first
         const newNotifications = transformed.reverse();
         setNotifications(newNotifications);
-
-        // // Check for new items
-        // if (newNotifications.length > prevCountRef.current) {
-        //   toggleNotify(true);
-        // }
-        // // Update previous count
-        // prevCountRef.current = newNotifications.length;
-
       } else {
-        toast.error("Unable to fetch notifications data");
+        toast.error("Unable to fetch notifications data.");
       }
     } catch (error) {
-      toast.error(error.response?.data?.error || "An error occurred while fetching the data.");
+      toast.error(error?.response?.data?.error || "Something went wrong. Please try again later.");
     } finally {
       setLoading(false);
     }
-  }, [referenceId, setShowTokenModal]);
+  }, [userId, setShowTokenModal, userRole, companyName, companyLocation]);
 
 
   useEffect(() => {
     fetchNotifications();
-    const interval = setInterval(() => {
-      fetchNotifications();
-    }, 300000);
-    return () => clearInterval(interval);
   }, [fetchNotifications]);
 
-  const handleNavigate = (e) => {
-    e.stopPropagation();
-    toggleNotify(false);
-    navigate('notifications');
-  }
 
-  // const handleNavigate = async (appointment) => {
-  //   document.querySelector(".layout-main")?.scrollTo({ top: 0, behavior: "smooth" });
+  const handleNavigate = async (appointmentId, type) => {
+    document.querySelector(".layout-main")?.scrollTo({ top: 0, behavior: "smooth" });
 
-  //   const token = sessionStorage.getItem("authToken");
-  //   if (!token) {
-  //     setShowTokenModal(true);
-  //     return;
-  //   }
+    const token = sessionStorage.getItem("authToken");
+    if (!token) {
+      setShowTokenModal(true);
+      return;
+    }
 
-  //   try {
-  //     const response = await axios.get(`${API_BASE_URL}/customerMaster/viewAppointmentById/${appointment.appointmentId}`, {
-  //       headers: {
-  //         Authorization: `Bearer ${token}`,
-  //       },
-  //     });
+    let navigateUrl = '';
+    if (type === 'Appointment') {
+      navigateUrl = `${API_BASE_URL}/customerMaster/viewAppointmentById/${appointmentId}`;
+    } if (type === 'Quotation') {
+      navigateUrl = `${API_BASE_URL}/advisorMaster/viewComplaintsByAppointmentId/${appointmentId}`;
+    }
 
-  //     if (response?.status === 200 && response?.data?.status === "success") {
-  //       navigate("view", { state: { appointmentData: response?.data?.data } });
-  //     } else {
-  //       toast.error("Unable to retrieve appointment data. Please try again.");
-  //     }
-  //   } catch (error) {
-  //     toast.error(error?.response?.data?.error || "An error occurred while fetch the data.");
-  //   } finally {
-  //     // setIsLoading(false);
-  //   }
-  // }
+    try {
+      const response = await axios.get(navigateUrl,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
+      if (response?.status === 200 && response?.data?.status === "success") {
+        toggleNotify(false);
+        if (type === 'Appointment') {
+          navigate("appointments/view", { state: { appointmentData: response?.data?.data } });
+        }
+        if (type === 'Quotation') {
+          navigate("quotes/quotesummary", { state: { quotesData: response?.data } });
+        }
+      } else {
+        toast.error("Unable to retrieve appointment data. Please try again.");
+      }
+    } catch (error) {
+      toast.error(error?.response?.data?.error || "An error occurred while fetch the data.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // mark as read api call
   const handleMarkAsRead = async (id, e) => {
     e.stopPropagation();
     // Add exit class for smooth removal
@@ -184,14 +199,13 @@ const CustomerNotify = ({ isOpen, toggleNotify }) => {
       } else {
         toast.error("Failed to mark as read");
       }
-    } catch {
-      toast.error("Something went wrong. Please try again.");
+    } catch (error) {
+      toast.error(error?.response?.data?.error || "Something went wrong. Please try again later.");
     }
   };
 
-  const handleSnackbarClose = () => {
-    setSnackbarOpen(false);
-  };
+
+  const handleSnackbarClose = () => { setSnackbarOpen(false) };
 
   // click outside to close notification
   useEffect(() => {
@@ -200,12 +214,8 @@ const CustomerNotify = ({ isOpen, toggleNotify }) => {
         toggleNotify(false);
       }
     };
-    if (isOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-    }
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
+    if (isOpen) { document.addEventListener('mousedown', handleClickOutside) }
+    return () => { document.removeEventListener('mousedown', handleClickOutside) };
   }, [isOpen, toggleNotify]);
 
 
@@ -238,7 +248,7 @@ const CustomerNotify = ({ isOpen, toggleNotify }) => {
 
   return (
     <>
-      <div className='customer-notification' ref={notifyRef}>
+      <div className='user-notification' ref={notifyRef}>
         <Tooltip id="notification-tooltip" className="custom-tooltip" />
         <IconButton
           aria-label="notification"
@@ -266,9 +276,9 @@ const CustomerNotify = ({ isOpen, toggleNotify }) => {
               <div className='notifications-list'>
                 {notifications.map((data) => (
                   <div id={`notification-${data.id}`} key={data.id}
-                    className="notification-item" onClick={handleNavigate}>
-                    <div
-                      className={`notification-icon ${data.type}`}>
+                    className="notification-item"
+                    onClick={() => handleNavigate(data.appointmentId, data.type)}>
+                    <div className={`notification-icon ${data.type}`}>
                       {data.icon}
                     </div>
                     <div className="notification-content">
@@ -278,15 +288,19 @@ const CustomerNotify = ({ isOpen, toggleNotify }) => {
 
                     <div className="notification-time">
                       <span className='time-container'> <IoMdTime />{formatTimeAgo(data.time)}</span>
-                      <span className='mark-icon'
-                        onClick={(e) => handleMarkAsRead(data.id, e)}
-                        data-tooltip-id={`mark-read-tooltip-${data.id}`}
-                        data-tooltip-content="Mark as read"
-                        aria-label="Mark as read">
-                        <IoCheckmarkDoneOutline />
-                      </span>
-                      <Tooltip id={`mark-read-tooltip-${data.id}`} className="custom-tooltip" />
 
+                      {userRole !== 'Manager' && (
+                        <>
+                          <span className='mark-icon'
+                            onClick={(e) => handleMarkAsRead(data.id, e)}
+                            data-tooltip-id={`mark-read-tooltip-${data.id}`}
+                            data-tooltip-content="Mark as read"
+                            aria-label="Mark as read">
+                            <IoCheckmarkDoneOutline />
+                          </span>
+                          <Tooltip id={`mark-read-tooltip-${data.id}`} className="custom-tooltip" />
+                        </>
+                      )}
                     </div>
                   </div>
                 ))}
@@ -301,6 +315,7 @@ const CustomerNotify = ({ isOpen, toggleNotify }) => {
         </div>
       </div>
 
+      {/* mark as read snackbar */}
       <Snackbar
         anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
         open={snackbarOpen && snackbarMessage !== ''}
@@ -314,4 +329,4 @@ const CustomerNotify = ({ isOpen, toggleNotify }) => {
   )
 }
 
-export default CustomerNotify;
+export default NotificationDropdown;

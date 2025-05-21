@@ -94,6 +94,7 @@ const RatingsByAdvisor = () => {
   };
 
   const handleSearchChange = (e) => setSearchInput(e.target.value);
+
   const handlePageChange = (event, value) => {
     setCurrentPage(value);
     document.querySelector(".layout-main")?.scrollTo({ top: 0, behavior: "smooth" });

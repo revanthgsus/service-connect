@@ -38,7 +38,7 @@ const InvoiceModal = ({ show, onHide, invoice }) => {
   }, []);
 
 
-  // handle amount change eventz
+  // handle amount change events
   const handleAmountChange = (e) => {
     let rawValue = e.target.value.replace(/[^\d.]/g, '');
     rawValue = rawValue.replace(/(\..*?)\..*/g, '$1');
@@ -134,7 +134,7 @@ const InvoiceModal = ({ show, onHide, invoice }) => {
               onHide();
               toast.success("Payment Verified Successful! ");
               setTimeout(() => {
-                toast.dismiss();
+                // toast.dismiss();
                 setOrderId(response.razorpay_order_id);
                 setShowFeedback(true);
               }, 1000);
@@ -166,11 +166,13 @@ const InvoiceModal = ({ show, onHide, invoice }) => {
     }
   };
 
+
   useEffect(() => {
     if (!show) {
       setAmountError(false);
     }
   }, [show]);
+
 
   return (
     <>
@@ -204,6 +206,7 @@ const InvoiceModal = ({ show, onHide, invoice }) => {
             Proceed Payment</button>
         </Modal.Footer>
       </Modal>
+
       <ToastContainer
         position="top-center"
         autoClose={1000}
@@ -211,7 +214,9 @@ const InvoiceModal = ({ show, onHide, invoice }) => {
         theme="light"
       />
 
-      <FeedbackModal show={showFeedback} onHide={() => setShowFeedback(false)}
+      <FeedbackModal
+        show={showFeedback}
+        onHide={() => setShowFeedback(false)}
         orderId={orderId} />
     </>
   );

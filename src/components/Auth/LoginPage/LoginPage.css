@@ -86,33 +86,8 @@
   background: #00adb9;
   border-radius: 5px;
   height: 5px;
-  overflow: hidden;
-  position: relative;
   width: 100px;
   margin: 15px auto 25px
-}
-
-.underline-animation::before {
-  animation: underline 3s linear infinite;
-  content: "";
-  height: 100%;
-  left: 0;
-  right: 0;
-  top: 0;
-  position: absolute;
-  width: 100%;
-  border-radius: 5px;
-  background-color: #009ba7;
-}
-
-@keyframes underline {
-  0% {
-    transform: translateX(0);
-  }
-
-  100% {
-    transform: translateX(100%);
-  }
 }
 
 .login-form p {

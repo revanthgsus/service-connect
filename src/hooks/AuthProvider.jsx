@@ -32,7 +32,7 @@ export const AuthProvider = ({ children }) => {
     const companyLocation = sessionStorage.getItem('companyLocation');
 
     setUser({ token, role, userId, userName, online, companyName, companyLocation });
-  }, [ location]);
+  }, [location]);
 
   const login = (token, role, userId, userName, online, companyName, companyLocation) => {
     sessionStorage.setItem('authToken', token);

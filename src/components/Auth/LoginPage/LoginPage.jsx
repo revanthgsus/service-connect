@@ -31,6 +31,8 @@ const LoginPage = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+
+  // login - handle submit api call function
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -85,7 +87,7 @@ const LoginPage = () => {
         setLoading(false);
       }
     } catch (err) {
-      setError((prev) => ({ ...prev, general: "Login failed. Please try again later.", }));
+      setError((prev) => ({ ...prev, general: "Something went wrong. Please try again later.", }));
     } finally {
       setLoading(false);
     }

@@ -14,7 +14,6 @@
 .additional-container .add-header h5 {
   margin-bottom: 0px;
   color: var(--text-color);
-  font-family: 'Be Vietnam Pro', sans-serif;
 }
 
 .additional-container .table-list {
@@ -37,7 +36,6 @@
 .additional-container .table-heading {
   padding: 15px 15px;
   font-weight: 500;
-  font-family: 'Be Vietnam Pro', sans-serif;
   text-align: start;
   white-space: nowrap;
 }
@@ -48,7 +46,6 @@
 
 .additional-container .quote-table td {
   padding: 15px 15px;
-  font-family: 'Be Vietnam Pro', sans-serif;
   color: var(--text-color);
   text-align: start;
 }

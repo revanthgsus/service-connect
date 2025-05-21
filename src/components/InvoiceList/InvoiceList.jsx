@@ -11,9 +11,9 @@ import API_BASE_URL from '../../services/AuthService';
 import PreLoader from '../../common/PreLoader/PreLoader';
 import { toast, ToastContainer } from 'react-toastify';
 import { useAuth } from '../../contexts/AuthContext';
-import InvoiceModal from '../../pages/Customer/Modules/Invoice/InvoiceModal/InvoiceModal';
 import { HiPlus } from 'react-icons/hi';
 import { useNavigate } from 'react-router-dom';
+import InvoiceModal from '../../pages/Customer/Modules/Invoice/InvoiceModal/InvoiceModal';
 
 const InvoiceList = ({ userId, apiUrl, tableHeadings, filters, showCreateButton, renderRow }) => {
   const navigate = useNavigate();
@@ -29,7 +29,6 @@ const InvoiceList = ({ userId, apiUrl, tableHeadings, filters, showCreateButton,
   const [invoiceShow, setInvoiceShow] = useState(false);
   const [selectedInvoice, setSelectedInvoice] = useState(null);
   const userRole = sessionStorage.getItem("userRole");
-
   const itemsPerPage = 10;
 
   useEffect(() => {
@@ -40,7 +39,7 @@ const InvoiceList = ({ userId, apiUrl, tableHeadings, filters, showCreateButton,
     return () => clearTimeout(handler);
   }, [searchInput]);
 
-
+  // fetch invoice details from api
   const fetchInvoice = useCallback(async () => {
     const token = sessionStorage.getItem("authToken");
     if (!token) {
@@ -75,13 +74,13 @@ const InvoiceList = ({ userId, apiUrl, tableHeadings, filters, showCreateButton,
       );
 
       if (response?.status === 200) {
-        setInvoice((response?.data?.invoicesListPage || []).reverse());
+        setInvoice(response?.data?.invoicesListPage || []);
         setTotalInvoice(response?.data?.count || 0);
       } else {
-        toast.error(response?.data?.error || "Failed to fetch invoice data. Please try again.");
+        toast.error(response?.data?.message || "Failed to fetch invoice data. Please try again.");
       }
     } catch (error) {
-      toast.error(error.response?.data?.error || "An error occurred while fetch the data.");
+      toast.error(error?.response?.data?.error || "Something went wrong. Please try again later.");
     } finally {
       setIsLoading(false);
     }
@@ -113,7 +112,7 @@ const InvoiceList = ({ userId, apiUrl, tableHeadings, filters, showCreateButton,
         toast.error(response?.data?.message || "Failed to fetch invoice datails.");
       }
     } catch (error) {
-      toast.error(error?.response?.data?.error || "An error occurred while fetch the data.");
+      toast.error(error?.response?.data?.error || "Something went wrong. Please try again later.");
     }
   };
 
@@ -128,16 +127,16 @@ const InvoiceList = ({ userId, apiUrl, tableHeadings, filters, showCreateButton,
     document.querySelector(".layout-main")?.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const handleView = (invoice) => {
-    navigate(`/${userRole.toLowerCase()}/invoice/viewinvoice`, {
-      state: { invoiceDetails: invoice }
-    });
-  }
-
   const handleCloseModal = () => setInvoiceShow(false);
   const handleCreate = (e) => {
     e.preventDefault();
     navigate('generate');
+  }
+
+  const handleView = (invoice) => {
+    navigate(`/${userRole.toLowerCase()}/invoice/viewinvoice`, {
+      state: { invoiceDetails: invoice }
+    });
   }
 
   // Image for empty state & no records
@@ -252,7 +251,10 @@ const InvoiceList = ({ userId, apiUrl, tableHeadings, filters, showCreateButton,
         </section>
       )}
 
-      <InvoiceModal show={invoiceShow} onHide={handleCloseModal} invoice={selectedInvoice} />
+      <InvoiceModal
+        show={invoiceShow}
+        onHide={handleCloseModal}
+        invoice={selectedInvoice} />
       <ToastContainer
         position="top-center"
         autoClose={1000}

@@ -33,6 +33,7 @@ const QuotesList = ({ userId, apiUrl, tableHeadings, filters, renderRow }) => {
     return () => clearTimeout(handler);
   }, [searchInput]);
 
+
   const fetchQuotes = useCallback(async () => {
     const token = sessionStorage.getItem("authToken");
     if (!token) {
@@ -54,6 +55,8 @@ const QuotesList = ({ userId, apiUrl, tableHeadings, filters, renderRow }) => {
       ...userIdentifier,
       ...(quoteStatus && { quoteStatus }),
       ...(debouncedSearch && filters?.searchKey && { [filters.searchKey]: debouncedSearch }),
+      // ...(debouncedSearch || !quoteStatus ? { page: "Quote" } : {}),
+      ...(((!debouncedSearch || !filters?.searchKey) || (!quoteStatus)) ? { page: "Quote" } : {}),
     };
 
     try {
@@ -66,11 +69,8 @@ const QuotesList = ({ userId, apiUrl, tableHeadings, filters, renderRow }) => {
       );
 
       if (response?.status === 200) {
-        const allQuotes = response?.data?.appointmentsListPage || [];
-        let validQuotes = allQuotes.filter(q => q.quoteStatus !== "-");
-        setQuotes(validQuotes);
-
-        setTotalQuotes(response?.data?.quoteCount || 0);
+        setQuotes(Array.isArray(response?.data?.quotesListPage) ? response.data.quotesListPage : []);
+        setTotalQuotes(response?.data?.quotesCount || 0);
       } else {
         toast.error("Unable to fetch quotes data. Please try again.");
       }

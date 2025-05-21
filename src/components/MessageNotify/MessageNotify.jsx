@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import './MessageDropdown.css';
+import './MessageNotify.css';
 import IconButton from '@mui/material/IconButton';
 import { useNavigate } from 'react-router-dom';
 import { Badge } from '@mui/material';
@@ -9,13 +9,13 @@ import { Tooltip } from 'react-tooltip';
 import { IoMdTime } from "react-icons/io";
 import { BsPersonCircle } from "react-icons/bs";
 import { toast } from 'react-toastify';
-import { ReactComponent as NoMessageImage } from '../../../../assets/images/comman/no-message.svg';
+import { ReactComponent as NoMessageImage } from '../../assets/images/comman/no-message.svg';
 import { MdMailOutline } from "react-icons/md";
-import { useAuth } from '../../../../contexts/AuthContext';
+import { useAuth } from '../../contexts/AuthContext';
 import axios from 'axios';
-import API_BASE_URL from '../../../../services/AuthService';
+import API_BASE_URL from '../../services/AuthService';
 
-const NotifyDropdown = ({ isOpen, toggleMessage }) => {
+const MessageNotify = ({ isOpen, toggleMessage }) => {
   const navigate = useNavigate();
   const { setShowTokenModal } = useAuth();
   const messageRef = useRef(null);
@@ -182,4 +182,4 @@ const NotifyDropdown = ({ isOpen, toggleMessage }) => {
   )
 }
 
-export default NotifyDropdown;
+export default MessageNotify;

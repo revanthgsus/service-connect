@@ -54,9 +54,11 @@ const AdvisorList = () => {
     return () => clearTimeout(handler);
   }, [searchInput]);
 
+
+  // fetch advisor data from get all api
   const fetchAdvisors = useCallback(async () => {
-    const token = sessionStorage.getItem("authToken");
     const userRole = sessionStorage.getItem("userRole");
+    const token = sessionStorage.getItem("authToken");
     if (!token) {
       setShowTokenModal(true);
       return;
@@ -88,7 +90,7 @@ const AdvisorList = () => {
         toast.error("Failed to fetch advisor data. Please try again.");
       }
     } catch (error) {
-      toast.error(error?.response?.data?.error || "An error occurred while saving the data.");
+      toast.error(error?.response?.data?.error || "Something went wrong. Please try again later.");
     } finally {
       setIsLoading(false);
     }
@@ -98,6 +100,7 @@ const AdvisorList = () => {
     fetchAdvisors();
   }, [fetchAdvisors]);
 
+  // when click edit icon call this api
   const handleEdit = async (advisorId) => {
     document.querySelector(".layout-main")?.scrollTo({ top: 0, behavior: "smooth" });
 
@@ -120,9 +123,7 @@ const AdvisorList = () => {
         toast.error("Failed to fetch advisor data. Please try again.");
       }
     } catch (error) {
-      toast.error(error?.response?.data?.error || "An error occurred while saving the data.");
-    } finally {
-      setIsLoading(false);
+      toast.error(error?.response?.data?.error || "Something went wrong. Please try again later.");
     }
   }
 

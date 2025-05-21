@@ -262,14 +262,14 @@ const ReportsList = () => {
                         <td>{report.advisorName}</td>
                         <td>{report.customerName}</td>
                         <td>{report.appointmentDate}</td>
-                        <td>
+                        {/* <td>
                           <span
                             className={`status ${report.paidStatus.toLowerCase() === "paid" ? "paid"
                               : report.paidStatus.toLowerCase() === "partial paid" ? "partialpaid"
                                 : "unpaid"}`}>
                             {report.paidStatus.charAt(0).toUpperCase() + report.paidStatus.slice(1)}
                           </span>
-                        </td>
+                        </td> */}
                         <td>{report.totalAmount}</td>
                         <td>{report.dueAmount}</td>
                       </tr>

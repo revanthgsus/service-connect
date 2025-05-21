@@ -159,8 +159,8 @@ const CreateManager = () => {
       } else {
         toast.error(response?.data?.error || "Failed to create manager. Please try again.");
       }
-    } catch (err) {
-      toast.error("An error occurred while saving the data.");
+    } catch (error) {
+      toast.error(error?.response?.data?.error || "Something went wrong. Please try again later.");
     } finally {
       setLoading(false);
       setSubmitting(false);

@@ -77,6 +77,7 @@ const Reviews = () => {
     navigate(-1);
   };
 
+
   return (
     <>
       {isLoading ? (<PreLoader />
