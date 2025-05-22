@@ -111,8 +111,8 @@ const CreateItem = () => {
 
   const formatFileSize = (size) => {
     return size < 1024 * 1024
-      ? `${(size / 1024).toFixed(5)} KB`
-      : `${(size / (1024 * 1024)).toFixed(5)} MB`;
+      ? `${(size / 1024).toFixed(2)} KB`
+      : `${(size / (1024 * 1024)).toFixed(2)} MB`;
   };
 
   const triggerFileInput = () => {
