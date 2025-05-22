@@ -164,7 +164,7 @@ const ViewInvoice = () => {
             {userRole === "Customer" ? (
               <button type="button" className="add-button" onClick={handleDownload}>Download</button>
             ) : (
-              <button type="button" className="add-button" onClick={handleSend}>Send</button>
+              <button type="button" className="add-button" onClick={handleSend}>Send Mail</button>
             )}
           </div>
 

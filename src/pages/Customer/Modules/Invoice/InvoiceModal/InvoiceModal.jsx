@@ -14,6 +14,8 @@ const InvoiceModal = ({ show, onHide, invoice }) => {
   const [amountError, setAmountError] = useState(false);
   const [showFeedback, setShowFeedback] = useState(false);
   const [orderId, setOrderId] = useState(null);
+  const [loading, setLoading] = useState(false);
+
 
   useEffect(() => {
     if (invoice?.dueAmount) {
@@ -81,6 +83,8 @@ const InvoiceModal = ({ show, onHide, invoice }) => {
       return;
     }
 
+    setLoading(true);
+
     const payload = {
       amount: numericAmount,
       invoiceId: invoice?.invoiceId,
@@ -101,6 +105,7 @@ const InvoiceModal = ({ show, onHide, invoice }) => {
       const data = response?.data;
       if (response?.status !== 200) {
         toast.error(response?.message || 'Payment initialization failed.');
+        setLoading(false);
         return;
       };
 
@@ -134,7 +139,7 @@ const InvoiceModal = ({ show, onHide, invoice }) => {
               onHide();
               toast.success("Payment Verified Successful! ");
               setTimeout(() => {
-                // toast.dismiss();
+                toast.dismiss();
                 setOrderId(response.razorpay_order_id);
                 setShowFeedback(true);
               }, 1000);
@@ -144,6 +149,8 @@ const InvoiceModal = ({ show, onHide, invoice }) => {
             }
           } catch {
             toast.error("An error occurred during payment verification. Please try again.");
+          } finally {
+            setLoading(false);
           }
         },
         prefill: {
@@ -161,6 +168,7 @@ const InvoiceModal = ({ show, onHide, invoice }) => {
 
       const paymentObject = new window.Razorpay(options);
       paymentObject.open();
+      setLoading(false);
     } catch {
       toast.error("Something went wrong. Please try again later.");
     }
@@ -202,8 +210,10 @@ const InvoiceModal = ({ show, onHide, invoice }) => {
           </p>
         </Modal.Body>
         <Modal.Footer className="border-0">
-          <button className="payment-btn" onClick={handlePayment} disabled={amountError}>
-            Proceed Payment</button>
+          <button className="payment-btn"
+            onClick={handlePayment}
+            disabled={amountError || loading}>
+            {loading ? 'Processing...' : 'Proceed Payment'}</button>
         </Modal.Footer>
       </Modal>
 

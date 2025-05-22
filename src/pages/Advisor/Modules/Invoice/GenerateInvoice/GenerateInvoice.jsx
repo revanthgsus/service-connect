@@ -102,9 +102,9 @@ const GenerateInvoice = () => {
   // calculate discount amount
   const handleDiscountChange = (e) => {
     let validDiscount = e.target.value.replace(/[^0-9]/g, '');
-    if (parseFloat(validDiscount) > 100) { validDiscount = '100' };
+    if (parseInt(validDiscount) > 100) { validDiscount = '100' };
 
-    const discountPercentage = parseFloat(validDiscount);
+    const discountPercentage = parseInt(validDiscount);
 
     setFormValues((prev) => ({
       ...prev,
@@ -234,18 +234,18 @@ const GenerateInvoice = () => {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-          responseType: 'blob'
+          // responseType: 'blob'
         });
 
       if (response?.data?.status === "success") {
-        const file = new Blob([response.data], { type: 'application/pdf' });
-        const fileURL = URL.createObjectURL(file);
+        // const file = new Blob([response.data], { type: 'application/pdf' });
+        // const fileURL = URL.createObjectURL(file);
 
         toast.success("Invoice generated successfully!");
         setTimeout(() => {
           navigate('/advisor/invoice/viewinvoice', {
             state: {
-              pdfUrl: fileURL,
+              // pdfUrl: fileURL,
               invoiceDetails: response.data
             }
           });

@@ -204,7 +204,6 @@ const NotificationDropdown = ({ isOpen, toggleNotify }) => {
     }
   };
 
-
   const handleSnackbarClose = () => { setSnackbarOpen(false) };
 
   // click outside to close notification

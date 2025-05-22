@@ -194,7 +194,7 @@ const ServiceHistory = () => {
                       <tr key={history.serviceId} className="list-item">
                         <td>{(currentPage - 1) * itemsPerPage + index + 1}</td>
                         <td>{history.serviceId}</td>
-                        <td>{history.emailAddress}</td>
+                        <td>{history.productSerialNo}</td>
                         <td>{history.dueDate}</td>
                         <td>{history.paidAmount ? `₹ ${history.paidAmount}` : "0"}</td>
                         <td>
