@@ -82,8 +82,6 @@ const NotificationDropdown = ({ isOpen, toggleNotify }) => {
           },
         });
 
-      console.log(response);
-
       if (response?.data?.status === "success") {
         const notificationsData = response.data.data || [];
 

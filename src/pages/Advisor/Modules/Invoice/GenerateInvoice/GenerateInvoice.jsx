@@ -176,6 +176,8 @@ const GenerateInvoice = () => {
   const roundedDueAmount = Math.round(balanceDueAmount);
   const roundOffAmount = (roundedDueAmount - balanceDueAmount).toFixed(2);
 
+  const showRoundOff = parseFloat(roundOffAmount) !== 0;
+
 
   // generate invoice api call
   const handleGenerate = async () => {
@@ -454,11 +456,13 @@ const GenerateInvoice = () => {
                         </div>
                       )}
 
-                      <div className="summary-container">
-                        <h6>Round Off :
-                          <span>{`₹ ${roundOffAmount}`}</span>
-                        </h6>
-                      </div>
+                      {showRoundOff && (
+                        <div className="summary-container">
+                          <h6>Round Off :
+                            <span>{`₹ ${roundOffAmount}`}</span>
+                          </h6>
+                        </div>
+                      )}
 
                       <div className="summary-container balace-dueamount">
                         <h6>Balance Due Amout :

@@ -50,6 +50,24 @@
   border-radius: 5px;
 }
 
+.revenuegraph .apexcharts-text tspan {
+  font-family: var(--font-family);
+  font-size: 12px;
+}
+
+.revenuegraph .empty-chart {
+  text-align: center;
+  padding: 50px 0px;
+}
+
+.revenuegraph .empty-chart p {
+  color: var(--text-color);
+}
+
+.revenuegraph .skeleton-alignment {
+  padding: 10px;
+}
+
 @media only screen and (max-width:575px) {
   .revenuegraph {
     margin-bottom: 20px;

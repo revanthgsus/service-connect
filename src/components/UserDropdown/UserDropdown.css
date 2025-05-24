@@ -90,6 +90,7 @@
   border-radius: 50%;
   object-fit: cover;
   padding: 3px;
+  border: 1px solid #cfcfcf;
 }
 
 .userdropdown .profile-icon {
